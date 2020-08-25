@@ -1,0 +1,15 @@
+<div class="row mt-0 mb-0" id="i4711">
+    <div class="col-sm">
+        <p>Content Card 1</p>
+    </div>
+    <div class="col-sm">
+        <p class="h1 mt-4 mb-4">Content Card 2</p>
+        <ul class="mb-2">
+            <li>erster Punkt</li>
+            <li>zweiter Punkt</li>
+        </ul>
+    </div>
+    <div class="col-sm">
+        <p>Content Card 3</p>
+    </div>
+</div>

@@ -1,0 +1,44 @@
+package org.mentalizr.mdpCompilerTestResrc;
+
+import de.arthurpicht.utils.io.textfile.TextFile;
+import org.mentalizr.mdpCompiler.document.DocumentIterator;
+import org.mentalizr.mdpCompiler.document.Line;
+import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementLinesExtractor;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class OutlineElementLinesExtractorBench {
+
+    @SuppressWarnings("SpellCheckingInspection")
+    private static final boolean SOUT_RESULT = true;
+
+    public static void execute(@SuppressWarnings("SpellCheckingInspection") String testname, DocumentIterator documentIterator, OutlineElementLinesExtractor outlineElementLinesExtractor, File file, int expectedDocumentIteratorIndex) throws IOException {
+
+        documentIterator.getNextLine();
+        List<Line> extractedLines = outlineElementLinesExtractor.extract();
+
+        List<String> mdpLinesAsString = new ArrayList<>();
+        for (Line extractedLine : extractedLines) {
+            String mdpLineAsString = extractedLine.asString();
+            mdpLinesAsString.add(mdpLineAsString);
+        }
+
+        if (SOUT_RESULT) {
+            System.out.println("### Begin [OutlineElementLinesExtractorBench] " + testname);
+            for (String mdpLineAsString : mdpLinesAsString) {
+                System.out.println(mdpLineAsString);
+            }
+            System.out.println("### End -----");
+        }
+
+        List<String> expectedLines = TextFile.getLinesAsStrings(file);
+        assertEquals(expectedLines, mdpLinesAsString);
+        assertEquals(expectedDocumentIteratorIndex, documentIterator.getIndex());
+    }
+
+}

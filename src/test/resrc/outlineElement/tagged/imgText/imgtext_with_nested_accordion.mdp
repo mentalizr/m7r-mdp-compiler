@@ -1,0 +1,12 @@
+@img-text[alt="relaxing picture"](sun_400x250-1.jpg)
+    This is a simple paragraph
+
+    Some further Text as a paragraph:
+
+    // TODO You need to do something
+
+    @accordion[id="myId"]
+    --- Tip
+        Tip: Keep on hacking!
+
+#### Use your power

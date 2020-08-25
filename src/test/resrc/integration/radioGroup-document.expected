@@ -1,0 +1,23 @@
+<!--
+@@name=AutoTest1
+@@persistent
+-->
+
+<p class="h3 mt-4 mb-4">Header 1</p>
+<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+<div id="myRadioButton" class="mb-2 ns_radiogroup">
+    <div>Drei Uhr am Nachmittag</div>
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="myRadioGroup" id="myRadioButton_1" value="1">
+        <label class="form-check-label" for="myRadioButton_1">Gefühl</label>
+    </div>
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="myRadioGroup" id="myRadioButton_2" value="2">
+        <label class="form-check-label" for="myRadioButton_2">Gedanken</label>
+    </div>
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="myRadioGroup" id="myRadioButton_3" value="3">
+        <label class="form-check-label" for="myRadioButton_3">Situation</label>
+    </div>
+</div>
+<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>

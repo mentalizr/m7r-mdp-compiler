@@ -1,0 +1,4 @@
+@input-group[id=\"input_myId\"]
+    Eine Überschrift.
+
+und hier folgt eine weitere Zeile ...

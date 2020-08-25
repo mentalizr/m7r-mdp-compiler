@@ -1,0 +1,11 @@
+<div id="4457" class="mb-2 ns_radiogroup">
+    <div>This is a headline</div>
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="worte" id="4457_1" value="1">
+        <label class="form-check-label" for="4457_1">"Danke" sagen</label>
+    </div>
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="worte" id="4457_2" value="2">
+        <label class="form-check-label" for="4457_2">einen Dankbrief oder eine Dankmail schreiben</label>
+    </div>
+</div>

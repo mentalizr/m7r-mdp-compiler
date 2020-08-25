@@ -1,0 +1,25 @@
+<div class="row" style="margin-bottom: 1.0em; margin-top: 1.0em">
+    <div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
+        <img src="service/v1/mediaImg/sun_400x250-1.jpg" class="img-fluid" style="width: 100%" alt="relaxing picture">
+    </div>
+    <div class="col-xs-12 col-sm-7 col-md-7 col-lg-7">
+        <p>This is a simple paragraph</p>
+        <p>Some further Text as a paragraph:</p>
+        <div class="accordion mt-3 mb-3" id="myId">
+            <div class="card">
+                <div class="card-header" id="myId_heading_0">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#myId_collapse_0" aria-expanded="true" aria-controls="myId_collapse_0">
+                            Tip
+                        </button>
+                    </h5>
+                </div>
+                <div id="myId_collapse_0" class="collapse" aria-labelledby="myId_heading_0" data-parent="#myId">
+                    <div class="card-body">
+                            Tip: Keep on hacking!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

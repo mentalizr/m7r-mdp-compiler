@@ -1,0 +1,61 @@
+@@name=AutoTest1
+@@persistent
+
+### Header 1
+
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+
+// Here some comment
+
+Im Informationstext @info[Was ist eigentlich mit mir los?](1) erhalten Sie einen Überblick über unterschiedliche Symptome, unter denen Menschen mit Depressionen leiden. Sie erhalten Antworten auf Fragen wie "Was ist eine Depression?"; "Was sind typische Symptome einer Depression?"; oder auf die Frage, wie oft Depressionen vorkommen.
+
+Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium:
+- Ratgeber Depression: Informationen für Betroffene und Angehörige, M. Hautzinger, Hogrefe-Verlag, ISBN-10: 3801718794
+
+#### Subheader 1
+
+Nemo [externer Link](www.example.com)enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.
+
+@img-text[alt="picture joe"](joe_400x250.jpg)
+    **Joe (35)** ist Krankenpfleger in einem Kreiskrankenhaus in Mecklenburg-Vorpommern. Er ist verheiratet
+    und hat drei Kinder- Little-Joe, Joe jr. und Joey. Er fühlt sich erschöpft und überlastet und hat Probleme.
+
+#### Subheader 2
+
+At vero eos et accusamus et iusto odio dignissimos ducimus.
+
+Klicken Sie auf *Weiter* um zum nächsten Schritt zu gelangen.
+
+@radio-group[name="myRadioGroup" id="myRadioButton" "Situation" "Gedanken" "Gefühl"]
+    Drei Uhr am Nachmittag
+
+Hier steht noch was dazwischen
+
+@radio-group[id="b" name="myRadioGroup" "Situation" "Gedanken" "Gefühl"]
+    * erster Punkt
+    * zweiter Punkt
+    * dritter Punkt
+
+@textarea-group[id="symptome" rows="5"]
+    Überschrift der Formgroup
+
+@input-group[id="aaabbb"]
+    Überschrift eines einzeiligen Textfeldes
+
+@input-group[id="0815-2"]
+    * erster
+    * zweiter
+    * dritter
+
+@input-group[id="0815-3" inputtype="text" placeholder="an einem ganz besonderen Ort"]
+    - Ich war ...
+
+@mc-question[id="q1"],
+    Frage 1 von 5
+    Welche zwei Arten von Stressbewältigung unterscheidet der Stressforscher Richard Lazarus in seinem berühmten transaktionalen Stressmodell?
+    - Veränderungszentriert und Vermeidungszentriert
+    + Problemorientiert und Emotionsorientiert
+    - Ablenkungsfokussiert und Emotionsfokussiert
+    - Vermeidungsfokussiert und Problemfokussiert
+
+Hier folgt noch was.

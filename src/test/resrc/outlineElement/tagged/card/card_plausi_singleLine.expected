@@ -1,0 +1,5 @@
+<div class="card mt-3 mb-3">
+    <div class="card-body">
+        <div class="card-text">Hier der Text!</div>
+    </div>
+</div>

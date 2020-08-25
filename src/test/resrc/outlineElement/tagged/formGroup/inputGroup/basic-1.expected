@@ -1,0 +1,4 @@
+<div class="form-group">
+    <label for="input_myId">Eine Überschrift.</label>
+    <input type="text" class="form-control ns_input" id="input_myId" placeholder="">
+</div>

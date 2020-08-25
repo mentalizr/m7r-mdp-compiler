@@ -1,0 +1,7 @@
+<div class="alert alert-info mb-4">
+    <div style="display: table; width: 100%">
+        <div style="display: table-cell; width: 24px; background-image: url(service/v1/mediaImg/info.png); background-repeat: no-repeat; background-position: center center; background-size: contain; width: 24px; height: 24px;"></div>
+        <div style="display: table-cell; width: 18px;"></div>
+        <div style="display: table-cell;" class="h3">Hier der <strong>Info-Text</strong>!</div>
+    </div>
+</div>

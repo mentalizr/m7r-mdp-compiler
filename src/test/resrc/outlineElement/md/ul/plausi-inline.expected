@@ -1,0 +1,5 @@
+<ul class="mb-4">
+    <li>first <em>italic</em> Item</li>
+    <li>second <strong>bold</strong> Item</li>
+    <li>third <em><strong>bold and italic</em></strong> Item with <code>some code</code></li>
+</ul>

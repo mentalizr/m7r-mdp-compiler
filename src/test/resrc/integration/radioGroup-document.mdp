@@ -1,0 +1,11 @@
+@@name=AutoTest1
+@@persistent
+
+### Header 1
+
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+
+@radio-group[name="myRadioGroup" id="myRadioButton" "Situation" "Gedanken" "Gefühl"]
+    Drei Uhr am Nachmittag
+
+Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.

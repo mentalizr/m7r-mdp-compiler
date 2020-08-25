@@ -1,0 +1,15 @@
+<div class="accordion mt-3 mb-3" id="id4711">
+    <div class="card">
+        <div class="card-header" id="id4711_heading_0">
+            <h5 class="mb-0">
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#id4711_collapse_0" aria-expanded="true" aria-controls="id4711_collapse_0">
+                    Header 1
+                </button>
+            </h5>
+        </div>
+        <div id="id4711_collapse_0" class="collapse show" aria-labelledby="id4711_heading_0" data-parent="#id4711">
+            <div class="card-body">
+            </div>
+        </div>
+    </div>
+</div>

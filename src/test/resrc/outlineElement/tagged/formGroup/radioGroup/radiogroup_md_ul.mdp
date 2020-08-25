@@ -1,0 +1,6 @@
+@radio-group[id="input_myId" name="myName" "Label1" "Label2" "Label3"]
+    * erster
+    * zweiter
+    * dritter
+
+Hier ein weiterer Abschnitt

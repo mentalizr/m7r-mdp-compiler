@@ -1,0 +1,44 @@
+<div id="q1" class="m7r-mc-one card mb-3 mt-3 m7r-mc-state-answering">
+    <div class="card-body">
+        <h5 class="card-title">Frage 1 von 5</h5>
+        <p class="card-text"><strong>Welche zwei Arten von Stressbewältigung unterscheidet der Stressforscher Richard Lazarus in seinem berühmten transaktionalen Stressmodell?</strong></p>
+        <div id="q1_1" class="m7r-mc-option p-2 rounded mt-2">
+            <span class="m7r-mc-icon"></span>
+            <span class="ml-2">Veränderungszentriert und Vermeidungszentriert</span>
+        </div>
+        <div id="q1_2" class="m7r-mc-option p-2 rounded mt-2 m7r-mc-option-correct">
+            <span class="m7r-mc-icon"></span>
+            <span class="ml-2">Problemorientiert und Emotionsorientiert</span>
+        </div>
+        <div id="q1_3" class="m7r-mc-option p-2 rounded mt-2">
+            <span class="m7r-mc-icon"></span>
+            <span class="ml-2">Ablenkungsfokussiert und Emotionsfokussiert</span>
+        </div>
+        <div id="q1_4" class="m7r-mc-option p-2 rounded mt-2">
+            <span class="m7r-mc-icon"></span>
+            <span class="ml-2">Vermeidungsfokussiert und Problemfokussiert</span>
+        </div>
+        <div class="mt-4">
+            <div class="m7r-mc-feedback-fail btn border border-danger text-danger font-weight-bold px-3 d-none">
+                <span class="m7r-mc-icon-fail"></span>
+                <span class="pl-2">Leider falsch!</span>
+            </div>
+            <div class="m7r-mc-feedback-success btn border border-success text-success font-weight-bold px-3 d-none">
+                <span class="m7r-mc-icon-success"></span>
+                <span class="pl-2">Richtig!</span>
+            </div>
+            <button type="button" class="m7r-mc-button-check btn btn-primary px-3 d-none">
+                <span class="m7r-mc-icon-check m7r-mc-icon-check"></span>
+                <span class="pl-2">Überprüfen</span>
+            </button>
+            <button type="button" class="m7r-mc-button-show btn btn-primary px-3 d-none">
+                <span class="m7r-mc-icon-show m7r-mc-icon-check"></span>
+                <span class="pl-2">Lösung anzeigen</span>
+            </button>
+            <button type="button" class="m7r-mc-button-retry btn btn-primary px-3 d-none">
+                <span class="m7r-mc-icon-retry m7r-mc-icon-check"></span>
+                <span class="pl-2">Wiederholen</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,124 @@
+<!--
+@@name=AutoTest1
+@@persistent
+-->
+
+<p class="h3 mt-4 mb-4">Header 1</p>
+<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+<p>Im Informationstext <a href="#" id="infolink_1" class="infolink">Was ist eigentlich mit mir los?</a> erhalten Sie einen Überblick über unterschiedliche Symptome, unter denen Menschen mit Depressionen leiden. Sie erhalten Antworten auf Fragen wie "Was ist eine Depression?"; "Was sind typische Symptome einer Depression?"; oder auf die Frage, wie oft Depressionen vorkommen.</p>
+<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium:
+- Ratgeber Depression: Informationen für Betroffene und Angehörige, M. Hautzinger, Hogrefe-Verlag, ISBN-10: 3801718794</p>
+<p class="h4 mt-4 mb-4">Subheader 1</p>
+<p>Nemo <a href="www.example.com" class="external-link" target="_blank" rel="noreferrer noopener">externer Link</a>enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.</p>
+<div class="row" style="margin-bottom: 1.0em; margin-top: 1.0em">
+    <div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
+        <img src="service/v1/mediaImg/joe_400x250.jpg" class="img-fluid" style="width: 100%" alt="picture joe">
+    </div>
+    <div class="col-xs-12 col-sm-7 col-md-7 col-lg-7">
+        <p><strong>Joe (35)</strong> ist Krankenpfleger in einem Kreiskrankenhaus in Mecklenburg-Vorpommern. Er ist verheiratet
+        und hat drei Kinder- Little-Joe, Joe jr. und Joey. Er fühlt sich erschöpft und überlastet und hat Probleme.</p>
+    </div>
+</div>
+<p class="h4 mt-4 mb-4">Subheader 2</p>
+<p>At vero eos et accusamus et iusto odio dignissimos ducimus.</p>
+<p>Klicken Sie auf <em>Weiter</em> um zum nächsten Schritt zu gelangen.</p>
+<div id="myRadioButton" class="mb-2 ns_radiogroup">
+    <div>Drei Uhr am Nachmittag</div>
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="myRadioGroup" id="myRadioButton_1" value="1">
+        <label class="form-check-label" for="myRadioButton_1">Gefühl</label>
+    </div>
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="myRadioGroup" id="myRadioButton_2" value="2">
+        <label class="form-check-label" for="myRadioButton_2">Gedanken</label>
+    </div>
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="myRadioGroup" id="myRadioButton_3" value="3">
+        <label class="form-check-label" for="myRadioButton_3">Situation</label>
+    </div>
+</div>
+<p>Hier steht noch was dazwischen</p>
+<div id="b" class="mb-2 ns_radiogroup">
+    <ul class="mb-2">
+        <li>erster Punkt</li>
+        <li>zweiter Punkt</li>
+        <li>dritter Punkt</li>
+    </ul>
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="myRadioGroup" id="b_1" value="1">
+        <label class="form-check-label" for="b_1">Gefühl</label>
+    </div>
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="myRadioGroup" id="b_2" value="2">
+        <label class="form-check-label" for="b_2">Gedanken</label>
+    </div>
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="myRadioGroup" id="b_3" value="3">
+        <label class="form-check-label" for="b_3">Situation</label>
+    </div>
+</div>
+<div class="form-group">
+    <label for="symptome">Überschrift der Formgroup</label>
+    <textarea class="form-control ns_input" id="symptome" rows="5"></textarea>
+</div>
+<div class="form-group">
+    <label for="aaabbb">Überschrift eines einzeiligen Textfeldes</label>
+    <input type="text" class="form-control ns_input" id="aaabbb" placeholder="">
+</div>
+<div class="form-group">
+    <ul class="mb-2">
+        <li>erster</li>
+        <li>zweiter</li>
+        <li>dritter</li>
+    </ul>
+    <input type="text" class="form-control ns_input" id="0815-2" placeholder="">
+</div>
+<div class="form-group">
+    <label for="0815-3">- Ich war ...</label>
+    <input type="text" class="form-control ns_input" id="0815-3" placeholder="an einem ganz besonderen Ort">
+</div>
+<div id="q1" class="m7r-mc-one card mb-3 mt-3 m7r-mc-state-answering">
+    <div class="card-body">
+        <h5 class="card-title">Frage 1 von 5</h5>
+        <p class="card-text"><strong>Welche zwei Arten von Stressbewältigung unterscheidet der Stressforscher Richard Lazarus in seinem berühmten transaktionalen Stressmodell?</strong></p>
+        <div id="q1_1" class="m7r-mc-option p-2 rounded mt-2">
+            <span class="m7r-mc-icon"></span>
+            <span class="ml-2">Veränderungszentriert und Vermeidungszentriert</span>
+        </div>
+        <div id="q1_2" class="m7r-mc-option p-2 rounded mt-2 m7r-mc-option-correct">
+            <span class="m7r-mc-icon"></span>
+            <span class="ml-2">Problemorientiert und Emotionsorientiert</span>
+        </div>
+        <div id="q1_3" class="m7r-mc-option p-2 rounded mt-2">
+            <span class="m7r-mc-icon"></span>
+            <span class="ml-2">Ablenkungsfokussiert und Emotionsfokussiert</span>
+        </div>
+        <div id="q1_4" class="m7r-mc-option p-2 rounded mt-2">
+            <span class="m7r-mc-icon"></span>
+            <span class="ml-2">Vermeidungsfokussiert und Problemfokussiert</span>
+        </div>
+        <div class="mt-4">
+            <div class="m7r-mc-feedback-fail btn border border-danger text-danger font-weight-bold px-3 d-none">
+                <span class="m7r-mc-icon-fail"></span>
+                <span class="pl-2">Leider falsch!</span>
+            </div>
+            <div class="m7r-mc-feedback-success btn border border-success text-success font-weight-bold px-3 d-none">
+                <span class="m7r-mc-icon-success"></span>
+                <span class="pl-2">Richtig!</span>
+            </div>
+            <button type="button" class="m7r-mc-button-check btn btn-primary px-3 d-none">
+                <span class="m7r-mc-icon-check m7r-mc-icon-check"></span>
+                <span class="pl-2">Überprüfen</span>
+            </button>
+            <button type="button" class="m7r-mc-button-show btn btn-primary px-3 d-none">
+                <span class="m7r-mc-icon-show m7r-mc-icon-check"></span>
+                <span class="pl-2">Lösung anzeigen</span>
+            </button>
+            <button type="button" class="m7r-mc-button-retry btn btn-primary px-3 d-none">
+                <span class="m7r-mc-icon-retry m7r-mc-icon-check"></span>
+                <span class="pl-2">Wiederholen</span>
+            </button>
+        </div>
+    </div>
+</div>
+<p>Hier folgt noch was.</p>
