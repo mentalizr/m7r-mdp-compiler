@@ -2,4 +2,4 @@
 
 __dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-java -cp "${__dir}/../build/libs/mdp-compiler-1.0-SNAPSHOT.jar:${__dir}/libs/*" org.mentalizr.mdpCompiler.MDPCompilerCLI "$@"
+java -cp "${__dir}/../build/libs/mdp-compiler-0.0.7.jar:${__dir}/libs/*" org.mentalizr.mdpCompiler.MDPCompilerCLI "$@"
