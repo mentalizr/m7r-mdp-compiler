@@ -45,7 +45,7 @@ public class VideoRenderer extends OutlineElementRenderer {
 
         String srcValue = compilerContext.getServiceContextURL() + CONTEXT_URL_VIDEO + this.mdpTagLink;
 
-        this.result.addLn("    <video class=\"\" controls=\"true\"" + poster + " src=\"" + srcValue + "\" onclick=\"this.paused?this.play():this.pause();\" allowfullscreen=\"\"></video>");
+        this.result.addLn("    <video class=\"\" preload=\"metadata\" controls=\"true\"" + poster + " src=\"" + srcValue + "\" onclick=\"this.paused?this.play():this.pause();\" allowfullscreen=\"\"></video>");
         this.result.addLn("</div>");
 
     }

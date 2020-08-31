@@ -18,7 +18,7 @@ class VideoTest {
                 },
                 new String[]{
                         "<div class=\"embed-responsive embed-responsive-16by9 mt-3 mb-3\">",
-                        "    <video class=\"\" controls=\"true\" src=\"service/v1/mediaAV/myVideo.mp4\" onclick=\"this.paused?this.play():this.pause();\" allowfullscreen=\"\"></video>",
+                        "    <video class=\"\" preload=\"metadata\" controls=\"true\" src=\"service/v1/mediaAV/myVideo.mp4\" onclick=\"this.paused?this.play():this.pause();\" allowfullscreen=\"\"></video>",
                         "</div>"
                 },
                 1
@@ -36,7 +36,7 @@ class VideoTest {
                 },
                 new String[]{
                         "<div class=\"embed-responsive embed-responsive-16by9 mt-3 mb-3\">",
-                        "    <video class=\"\" controls=\"true\" poster=\"service/v1/mediaImg/background.png\" src=\"service/v1/mediaAV/myVideo.mp4\" onclick=\"this.paused?this.play():this.pause();\" allowfullscreen=\"\"></video>",
+                        "    <video class=\"\" preload=\"metadata\" controls=\"true\" poster=\"service/v1/mediaImg/background.png\" src=\"service/v1/mediaAV/myVideo.mp4\" onclick=\"this.paused?this.play():this.pause();\" allowfullscreen=\"\"></video>",
                         "</div>"
                 },
                 1
@@ -54,7 +54,7 @@ class VideoTest {
                 },
                 new String[]{
                         "<div class=\"embed-responsive embed-responsive-16by9 mt-1 mb-2\">",
-                        "    <video class=\"\" controls=\"true\" poster=\"service/v1/mediaImg/background.png\" src=\"service/v1/mediaAV/myVideo.mp4\" onclick=\"this.paused?this.play():this.pause();\" allowfullscreen=\"\"></video>",
+                        "    <video class=\"\" preload=\"metadata\" controls=\"true\" poster=\"service/v1/mediaImg/background.png\" src=\"service/v1/mediaAV/myVideo.mp4\" onclick=\"this.paused?this.play():this.pause();\" allowfullscreen=\"\"></video>",
                         "</div>"
                 },
                 1
