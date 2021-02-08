@@ -1,5 +1,6 @@
 package org.mentalizr.mdpCompiler;
 
+import de.arthurpicht.cli.CommandExecutorException;
 import de.arthurpicht.cli.CommandLineInterface;
 import de.arthurpicht.cli.CommandLineInterfaceBuilder;
 import de.arthurpicht.cli.command.CommandSequenceBuilder;
@@ -81,6 +82,10 @@ public class MDPCompilerCLI {
             System.out.println("Error: " + e.getMessage());
             System.out.println("mdpc " + e.getArgsAsString());
             System.out.println("     " + e.getArgumentPointerString());
+            System.exit(1);
+        } catch (CommandExecutorException e) {
+            System.out.println("Error: " + e.getMessage());
+            System.exit(1);
         }
     }
 
