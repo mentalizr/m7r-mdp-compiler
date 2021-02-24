@@ -1,6 +1,8 @@
 package org.mentalizr.mdpCompiler.cli;
 
+import de.arthurpicht.cli.CliCall;
 import de.arthurpicht.cli.CommandExecutor;
+import de.arthurpicht.cli.CommandExecutorException;
 import de.arthurpicht.cli.option.OptionParserResult;
 import org.mentalizr.mdpCompiler.ContentCompiler;
 import org.mentalizr.mdpCompiler.MDPSyntaxErrorCollector;
@@ -15,11 +17,12 @@ import static org.mentalizr.mdpCompiler.MDPCompilerCLI.*;
 public class CommandExecutorCompile implements CommandExecutor {
 
     @Override
-    public void execute(
-            OptionParserResult optionParserResultGlobal,
-            List<String> commandList,
-            OptionParserResult optionParserResultSpecific,
-            List<String> parameterList) {
+    public void execute(CliCall cliCall) throws CommandExecutorException {
+
+        OptionParserResult optionParserResultGlobal = cliCall.getOptionParserResultGlobal();
+        List<String> commandList = cliCall.getCommandList();
+        OptionParserResult optionParserResultSpecific = cliCall.getOptionParserResultSpecific();
+        List<String> parameterList = cliCall.getParameterList();
 
         GlobalConfiguration globalConfiguration = createGlobalConfiguration(optionParserResultGlobal);
         CompileConfiguration compileConfiguration = new CompileConfiguration();
@@ -50,6 +53,7 @@ public class CommandExecutorCompile implements CommandExecutor {
             }
             System.exit(1);
         }
+
     }
 
     private static GlobalConfiguration createGlobalConfiguration(OptionParserResult optionParserResult) {

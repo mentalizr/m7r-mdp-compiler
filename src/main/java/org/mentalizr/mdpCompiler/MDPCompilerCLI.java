@@ -1,25 +1,17 @@
 package org.mentalizr.mdpCompiler;
 
-import de.arthurpicht.cli.CommandExecutorException;
-import de.arthurpicht.cli.CommandLineInterface;
-import de.arthurpicht.cli.CommandLineInterfaceBuilder;
+import de.arthurpicht.cli.*;
 import de.arthurpicht.cli.command.CommandSequenceBuilder;
 import de.arthurpicht.cli.command.Commands;
-import de.arthurpicht.cli.command.DefaultCommandBuilder;
 import de.arthurpicht.cli.common.UnrecognizedArgumentException;
-import de.arthurpicht.cli.option.OptionBuilder;
-import de.arthurpicht.cli.option.Options;
-import de.arthurpicht.cli.parameter.ParametersVar;
+import de.arthurpicht.cli.option.*;
+import de.arthurpicht.cli.parameter.ParametersMin;
 import org.mentalizr.mdpCompiler.cli.CommandExecutorClean;
 import org.mentalizr.mdpCompiler.cli.CommandExecutorCompile;
-import org.mentalizr.mdpCompiler.cli.CommandExecutorDefault;
-import org.mentalizr.mdpCompiler.cli.CommandExecutorHelp;
 
 public class MDPCompilerCLI {
 
-    public static final String ID_VERSION = "version";
     public static final String ID_NO_CLEAN = "no-clean";
-    public static final String ID_HELP = "help";
     public static final String ID_VERBOSE = "verbose";
     public static final String ID_SILENT = "silent";
     public static final String ID_SHOW_STACKTRACE = "stacktrace";
@@ -28,53 +20,62 @@ public class MDPCompilerCLI {
     public static final String FILE = "file";
     public static final String PROGRAM = "program";
     public static final String CLEAN = "clean";
-    public static final String HELP = "help";
 
-    private static CommandLineInterface createCommandLineInterface() {
+    private static Cli createCli() {
 
         Options globalOptions = new Options()
-                .add(new OptionBuilder().withShortName('v').withLongName("version").withDescription("show Version").build(ID_VERSION))
-                .add(new OptionBuilder().withLongName("no-clean").withDescription("omit cleaning preexisting html files").build(ID_NO_CLEAN))
-                .add(new OptionBuilder().withShortName('h').withLongName("help").withDescription("show help text").build(ID_HELP))
-                .add(new OptionBuilder().withLongName("silent").withDescription("silent").build(ID_SILENT))
-                .add(new OptionBuilder().withLongName("verbose").withDescription("verbose").build(ID_VERBOSE))
-                .add(new OptionBuilder().withLongName("stacktrace").build(ID_SHOW_STACKTRACE));
+                .add(new VersionOption())
+                .add(new HelpOption())
+                .add(new ManOption())
+                .add(new OptionBuilder().withLongName("no-clean").withDescription("Omit cleaning preexisting html files.").build(ID_NO_CLEAN))
+                .add(new OptionBuilder().withLongName("silent").withDescription("Proceed without any output to console.").build(ID_SILENT))
+                .add(new OptionBuilder().withLongName("verbose").withDescription("Show extended output if necessary.").build(ID_VERBOSE))
+                .add(new OptionBuilder().withLongName("stacktrace").withDescription("Print stacktrace in case of error occurrence.").build(ID_SHOW_STACKTRACE));
 
         Options specificOptionsCompile = new Options()
-                .add(new OptionBuilder().withLongName("no-clean").withDescription("omit cleaning preexisting html files").build(ID_NO_CLEAN));
+                .add(new HelpOption())
+                .add(new OptionBuilder().withLongName("no-clean").withDescription("Omit cleaning preexisting html files.").build(ID_NO_CLEAN));
 
         Commands commands = new Commands()
-                .setDefaultCommand(new DefaultCommandBuilder().withCommandExecutor(new CommandExecutorDefault()).build())
                 .add(new CommandSequenceBuilder()
                         .addCommands(COMPILE, FILE)
                         .withSpecificOptions(specificOptionsCompile)
-                        .withParameters(new ParametersVar(0))
+                        .withParameters(new ParametersMin(0, "file", ".mdp files to be compiled."))
                         .withCommandExecutor(new CommandExecutorCompile())
+                        .withDescription("Compiles one ore more .mdp file(s).")
+                        .withHelpPriority(1)
                         .build())
                 .add(new CommandSequenceBuilder()
                         .addCommands(COMPILE, PROGRAM)
                         .withSpecificOptions(specificOptionsCompile)
-                        .withParameters(new ParametersVar(0))
+                        .withParameters(new ParametersMin(0, "program-dir", "Program directory to be compiled."))
                         .withCommandExecutor(new CommandExecutorCompile())
+                        .withDescription("Compile one or more programs.")
+                        .withHelpPriority(2)
                         .build())
                 .add(new CommandSequenceBuilder()
                         .addCommands(CLEAN)
+                        .withSpecificOptions(new Options().add(new HelpOption()))
                         .withCommandExecutor(new CommandExecutorClean())
-                        .build())
-                .add(new CommandSequenceBuilder()
-                        .addCommands(HELP)
-                        .withCommandExecutor(new CommandExecutorHelp())
+                        .withDescription("Deletes all compile products. (NIY)")
+                        .withHelpPriority(3)
                         .build());
 
-        return new CommandLineInterfaceBuilder()
+        CliDescription cliDescription = new CliDescriptionBuilder("mdpc")
+                .withDescription("Markdown for psychoeducation compiler\nmdpc is part of the mentalizr project\nSee https://github.com/mentalizr/m7r-mdp-compiler for more info.")
+                .withVersion(Const.VERSION)
+                .withDate(Const.VERSION_DATE)
+                .build();
+
+        return new CliBuilder()
                 .withGlobalOptions(globalOptions)
                 .withCommands(commands)
-                .build();
+                .build(cliDescription);
     }
 
     public static void main(String[] args) {
 
-        CommandLineInterface cli = createCommandLineInterface();
+        Cli cli = createCli();
         try {
             cli.execute(args);
 
