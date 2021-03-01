@@ -3,6 +3,7 @@ package org.mentalizr.mdpCompiler;
 import de.arthurpicht.cli.*;
 import de.arthurpicht.cli.command.CommandSequenceBuilder;
 import de.arthurpicht.cli.command.Commands;
+import de.arthurpicht.cli.command.InfoDefaultCommand;
 import de.arthurpicht.cli.common.UnrecognizedArgumentException;
 import de.arthurpicht.cli.option.*;
 import de.arthurpicht.cli.parameter.ParametersMin;
@@ -25,7 +26,6 @@ public class MDPCompilerCLI {
 
         Options globalOptions = new Options()
                 .add(new VersionOption())
-                .add(new HelpOption())
                 .add(new ManOption())
                 .add(new OptionBuilder().withLongName("no-clean").withDescription("Omit cleaning preexisting html files.").build(ID_NO_CLEAN))
                 .add(new OptionBuilder().withLongName("silent").withDescription("Proceed without any output to console.").build(ID_SILENT))
@@ -33,10 +33,10 @@ public class MDPCompilerCLI {
                 .add(new OptionBuilder().withLongName("stacktrace").withDescription("Print stacktrace in case of error occurrence.").build(ID_SHOW_STACKTRACE));
 
         Options specificOptionsCompile = new Options()
-                .add(new HelpOption())
                 .add(new OptionBuilder().withLongName("no-clean").withDescription("Omit cleaning preexisting html files.").build(ID_NO_CLEAN));
 
         Commands commands = new Commands()
+                .setDefaultCommand(new InfoDefaultCommand())
                 .add(new CommandSequenceBuilder()
                         .addCommands(COMPILE, FILE)
                         .withSpecificOptions(specificOptionsCompile)
@@ -61,15 +61,16 @@ public class MDPCompilerCLI {
                         .withHelpPriority(3)
                         .build());
 
-        CliDescription cliDescription = new CliDescriptionBuilder("mdpc")
+        CliDescription cliDescription = new CliDescriptionBuilder()
                 .withDescription("Markdown for psychoeducation compiler\nmdpc is part of the mentalizr project\nSee https://github.com/mentalizr/m7r-mdp-compiler for more info.")
                 .withVersion(Const.VERSION)
                 .withDate(Const.VERSION_DATE)
-                .build();
+                .build("mdpc");
 
         return new CliBuilder()
                 .withGlobalOptions(globalOptions)
                 .withCommands(commands)
+                .withAutoHelp()
                 .build(cliDescription);
     }
 
@@ -81,8 +82,8 @@ public class MDPCompilerCLI {
 
         } catch (UnrecognizedArgumentException e) {
             System.out.println("Error: " + e.getMessage());
-            System.out.println("mdpc " + e.getArgsAsString());
-            System.out.println("     " + e.getArgumentPointerString());
+            System.out.println(e.getCallString());
+            System.out.println(e.getCallPointerString());
             System.exit(1);
         } catch (CommandExecutorException e) {
             System.out.println("Error: " + e.getMessage());
