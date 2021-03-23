@@ -11,6 +11,7 @@ import org.mentalizr.mdpCompiler.result.ResultWriter;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 public class MDPCompiler {
 
@@ -20,6 +21,12 @@ public class MDPCompiler {
         ResultWriter resultWriter = new ResultWriter();
         MDPCompiler.compileMdpDocument(new Document(input), resultWriter);
         resultWriter.write(output);
+    }
+
+    public static List<String> compile(File input) throws IOException, MDPSyntaxError {
+        ResultWriter resultWriter = new ResultWriter();
+        MDPCompiler.compileMdpDocument(new Document(input), resultWriter);
+        return resultWriter.getResultLines();
     }
 
     /**
