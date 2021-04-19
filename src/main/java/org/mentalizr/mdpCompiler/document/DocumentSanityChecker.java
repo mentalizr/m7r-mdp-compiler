@@ -10,16 +10,12 @@ public class DocumentSanityChecker {
 
         while (documentIterator.hasNextLine()) {
             Line line = documentIterator.getNextLine();
-
             checkLine(line);
         }
-
     }
 
     public static void checkLine(Line line) throws MDPSyntaxError {
-
         checkForTab(line);
-
         checkForInconsistentIndent(line);
     }
 
@@ -31,7 +27,6 @@ public class DocumentSanityChecker {
     }
 
     private static void checkForInconsistentIndent(Line line) throws MDPSyntaxError {
-
         String lineString = line.asString();
 
         if (!lineString.startsWith(" ")) return;
