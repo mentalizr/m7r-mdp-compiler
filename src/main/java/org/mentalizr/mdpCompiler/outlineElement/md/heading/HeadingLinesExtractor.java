@@ -6,8 +6,8 @@ import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementLinesExt
 
 public class HeadingLinesExtractor extends OutlineElementLinesExtractor {
 
-    public HeadingLinesExtractor(DocumentIterator documentIterator) {
-        super(documentIterator);
+    public HeadingLinesExtractor() {
+        super();
     }
 
     @Override

@@ -2,6 +2,7 @@ package org.mentalizr.mdpCompiler.outlineElement.tagged.imgText;
 
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
 import org.mentalizr.mdpCompiler.document.DocumentIterator;
+import org.mentalizr.mdpCompiler.document.Line;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModelBuilder;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTagged;
@@ -16,8 +17,8 @@ public class ImgText extends OutlineElementTagged {
 
     public static final String TAG = "@img-text";
 
-    public ImgText(DocumentIterator documentIterator, Result result) throws MDPSyntaxError {
-        super(TAG, result, documentIterator);
+    public ImgText(Line tagLine) throws MDPSyntaxError {
+        super(TAG, tagLine);
     }
 
     @Override
@@ -32,7 +33,7 @@ public class ImgText extends OutlineElementTagged {
 
     @Override
     protected OutlineElementLinesExtractor getOutlineElementLinesExtractor() {
-        return new TextBlockLinesExtractor(this.documentIterator);
+        return new TextBlockLinesExtractor();
     }
 
     @Override
@@ -45,6 +46,6 @@ public class ImgText extends OutlineElementTagged {
         ImgTextAttributes imgTextAttributes = (ImgTextAttributes) this.outlineElementTaggedAttributes;
         TextBlockModel textBlockModel = (TextBlockModel) this.outlineElementModel;
         String mdpLinkString = this.mdpTag.getLinkString();
-        return new ImgTextRenderer(this.result, imgTextAttributes, textBlockModel, mdpLinkString);
+        return new ImgTextRenderer(imgTextAttributes, textBlockModel, mdpLinkString);
     }
 }

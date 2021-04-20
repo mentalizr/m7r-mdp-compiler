@@ -22,8 +22,8 @@ class H1Test {
         System.out.println("first Line: " + firstLine.asString());
         Result result = new ResultTest();
 
-        H1 h1 = new H1(documentIterator, result);
-        h1.process(CompilerContext.getDefaultTestContext());
+        H1 h1 = new H1();
+        h1.process(CompilerContext.getDefaultTestContext(), documentIterator, result);
 
         List<String> htmlLines = result.getResultLines();
 
@@ -40,8 +40,8 @@ class H1Test {
         System.out.println("first Line: " + firstLine.asString());
         Result result = new ResultTest();
 
-        H1 h1 = new H1(documentIterator, result);
-        h1.process(CompilerContext.getDefaultTestContext());
+        H1 h1 = new H1();
+        h1.process(CompilerContext.getDefaultTestContext(), documentIterator, result);
 
         List<String> htmlLines = result.getResultLines();
 
@@ -58,8 +58,8 @@ class H1Test {
         System.out.println("first Line: " + firstLine.asString());
         Result result = new ResultTest();
 
-        H1 h1 = new H1(documentIterator, result);
-        h1.process(new CompilerContext(false, 1));
+        H1 h1 = new H1();
+        h1.process(new CompilerContext(false, 1), documentIterator, result);
 
         List<String> htmlLines = result.getResultLines();
 
@@ -76,8 +76,8 @@ class H1Test {
         System.out.println("first Line: " + firstLine.asString());
         Result result = new ResultTest();
 
-        H1 h1 = new H1(documentIterator, result);
-        h1.process(new CompilerContext(false, 2));
+        H1 h1 = new H1();
+        h1.process(new CompilerContext(false, 2), documentIterator, result);
 
         List<String> htmlLines = result.getResultLines();
 

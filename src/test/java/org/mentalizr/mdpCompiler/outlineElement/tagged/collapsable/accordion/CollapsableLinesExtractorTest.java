@@ -35,7 +35,7 @@ class CollapsableLinesExtractorTest {
         OutlineElementLinesExtractorBench.execute(
                 "plausi-1",
                 documentIterator,
-                new CollapsableLinesExtractor(documentIterator),
+                new CollapsableLinesExtractor(),
                 new File(EXPECTED_DIR, "extractor-plausi-1.expected"),
                 10
         );
@@ -62,7 +62,7 @@ class CollapsableLinesExtractorTest {
         OutlineElementLinesExtractorBench.execute(
                 "plausi-1 no empty line",
                 documentIterator,
-                new CollapsableLinesExtractor(documentIterator),
+                new CollapsableLinesExtractor(),
                 new File(EXPECTED_DIR, "extractor-plausi-1.expected"),
                 9
         );

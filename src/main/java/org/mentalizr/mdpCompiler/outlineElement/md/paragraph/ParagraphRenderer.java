@@ -9,13 +9,13 @@ public class ParagraphRenderer extends OutlineElementRenderer {
 
     private final ParagraphModel paragraphModel;
 
-    public ParagraphRenderer(Result result, ParagraphModel paragraphModel) {
-        super(result);
+    public ParagraphRenderer(ParagraphModel paragraphModel) {
+        super();
         this.paragraphModel = paragraphModel;
     }
 
     @Override
-    public void render(CompilerContext compilerContext) throws MDPSyntaxError {
+    public void render(CompilerContext compilerContext, Result result) throws MDPSyntaxError {
 
         int indentLevel = compilerContext.getIndentLevel();
 
@@ -37,7 +37,7 @@ public class ParagraphRenderer extends OutlineElementRenderer {
                 lineWork += "</p>";
             }
 
-            this.result.addLn(indentLevel, lineWork);
+            result.addLn(indentLevel, lineWork);
         }
     }
 

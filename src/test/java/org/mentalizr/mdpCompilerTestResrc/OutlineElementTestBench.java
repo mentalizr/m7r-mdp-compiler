@@ -63,8 +63,8 @@ public class OutlineElementTestBench {
         documentIterator.getNextLine();
         Result result = new ResultTest();
 
-        OutlineElement outlineElement = outlineElementFactory.getInstance(documentIterator, result);
-        outlineElement.process(CompilerContext.getDefaultTestContext());
+        OutlineElement outlineElement = outlineElementFactory.getInstance(documentIterator.getCurrentLine());
+        outlineElement.process(CompilerContext.getDefaultTestContext(), documentIterator, result);
 
         if (SOUT_RESULT) {
             System.out.println(">>>[OutlineElementTestBench: " + testName + "] generated HTML:");
@@ -92,8 +92,8 @@ public class OutlineElementTestBench {
         documentIterator.getNextLine();
         Result result = new ResultTest();
 
-        OutlineElement outlineElement = outlineElementFactory.getInstance(documentIterator, result);
-        outlineElement.process(CompilerContext.getDefaultTestContext());
+        OutlineElement outlineElement = outlineElementFactory.getInstance(documentIterator.getCurrentLine());
+        outlineElement.process(CompilerContext.getDefaultTestContext(), documentIterator, result);
 
         if (SOUT_RESULT) {
             System.out.println("###[OutlineElementTestBench] " + testname);

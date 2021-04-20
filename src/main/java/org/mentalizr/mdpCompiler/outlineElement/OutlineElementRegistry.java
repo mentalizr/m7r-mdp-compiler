@@ -85,21 +85,21 @@ public class OutlineElementRegistry {
 
         if (mode == MDPCompiler.Mode.MDP_COMPLETE) {
             for (OutlineElementFactory factory : this.outlineElementTaggedFactoryList) {
-                if (factory.isResponsible(line)) return factory.getInstance(this.documentIterator, this.result);
+                if (factory.isResponsible(line)) return factory.getInstance(line);
             }
         }
 
         if (mode == MDPCompiler.Mode.MD_AND_MDP_NESTABLE || mode == MDPCompiler.Mode.MDP_COMPLETE) {
             for (OutlineElementFactory factory : this.outlineElementTaggedNestableFactoryList) {
-                if (factory.isResponsible(line)) return factory.getInstance(this.documentIterator, this.result);
+                if (factory.isResponsible(line)) return factory.getInstance(line);
             }
         }
 
         for (OutlineElementFactory factory : this.outlineElementMDFactoryList) {
-            if (factory.isResponsible(line)) return factory.getInstance(this.documentIterator, this.result);
+            if (factory.isResponsible(line)) return factory.getInstance(line);
         }
 
-        return this.defaultElement.getInstance(this.documentIterator, this.result);
+        return this.defaultElement.getInstance(this.documentIterator.getCurrentLine());
     }
 
 }

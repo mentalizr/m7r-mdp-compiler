@@ -6,7 +6,7 @@ import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CollapsableModel implements OutlineElementModel {
+public class CollapsableModel extends OutlineElementModel {
 
     private final List<CollapsableCardContent> collapsableCardContentList;
     private CollapsableCardContent curCollapsableCardContent;

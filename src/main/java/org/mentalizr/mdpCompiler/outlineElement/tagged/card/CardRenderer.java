@@ -12,24 +12,24 @@ public class CardRenderer extends OutlineElementRenderer {
     private final CardAttributes cardAttributes;
     private final TextBlockModel cardModel;
 
-    public CardRenderer(Result result, CardAttributes cardAttributes, TextBlockModel cardModel) {
-        super(result);
+    public CardRenderer(CardAttributes cardAttributes, TextBlockModel cardModel) {
+        super();
         this.cardAttributes = cardAttributes;
         this.cardModel = cardModel;
     }
 
     @Override
-    public void render(CompilerContext compilerContext) throws MDPSyntaxError {
+    public void render(CompilerContext compilerContext, Result result) throws MDPSyntaxError {
 
         int indent = compilerContext.getIndentLevel();
 
-        this.result.addLn(indent, "<div class=\"" + getCardClassValue() + "\">");
+        result.addLn(indent, "<div class=\"" + getCardClassValue() + "\">");
 
-        renderHeader(indent);
+        renderHeader(indent, result);
 
-        renderBody(indent);
+        renderBody(indent, result);
 
-        this.result.addLn(indent, "</div>");
+        result.addLn(indent, "</div>");
 
     }
 
@@ -52,36 +52,36 @@ public class CardRenderer extends OutlineElementRenderer {
         return classValueBuilder.toString();
     }
 
-    private void renderHeader(int indent) {
+    private void renderHeader(int indent, Result result) {
         if (this.cardAttributes.hasHeader()) {
-            this.result.addLn(indent + 1, "<div class=\"card-header\">" + this.cardAttributes.getHeader() + "</div>");
+            result.addLn(indent + 1, "<div class=\"card-header\">" + this.cardAttributes.getHeader() + "</div>");
         }
     }
 
-    private void renderBody(int indent) throws MDPSyntaxError {
+    private void renderBody(int indent, Result result) throws MDPSyntaxError {
         if (this.cardModel.getNrOfTextBlockLines() == 1) {
-            renderSingleLineBody(indent);
+            renderSingleLineBody(indent, result);
         } else if (this.cardModel.getNrOfTextBlockLines() > 1) {
-            renderMultiLineBody(indent);
+            renderMultiLineBody(indent, result);
         }
     }
 
-    private void renderSingleLineBody(int indent) {
+    private void renderSingleLineBody(int indent, Result result) {
         String cardText = this.cardModel.getSingleLineAsString();
-        this.result.addLn(indent + 1, "<div class=\"card-body\">");
-        this.result.addLn(indent + 2, "<div class=\"card-text\">" + cardText + "</div>");
-        this.result.addLn(indent + 1, "</div>");
+        result.addLn(indent + 1, "<div class=\"card-body\">");
+        result.addLn(indent + 2, "<div class=\"card-text\">" + cardText + "</div>");
+        result.addLn(indent + 1, "</div>");
     }
 
-    private void renderMultiLineBody(int indent) throws MDPSyntaxError {
+    private void renderMultiLineBody(int indent, Result result) throws MDPSyntaxError {
 
-        this.result.addLn(indent + 1, "<div class=\"card-body\">");
+        result.addLn(indent + 1, "<div class=\"card-body\">");
 
         MDPCompiler.compileSubdocument(
                 cardModel.asDocument(),
-                this.result,
+                result,
                 new CompilerContext(false, indent + 1));
 
-        this.result.addLn(indent + 1, "</div>");
+        result.addLn(indent + 1, "</div>");
     }
 }

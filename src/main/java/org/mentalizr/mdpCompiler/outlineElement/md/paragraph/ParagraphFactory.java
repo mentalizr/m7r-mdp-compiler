@@ -14,8 +14,8 @@ public class ParagraphFactory extends OutlineElementFactory {
     }
 
     @Override
-    public OutlineElement getInstance(DocumentIterator documentIterator, Result result) throws MDPSyntaxError {
-        return new Paragraph(documentIterator, result);
+    public OutlineElement getInstance(Line tagLine) throws MDPSyntaxError {
+        return new Paragraph();
     }
 
     @Override

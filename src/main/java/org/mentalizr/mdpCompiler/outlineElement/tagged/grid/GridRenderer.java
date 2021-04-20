@@ -13,14 +13,14 @@ public class GridRenderer extends OutlineElementRenderer {
     private final GridAttributes gridAttributes;
     private final GridModel gridModel;
 
-    public GridRenderer(Result result, GridAttributes gridAttributes, GridModel gridModel) {
-        super(result);
+    public GridRenderer(GridAttributes gridAttributes, GridModel gridModel) {
+        super();
         this.gridAttributes = gridAttributes;
         this.gridModel = gridModel;
     }
 
     @Override
-    public void render(CompilerContext compilerContext) throws MDPSyntaxError {
+    public void render(CompilerContext compilerContext, Result result) throws MDPSyntaxError {
 
         String id = obtainId();
 
@@ -28,15 +28,15 @@ public class GridRenderer extends OutlineElementRenderer {
         String marginBottom = this.gridAttributes.getMarginBottom();
         String classValue = "row mt-" + marginTop + " mb-" + marginBottom;
 
-        this.result.addLn("<div class=\"" + classValue + "\" id=\"" + id + "\">");
+        result.addLn("<div class=\"" + classValue + "\" id=\"" + id + "\">");
 
         for (int i = 0; i<this.gridModel.getColumnContentList().size(); i++) {
 
-            createRow(i, compilerContext);
+            createRow(i, compilerContext, result);
 
         }
 
-        this.result.addLn("</div>");
+        result.addLn("</div>");
 
     }
 
@@ -45,18 +45,18 @@ public class GridRenderer extends OutlineElementRenderer {
         return "genId-" + UUID.randomUUID().toString();
     }
 
-    private void createRow(int rowIndex, CompilerContext compilerContext) throws MDPSyntaxError {
+    private void createRow(int rowIndex, CompilerContext compilerContext, Result result) throws MDPSyntaxError {
 
         ColumnContent columnContent = this.gridModel.getColumnContentList().get(rowIndex);
 
-        this.result.addLn(compilerContext.getIndentLevel() + 1, "<div class=\"" + columnContent.getClassValue() + "\">");
+        result.addLn(compilerContext.getIndentLevel() + 1, "<div class=\"" + columnContent.getClassValue() + "\">");
 
         MDPCompiler.compileSubdocument(
                 columnContent.asDocument(),
-                this.result,
+                result,
                 new CompilerContext(false, compilerContext.getIndentLevel() + 1));
 
-        this.result.addLn(compilerContext.getIndentLevel() + 1,"</div>");
+        result.addLn(compilerContext.getIndentLevel() + 1,"</div>");
     }
 
 }

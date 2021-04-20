@@ -19,8 +19,8 @@ class ParagraphLinesExtractorTest {
         DocumentIterator documentIterator = DocumentIterator.getInstance("first line", "second line", "third line", "", "next paragraph");
         Line line = documentIterator.getNextLine();
 
-        ParagraphLinesExtractor paragraphLinesExtractor = new ParagraphLinesExtractor(documentIterator);
-        List<Line> extractedLines = paragraphLinesExtractor.extract();
+        ParagraphLinesExtractor paragraphLinesExtractor = new ParagraphLinesExtractor();
+        List<Line> extractedLines = paragraphLinesExtractor.extract(documentIterator);
 
         assertNotNull(extractedLines);
         assertEquals(3, extractedLines.size());
@@ -37,8 +37,8 @@ class ParagraphLinesExtractorTest {
         DocumentIterator documentIterator = DocumentIterator.getInstance("first line", "", "second line");
         Line line = documentIterator.getNextLine();
 
-        ParagraphLinesExtractor paragraphLinesExtractor = new ParagraphLinesExtractor(documentIterator);
-        List<Line> extractedLines = paragraphLinesExtractor.extract();
+        ParagraphLinesExtractor paragraphLinesExtractor = new ParagraphLinesExtractor();
+        List<Line> extractedLines = paragraphLinesExtractor.extract(documentIterator);
 
         assertNotNull(extractedLines);
         assertEquals(1, extractedLines.size());

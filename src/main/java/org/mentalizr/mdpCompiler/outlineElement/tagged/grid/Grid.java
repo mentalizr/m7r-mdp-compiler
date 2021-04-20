@@ -2,6 +2,7 @@ package org.mentalizr.mdpCompiler.outlineElement.tagged.grid;
 
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
 import org.mentalizr.mdpCompiler.document.DocumentIterator;
+import org.mentalizr.mdpCompiler.document.Line;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModelBuilder;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTagged;
@@ -13,13 +14,13 @@ public class Grid extends OutlineElementTagged {
 
     public static final String TAG = "@grid";
 
-    public Grid(DocumentIterator documentIterator, Result result) throws MDPSyntaxError {
-        super(TAG, result, documentIterator);
+    public Grid(Line tagLine) throws MDPSyntaxError {
+        super(TAG, tagLine);
     }
 
     @Override
     protected OutlineElementLinesExtractor getOutlineElementLinesExtractor() {
-        return new GridLinesExtractor(this.documentIterator);
+        return new GridLinesExtractor();
     }
 
     @Override
@@ -32,7 +33,7 @@ public class Grid extends OutlineElementTagged {
     protected OutlineElementRenderer getOutlineElementRenderer() {
         GridAttributes gridAttributes = (GridAttributes) this.outlineElementTaggedAttributes;
         GridModel gridModel = (GridModel) this.outlineElementModel;
-        return new GridRenderer(this.result, gridAttributes, gridModel);
+        return new GridRenderer(gridAttributes, gridModel);
     }
 
     @Override

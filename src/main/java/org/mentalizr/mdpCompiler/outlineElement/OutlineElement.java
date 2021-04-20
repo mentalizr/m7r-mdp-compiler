@@ -12,16 +12,12 @@ import java.util.List;
 public abstract class OutlineElement {
 
     protected String prefix;
-    protected DocumentIterator documentIterator;
-    protected Result result;
 
     protected List<Line> outlineElementLines;
     protected OutlineElementModel outlineElementModel;
 
-    public OutlineElement(String prefix, DocumentIterator documentIterator, Result result) {
+    public OutlineElement(String prefix) {
         this.prefix = prefix;
-        this.documentIterator = documentIterator;
-        this.result = result;
     }
 
     protected abstract OutlineElementLinesExtractor getOutlineElementLinesExtractor();
@@ -34,9 +30,9 @@ public abstract class OutlineElement {
         return this.prefix;
     }
 
-    public void process(CompilerContext compilerContext) throws MDPSyntaxError {
+    public void process(CompilerContext compilerContext, DocumentIterator documentIterator, Result result) throws MDPSyntaxError {
 
-        this.outlineElementLines = getOutlineElementLinesExtractor().extract();
+        this.outlineElementLines = getOutlineElementLinesExtractor().extract(documentIterator);
 
 //        System.out.println("extr. Lines:");
 //        for (Line line : this.outlineElementLines) {
@@ -46,7 +42,7 @@ public abstract class OutlineElement {
 
         this.outlineElementModel = getOutlineElementModelBuilder().getModel();
 
-        this.getOutlineElementRenderer().render(compilerContext);
+        this.getOutlineElementRenderer().render(compilerContext, result);
 
     }
 

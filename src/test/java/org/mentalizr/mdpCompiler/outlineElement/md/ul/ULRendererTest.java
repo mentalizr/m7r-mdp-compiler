@@ -25,8 +25,8 @@ class ULRendererTest {
         ulModel.addItem("second Item");
         ulModel.addItem("third Item");
 
-        ULRenderer ulRenderer = new ULRenderer(result, ulModel);
-        ulRenderer.render(CompilerContext.getDefaultTestContext());
+        ULRenderer ulRenderer = new ULRenderer(ulModel);
+        ulRenderer.render(CompilerContext.getDefaultTestContext(), result);
 
         for (String string : result.getResultLines()) {
             System.out.println(string);

@@ -14,8 +14,8 @@ public class TableFactory extends OutlineElementFactory {
     }
 
     @Override
-    public OutlineElement getInstance(DocumentIterator documentIterator, Result result) throws MDPSyntaxError {
-        return new Table(documentIterator, result);
+    public OutlineElement getInstance(Line tagLine) throws MDPSyntaxError {
+        return new Table();
     }
 
     @Override

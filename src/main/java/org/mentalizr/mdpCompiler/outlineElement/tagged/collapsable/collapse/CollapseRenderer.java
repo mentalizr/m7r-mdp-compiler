@@ -18,14 +18,14 @@ public class CollapseRenderer extends OutlineElementRenderer {
     private final CollapsableAttributes collapsableAttributes;
     private final CollapsableModel collapsableModel;
 
-    public CollapseRenderer(Result result, CollapsableAttributes collapsableAttributes, CollapsableModel collapsableModel) {
-        super(result);
+    public CollapseRenderer(CollapsableAttributes collapsableAttributes, CollapsableModel collapsableModel) {
+        super();
         this.collapsableAttributes = collapsableAttributes;
         this.collapsableModel = collapsableModel;
     }
 
     @Override
-    public void render(CompilerContext compilerContext) throws MDPSyntaxError {
+    public void render(CompilerContext compilerContext, Result result) throws MDPSyntaxError {
 
         String id = obtainId();
         String marginTop = this.collapsableAttributes.getMarginTop();
@@ -33,13 +33,13 @@ public class CollapseRenderer extends OutlineElementRenderer {
 
         int indent = compilerContext.getIndentLevel();
 
-        this.result.addLn(indent, "<div class=\"mt-" + marginTop + " mb-" + marginBottom + "\" id=\"" + id + "\">");
+        result.addLn(indent, "<div class=\"mt-" + marginTop + " mb-" + marginBottom + "\" id=\"" + id + "\">");
 
-        this.renderButtons(indent, id);
+        this.renderButtons(indent, id, result);
 
-        this.renderCollapseList(indent, id);
+        this.renderCollapseList(indent, id, result);
 
-        this.result.addLn(indent, "</div>");
+        result.addLn(indent, "</div>");
 
     }
 
@@ -48,55 +48,55 @@ public class CollapseRenderer extends OutlineElementRenderer {
         return "genId-" + UUID.randomUUID().toString();
     }
 
-    private void renderButtons(int indent, String id) {
+    private void renderButtons(int indent, String id, Result result) {
 
-        this.result.addLn(indent + 1, "<p>");
+        result.addLn(indent + 1, "<p>");
 
         List<CollapsableCardContent> collapsableCardContentList = this.collapsableModel.getCollapsableCardContentList();
         for (CollapsableCardContent collapsableCardContent : collapsableCardContentList) {
             String targetId = id + "_collapse_" + collapsableCardContent.getIndex();
-            this.result.addLn(indent + 2, "<button class=\"btn btn-primary\" type=\"button\" data-toggle=\"collapse\" data-target=\"#" + targetId + "\" aria-expanded=\"false\" aria-controls=\"" + targetId + "\">");
-            this.result.addLn(indent + 3, collapsableCardContent.getHeader());
-            this.result.addLn(indent + 2, "</button>");
+            result.addLn(indent + 2, "<button class=\"btn btn-primary\" type=\"button\" data-toggle=\"collapse\" data-target=\"#" + targetId + "\" aria-expanded=\"false\" aria-controls=\"" + targetId + "\">");
+            result.addLn(indent + 3, collapsableCardContent.getHeader());
+            result.addLn(indent + 2, "</button>");
         }
 
-        this.result.addLn(indent + 1, "</p>");
+        result.addLn(indent + 1, "</p>");
     }
 
-    private void renderCollapseList(int indent, String id) throws MDPSyntaxError {
+    private void renderCollapseList(int indent, String id, Result result) throws MDPSyntaxError {
 
         for (CollapsableCardContent collapsableCardContent : this.collapsableModel.getCollapsableCardContentList()) {
-            renderCollapse(indent, id, collapsableCardContent);
+            renderCollapse(indent, id, collapsableCardContent, result);
         }
 
     }
 
-    private void renderCollapse(int indent, String id, CollapsableCardContent collapsableCardContent) throws MDPSyntaxError {
+    private void renderCollapse(int indent, String id, CollapsableCardContent collapsableCardContent, Result result) throws MDPSyntaxError {
         int collapsableIndex = collapsableCardContent.getIndex();
         String elementId = id + "_collapse_" + collapsableIndex;
 
-        this.result.addLn(indent + 1, "<div class=\"collapse" + this.getShowFirst(collapsableIndex) + "\" id=\"" + elementId + "\" data-parent=\"#" + id + "\">");
-        this.result.addLn(indent + 2, "<div class=\"card card-body\">");
+        result.addLn(indent + 1, "<div class=\"collapse" + this.getShowFirst(collapsableIndex) + "\" id=\"" + elementId + "\" data-parent=\"#" + id + "\">");
+        result.addLn(indent + 2, "<div class=\"card card-body\">");
 
-        this.processCardContent(collapsableCardContent, indent);
+        this.processCardContent(collapsableCardContent, indent, result);
 
-        this.result.addLn(indent + 2, "</div>");
-        this.result.addLn(indent + 1, "</div>");
+        result.addLn(indent + 2, "</div>");
+        result.addLn(indent + 1, "</div>");
     }
 
-    private void processCardContent(CollapsableCardContent collapsableCardContent, int indent) throws MDPSyntaxError {
+    private void processCardContent(CollapsableCardContent collapsableCardContent, int indent, Result result) throws MDPSyntaxError {
 
         if (collapsableCardContent.getNrOfContentLines() <= 1) {
             if (collapsableCardContent.getNrOfContentLines() == 1) {
                 String cardContentSingleLine = collapsableCardContent.getContent().get(0).asString();
                 String cardContentPreprocessed = this.inlineParserMDP.parse(cardContentSingleLine);
-                this.result.addLn(indent + 3, cardContentPreprocessed);
+                result.addLn(indent + 3, cardContentPreprocessed);
             }
             return;
         }
 
         Document cardContentDocument = collapsableCardContent.getContentAsDocument();
-        MDPCompiler.compileSubdocument(cardContentDocument, this.result, new CompilerContext(false, indent + 2));
+        MDPCompiler.compileSubdocument(cardContentDocument, result, new CompilerContext(false, indent + 2));
     }
 
     private String getCardHeaderId(String id, int cardIndex) {

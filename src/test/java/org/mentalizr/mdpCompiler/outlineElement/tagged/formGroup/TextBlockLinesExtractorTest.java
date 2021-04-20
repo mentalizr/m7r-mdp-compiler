@@ -24,7 +24,7 @@ class TextBlockLinesExtractorTest {
         OutlineElementLinesExtractorBench.execute(
                 "plausi 1",
                 documentIterator,
-                new TextBlockLinesExtractor(documentIterator),
+                new TextBlockLinesExtractor(),
                 new File(EXPECTED_DIR, "basic-1.extracted.mdp"),
                 2
         );
@@ -39,7 +39,7 @@ class TextBlockLinesExtractorTest {
         OutlineElementLinesExtractorBench.execute(
                 "plausi 2",
                 documentIterator,
-                new TextBlockLinesExtractor(documentIterator),
+                new TextBlockLinesExtractor(),
                 new File(EXPECTED_DIR, "input-group_md_ul.extracted.mdp"),
                 8
         );

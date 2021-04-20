@@ -6,8 +6,8 @@ import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementLinesExt
 
 public class MDPTagOnlyLinesExtractor extends OutlineElementLinesExtractor {
 
-    public MDPTagOnlyLinesExtractor(DocumentIterator documentIterator) {
-        super(documentIterator);
+    public MDPTagOnlyLinesExtractor() {
+        super();
     }
 
     @Override

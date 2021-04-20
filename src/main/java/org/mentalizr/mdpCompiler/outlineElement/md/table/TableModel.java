@@ -5,7 +5,7 @@ import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
 
 import java.util.List;
 
-public class TableModel implements OutlineElementModel {
+public class TableModel extends OutlineElementModel {
 
     private final TableModelRow header;
     private final List<TableModelRow> rows;

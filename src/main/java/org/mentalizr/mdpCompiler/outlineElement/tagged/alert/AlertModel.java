@@ -2,7 +2,7 @@ package org.mentalizr.mdpCompiler.outlineElement.tagged.alert;
 
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
 
-public class AlertModel implements OutlineElementModel {
+public class AlertModel extends OutlineElementModel {
 
     private String text;
 

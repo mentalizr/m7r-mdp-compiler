@@ -8,23 +8,23 @@ public class ULRenderer extends OutlineElementRenderer {
 
     private final ULModel ulModel;
 
-    public ULRenderer(Result result, ULModel ulModel) {
-        super(result);
+    public ULRenderer(ULModel ulModel) {
+        super();
         this.ulModel = ulModel;
     }
 
     @Override
-    public void render(CompilerContext compilerContext) {
+    public void render(CompilerContext compilerContext, Result result) {
 
         String marginClass = compilerContext.isOuterElement() ? "mb-4" : "mb-2";
         int indentLevel = compilerContext.getIndentLevel();
 
-        this.result.addLn(indentLevel,"<ul class=\"" + marginClass + "\">");
+        result.addLn(indentLevel,"<ul class=\"" + marginClass + "\">");
         for (String item : this.ulModel.getItemList()) {
             String preprocessedItem = this.inlineParserMDP.parse(item);
-            this.result.addLn(indentLevel, "    <li>" + preprocessedItem + "</li>");
+            result.addLn(indentLevel, "    <li>" + preprocessedItem + "</li>");
         }
-        this.result.addLn(indentLevel, "</ul>");
+        result.addLn(indentLevel, "</ul>");
     }
 
 }

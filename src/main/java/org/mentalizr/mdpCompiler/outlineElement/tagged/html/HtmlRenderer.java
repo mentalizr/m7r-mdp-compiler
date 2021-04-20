@@ -16,14 +16,14 @@ public class HtmlRenderer extends OutlineElementRenderer {
 
     // TODO Attributes
 
-    public HtmlRenderer(Result result, HtmlAttributes htmlAttributes, TextBlockModel htmlModel) {
-        super(result);
+    public HtmlRenderer(HtmlAttributes htmlAttributes, TextBlockModel htmlModel) {
+        super();
         this.htmlAttributes = htmlAttributes;
         this.htmlModel = htmlModel;
     }
 
     @Override
-    public void render(CompilerContext compilerContext) throws MDPSyntaxError {
+    public void render(CompilerContext compilerContext, Result result) throws MDPSyntaxError {
 
         int indent = compilerContext.getIndentLevel();
 
@@ -39,14 +39,14 @@ public class HtmlRenderer extends OutlineElementRenderer {
         divTagBuilder.append(" mb-").append(this.htmlAttributes.getMarginBottom());
         divTagBuilder.append("\">");
 
-        this.result.addLn(indent, divTagBuilder.toString());
+        result.addLn(indent, divTagBuilder.toString());
 
         List<Line> htmlLines = this.htmlModel.asDocument().getLines();
         for (Line line : htmlLines) {
-            this.result.addLn(indent + 1, line.asString());
+            result.addLn(indent + 1, line.asString());
         }
 
-        this.result.addLn(indent, "</div>");
+        result.addLn(indent, "</div>");
 
     }
 

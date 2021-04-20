@@ -13,14 +13,14 @@ public class RadioGroupRenderer extends OutlineElementRenderer {
     private final RadioGroupAttributes radioGroupAttributes;
     private final TextBlockModel textBlockModel;
 
-    public RadioGroupRenderer(Result result, RadioGroupAttributes radioGroupAttributes, TextBlockModel textBlockModel) {
-        super(result);
+    public RadioGroupRenderer(RadioGroupAttributes radioGroupAttributes, TextBlockModel textBlockModel) {
+        super();
         this.radioGroupAttributes = radioGroupAttributes;
         this.textBlockModel = textBlockModel;
     }
 
     @Override
-    public void render(CompilerContext compilerContext) throws MDPSyntaxError {
+    public void render(CompilerContext compilerContext, Result result) throws MDPSyntaxError {
 
         int indent = compilerContext.getIndentLevel();
 
@@ -35,14 +35,14 @@ public class RadioGroupRenderer extends OutlineElementRenderer {
             stringBuilder.append(" data-m7r-program-scope-id=\"").append(this.radioGroupAttributes.getScopeId()).append("\"");
         }
         stringBuilder.append(">");
-        this.result.addLn(indent, stringBuilder.toString());
+        result.addLn(indent, stringBuilder.toString());
 
-//        this.result.addLn(indent, "<div id=\"" + this.radioGroupAttributes.getId() + "\" class=\"mb-2 ns_radiogroup\">");
+//        result.addLn(indent, "<div id=\"" + this.radioGroupAttributes.getId() + "\" class=\"mb-2 ns_radiogroup\">");
 
         if (this.textBlockModel.getNrOfTextBlockLines() == 1) {
             String label = this.textBlockModel.getSingleLineAsString();
             String labelPreprocessed = this.inlineParserMDP.parse(label);
-            this.result.addLn(indent + 1, "<div>" + labelPreprocessed + "</div>");
+            result.addLn(indent + 1, "<div>" + labelPreprocessed + "</div>");
         } else {
             MDPCompiler.compileSubdocument(
                     textBlockModel.asDocument(),
@@ -56,7 +56,7 @@ public class RadioGroupRenderer extends OutlineElementRenderer {
         int itemCounter = 1;
         for (String buttonText : this.radioGroupAttributes.getOpenSimpleAttributes()) {
             String buttonTextPreprocessed = this.inlineParserMDP.parse(buttonText);
-            this.result.addLn(indent + 1, "<div class=\"form-check form-check-inline\">");
+            result.addLn(indent + 1, "<div class=\"form-check form-check-inline\">");
 
             stringBuilder = new StringBuilder()
                     .append("<input class=\"form-check-input\" type=\"radio\"")
@@ -75,14 +75,14 @@ public class RadioGroupRenderer extends OutlineElementRenderer {
 
             stringBuilder.append(">");
 
-            this.result.addLn(indent + 2, stringBuilder.toString());
+            result.addLn(indent + 2, stringBuilder.toString());
 
-            this.result.addLn(indent + 2, "<label class=\"form-check-label\" for=\"" + this.radioGroupAttributes.getId() + "_" + itemCounter + "\">" + buttonTextPreprocessed + "</label>");
-            this.result.addLn(indent + 1, "</div>");
+            result.addLn(indent + 2, "<label class=\"form-check-label\" for=\"" + this.radioGroupAttributes.getId() + "_" + itemCounter + "\">" + buttonTextPreprocessed + "</label>");
+            result.addLn(indent + 1, "</div>");
             itemCounter++;
         }
 
-        this.result.addLn(indent, "</div>");
+        result.addLn(indent, "</div>");
 
     }
 }

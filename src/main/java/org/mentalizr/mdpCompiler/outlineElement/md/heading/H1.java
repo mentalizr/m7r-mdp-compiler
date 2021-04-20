@@ -7,8 +7,8 @@ public class H1 extends Heading {
 
     public static final String PREFIX = "# ";
 
-    public H1(DocumentIterator documentIterator, Result result) {
-        super(PREFIX, documentIterator, result);
+    public H1() {
+        super(PREFIX);
     }
 
 }

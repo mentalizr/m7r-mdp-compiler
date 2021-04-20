@@ -18,13 +18,13 @@ class DirectiveFactoryTest {
         DocumentIterator documentIterator = DocumentIterator.getInstance("@@name=myName", "@@persistent");
         Result result = new ResultTest();
         DirectiveFactory directiveFactory = new DirectiveFactory();
-        OutlineElement outlineElement = directiveFactory.getInstance(documentIterator, result);
+        OutlineElement outlineElement = directiveFactory.getInstance(documentIterator.getNextLine());
 
         assertTrue(outlineElement instanceof Directive);
     }
 
     @Test
-    void isResponsible() throws MDPSyntaxError {
+    void isResponsible() {
 
         DocumentIterator documentIterator = DocumentIterator.getInstance(
                 "@@name=myName",
@@ -38,7 +38,7 @@ class DirectiveFactoryTest {
     }
 
     @Test
-    void isResponsibleNegative() throws MDPSyntaxError {
+    void isResponsibleNegative() {
 
         DocumentIterator documentIterator = DocumentIterator.getInstance(
                 "",

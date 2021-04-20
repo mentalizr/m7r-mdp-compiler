@@ -2,6 +2,7 @@ package org.mentalizr.mdpCompiler.outlineElement.tagged.alert;
 
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
 import org.mentalizr.mdpCompiler.document.DocumentIterator;
+import org.mentalizr.mdpCompiler.document.Line;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModelBuilder;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTagged;
@@ -13,13 +14,13 @@ public class Alert extends OutlineElementTagged {
 
     public static final String TAG = "@alert";
 
-    public Alert(DocumentIterator documentIterator, Result result) throws MDPSyntaxError {
-        super(TAG, result, documentIterator);
+    public Alert(Line tagLine) throws MDPSyntaxError {
+        super(TAG, tagLine);
     }
 
     @Override
     protected OutlineElementLinesExtractor getOutlineElementLinesExtractor() {
-        return new AlertLinesExtractor(this.documentIterator);
+        return new AlertLinesExtractor();
     }
 
     @Override
@@ -32,7 +33,7 @@ public class Alert extends OutlineElementTagged {
     protected OutlineElementRenderer getOutlineElementRenderer() {
         AlertAttributes alertAttributes = (AlertAttributes) this.outlineElementTaggedAttributes;
         AlertModel alertModel = (AlertModel) this.outlineElementModel;
-        return new AlertRenderer(this.result, alertAttributes, alertModel);
+        return new AlertRenderer(alertAttributes, alertModel);
     }
 
     @Override

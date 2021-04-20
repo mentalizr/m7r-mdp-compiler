@@ -11,23 +11,23 @@ public class ImgFluidRenderer extends OutlineElementRenderer {
     private final ImgFluidModel imgFluidModel;
     private final String mdpTagLink;
 
-    public ImgFluidRenderer(Result result, ImgFluidAttributes imgFluidAttributes, ImgFluidModel imgFluidModel, String mdpTagLink) {
-        super(result);
+    public ImgFluidRenderer(ImgFluidAttributes imgFluidAttributes, ImgFluidModel imgFluidModel, String mdpTagLink) {
+        super();
         this.imgFluidAttributes = imgFluidAttributes;
         this.imgFluidModel = imgFluidModel;
         this.mdpTagLink = mdpTagLink;
     }
 
     @Override
-    public void render(CompilerContext compilerContext) throws MDPSyntaxError {
+    public void render(CompilerContext compilerContext, Result result) throws MDPSyntaxError {
 
         String contextUrl = compilerContext.getServiceContextURL() + "mediaImg/";
 
         String classString = "img-fluid mb-" + this.imgFluidAttributes.getNameMarginBottom() + " mt-" + this.imgFluidAttributes.getMarginTop();
 
-        String result = "<img src=\"" + contextUrl + this.mdpTagLink + "\" class=\"" + classString + "\" style=\"width: 100%\""
+        String resultString = "<img src=\"" + contextUrl + this.mdpTagLink + "\" class=\"" + classString + "\" style=\"width: 100%\""
             + " alt=\"" + this.imgFluidAttributes.getAlt() + "\">";
 
-        this.result.addLn(compilerContext.getIndentLevel(), result);
+        result.addLn(compilerContext.getIndentLevel(), resultString);
     }
 }

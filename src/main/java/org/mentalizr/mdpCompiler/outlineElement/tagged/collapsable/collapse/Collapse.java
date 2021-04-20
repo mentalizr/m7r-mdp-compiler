@@ -2,6 +2,7 @@ package org.mentalizr.mdpCompiler.outlineElement.tagged.collapsable.collapse;
 
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
 import org.mentalizr.mdpCompiler.document.DocumentIterator;
+import org.mentalizr.mdpCompiler.document.Line;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModelBuilder;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTagged;
@@ -14,13 +15,13 @@ public class Collapse extends OutlineElementTagged {
 
     public static final String TAG = "@collapse";
 
-    public Collapse(DocumentIterator documentIterator, Result result) throws MDPSyntaxError {
-        super(TAG, result, documentIterator);
+    public Collapse(Line tagLine) throws MDPSyntaxError {
+        super(TAG, tagLine);
     }
 
     @Override
     protected OutlineElementLinesExtractor getOutlineElementLinesExtractor() {
-        return new CollapsableLinesExtractor(this.documentIterator);
+        return new CollapsableLinesExtractor();
     }
 
     @Override
@@ -33,7 +34,7 @@ public class Collapse extends OutlineElementTagged {
     protected OutlineElementRenderer getOutlineElementRenderer() {
         CollapsableAttributes collapsableAttributes = (CollapsableAttributes) this.outlineElementTaggedAttributes;
         CollapsableModel collapsableModel = (CollapsableModel) this.outlineElementModel;
-        return new CollapseRenderer(this.result, collapsableAttributes, collapsableModel);
+        return new CollapseRenderer(collapsableAttributes, collapsableModel);
     }
 
     @Override

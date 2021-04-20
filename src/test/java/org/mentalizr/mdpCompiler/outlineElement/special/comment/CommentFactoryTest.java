@@ -16,9 +16,8 @@ class CommentFactoryTest {
     void getInstance() throws MDPSyntaxError {
 
         DocumentIterator documentIterator = DocumentIterator.getInstance("// Some comment");
-        Result result = new ResultTest();
         CommentFactory commentFactory = new CommentFactory();
-        OutlineElement outlineElement = commentFactory.getInstance(documentIterator, result);
+        OutlineElement outlineElement = commentFactory.getInstance(documentIterator.getNextLine());
 
         assertTrue(outlineElement instanceof Comment);
     }

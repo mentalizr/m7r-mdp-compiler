@@ -2,6 +2,7 @@ package org.mentalizr.mdpCompiler.outlineElement.tagged.imgFluid;
 
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
 import org.mentalizr.mdpCompiler.document.DocumentIterator;
+import org.mentalizr.mdpCompiler.document.Line;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModelBuilder;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTagged;
@@ -14,8 +15,8 @@ public class ImgFluid extends OutlineElementTagged {
 
     public static final String TAG = "@img-fluid";
 
-    public ImgFluid(DocumentIterator documentIterator, Result result) throws MDPSyntaxError {
-        super(TAG, result, documentIterator);
+    public ImgFluid(Line tagLine) throws MDPSyntaxError {
+        super(TAG, tagLine);
     }
 
     @Override
@@ -30,7 +31,7 @@ public class ImgFluid extends OutlineElementTagged {
 
     @Override
     protected OutlineElementLinesExtractor getOutlineElementLinesExtractor() {
-        return new MDPTagOnlyLinesExtractor(this.documentIterator);
+        return new MDPTagOnlyLinesExtractor();
     }
 
     @Override
@@ -44,6 +45,6 @@ public class ImgFluid extends OutlineElementTagged {
         ImgFluidAttributes imgFluidAttributes = (ImgFluidAttributes) this.outlineElementTaggedAttributes;
         ImgFluidModel imgFluidModel = (ImgFluidModel) this.outlineElementModel;
         String mdpLinkString = this.mdpTag.getLinkString();
-        return new ImgFluidRenderer(this.result, imgFluidAttributes, imgFluidModel, mdpLinkString);
+        return new ImgFluidRenderer(imgFluidAttributes, imgFluidModel, mdpLinkString);
     }
 }

@@ -9,22 +9,22 @@ public class TableRenderer extends OutlineElementRenderer {
 
     private final TableModel tableModel;
 
-    public TableRenderer(Result result, TableModel tableModel) {
-        super(result);
+    public TableRenderer(TableModel tableModel) {
+        super();
         this.tableModel = tableModel;
     }
 
     @Override
-    public void render(CompilerContext compilerContext) throws MDPSyntaxError {
+    public void render(CompilerContext compilerContext, Result result) throws MDPSyntaxError {
 
         int indentLevel = compilerContext.getIndentLevel();
 
-        this.result.addLn(indentLevel, "<table class=\"table\">");
+        result.addLn(indentLevel, "<table class=\"table\">");
 
         if (tableModel.hasHeader()) {
 
-            this.result.addLn(indentLevel,"    <thead>");
-            this.result.addLn(indentLevel, "        <tr>");
+            result.addLn(indentLevel,"    <thead>");
+            result.addLn(indentLevel, "        <tr>");
 
             for (int i = 0; i < tableModel.getNrOfCols(); i++) {
                 String thTag = "            <th scope=\"col\"";
@@ -34,17 +34,17 @@ public class TableRenderer extends OutlineElementRenderer {
                     thTag += " class=\"text-right\"";
                 }
                 thTag += ">" + tableModel.getHeaderData(i) + "</th>";
-                this.result.addLn(indentLevel, thTag);
+                result.addLn(indentLevel, thTag);
             }
 
-            this.result.addLn(indentLevel, "        </tr>");
-            this.result.addLn(indentLevel, "    </thead>");
+            result.addLn(indentLevel, "        </tr>");
+            result.addLn(indentLevel, "    </thead>");
         }
 
-        this.result.addLn(indentLevel, "    <tbody>");
+        result.addLn(indentLevel, "    <tbody>");
 
         for (int rowIndex = 0; rowIndex < tableModel.getNrOfRows(); rowIndex++) {
-            this.result.addLn(indentLevel, "        <tr>");
+            result.addLn(indentLevel, "        <tr>");
             for (int colIndex = 0; colIndex < tableModel.getNrOfCols(); colIndex++) {
                 String tdTag = "            <td";
                 if (tableModel.getAlignment(colIndex).equals(TableModelColMetaData.Alignment.CENTER)) {
@@ -54,13 +54,13 @@ public class TableRenderer extends OutlineElementRenderer {
                 }
 //                tdTag += ">" + tableModel.getData(colIndex, rowIndex) + "</td>";
                 tdTag += ">" + getInlineProcessedTableData(colIndex, rowIndex) + "</td>";
-                this.result.addLn(indentLevel, tdTag);
+                result.addLn(indentLevel, tdTag);
             }
-            this.result.addLn(indentLevel, "        </tr>");
+            result.addLn(indentLevel, "        </tr>");
         }
 
-        this.result.addLn(indentLevel, "    </tbody>");
-        this.result.addLn(indentLevel, "</table>");
+        result.addLn(indentLevel, "    </tbody>");
+        result.addLn(indentLevel, "</table>");
     }
 
     private String getInlineProcessedTableData(int colIndex, int rowIndex) {

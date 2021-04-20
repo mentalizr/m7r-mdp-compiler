@@ -24,7 +24,7 @@ class AlertLinesExtractorTest {
         OutlineElementLinesExtractorBench.execute(
                 "plausi 1",
                 documentIterator,
-                new CollapsableLinesExtractor(documentIterator),
+                new CollapsableLinesExtractor(),
                 new File(EXPECTED_DIR, "extractor-plausi-1.expected"),
                 1
         );

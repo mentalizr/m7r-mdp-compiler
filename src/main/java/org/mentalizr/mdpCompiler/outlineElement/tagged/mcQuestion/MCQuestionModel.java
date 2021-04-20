@@ -4,7 +4,7 @@ import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
 
 import java.util.List;
 
-public class MCQuestionModel implements OutlineElementModel {
+public class MCQuestionModel extends OutlineElementModel {
 
     public enum MCQuestionType {ONE, MULTI}
 

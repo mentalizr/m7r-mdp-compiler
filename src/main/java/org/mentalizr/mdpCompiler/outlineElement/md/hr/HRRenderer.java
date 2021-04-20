@@ -7,13 +7,13 @@ import org.mentalizr.mdpCompiler.result.Result;
 
 public class HRRenderer extends OutlineElementRenderer {
 
-    public HRRenderer(Result result) {
-        super(result);
+    public HRRenderer() {
+        super();
     }
 
     @Override
-    public void render(CompilerContext compilerContext) throws MDPSyntaxError {
+    public void render(CompilerContext compilerContext, Result result) throws MDPSyntaxError {
         int indentLevel = compilerContext.getIndentLevel();
-        this.result.addLn(indentLevel, "<hr/>");
+        result.addLn(indentLevel, "<hr/>");
     }
 }

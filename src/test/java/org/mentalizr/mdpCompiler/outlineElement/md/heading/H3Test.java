@@ -20,8 +20,8 @@ class H3Test {
         documentIterator.getNextLine();
         Result result = new ResultTest();
 
-        H3 h3 = new H3(documentIterator, result);
-        h3.process(CompilerContext.getDefaultTestContext());
+        H3 h3 = new H3();
+        h3.process(CompilerContext.getDefaultTestContext(), documentIterator, result);
 
         List<String> resultLines = result.getResultLines();
 

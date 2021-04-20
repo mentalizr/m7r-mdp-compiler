@@ -2,6 +2,7 @@ package org.mentalizr.mdpCompiler.outlineElement.tagged.mcQuestion;
 
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
 import org.mentalizr.mdpCompiler.document.DocumentIterator;
+import org.mentalizr.mdpCompiler.document.Line;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModelBuilder;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTagged;
@@ -14,13 +15,13 @@ public class MCQuestion extends OutlineElementTagged {
 
     public static final String TAG = "@mc-question";
 
-    public MCQuestion(DocumentIterator documentIterator, Result result) throws MDPSyntaxError {
-        super(TAG, result, documentIterator);
+    public MCQuestion(Line tagLine) throws MDPSyntaxError {
+        super(TAG, tagLine);
     }
 
     @Override
     protected OutlineElementLinesExtractor getOutlineElementLinesExtractor() {
-        return new TextBlockLinesExtractor(this.documentIterator);
+        return new TextBlockLinesExtractor();
     }
 
     @Override
@@ -33,7 +34,7 @@ public class MCQuestion extends OutlineElementTagged {
     protected OutlineElementRenderer getOutlineElementRenderer() {
         MCQuestionAttributes mcQuestionAttributes = (MCQuestionAttributes) this.outlineElementTaggedAttributes;
         MCQuestionModel mcQuestionModel = (MCQuestionModel) this.outlineElementModel;
-        return new MCQuestionRenderer(this.result, mcQuestionAttributes, mcQuestionModel);
+        return new MCQuestionRenderer(mcQuestionAttributes, mcQuestionModel);
     }
 
     @Override

@@ -6,7 +6,7 @@ import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GridModel implements OutlineElementModel {
+public class GridModel extends OutlineElementModel {
 
     private final List<ColumnContent> columnContentList;
     private ColumnContent curColumnContent;

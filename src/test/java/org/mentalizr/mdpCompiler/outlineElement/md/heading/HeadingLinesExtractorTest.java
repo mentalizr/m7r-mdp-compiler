@@ -24,8 +24,8 @@ class HeadingLinesExtractorTest {
 
         Line line = documentIterator.getNextLine();
 //        System.out.println(line.asString());
-        HeadingLinesExtractor headingLinesExtractor = new HeadingLinesExtractor(documentIterator);
-        List<Line> extractedLines = headingLinesExtractor.extract();
+        HeadingLinesExtractor headingLinesExtractor = new HeadingLinesExtractor();
+        List<Line> extractedLines = headingLinesExtractor.extract(documentIterator);
 
         assertNotNull(extractedLines);
         assertEquals(1, extractedLines.size());
@@ -43,8 +43,8 @@ class HeadingLinesExtractorTest {
         DocumentIterator documentIterator = document.getDocumentIterator();
 
         Line line = documentIterator.getNextLine();
-        HeadingLinesExtractor headingLinesExtractor = new HeadingLinesExtractor(documentIterator);
-        List<Line> extractedLines = headingLinesExtractor.extract();
+        HeadingLinesExtractor headingLinesExtractor = new HeadingLinesExtractor();
+        List<Line> extractedLines = headingLinesExtractor.extract(documentIterator);
 
         assertNotNull(extractedLines);
         assertEquals(1, extractedLines.size());
@@ -62,8 +62,8 @@ class HeadingLinesExtractorTest {
         DocumentIterator documentIterator = document.getDocumentIterator();
 
         Line line = documentIterator.getNextLine();
-        HeadingLinesExtractor headingLinesExtractor = new HeadingLinesExtractor(documentIterator);
-        List<Line> extractedLines = headingLinesExtractor.extract();
+        HeadingLinesExtractor headingLinesExtractor = new HeadingLinesExtractor();
+        List<Line> extractedLines = headingLinesExtractor.extract(documentIterator);
 
         assertNotNull(extractedLines);
         assertEquals(1, extractedLines.size());

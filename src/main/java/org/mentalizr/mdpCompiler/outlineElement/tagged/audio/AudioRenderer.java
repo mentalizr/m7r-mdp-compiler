@@ -15,24 +15,24 @@ public class AudioRenderer extends OutlineElementRenderer {
     private final AudioModel audioModel;
     private final String mdpTagLink;
 
-    public AudioRenderer(Result result, AudioAttributes audioAttributes, AudioModel audioModel, String mdpTagLink) {
-        super(result);
+    public AudioRenderer(AudioAttributes audioAttributes, AudioModel audioModel, String mdpTagLink) {
+        super();
         this.audioAttributes = audioAttributes;
         this.audioModel = audioModel;
         this.mdpTagLink = mdpTagLink;
     }
 
     @Override
-    public void render(CompilerContext compilerContext) throws MDPSyntaxError {
+    public void render(CompilerContext compilerContext, Result result) throws MDPSyntaxError {
 
         String marginTop = this.audioAttributes.getMarginTop();
         String marginBottom = this.audioAttributes.getMarginBottom();
         String source = compilerContext.getServiceContextURL() + CONTEXT_UR_AUDIO + this.mdpTagLink;
 
-        this.result.addLn("<audio class=\"mt-" + marginTop + " mb-" + marginBottom + "\" preload=\"none\" style=\"width: 100%;\" controls=\"controls\">");
-        this.result.addLn(1, "<source type=\"audio/mpeg\" src=\"" + source + "\"/>");
-        this.result.addLn(1, "<a href=\"" + source + "\">" + source + "</a>");
-        this.result.addLn("</audio>");
+        result.addLn("<audio class=\"mt-" + marginTop + " mb-" + marginBottom + "\" preload=\"none\" style=\"width: 100%;\" controls=\"controls\">");
+        result.addLn(1, "<source type=\"audio/mpeg\" src=\"" + source + "\"/>");
+        result.addLn(1, "<a href=\"" + source + "\">" + source + "</a>");
+        result.addLn("</audio>");
     }
 
 }

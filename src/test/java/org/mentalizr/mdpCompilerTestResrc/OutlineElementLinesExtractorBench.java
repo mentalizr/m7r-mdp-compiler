@@ -20,7 +20,7 @@ public class OutlineElementLinesExtractorBench {
     public static void execute(@SuppressWarnings("SpellCheckingInspection") String testname, DocumentIterator documentIterator, OutlineElementLinesExtractor outlineElementLinesExtractor, File file, int expectedDocumentIteratorIndex) throws IOException {
 
         documentIterator.getNextLine();
-        List<Line> extractedLines = outlineElementLinesExtractor.extract();
+        List<Line> extractedLines = outlineElementLinesExtractor.extract(documentIterator);
 
         List<String> mdpLinesAsString = new ArrayList<>();
         for (Line extractedLine : extractedLines) {

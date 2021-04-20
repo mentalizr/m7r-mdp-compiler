@@ -9,20 +9,20 @@ public class DirectiveRenderer extends OutlineElementRenderer {
 
     private final DirectiveModel directiveModel;
 
-    public DirectiveRenderer(Result result, DirectiveModel directiveModel) {
-        super(result);
+    public DirectiveRenderer(DirectiveModel directiveModel) {
+        super();
         this.directiveModel = directiveModel;
     }
 
     @Override
-    public void render(CompilerContext compilerContext) throws MDPSyntaxError {
+    public void render(CompilerContext compilerContext, Result result) throws MDPSyntaxError {
 
-        this.result.addLn("<!--");
+        result.addLn("<!--");
         for (String line : this.directiveModel.getDirectives()) {
-            this.result.addLn(line);
+            result.addLn(line);
         }
-        this.result.addLn("-->");
-        this.result.addLn("");
+        result.addLn("-->");
+        result.addLn("");
 
 
     }

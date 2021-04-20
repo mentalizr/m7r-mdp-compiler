@@ -19,8 +19,8 @@ class DirectiveRendererTest {
         List<String> directiveLines = Arrays.asList("@@name=myName", "@@persistent");
         DirectiveModel directiveModel = new DirectiveModel(directiveLines);
         Result result = new ResultTest();
-        DirectiveRenderer directiveRenderer = new DirectiveRenderer(result, directiveModel);
-        directiveRenderer.render(CompilerContext.getDefaultTestContext());
+        DirectiveRenderer directiveRenderer = new DirectiveRenderer(directiveModel);
+        directiveRenderer.render(CompilerContext.getDefaultTestContext(), result);
 
         List<String> htmlLines = result.getResultLines();
 

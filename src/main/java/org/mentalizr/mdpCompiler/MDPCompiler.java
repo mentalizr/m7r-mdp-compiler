@@ -6,6 +6,7 @@ import org.mentalizr.mdpCompiler.document.DocumentSanityChecker;
 import org.mentalizr.mdpCompiler.document.Line;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElement;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRegistry;
+import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRegistryNew;
 import org.mentalizr.mdpCompiler.result.Result;
 import org.mentalizr.mdpCompiler.result.ResultWriter;
 
@@ -59,9 +60,31 @@ public class MDPCompiler {
 
             OutlineElement outlineElement;
             outlineElement = outlineElementRegistry.getMatchingElement(line, mode);
-            outlineElement.process(compilerContext);
+            outlineElement.process(compilerContext, documentIterator, result);
 
         }
     }
+
+//    public static void buildAbstractSyntaxTree(Document document) throws MDPSyntaxError {
+//        CompilerContext compilerContext = new CompilerContext(true, 0);
+//
+//        DocumentSanityChecker.check(document);
+//
+//        DocumentIterator documentIterator = document.getDocumentIterator();
+//        OutlineElementRegistryNew outlineElementRegistry = new OutlineElementRegistryNew();
+//
+//        while (documentIterator.hasNextLine()) {
+//
+//            Line line = documentIterator.getNextLine();
+//
+//            if (line.asString().isBlank()) continue;
+//
+//            OutlineElement outlineElement;
+//            outlineElement = outlineElementRegistry.getMatchingElement(line, Mode.MDP_COMPLETE);
+//            outlineElement.process(compilerContext);
+//
+//        }
+//
+//    }
 
 }

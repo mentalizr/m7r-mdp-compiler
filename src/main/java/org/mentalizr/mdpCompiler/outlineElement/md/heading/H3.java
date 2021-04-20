@@ -7,8 +7,8 @@ public class H3 extends Heading {
 
     public static final String PREFIX = "### ";
 
-    public H3(DocumentIterator documentIterator, Result result) {
-        super(PREFIX, documentIterator, result);
+    public H3() {
+        super(PREFIX);
     }
 
 }

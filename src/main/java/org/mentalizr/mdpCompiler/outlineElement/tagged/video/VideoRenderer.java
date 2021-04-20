@@ -15,15 +15,15 @@ public class VideoRenderer extends OutlineElementRenderer {
     private final VideoModel videoModel;
     private final String mdpTagLink;
 
-    public VideoRenderer(Result result, VideoAttributes videoAttributes, VideoModel videoModel, String mdpTagLink) {
-        super(result);
+    public VideoRenderer(VideoAttributes videoAttributes, VideoModel videoModel, String mdpTagLink) {
+        super();
         this.videoAttributes = videoAttributes;
         this.videoModel = videoModel;
         this.mdpTagLink = mdpTagLink;
     }
 
     @Override
-    public void render(CompilerContext compilerContext) throws MDPSyntaxError {
+    public void render(CompilerContext compilerContext, Result result) throws MDPSyntaxError {
 
 //        String style = " style=\"";
 //
@@ -31,12 +31,12 @@ public class VideoRenderer extends OutlineElementRenderer {
 //        style += "margin-bottom: " + this.videoAttributes.getMarginBottom() + "em";
 //        style += "\"";
 //
-//        this.result.addLn("<div class=\"embed-responsive embed-responsive-16by9\"" + style + ">");
+//        result.addLn("<div class=\"embed-responsive embed-responsive-16by9\"" + style + ">");
 
         String marginTop = this.videoAttributes.getMarginTop();
         String marginBottom = this.videoAttributes.getMarginBottom();
 
-        this.result.addLn("<div class=\"embed-responsive embed-responsive-16by9 mt-" + marginTop + " mb-" + marginBottom + "\">");
+        result.addLn("<div class=\"embed-responsive embed-responsive-16by9 mt-" + marginTop + " mb-" + marginBottom + "\">");
 
         String poster = "";
         if (this.videoAttributes.hasPoster()) {
@@ -45,8 +45,8 @@ public class VideoRenderer extends OutlineElementRenderer {
 
         String srcValue = compilerContext.getServiceContextURL() + CONTEXT_URL_VIDEO + this.mdpTagLink;
 
-        this.result.addLn("    <video class=\"\" preload=\"metadata\" controls=\"true\"" + poster + " src=\"" + srcValue + "\" onclick=\"this.paused?this.play():this.pause();\" allowfullscreen=\"\"></video>");
-        this.result.addLn("</div>");
+        result.addLn("    <video class=\"\" preload=\"metadata\" controls=\"true\"" + poster + " src=\"" + srcValue + "\" onclick=\"this.paused?this.play():this.pause();\" allowfullscreen=\"\"></video>");
+        result.addLn("</div>");
 
     }
 }

@@ -2,6 +2,7 @@ package org.mentalizr.mdpCompiler.outlineElement.tagged.audio;
 
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
 import org.mentalizr.mdpCompiler.document.DocumentIterator;
+import org.mentalizr.mdpCompiler.document.Line;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModelBuilder;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTagged;
@@ -14,8 +15,8 @@ public class Audio extends OutlineElementTagged {
 
     public static final String TAG = "@audio";
 
-    public Audio(DocumentIterator documentIterator, Result result) throws MDPSyntaxError {
-        super(TAG, result, documentIterator);
+    public Audio(Line currentLine) throws MDPSyntaxError {
+        super(TAG, currentLine);
     }
 
     @Override
@@ -30,7 +31,7 @@ public class Audio extends OutlineElementTagged {
 
     @Override
     protected OutlineElementLinesExtractor getOutlineElementLinesExtractor() {
-        return new MDPTagOnlyLinesExtractor(this.documentIterator);
+        return new MDPTagOnlyLinesExtractor();
     }
 
     @Override
@@ -44,6 +45,6 @@ public class Audio extends OutlineElementTagged {
         AudioAttributes audioAttributes = (AudioAttributes) this.outlineElementTaggedAttributes;
         AudioModel audioModel = (AudioModel) this.outlineElementModel;
         String mdpLinkString = this.mdpTag.getLinkString();
-        return new AudioRenderer(this.result, audioAttributes, audioModel, mdpLinkString);
+        return new AudioRenderer(audioAttributes, audioModel, mdpLinkString);
     }
 }

@@ -8,8 +8,8 @@ import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementLinesExt
 
 public class GridLinesExtractor extends OutlineElementLinesExtractor {
 
-    public GridLinesExtractor(DocumentIterator documentIterator) {
-        super(documentIterator);
+    public GridLinesExtractor() {
+        super();
     }
 
     @Override

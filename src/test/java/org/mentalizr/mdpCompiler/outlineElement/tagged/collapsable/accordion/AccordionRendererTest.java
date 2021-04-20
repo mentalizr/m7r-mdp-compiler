@@ -45,8 +45,8 @@ class AccordionRendererTest {
         collapsableModel.createNextCard("Header 3");
         collapsableModel.addContentLine(new Line("Content Card 3", 9));
 
-        AccordionRenderer accordionRenderer = new AccordionRenderer(result, collapsableAttributes, collapsableModel);
-        accordionRenderer.render(CompilerContext.getDefaultTestContext());
+        AccordionRenderer accordionRenderer = new AccordionRenderer(collapsableAttributes, collapsableModel);
+        accordionRenderer.render(CompilerContext.getDefaultTestContext(), result);
 
         for (String htmlLine : result.getResultLines()) {
             System.out.println(htmlLine);

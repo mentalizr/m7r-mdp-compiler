@@ -1,4 +1,9 @@
 package org.mentalizr.mdpCompiler.outlineElement;
 
-public interface OutlineElementModel {
+import java.util.List;
+
+public abstract class OutlineElementModel {
+
+    protected List<OutlineElementModel> childElements;
+
 }

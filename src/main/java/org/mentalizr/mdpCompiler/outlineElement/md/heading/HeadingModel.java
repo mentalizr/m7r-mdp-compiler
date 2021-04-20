@@ -2,7 +2,7 @@ package org.mentalizr.mdpCompiler.outlineElement.md.heading;
 
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
 
-public class HeadingModel implements OutlineElementModel {
+public class HeadingModel extends OutlineElementModel {
 
     private String heading;
 

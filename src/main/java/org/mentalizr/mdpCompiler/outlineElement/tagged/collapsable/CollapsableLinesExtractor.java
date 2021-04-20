@@ -8,8 +8,8 @@ import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementLinesExt
 
 public class CollapsableLinesExtractor extends OutlineElementLinesExtractor {
 
-    public CollapsableLinesExtractor(DocumentIterator documentIterator) {
-        super(documentIterator);
+    public CollapsableLinesExtractor() {
+        super();
     }
 
     @Override

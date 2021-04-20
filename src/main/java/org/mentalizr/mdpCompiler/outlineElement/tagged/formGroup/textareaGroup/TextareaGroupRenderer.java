@@ -13,21 +13,21 @@ public class TextareaGroupRenderer extends OutlineElementRenderer {
     private final TextareaGroupAttributes textareaGroupAttributes;
     private final TextBlockModel textBlockModel;
 
-    public TextareaGroupRenderer(Result result, TextareaGroupAttributes textareaGroupAttributes, TextBlockModel textBlockModel) {
-        super(result);
+    public TextareaGroupRenderer(TextareaGroupAttributes textareaGroupAttributes, TextBlockModel textBlockModel) {
+        super();
         this.textareaGroupAttributes = textareaGroupAttributes;
         this.textBlockModel = textBlockModel;
     }
 
     @Override
-    public void render(CompilerContext compilerContext) throws MDPSyntaxError {
+    public void render(CompilerContext compilerContext, Result result) throws MDPSyntaxError {
 
         String cssPseudoClass = "ns_input";
         int indent = compilerContext.getIndentLevel();
 
-        this.result.addLn(indent, "<div class=\"form-group\">");
+        result.addLn(indent, "<div class=\"form-group\">");
 
-        FormGroupRendererHelper.renderHeaderLines(this.textBlockModel, this.textareaGroupAttributes.getId(), this.result, compilerContext);
+        FormGroupRendererHelper.renderHeaderLines(this.textBlockModel, this.textareaGroupAttributes.getId(), result, compilerContext);
 
         StringBuilder stringBuilder = new StringBuilder("<textarea ");
         stringBuilder.append("class=\"form-control ").append(cssPseudoClass).append("\" ");
@@ -49,9 +49,9 @@ public class TextareaGroupRenderer extends OutlineElementRenderer {
 
         stringBuilder.append("></textarea>");
 
-        this.result.addLn(indent + 1, stringBuilder.toString());
+        result.addLn(indent + 1, stringBuilder.toString());
 
-        this.result.addLn("</div>");
-
+        result.addLn("</div>");
     }
+
 }

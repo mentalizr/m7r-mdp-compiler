@@ -22,8 +22,8 @@ class HRLinesExtractorTest {
         DocumentIterator documentIterator = document.getDocumentIterator();
 
         Line line = documentIterator.getNextLine();
-        HRLinesExtractor hrLinesExtractor = new HRLinesExtractor(documentIterator);
-        List<Line> extractedLines = hrLinesExtractor.extract();
+        HRLinesExtractor hrLinesExtractor = new HRLinesExtractor();
+        List<Line> extractedLines = hrLinesExtractor.extract(documentIterator);
 
         assertNotNull(extractedLines);
         assertEquals(1, extractedLines.size());

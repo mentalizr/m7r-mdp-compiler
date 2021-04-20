@@ -9,13 +9,13 @@ public class CommentRenderer extends OutlineElementRenderer {
 
     private final CommentModel commentModel;
 
-    public CommentRenderer(Result result, CommentModel commentModel) {
-        super(result);
+    public CommentRenderer(CommentModel commentModel) {
+        super();
         this.commentModel = commentModel;
     }
 
     @Override
-    public void render(CompilerContext compilerContext) throws MDPSyntaxError {
+    public void render(CompilerContext compilerContext, Result result) throws MDPSyntaxError {
     }
 
 }

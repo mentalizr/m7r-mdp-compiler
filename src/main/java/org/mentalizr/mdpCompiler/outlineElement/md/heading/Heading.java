@@ -1,16 +1,14 @@
 package org.mentalizr.mdpCompiler.outlineElement.md.heading;
 
-import org.mentalizr.mdpCompiler.document.DocumentIterator;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElement;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModelBuilder;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
 import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementLinesExtractor;
-import org.mentalizr.mdpCompiler.result.Result;
 
 public abstract class Heading extends OutlineElement {
 
-    public Heading(String prefix, DocumentIterator documentIterator, Result result) {
-        super(prefix, documentIterator, result);
+    public Heading(String prefix) {
+        super(prefix);
     }
 
     private int getHeadingLevel() {
@@ -19,7 +17,7 @@ public abstract class Heading extends OutlineElement {
 
     @Override
     protected OutlineElementLinesExtractor getOutlineElementLinesExtractor() {
-        return new HeadingLinesExtractor(this.documentIterator);
+        return new HeadingLinesExtractor();
     }
 
     @Override
@@ -30,7 +28,7 @@ public abstract class Heading extends OutlineElement {
     @Override
     protected OutlineElementRenderer getOutlineElementRenderer() {
         HeadingModel headingModel = (HeadingModel) this.outlineElementModel;
-        return new HeadingRenderer(this.result, headingModel, getHeadingLevel());
+        return new HeadingRenderer(headingModel, getHeadingLevel());
     }
 
 }

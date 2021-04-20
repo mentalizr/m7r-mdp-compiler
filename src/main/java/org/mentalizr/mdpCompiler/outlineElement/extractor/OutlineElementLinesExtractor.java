@@ -9,13 +9,13 @@ public abstract class OutlineElementLinesExtractor {
 
     public enum TerminationStrategy { INCLUDE, EXCLUDE_IGNORE, EXCLUDE_REPROCESS }
 
-    protected DocumentIterator documentIterator;
+//    protected DocumentIterator documentIterator;
     protected ExtractedOutlineElementBuffer extractedOutlineElementBuffer;
 
-    public OutlineElementLinesExtractor(DocumentIterator documentIterator) {
+    public OutlineElementLinesExtractor() {
 
-        this.documentIterator = documentIterator;
-//        this.extractedOutlineElementBuffer = new ExtractedOutlineElementBuffer();
+//        this.documentIterator = documentIterator;
+        this.extractedOutlineElementBuffer = new ExtractedOutlineElementBuffer();
 //
 //        if (!documentIterator.hasCurrentLine())
 //            throw new IllegalStateException("Specified DocumentIterator has no first line.");
@@ -24,27 +24,27 @@ public abstract class OutlineElementLinesExtractor {
 //        this.extractedOutlineElementBuffer.add(firstLine);
     }
 
-    public List<Line> extract() {
+    public List<Line> extract(DocumentIterator documentIterator) {
 
-        this.extractedOutlineElementBuffer = new ExtractedOutlineElementBuffer();
+//        ExtractedOutlineElementBuffer extractedOutlineElementBuffer = new ExtractedOutlineElementBuffer();
 
         if (!documentIterator.hasCurrentLine())
             throw new IllegalStateException("Specified DocumentIterator has no first line.");
 
-        Line firstLine = this.documentIterator.getCurrentLine();
-        this.extractedOutlineElementBuffer.add(firstLine);
+        Line firstLine = documentIterator.getCurrentLine();
+        extractedOutlineElementBuffer.add(firstLine);
 
         while (documentIterator.hasNextLine()) {
 
             Line line = documentIterator.getNextLine();
 
             if (!isTerminated(line)) {
-                this.extractedOutlineElementBuffer.add(line);
+                extractedOutlineElementBuffer.add(line);
 
             } else {
 
                 if (getTerminationStrategy() == TerminationStrategy.INCLUDE) {
-                    this.extractedOutlineElementBuffer.add(line);
+                    extractedOutlineElementBuffer.add(line);
                 } else if (getTerminationStrategy() == TerminationStrategy.EXCLUDE_REPROCESS) {
                     documentIterator.getPreviousLine();
                 } else if (getTerminationStrategy() == TerminationStrategy.EXCLUDE_IGNORE) {
@@ -55,9 +55,9 @@ public abstract class OutlineElementLinesExtractor {
             }
         }
 
-        this.extractedOutlineElementBuffer.stripTrailingEmptyLines();
+        extractedOutlineElementBuffer.stripTrailingEmptyLines();
 
-        return this.extractedOutlineElementBuffer.getLines();
+        return extractedOutlineElementBuffer.getLines();
     }
 
     protected abstract boolean isTerminated(Line line);

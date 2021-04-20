@@ -11,23 +11,23 @@ public class ImgCenterRenderer extends OutlineElementRenderer {
     private final ImgCenterModel imgCenterModel;
     private final String mdpTagLink;
 
-    public ImgCenterRenderer(Result result, ImgCenterAttributes imgCenterAttributes, ImgCenterModel imgCenterModel, String mdpTagLink) {
-        super(result);
+    public ImgCenterRenderer(ImgCenterAttributes imgCenterAttributes, ImgCenterModel imgCenterModel, String mdpTagLink) {
+        super();
         this.imgCenterAttributes = imgCenterAttributes;
         this.imgCenterModel = imgCenterModel;
         this.mdpTagLink = mdpTagLink;
     }
 
     @Override
-    public void render(CompilerContext compilerContext) throws MDPSyntaxError {
+    public void render(CompilerContext compilerContext, Result result) throws MDPSyntaxError {
 
         String contextUrl = compilerContext.getServiceContextURL() + "mediaImg/";
 
         String classString = "mx-auto d-block mb-" + this.imgCenterAttributes.getNameMarginBottom() + " mt-" + this.imgCenterAttributes.getMarginTop();
 
-        String result = "<img src=\"" + contextUrl + this.mdpTagLink + "\" class=\"" + classString + "\""
+        String resultString = "<img src=\"" + contextUrl + this.mdpTagLink + "\" class=\"" + classString + "\""
             + " alt=\"" + this.imgCenterAttributes.getAlt() + "\">";
 
-        this.result.addLn(compilerContext.getIndentLevel(), result);
+        result.addLn(compilerContext.getIndentLevel(), resultString);
     }
 }

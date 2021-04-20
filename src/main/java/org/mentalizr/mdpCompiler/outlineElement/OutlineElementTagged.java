@@ -20,10 +20,10 @@ public abstract class OutlineElementTagged extends OutlineElement {
     protected MDPTag mdpTag;
     protected OutlineElementTaggedAttributes outlineElementTaggedAttributes;
 
-    public OutlineElementTagged(String tagName, Result result, DocumentIterator documentIterator) throws MDPSyntaxError {
-        super(tagName, documentIterator, result);
+    public OutlineElementTagged(String tagName, Line tagLine) throws MDPSyntaxError {
+        super(tagName);
         this.tagName = tagName;
-        this.mdpTagLine = documentIterator.getCurrentLine();
+        this.mdpTagLine = tagLine;
         if (withLink()) {
             this.mdpTag = new MDPTagWithLink(this.tagName, this.mdpTagLine);
         } else {
@@ -35,7 +35,6 @@ public abstract class OutlineElementTagged extends OutlineElement {
         } catch (AttributeParserException | AttributeProfileException e) {
             throw new MDPSyntaxError(this.mdpTagLine, e);
         }
-
     }
 
     protected boolean withLink() {
@@ -43,6 +42,5 @@ public abstract class OutlineElementTagged extends OutlineElement {
     }
 
     protected abstract OutlineElementTaggedAttributesFactory getOutlineElementTaggedAttributesFactory();
-
 
 }

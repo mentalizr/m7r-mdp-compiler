@@ -7,7 +7,7 @@ import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TextBlockModel implements OutlineElementModel {
+public class TextBlockModel extends OutlineElementModel {
 
     private final List<Line> textBlockLines;
 

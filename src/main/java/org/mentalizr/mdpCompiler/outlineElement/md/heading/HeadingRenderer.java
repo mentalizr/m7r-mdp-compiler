@@ -10,15 +10,15 @@ public class HeadingRenderer extends OutlineElementRenderer {
     private final HeadingModel headingModel;
     private final int headingLevel;
 
-    public HeadingRenderer(Result result, HeadingModel headingModel, int headingLevel) {
-        super(result);
+    public HeadingRenderer(HeadingModel headingModel, int headingLevel) {
+        super();
         this.headingModel = headingModel;
         this.headingLevel = headingLevel;
     }
 
     @Override
-    public void render(CompilerContext compilerContext) throws MDPSyntaxError {
+    public void render(CompilerContext compilerContext, Result result) throws MDPSyntaxError {
         int indentLevel = compilerContext.getIndentLevel();
-        this.result.addLn(indentLevel, "<p class=\"h" + this.headingLevel + " mt-4 mb-4\">" + this.headingModel.getHeading() + "</p>");
+        result.addLn(indentLevel, "<p class=\"h" + this.headingLevel + " mt-4 mb-4\">" + this.headingModel.getHeading() + "</p>");
     }
 }

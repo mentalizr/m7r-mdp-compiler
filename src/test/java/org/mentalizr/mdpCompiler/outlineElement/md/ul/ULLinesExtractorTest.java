@@ -25,7 +25,7 @@ class ULLinesExtractorTest {
         OutlineElementLinesExtractorBench.execute(
                 ULLinesExtractorTest.class.getSimpleName() + "@plausibility_pos_1",
                 documentIterator,
-                new ULLinesExtractor(documentIterator),
+                new ULLinesExtractor(),
                 new File(EXPECTED_DIR, "extractor-plausi-1.expected"),
                 2
         );
@@ -43,7 +43,7 @@ class ULLinesExtractorTest {
         OutlineElementLinesExtractorBench.execute(
                 ULLinesExtractorTest.class.getSimpleName() + "@plausibility_pos_2",
                 documentIterator,
-                new ULLinesExtractor(documentIterator),
+                new ULLinesExtractor(),
                 new File(EXPECTED_DIR, "extractor-plausi-1.expected"),
                 1
         );
@@ -60,7 +60,7 @@ class ULLinesExtractorTest {
         OutlineElementLinesExtractorBench.execute(
                 ULLinesExtractorTest.class.getSimpleName() + "@pos_eol",
                 documentIterator,
-                new ULLinesExtractor(documentIterator),
+                new ULLinesExtractor(),
                 new File(EXPECTED_DIR, "extractor-plausi-1.expected"),
                 1
         );
@@ -79,7 +79,7 @@ class ULLinesExtractorTest {
         OutlineElementLinesExtractorBench.execute(
                 ULLinesExtractorTest.class.getSimpleName() + "@pos_eol_withTrailingBlankLines",
                 documentIterator,
-                new ULLinesExtractor(documentIterator),
+                new ULLinesExtractor(),
                 new File(EXPECTED_DIR, "extractor-plausi-1.expected"),
                 3
         );

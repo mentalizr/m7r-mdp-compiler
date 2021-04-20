@@ -2,6 +2,7 @@ package org.mentalizr.mdpCompiler.outlineElement.tagged.video;
 
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
 import org.mentalizr.mdpCompiler.document.DocumentIterator;
+import org.mentalizr.mdpCompiler.document.Line;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModelBuilder;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTagged;
@@ -14,8 +15,8 @@ public class Video extends OutlineElementTagged {
 
     public static final String TAG = "@video";
 
-    public Video(DocumentIterator documentIterator, Result result) throws MDPSyntaxError {
-        super(TAG, result, documentIterator);
+    public Video(Line tagLine) throws MDPSyntaxError {
+        super(TAG, tagLine);
     }
 
     @Override
@@ -30,7 +31,7 @@ public class Video extends OutlineElementTagged {
 
     @Override
     protected OutlineElementLinesExtractor getOutlineElementLinesExtractor() {
-        return new MDPTagOnlyLinesExtractor(this.documentIterator);
+        return new MDPTagOnlyLinesExtractor();
     }
 
     @Override
@@ -44,6 +45,6 @@ public class Video extends OutlineElementTagged {
         VideoAttributes videoAttributes = (VideoAttributes) this.outlineElementTaggedAttributes;
         VideoModel videoModel = (VideoModel) this.outlineElementModel;
         String mdpLinkString = this.mdpTag.getLinkString();
-        return new VideoRenderer(this.result, videoAttributes, videoModel, mdpLinkString);
+        return new VideoRenderer(videoAttributes, videoModel, mdpLinkString);
     }
 }

@@ -11,13 +11,13 @@ public class UL extends OutlineElement {
 
     public static final String PREFIX = "* ";
 
-    public UL(DocumentIterator documentIterator, Result result) {
-        super(PREFIX, documentIterator, result);
+    public UL() {
+        super(PREFIX);
     }
 
     @Override
     protected OutlineElementLinesExtractor getOutlineElementLinesExtractor() {
-        return new ULLinesExtractor(this.documentIterator);
+        return new ULLinesExtractor();
     }
 
     @Override
@@ -28,6 +28,6 @@ public class UL extends OutlineElement {
     @Override
     protected OutlineElementRenderer getOutlineElementRenderer() {
         ULModel ulModel = (ULModel) this.outlineElementModel;
-        return new ULRenderer(this.result, ulModel);
+        return new ULRenderer(ulModel);
     }
 }

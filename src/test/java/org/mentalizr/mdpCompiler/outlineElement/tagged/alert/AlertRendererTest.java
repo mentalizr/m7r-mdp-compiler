@@ -33,8 +33,8 @@ class AlertRendererTest {
         AlertModel alertModel = new AlertModel();
         alertModel.setText("Hier der Info-Text!");
 
-        AlertRenderer alertRenderer = new AlertRenderer(result, alertAttributes, alertModel);
-        alertRenderer.render(CompilerContext.getDefaultTestContext());
+        AlertRenderer alertRenderer = new AlertRenderer(alertAttributes, alertModel);
+        alertRenderer.render(CompilerContext.getDefaultTestContext(), result);
 
         for (String htmlLine : result.getResultLines()) {
             System.out.println(htmlLine);

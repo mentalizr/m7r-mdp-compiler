@@ -17,14 +17,14 @@ public class AccordionRenderer extends OutlineElementRenderer {
     private final CollapsableAttributes collapsableAttributes;
     private final CollapsableModel collapsableModel;
 
-    public AccordionRenderer(Result result, CollapsableAttributes collapsableAttributes, CollapsableModel collapsableModel) {
-        super(result);
+    public AccordionRenderer(CollapsableAttributes collapsableAttributes, CollapsableModel collapsableModel) {
+        super();
         this.collapsableAttributes = collapsableAttributes;
         this.collapsableModel = collapsableModel;
     }
 
     @Override
-    public void render(CompilerContext compilerContext) throws MDPSyntaxError {
+    public void render(CompilerContext compilerContext, Result result) throws MDPSyntaxError {
 
         String id = obtainId();
         String marginTop = this.collapsableAttributes.getMarginTop();
@@ -32,20 +32,20 @@ public class AccordionRenderer extends OutlineElementRenderer {
 
         int indent = compilerContext.getIndentLevel();
 
-        this.result.addLn(indent, "<div class=\"accordion mt-" + marginTop + " mb-" + marginBottom + "\" id=\"" + id + "\">");
+        result.addLn(indent, "<div class=\"accordion mt-" + marginTop + " mb-" + marginBottom + "\" id=\"" + id + "\">");
 
         for (int i = 0; i<this.collapsableModel.getCollapsableCardContentList().size(); i++) {
 
-            this.result.addLn(indent + 1, "<div class=\"card\">");
+            result.addLn(indent + 1, "<div class=\"card\">");
 
-            createAccordionCardHeader(id, i, indent);
-            createCardBody(id, i, indent);
+            createAccordionCardHeader(id, i, indent, result);
+            createCardBody(id, i, indent, result);
 
-            this.result.addLn(indent + 1,"</div>");
+            result.addLn(indent + 1,"</div>");
 
         }
 
-        this.result.addLn(indent, "</div>");
+        result.addLn(indent, "</div>");
 
     }
 
@@ -54,23 +54,23 @@ public class AccordionRenderer extends OutlineElementRenderer {
         return "genId-" + UUID.randomUUID().toString();
     }
 
-    private void createAccordionCardHeader(String id, int cardIndex, int indent) {
+    private void createAccordionCardHeader(String id, int cardIndex, int indent, Result result) {
 
         String cardHeaderId = getCardHeaderId(id, cardIndex);
         String cardCollapseId = getCardCollapseId(id, cardIndex);
         CollapsableCardContent collapsableCardContent = this.collapsableModel.getCollapsableCardContentList().get(cardIndex);
         String cardContentHeaderPreprocessed = this.inlineParserMDP.parse(collapsableCardContent.getHeader());
 
-        this.result.addLn(indent + 2, "<div class=\"card-header\" id=\"" + cardHeaderId + "\">");
-        this.result.addLn(indent + 3, "<h5 class=\"mb-0\">");
-        this.result.addLn(indent + 4, "<button class=\"btn btn-link\" type=\"button\" data-toggle=\"collapse\" data-target=\"#" + cardCollapseId + "\" aria-expanded=\"true\" aria-controls=\"" + cardCollapseId + "\">");
-        this.result.addLn(indent + 5, "" + cardContentHeaderPreprocessed);
-        this.result.addLn(indent + 4, "</button>");
-        this.result.addLn(indent + 3, "</h5>");
-        this.result.addLn(indent + 2, "</div>");
+        result.addLn(indent + 2, "<div class=\"card-header\" id=\"" + cardHeaderId + "\">");
+        result.addLn(indent + 3, "<h5 class=\"mb-0\">");
+        result.addLn(indent + 4, "<button class=\"btn btn-link\" type=\"button\" data-toggle=\"collapse\" data-target=\"#" + cardCollapseId + "\" aria-expanded=\"true\" aria-controls=\"" + cardCollapseId + "\">");
+        result.addLn(indent + 5, "" + cardContentHeaderPreprocessed);
+        result.addLn(indent + 4, "</button>");
+        result.addLn(indent + 3, "</h5>");
+        result.addLn(indent + 2, "</div>");
     }
 
-    private void createCardBody(String id, int cardIndex, int indent) throws MDPSyntaxError {
+    private void createCardBody(String id, int cardIndex, int indent, Result result) throws MDPSyntaxError {
 
         String cardHeaderId = getCardHeaderId(id, cardIndex);
         String cardCollapseId = getCardCollapseId(id, cardIndex);
@@ -78,29 +78,29 @@ public class AccordionRenderer extends OutlineElementRenderer {
 
         // TODO invoke InlineParser
 
-        this.result.addLn(indent + 2, "<div id=\"" + cardCollapseId + "\" class=\"collapse" + getShowFirst(cardIndex) + "\" aria-labelledby=\"" + cardHeaderId + "\" data-parent=\"#" + id + "\">");
-        this.result.addLn(indent + 3, "<div class=\"card-body\">");
+        result.addLn(indent + 2, "<div id=\"" + cardCollapseId + "\" class=\"collapse" + getShowFirst(cardIndex) + "\" aria-labelledby=\"" + cardHeaderId + "\" data-parent=\"#" + id + "\">");
+        result.addLn(indent + 3, "<div class=\"card-body\">");
 
-        processCardContent(collapsableCardContent, indent);
+        processCardContent(collapsableCardContent, indent, result);
 
-        this.result.addLn(indent + 3, "</div>");
-        this.result.addLn(indent + 2, "</div>");
+        result.addLn(indent + 3, "</div>");
+        result.addLn(indent + 2, "</div>");
 
     }
 
-    private void processCardContent(CollapsableCardContent collapsableCardContent, int indent) throws MDPSyntaxError {
+    private void processCardContent(CollapsableCardContent collapsableCardContent, int indent, Result result) throws MDPSyntaxError {
 
         if (collapsableCardContent.getNrOfContentLines() <= 1) {
             if (collapsableCardContent.getNrOfContentLines() == 1) {
                 String cardContentSingleLine = collapsableCardContent.getContent().get(0).asString();
                 String cardContentPreprocessed = this.inlineParserMDP.parse(cardContentSingleLine);
-                this.result.addLn(indent + 5, cardContentPreprocessed);
+                result.addLn(indent + 5, cardContentPreprocessed);
             }
             return;
         }
 
         Document cardContentDocument = collapsableCardContent.getContentAsDocument();
-        MDPCompiler.compileSubdocument(cardContentDocument, this.result, new CompilerContext(false, indent + 3));
+        MDPCompiler.compileSubdocument(cardContentDocument, result, new CompilerContext(false, indent + 3));
     }
 
     private String getCardHeaderId(String id, int cardIndex) {

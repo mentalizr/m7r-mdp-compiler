@@ -12,22 +12,22 @@ public class InputGroupRenderer extends OutlineElementRenderer {
     private final InputGroupAttributes inputGroupAttributes;
     private final TextBlockModel textBlockModel;
 
-    public InputGroupRenderer(Result result, InputGroupAttributes inputGroupAttributes, TextBlockModel textBlockModel) {
-        super(result);
+    public InputGroupRenderer(InputGroupAttributes inputGroupAttributes, TextBlockModel textBlockModel) {
+        super();
         this.inputGroupAttributes = inputGroupAttributes;
         this.textBlockModel = textBlockModel;
     }
 
     @Override
-    public void render(CompilerContext compilerContext) throws MDPSyntaxError {
+    public void render(CompilerContext compilerContext, Result result) throws MDPSyntaxError {
 
         String cssPseudoClass = "ns_input";
 
         int indent = compilerContext.getIndentLevel();
 
-        this.result.addLn("<div class=\"form-group\">");
+        result.addLn("<div class=\"form-group\">");
 
-        FormGroupRendererHelper.renderHeaderLines(this.textBlockModel, this.inputGroupAttributes.getId(), this.result, compilerContext);
+        FormGroupRendererHelper.renderHeaderLines(this.textBlockModel, this.inputGroupAttributes.getId(), result, compilerContext);
 
         StringBuilder stringBuilder = new StringBuilder("<input ");
         stringBuilder.append("type=\"").append(this.inputGroupAttributes.getInputtype()).append("\" ");
@@ -40,15 +40,15 @@ public class InputGroupRenderer extends OutlineElementRenderer {
 
         stringBuilder.append("placeholder=\"").append(this.inputGroupAttributes.getPlaceholder()).append("\">");
 
-        this.result.addLn(indent + 1, stringBuilder.toString());
+        result.addLn(indent + 1, stringBuilder.toString());
 
-//        this.result.addLn(indent + 1, "<input " +
+//        result.addLn(indent + 1, "<input " +
 //                "type=\"" + this.inputGroupAttributes.getInputtype() + "\" " +
 //                "class=\"form-control " + cssPseudoClass + "\" " +
 //                "id=\"" + this.inputGroupAttributes.getId() + "\" " +
 //                "placeholder=\"" + this.inputGroupAttributes.getPlaceholder() + "\">");
 
-        this.result.addLn("</div>");
+        result.addLn("</div>");
 
     }
 

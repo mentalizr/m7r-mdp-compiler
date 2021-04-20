@@ -11,13 +11,13 @@ public class Directive extends OutlineElement {
 
     public static final String PREFIX = "@@";
 
-    public Directive(DocumentIterator documentIterator, Result result) {
-        super(PREFIX, documentIterator, result);
+    public Directive() {
+        super(PREFIX);
     }
 
     @Override
     protected OutlineElementLinesExtractor getOutlineElementLinesExtractor() {
-        return new DirectiveLinesExtractor(this.documentIterator);
+        return new DirectiveLinesExtractor();
     }
 
     @Override
@@ -28,6 +28,6 @@ public class Directive extends OutlineElement {
     @Override
     protected OutlineElementRenderer getOutlineElementRenderer() {
         DirectiveModel directiveModel = (DirectiveModel) this.outlineElementModel;
-        return new DirectiveRenderer(this.result, directiveModel);
+        return new DirectiveRenderer(directiveModel);
     }
 }

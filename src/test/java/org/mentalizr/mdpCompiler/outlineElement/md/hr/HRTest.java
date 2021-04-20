@@ -21,8 +21,8 @@ class HRTest {
         Line firstLine = documentIterator.getNextLine();
         Result result = new ResultTest();
 
-        HR hr = new HR(documentIterator, result);
-        hr.process(CompilerContext.getDefaultTestContext());
+        HR hr = new HR();
+        hr.process(CompilerContext.getDefaultTestContext(), documentIterator, result);
 
         List<String> htmlLines = result.getResultLines();
 

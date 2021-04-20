@@ -20,8 +20,8 @@ class HeadingRendererTest {
 
         Result testResult = new ResultTest();
 
-        HeadingRenderer headingRenderer = new HeadingRenderer(testResult, headingModel, 1);
-        headingRenderer.render(CompilerContext.getDefaultTestContext());
+        HeadingRenderer headingRenderer = new HeadingRenderer(headingModel, 1);
+        headingRenderer.render(CompilerContext.getDefaultTestContext(), testResult);
 
         List<String> htmlLines = testResult.getResultLines();
 
@@ -38,8 +38,8 @@ class HeadingRendererTest {
 
         Result testResult = new ResultTest();
 
-        HeadingRenderer headingRenderer = new HeadingRenderer(testResult, headingModel, 2);
-        headingRenderer.render(CompilerContext.getDefaultTestContext());
+        HeadingRenderer headingRenderer = new HeadingRenderer(headingModel, 2);
+        headingRenderer.render(CompilerContext.getDefaultTestContext(), testResult);
 
         List<String> htmlLines = testResult.getResultLines();
 
@@ -56,8 +56,8 @@ class HeadingRendererTest {
 
         Result testResult = new ResultTest();
 
-        HeadingRenderer headingRenderer = new HeadingRenderer(testResult, headingModel, 5);
-        headingRenderer.render(CompilerContext.getDefaultTestContext());
+        HeadingRenderer headingRenderer = new HeadingRenderer(headingModel, 5);
+        headingRenderer.render(CompilerContext.getDefaultTestContext(), testResult);
 
         List<String> htmlLines = testResult.getResultLines();
 

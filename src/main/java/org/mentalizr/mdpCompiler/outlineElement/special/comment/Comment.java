@@ -1,23 +1,21 @@
 package org.mentalizr.mdpCompiler.outlineElement.special.comment;
 
-import org.mentalizr.mdpCompiler.document.DocumentIterator;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElement;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModelBuilder;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
 import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementLinesExtractor;
-import org.mentalizr.mdpCompiler.result.Result;
 
 public class Comment extends OutlineElement {
 
     public static final String PREFIX = "//";
 
-    public Comment(DocumentIterator documentIterator, Result result) {
-        super(PREFIX, documentIterator, result);
+    public Comment() {
+        super(PREFIX);
     }
 
     @Override
     protected OutlineElementLinesExtractor getOutlineElementLinesExtractor() {
-        return new CommentLinesExtractor(this.documentIterator);
+        return new CommentLinesExtractor();
     }
 
     @Override
@@ -28,6 +26,6 @@ public class Comment extends OutlineElement {
     @Override
     protected OutlineElementRenderer getOutlineElementRenderer() {
         CommentModel commentModel = (CommentModel) this.outlineElementModel;
-        return new CommentRenderer(this.result, commentModel);
+        return new CommentRenderer(commentModel);
     }
 }

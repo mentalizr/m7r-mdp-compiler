@@ -17,6 +17,6 @@ public abstract class OutlineElementFactory {
         return line.asString().startsWith(this.prefix);
     }
 
-    public abstract OutlineElement getInstance(DocumentIterator documentIterator, Result result) throws MDPSyntaxError;
+    public abstract OutlineElement getInstance(Line tagLine) throws MDPSyntaxError;
 
 }
