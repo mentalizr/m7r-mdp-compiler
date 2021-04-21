@@ -1,13 +1,13 @@
 package org.mentalizr.mdpCompiler.outlineElement.tagged;
 
-import org.mentalizr.mdpCompiler.document.DocumentIterator;
 import org.mentalizr.mdpCompiler.document.Line;
-import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementLinesExtractor;
+import org.mentalizr.mdpCompiler.outlineElement.ExtractionFactory;
+import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementExtractor;
 
-public class MDPTagOnlyLinesExtractor extends OutlineElementLinesExtractor {
+public class MDPTagOnlyExtractor extends OutlineElementExtractor {
 
-    public MDPTagOnlyLinesExtractor() {
-        super();
+    public MDPTagOnlyExtractor(ExtractionFactory extractionFactory) {
+        super(extractionFactory);
     }
 
     @Override

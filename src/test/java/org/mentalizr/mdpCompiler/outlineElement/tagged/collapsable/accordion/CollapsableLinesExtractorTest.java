@@ -2,7 +2,7 @@ package org.mentalizr.mdpCompiler.outlineElement.tagged.collapsable.accordion;
 
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
 import org.mentalizr.mdpCompiler.document.DocumentIterator;
-import org.mentalizr.mdpCompiler.outlineElement.tagged.collapsable.CollapsableLinesExtractor;
+import org.mentalizr.mdpCompiler.outlineElement.tagged.collapsable.CollapsableExtractor;
 import org.mentalizr.mdpCompilerTestResrc.OutlineElementLinesExtractorBench;
 import org.junit.jupiter.api.Test;
 
@@ -35,7 +35,7 @@ class CollapsableLinesExtractorTest {
         OutlineElementLinesExtractorBench.execute(
                 "plausi-1",
                 documentIterator,
-                new CollapsableLinesExtractor(),
+                new CollapsableExtractor(),
                 new File(EXPECTED_DIR, "extractor-plausi-1.expected"),
                 10
         );
@@ -62,7 +62,7 @@ class CollapsableLinesExtractorTest {
         OutlineElementLinesExtractorBench.execute(
                 "plausi-1 no empty line",
                 documentIterator,
-                new CollapsableLinesExtractor(),
+                new CollapsableExtractor(),
                 new File(EXPECTED_DIR, "extractor-plausi-1.expected"),
                 9
         );

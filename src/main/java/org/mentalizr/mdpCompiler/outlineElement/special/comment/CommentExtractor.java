@@ -1,13 +1,12 @@
 package org.mentalizr.mdpCompiler.outlineElement.special.comment;
 
-import org.mentalizr.mdpCompiler.document.DocumentIterator;
 import org.mentalizr.mdpCompiler.document.Line;
-import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementLinesExtractor;
+import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementExtractor;
 
-public class CommentLinesExtractor extends OutlineElementLinesExtractor {
+public class CommentExtractor extends OutlineElementExtractor {
 
-    public CommentLinesExtractor() {
-        super();
+    public CommentExtractor() {
+        super(new CommentExtractionFactory());
     }
 
     @Override

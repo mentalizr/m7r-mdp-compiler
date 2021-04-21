@@ -1,18 +1,16 @@
 package org.mentalizr.mdpCompiler.outlineElement.tagged.imgFluid;
 
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
-import org.mentalizr.mdpCompiler.document.Line;
+import org.mentalizr.mdpCompiler.outlineElement.Extraction;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModelBuilder;
-
-import java.util.List;
 
 public class ImgFluidModelBuilder implements OutlineElementModelBuilder {
 
-    public ImgFluidModelBuilder(ImgFluidAttributes imgFluidAttributes, List<Line> lines) {
+    public ImgFluidModelBuilder(ImgFluidAttributes imgFluidAttributes) {
     }
 
     @Override
-    public ImgFluidModel getModel() throws MDPSyntaxError {
+    public ImgFluidModel getModel(Extraction extraction) throws MDPSyntaxError {
         return new ImgFluidModel();
     }
 

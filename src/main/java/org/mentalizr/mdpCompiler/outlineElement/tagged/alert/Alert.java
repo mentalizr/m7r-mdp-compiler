@@ -1,14 +1,12 @@
 package org.mentalizr.mdpCompiler.outlineElement.tagged.alert;
 
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
-import org.mentalizr.mdpCompiler.document.DocumentIterator;
 import org.mentalizr.mdpCompiler.document.Line;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModelBuilder;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTagged;
-import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementLinesExtractor;
+import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementExtractor;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.OutlineElementTaggedAttributesFactory;
-import org.mentalizr.mdpCompiler.result.Result;
 
 public class Alert extends OutlineElementTagged {
 
@@ -19,14 +17,14 @@ public class Alert extends OutlineElementTagged {
     }
 
     @Override
-    protected OutlineElementLinesExtractor getOutlineElementLinesExtractor() {
-        return new AlertLinesExtractor();
+    protected OutlineElementExtractor getOutlineElementLinesExtractor() {
+        return new AlertExtractor();
     }
 
     @Override
     protected OutlineElementModelBuilder getOutlineElementModelBuilder() {
         AlertAttributes alertAttributes = (AlertAttributes) this.outlineElementTaggedAttributes;
-        return new AlertModelBuilder(alertAttributes, this.outlineElementLines);
+        return new AlertModelBuilder(alertAttributes);
     }
 
     @Override

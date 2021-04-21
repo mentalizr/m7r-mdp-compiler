@@ -1,13 +1,12 @@
 package org.mentalizr.mdpCompiler.outlineElement.md.heading;
 
-import org.mentalizr.mdpCompiler.document.DocumentIterator;
 import org.mentalizr.mdpCompiler.document.Line;
-import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementLinesExtractor;
+import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementExtractor;
 
-public class HeadingLinesExtractor extends OutlineElementLinesExtractor {
+public class HeadingExtractor extends OutlineElementExtractor {
 
-    public HeadingLinesExtractor() {
-        super();
+    public HeadingExtractor() {
+        super(new HeadingExtractionFactory());
     }
 
     @Override

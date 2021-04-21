@@ -2,37 +2,39 @@ package org.mentalizr.mdpCompiler.outlineElement.md.heading;
 
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
 import org.mentalizr.mdpCompiler.document.Line;
+import org.mentalizr.mdpCompiler.outlineElement.Extraction;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModelBuilder;
+import org.mentalizr.mdpCompiler.outlineElement.tagged.alert.AlertExtraction;
 
 import java.util.List;
 
 public class HeadingModelBuilder implements OutlineElementModelBuilder {
 
-    private final List<Line> lines;
+//    private final List<Line> lines;
     private final int headerLevel;
-    private HeadingModel headingModel;
+//    private HeadingModel headingModel;
 
-    public HeadingModelBuilder(List<Line> lines, int headerLevel) {
-        this.lines = lines;
+    public HeadingModelBuilder(int headerLevel) {
+//        this.lines = lines;
         this.headerLevel = headerLevel;
-        this.headingModel = null;
+//        this.headingModel = null;
     }
 
     @Override
-    public HeadingModel getModel() throws MDPSyntaxError {
-        if (this.headingModel == null) {
-            buildModel();
-        }
-        return this.headingModel;
-    }
+    public HeadingModel getModel(Extraction extraction) throws MDPSyntaxError {
 
-    private void buildModel() {
+        if (!(extraction instanceof HeadingExtraction))
+            throw new RuntimeException(HeadingExtraction.class.getSimpleName() + " expected.");
 
-        if (this.lines.size() != 1) throw new IllegalStateException("Number of heading lines must be 1.");
-        String line = this.lines.get(0).asString();
+        if (extraction.getNrOfLines() != 1)
+            throw new MDPSyntaxError(extraction.getTagLine(), "Number of heading lines must be 1.");
 
-        this.headingModel = new HeadingModel();
-        String heading = line.substring(this.headerLevel).trim();
-        this.headingModel.addHeading(heading);
+        String tagLine = extraction.getTagLine().asString();
+
+        HeadingModel headingModel = new HeadingModel();
+        String heading = tagLine.substring(this.headerLevel).trim();
+        headingModel.addHeading(heading);
+
+        return headingModel;
     }
 }

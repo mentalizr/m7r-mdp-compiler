@@ -1,13 +1,12 @@
 package org.mentalizr.mdpCompiler.outlineElement.special.directive;
 
-import org.mentalizr.mdpCompiler.document.DocumentIterator;
 import org.mentalizr.mdpCompiler.document.Line;
-import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementLinesExtractor;
+import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementExtractor;
 
-public class DirectiveLinesExtractor extends OutlineElementLinesExtractor {
+public class DirectiveExtractor extends OutlineElementExtractor {
 
-    public DirectiveLinesExtractor() {
-        super();
+    public DirectiveExtractor() {
+        super(new DirectiveExtractionFactory());
     }
 
     @Override

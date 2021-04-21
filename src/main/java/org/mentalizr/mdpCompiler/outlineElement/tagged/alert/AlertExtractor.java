@@ -1,13 +1,12 @@
 package org.mentalizr.mdpCompiler.outlineElement.tagged.alert;
 
-import org.mentalizr.mdpCompiler.document.DocumentIterator;
 import org.mentalizr.mdpCompiler.document.Line;
-import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementLinesExtractor;
+import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementExtractor;
 
-public class AlertLinesExtractor extends OutlineElementLinesExtractor {
+public class AlertExtractor extends OutlineElementExtractor {
 
-    public AlertLinesExtractor() {
-        super();
+    public AlertExtractor() {
+        super(new AlertExtractionFactory());
     }
 
     @Override

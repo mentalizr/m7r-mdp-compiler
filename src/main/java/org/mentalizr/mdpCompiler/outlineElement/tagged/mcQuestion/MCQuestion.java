@@ -1,15 +1,13 @@
 package org.mentalizr.mdpCompiler.outlineElement.tagged.mcQuestion;
 
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
-import org.mentalizr.mdpCompiler.document.DocumentIterator;
 import org.mentalizr.mdpCompiler.document.Line;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModelBuilder;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTagged;
-import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementLinesExtractor;
+import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementExtractor;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.OutlineElementTaggedAttributesFactory;
-import org.mentalizr.mdpCompiler.outlineElement.tagged.TextBlockLinesExtractor;
-import org.mentalizr.mdpCompiler.result.Result;
+import org.mentalizr.mdpCompiler.outlineElement.tagged.TextBlockExtractor;
 
 public class MCQuestion extends OutlineElementTagged {
 
@@ -20,14 +18,14 @@ public class MCQuestion extends OutlineElementTagged {
     }
 
     @Override
-    protected OutlineElementLinesExtractor getOutlineElementLinesExtractor() {
-        return new TextBlockLinesExtractor();
+    protected OutlineElementExtractor getOutlineElementLinesExtractor() {
+        return new McQuestionExtractor();
     }
 
     @Override
     protected OutlineElementModelBuilder getOutlineElementModelBuilder() {
         MCQuestionAttributes mcQuestionAttributes = (MCQuestionAttributes) this.outlineElementTaggedAttributes;
-        return new MCQuestionModelBuilder(mcQuestionAttributes, this.outlineElementLines);
+        return new MCQuestionModelBuilder(mcQuestionAttributes);
     }
 
     @Override

@@ -4,6 +4,7 @@ import org.mentalizr.mdpCompiler.document.DocumentIterator;
 import org.mentalizr.mdpCompiler.document.Line;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mentalizr.mdpCompiler.outlineElement.Extraction;
 
 import java.util.List;
 
@@ -19,14 +20,14 @@ class ParagraphLinesExtractorTest {
         DocumentIterator documentIterator = DocumentIterator.getInstance("first line", "second line", "third line", "", "next paragraph");
         Line line = documentIterator.getNextLine();
 
-        ParagraphLinesExtractor paragraphLinesExtractor = new ParagraphLinesExtractor();
-        List<Line> extractedLines = paragraphLinesExtractor.extract(documentIterator);
+        ParagraphExtractor paragraphLinesExtractor = new ParagraphExtractor();
+        Extraction extraction = paragraphLinesExtractor.extract(documentIterator);
 
-        assertNotNull(extractedLines);
-        assertEquals(3, extractedLines.size());
-        assertEquals("first line", extractedLines.get(0).asString());
-        assertEquals("second line", extractedLines.get(1).asString());
-        assertEquals("third line", extractedLines.get(2).asString());
+        assertNotNull(extraction);
+        assertEquals(3, extraction.getNrOfLines());
+        assertEquals("first line", extraction.getLines().get(0).asString());
+        assertEquals("second line", extraction.getLines().get(1).asString());
+        assertEquals("third line", extraction.getLines().get(2).asString());
         assertEquals(3, documentIterator.getIndex());
     }
 
@@ -37,12 +38,12 @@ class ParagraphLinesExtractorTest {
         DocumentIterator documentIterator = DocumentIterator.getInstance("first line", "", "second line");
         Line line = documentIterator.getNextLine();
 
-        ParagraphLinesExtractor paragraphLinesExtractor = new ParagraphLinesExtractor();
-        List<Line> extractedLines = paragraphLinesExtractor.extract(documentIterator);
+        ParagraphExtractor paragraphLinesExtractor = new ParagraphExtractor();
+        Extraction extraction = paragraphLinesExtractor.extract(documentIterator);
 
-        assertNotNull(extractedLines);
-        assertEquals(1, extractedLines.size());
-        assertEquals("first line", extractedLines.get(0).asString());
+        assertNotNull(extraction);
+        assertEquals(1, extraction.getNrOfLines());
+        assertEquals("first line", extraction.getLines().get(0).asString());
         assertEquals(1, documentIterator.getIndex());
     }
 

@@ -1,15 +1,13 @@
 package org.mentalizr.mdpCompiler.outlineElement.tagged.collapsable.collapse;
 
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
-import org.mentalizr.mdpCompiler.document.DocumentIterator;
 import org.mentalizr.mdpCompiler.document.Line;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModelBuilder;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTagged;
-import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementLinesExtractor;
+import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementExtractor;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.OutlineElementTaggedAttributesFactory;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.collapsable.*;
-import org.mentalizr.mdpCompiler.result.Result;
 
 public class Collapse extends OutlineElementTagged {
 
@@ -20,14 +18,14 @@ public class Collapse extends OutlineElementTagged {
     }
 
     @Override
-    protected OutlineElementLinesExtractor getOutlineElementLinesExtractor() {
-        return new CollapsableLinesExtractor();
+    protected OutlineElementExtractor getOutlineElementLinesExtractor() {
+        return new CollapsableExtractor();
     }
 
     @Override
     protected OutlineElementModelBuilder getOutlineElementModelBuilder() {
         CollapsableAttributes collapsableAttributes = (CollapsableAttributes) this.outlineElementTaggedAttributes;
-        return new CollapsableModelBuilder(collapsableAttributes, this.outlineElementLines);
+        return new CollapsableModelBuilder(collapsableAttributes);
     }
 
     @Override

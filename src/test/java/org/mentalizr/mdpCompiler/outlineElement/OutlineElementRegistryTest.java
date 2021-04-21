@@ -25,7 +25,7 @@ class OutlineElementRegistryTest {
         DocumentIterator documentIterator = document.getDocumentIterator();
 
         ResultTest resultTest = new ResultTest();
-        OutlineElementRegistry outlineElementRegistry = new OutlineElementRegistry(resultTest, documentIterator);
+        OutlineElementRegistry outlineElementRegistry = new OutlineElementRegistry();
 
         OutlineElement element = outlineElementRegistry.getMatchingElement(documentIterator.getNextLine(), MDPCompiler.Mode.MDP_COMPLETE);
 
@@ -42,7 +42,8 @@ class OutlineElementRegistryTest {
         DocumentIterator documentIterator = document.getDocumentIterator();
 
         ResultTest resultTest = new ResultTest();
-        OutlineElementRegistry outlineElementRegistry = new OutlineElementRegistry(resultTest, documentIterator);
+        OutlineElementRegistry outlineElementRegistry = new OutlineElementRegistry();
+//        OutlineElementRegistry outlineElementRegistry = new OutlineElementRegistry(resultTest, documentIterator);
 
         OutlineElement element = outlineElementRegistry.getMatchingElement(documentIterator.getNextLine(), MDPCompiler.Mode.MDP_COMPLETE);
 

@@ -3,7 +3,7 @@ package org.mentalizr.mdpCompiler.outlineElement.md.hr;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElement;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModelBuilder;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
-import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementLinesExtractor;
+import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementExtractor;
 
 public class HR extends OutlineElement {
 
@@ -14,13 +14,13 @@ public class HR extends OutlineElement {
     }
 
     @Override
-    protected OutlineElementLinesExtractor getOutlineElementLinesExtractor() {
-        return new HRLinesExtractor();
+    protected OutlineElementExtractor getOutlineElementLinesExtractor() {
+        return new HRExtractor();
     }
 
     @Override
     protected OutlineElementModelBuilder getOutlineElementModelBuilder() {
-        return new HRModelBuilder(this.outlineElementLines);
+        return new HRModelBuilder();
     }
 
     @Override

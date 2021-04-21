@@ -3,28 +3,28 @@ package org.mentalizr.mdpCompiler.outlineElement.md.paragraph;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElement;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModelBuilder;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
-import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementLinesExtractor;
+import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementExtractor;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Paragraph extends OutlineElement {
 
-    private final List<String> lines;
+//    private final List<String> lines;
 
     public Paragraph() {
         super("");
-        this.lines = new ArrayList<>();
+//        this.lines = new ArrayList<>();
     }
 
     @Override
-    protected OutlineElementLinesExtractor getOutlineElementLinesExtractor() {
-        return new ParagraphLinesExtractor();
+    protected OutlineElementExtractor getOutlineElementLinesExtractor() {
+        return new ParagraphExtractor();
     }
 
     @Override
     protected OutlineElementModelBuilder getOutlineElementModelBuilder() {
-        return new ParagraphModelBuilder(this.outlineElementLines);
+        return new ParagraphModelBuilder();
     }
 
     @Override

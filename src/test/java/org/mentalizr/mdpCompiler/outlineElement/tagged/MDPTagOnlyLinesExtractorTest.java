@@ -3,6 +3,8 @@ package org.mentalizr.mdpCompiler.outlineElement.tagged;
 import org.mentalizr.mdpCompiler.document.DocumentIterator;
 import org.mentalizr.mdpCompiler.document.Line;
 import org.junit.jupiter.api.Test;
+import org.mentalizr.mdpCompiler.outlineElement.Extraction;
+import org.mentalizr.mdpCompiler.outlineElement.tagged.imgFluid.ImgFluidExtractionFactory;
 
 import java.util.List;
 
@@ -21,10 +23,10 @@ class MDPTagOnlyLinesExtractorTest {
         );
         documentIterator.getNextLine();
 
-        MDPTagOnlyLinesExtractor mdpTagOnlyLinesExtractor = new MDPTagOnlyLinesExtractor();
-        List<Line> lineList = mdpTagOnlyLinesExtractor.extract(documentIterator);
+        MDPTagOnlyExtractor mdpTagOnlyLinesExtractor = new MDPTagOnlyExtractor(new ImgFluidExtractionFactory());
+        Extraction extraction = mdpTagOnlyLinesExtractor.extract(documentIterator);
 
-        assertEquals(1, lineList.size());
-        assertEquals("@img-fluid[alt=\"Ein alternativer Text.\"]()", lineList.get(0).asString());
+        assertEquals(1, extraction.getNrOfLines());
+        assertEquals("@img-fluid[alt=\"Ein alternativer Text.\"]()", extraction.getTagLine().toString());
     }
 }

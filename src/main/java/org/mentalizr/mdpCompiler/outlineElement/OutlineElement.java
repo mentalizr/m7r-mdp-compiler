@@ -3,24 +3,21 @@ package org.mentalizr.mdpCompiler.outlineElement;
 import org.mentalizr.mdpCompiler.CompilerContext;
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
 import org.mentalizr.mdpCompiler.document.DocumentIterator;
-import org.mentalizr.mdpCompiler.document.Line;
-import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementLinesExtractor;
+import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementExtractor;
 import org.mentalizr.mdpCompiler.result.Result;
-
-import java.util.List;
 
 public abstract class OutlineElement {
 
     protected String prefix;
 
-    protected List<Line> outlineElementLines;
+//    protected List<Line> outlineElementLines;
     protected OutlineElementModel outlineElementModel;
 
     public OutlineElement(String prefix) {
         this.prefix = prefix;
     }
 
-    protected abstract OutlineElementLinesExtractor getOutlineElementLinesExtractor();
+    protected abstract OutlineElementExtractor getOutlineElementLinesExtractor();
 
     protected abstract OutlineElementModelBuilder getOutlineElementModelBuilder();
 
@@ -32,7 +29,7 @@ public abstract class OutlineElement {
 
     public void process(CompilerContext compilerContext, DocumentIterator documentIterator, Result result) throws MDPSyntaxError {
 
-        this.outlineElementLines = getOutlineElementLinesExtractor().extract(documentIterator);
+        Extraction extraction = getOutlineElementLinesExtractor().extract(documentIterator);
 
 //        System.out.println("extr. Lines:");
 //        for (Line line : this.outlineElementLines) {
@@ -40,10 +37,16 @@ public abstract class OutlineElement {
 //        }
 //        System.out.println("---");
 
-        this.outlineElementModel = getOutlineElementModelBuilder().getModel();
+        this.outlineElementModel = getOutlineElementModelBuilder().getModel(extraction);
 
         this.getOutlineElementRenderer().render(compilerContext, result);
 
     }
+
+    public Extraction getExtraction(DocumentIterator documentIterator) {
+        return getOutlineElementLinesExtractor().extract(documentIterator);
+    }
+
+
 
 }

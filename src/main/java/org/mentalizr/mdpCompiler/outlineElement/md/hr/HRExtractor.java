@@ -1,13 +1,12 @@
 package org.mentalizr.mdpCompiler.outlineElement.md.hr;
 
-import org.mentalizr.mdpCompiler.document.DocumentIterator;
 import org.mentalizr.mdpCompiler.document.Line;
-import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementLinesExtractor;
+import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementExtractor;
 
-public class HRLinesExtractor extends OutlineElementLinesExtractor {
+public class HRExtractor extends OutlineElementExtractor {
 
-    public HRLinesExtractor() {
-        super();
+    public HRExtractor() {
+        super(new HRExtractionFactory());
     }
 
     @Override

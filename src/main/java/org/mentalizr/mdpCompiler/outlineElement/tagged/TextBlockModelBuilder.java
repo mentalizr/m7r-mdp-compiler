@@ -2,46 +2,44 @@ package org.mentalizr.mdpCompiler.outlineElement.tagged;
 
 import org.mentalizr.mdpCompiler.document.Line;
 import org.mentalizr.mdpCompiler.document.Lines;
+import org.mentalizr.mdpCompiler.outlineElement.Extraction;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModelBuilder;
+import org.mentalizr.mdpCompiler.outlineElement.tagged.alert.AlertModelBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TextBlockModelBuilder implements OutlineElementModelBuilder {
 
-    private final List<Line> lines;
+//    private final List<Line> lines;
 
-    private final Line mdpTagLine;
-    private TextBlockModel textBlockModel;
+//    private final Line mdpTagLine;
+//    private TextBlockModel textBlockModel;
 
-    public TextBlockModelBuilder(List<Line> lines) {
+    public TextBlockModelBuilder() {
 
         // TODO Durch MDPSyntaxError ersetzen, dazu ist die MDP-Line notwendig --> Refactoring
-        if (lines.size() == 0) throw new IllegalStateException(TextBlockModelBuilder.class.getSimpleName() + ": No lines.");
+//        if (lines.size() == 0) throw new IllegalStateException(TextBlockModelBuilder.class.getSimpleName() + ": No lines.");
 
-        this.lines = Lines.shallowCopy(lines);
+//        this.lines = Lines.shallowCopy(lines);
 
-        this.mdpTagLine = lines.get(0);
-        this.textBlockModel = null;
+//        this.mdpTagLine = lines.get(0);
+//        this.textBlockModel = null;
     }
 
     @Override
-    public OutlineElementModel getModel() {
+    public OutlineElementModel getModel(Extraction extraction) {
 
-        if (this.textBlockModel == null) {
-            buildModel();
-        }
-        return this.textBlockModel;
-    }
-
-    private void buildModel() {
+        // TODO Durch MDPSyntaxError ersetzen, dazu ist die MDP-Line notwendig --> Refactoring
+        if (extraction.isEmpty())
+            throw new IllegalStateException("Insufficient number of lines.");
 
         List<Line> textBlockLines = new ArrayList<>();
 
-        removeTagLine();
+        List<Line> lines = extraction.getLinesWithoutTagLine();
 
-        for (Line line : this.lines) {
+        for (Line line : lines) {
             String lineString = line.asString();
 
             if (lineString.startsWith("    ")) {
@@ -54,11 +52,7 @@ public class TextBlockModelBuilder implements OutlineElementModelBuilder {
             }
         }
 
-        this.textBlockModel = new TextBlockModel(textBlockLines);
-    }
-
-    private void removeTagLine() {
-        this.lines.remove(0);
+        return new TextBlockModel(textBlockLines);
     }
 
 }

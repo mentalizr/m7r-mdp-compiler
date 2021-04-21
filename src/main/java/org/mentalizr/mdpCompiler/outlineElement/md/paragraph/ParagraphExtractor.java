@@ -1,13 +1,12 @@
 package org.mentalizr.mdpCompiler.outlineElement.md.paragraph;
 
-import org.mentalizr.mdpCompiler.document.DocumentIterator;
 import org.mentalizr.mdpCompiler.document.Line;
-import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementLinesExtractor;
+import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementExtractor;
 
-public class ParagraphLinesExtractor extends OutlineElementLinesExtractor {
+public class ParagraphExtractor extends OutlineElementExtractor {
 
-    public ParagraphLinesExtractor() {
-        super();
+    public ParagraphExtractor() {
+        super(new ParagraphExtractionFactory());
     }
 
     @Override

@@ -2,31 +2,25 @@ package org.mentalizr.mdpCompiler.outlineElement.extractor;
 
 import org.mentalizr.mdpCompiler.document.DocumentIterator;
 import org.mentalizr.mdpCompiler.document.Line;
+import org.mentalizr.mdpCompiler.outlineElement.Extraction;
+import org.mentalizr.mdpCompiler.outlineElement.ExtractionFactory;
 
 import java.util.List;
 
-public abstract class OutlineElementLinesExtractor {
+public abstract class OutlineElementExtractor {
 
     public enum TerminationStrategy { INCLUDE, EXCLUDE_IGNORE, EXCLUDE_REPROCESS }
 
-//    protected DocumentIterator documentIterator;
+    protected ExtractionFactory extractionFactory;
     protected ExtractedOutlineElementBuffer extractedOutlineElementBuffer;
 
-    public OutlineElementLinesExtractor() {
-
-//        this.documentIterator = documentIterator;
+    public OutlineElementExtractor(ExtractionFactory extractionFactory) {
+        this.extractionFactory = extractionFactory;
         this.extractedOutlineElementBuffer = new ExtractedOutlineElementBuffer();
-//
-//        if (!documentIterator.hasCurrentLine())
-//            throw new IllegalStateException("Specified DocumentIterator has no first line.");
-//
-//        Line firstLine = this.documentIterator.getCurrentLine();
-//        this.extractedOutlineElementBuffer.add(firstLine);
     }
 
-    public List<Line> extract(DocumentIterator documentIterator) {
-
-//        ExtractedOutlineElementBuffer extractedOutlineElementBuffer = new ExtractedOutlineElementBuffer();
+//    public List<Line> extract(DocumentIterator documentIterator) {
+    public Extraction extract(DocumentIterator documentIterator) {
 
         if (!documentIterator.hasCurrentLine())
             throw new IllegalStateException("Specified DocumentIterator has no first line.");
@@ -57,7 +51,8 @@ public abstract class OutlineElementLinesExtractor {
 
         extractedOutlineElementBuffer.stripTrailingEmptyLines();
 
-        return extractedOutlineElementBuffer.getLines();
+        List<Line> lines = extractedOutlineElementBuffer.getLines();
+        return this.extractionFactory.createInstance(lines);
     }
 
     protected abstract boolean isTerminated(Line line);

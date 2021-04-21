@@ -3,7 +3,8 @@ package org.mentalizr.mdpCompilerTestResrc;
 import de.arthurpicht.utils.io.textfile.TextFile;
 import org.mentalizr.mdpCompiler.document.DocumentIterator;
 import org.mentalizr.mdpCompiler.document.Line;
-import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementLinesExtractor;
+import org.mentalizr.mdpCompiler.outlineElement.Extraction;
+import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementExtractor;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,13 +18,13 @@ public class OutlineElementLinesExtractorBench {
     @SuppressWarnings("SpellCheckingInspection")
     private static final boolean SOUT_RESULT = true;
 
-    public static void execute(@SuppressWarnings("SpellCheckingInspection") String testname, DocumentIterator documentIterator, OutlineElementLinesExtractor outlineElementLinesExtractor, File file, int expectedDocumentIteratorIndex) throws IOException {
+    public static void execute(@SuppressWarnings("SpellCheckingInspection") String testname, DocumentIterator documentIterator, OutlineElementExtractor outlineElementExtractor, File file, int expectedDocumentIteratorIndex) throws IOException {
 
         documentIterator.getNextLine();
-        List<Line> extractedLines = outlineElementLinesExtractor.extract(documentIterator);
+        Extraction extraction = outlineElementExtractor.extract(documentIterator);
 
         List<String> mdpLinesAsString = new ArrayList<>();
-        for (Line extractedLine : extractedLines) {
+        for (Line extractedLine : extraction.getLines()) {
             String mdpLineAsString = extractedLine.asString();
             mdpLinesAsString.add(mdpLineAsString);
         }

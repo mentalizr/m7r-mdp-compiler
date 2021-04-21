@@ -1,17 +1,15 @@
 package org.mentalizr.mdpCompiler.outlineElement.tagged.card;
 
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
-import org.mentalizr.mdpCompiler.document.DocumentIterator;
 import org.mentalizr.mdpCompiler.document.Line;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModelBuilder;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTagged;
-import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementLinesExtractor;
+import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementExtractor;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.OutlineElementTaggedAttributesFactory;
-import org.mentalizr.mdpCompiler.outlineElement.tagged.TextBlockLinesExtractor;
+import org.mentalizr.mdpCompiler.outlineElement.tagged.TextBlockExtractor;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.TextBlockModel;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.TextBlockModelBuilder;
-import org.mentalizr.mdpCompiler.result.Result;
 
 public class Card extends OutlineElementTagged {
 
@@ -22,13 +20,13 @@ public class Card extends OutlineElementTagged {
     }
 
     @Override
-    protected OutlineElementLinesExtractor getOutlineElementLinesExtractor() {
-        return new TextBlockLinesExtractor();
+    protected OutlineElementExtractor getOutlineElementLinesExtractor() {
+        return new CardExtractor();
     }
 
     @Override
     protected OutlineElementModelBuilder getOutlineElementModelBuilder() {
-        return new TextBlockModelBuilder(this.outlineElementLines);
+        return new TextBlockModelBuilder();
     }
 
     @Override

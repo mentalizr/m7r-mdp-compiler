@@ -7,8 +7,6 @@ import org.mentalizr.mdpCompiler.result.Result;
 
 public class AudioRenderer extends OutlineElementRenderer {
 
-//    private static final String CONTEXT_UR_AUDIO = "mediaAudio/";
-//    private static final String CONTEXT_UR_AUDIO = "mediaVideo/";
     private static final String CONTEXT_UR_AUDIO = "mediaAV/";
 
     private final AudioAttributes audioAttributes;

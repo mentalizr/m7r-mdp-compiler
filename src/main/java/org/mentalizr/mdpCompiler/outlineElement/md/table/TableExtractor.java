@@ -1,13 +1,12 @@
 package org.mentalizr.mdpCompiler.outlineElement.md.table;
 
-import org.mentalizr.mdpCompiler.document.DocumentIterator;
 import org.mentalizr.mdpCompiler.document.Line;
-import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementLinesExtractor;
+import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementExtractor;
 
-public class TableLinesExtractor extends OutlineElementLinesExtractor {
+public class TableExtractor extends OutlineElementExtractor {
 
-    public TableLinesExtractor() {
-        super();
+    public TableExtractor() {
+        super(new TableExtractionFactory());
     }
 
     @Override

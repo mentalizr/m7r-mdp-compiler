@@ -6,6 +6,7 @@ import org.mentalizr.mdpCompiler.attributeProfile.attributesBuilder.AttributesBu
 import org.mentalizr.mdpCompiler.document.Document;
 import org.mentalizr.mdpCompiler.document.Line;
 import org.junit.jupiter.api.Test;
+import org.mentalizr.mdpCompiler.outlineElement.Extraction;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,10 +29,11 @@ class AlertModelBuilderTest {
 //        AlertAttributesParser alertAttributes = new AlertAttributesParser(AlertAttributes.ATTRIBUTE_NAME_TYPE + "=\"info\" " + AlertAttributes.ATTRIBUTE_NAME_HEADERSIZE + "=\"3\"");
 
         Document document = new Document(new File(EXPECTED_DIR, "extractor-plausi-1.expected"));
-        List<Line> lines = document.getLines();
+        Extraction extraction = new AlertExtraction(document);
+//        List<Line> lines = document.getLines();
 
-        AlertModelBuilder alertModelBuilder = new AlertModelBuilder(alertAttributes, lines);
-        AlertModel alertModel = alertModelBuilder.getModel();
+        AlertModelBuilder alertModelBuilder = new AlertModelBuilder(alertAttributes);
+        AlertModel alertModel = alertModelBuilder.getModel(extraction);
 
         assertNotNull(alertModel);
         assertEquals("Hier der Info-Text!", alertModel.getText());

@@ -33,18 +33,12 @@ import java.util.List;
 
 public class OutlineElementRegistry {
 
-    private final DocumentIterator documentIterator;
-    private final Result result;
-
     private final List<OutlineElementFactory> outlineElementMDFactoryList;
     private final List<OutlineElementFactory> outlineElementTaggedFactoryList;
     private final List<OutlineElementFactory> outlineElementTaggedNestableFactoryList;
     private final OutlineElementFactory defaultElement;
 
-    public OutlineElementRegistry(Result result, DocumentIterator documentIterator) {
-
-        this.documentIterator = documentIterator;
-        this.result = result;
+    public OutlineElementRegistry() {
 
         this.outlineElementMDFactoryList = new ArrayList<>();
         this.outlineElementTaggedFactoryList = new ArrayList<>();
@@ -81,25 +75,25 @@ public class OutlineElementRegistry {
         this.outlineElementTaggedFactoryList.add(new DirectiveFactory());
     }
 
-    public OutlineElement getMatchingElement(Line line, MDPCompiler.Mode mode) throws MDPSyntaxError {
+    public OutlineElement getMatchingElement(Line tagLine, MDPCompiler.Mode mode) throws MDPSyntaxError {
 
         if (mode == MDPCompiler.Mode.MDP_COMPLETE) {
             for (OutlineElementFactory factory : this.outlineElementTaggedFactoryList) {
-                if (factory.isResponsible(line)) return factory.getInstance(line);
+                if (factory.isResponsible(tagLine)) return factory.getInstance(tagLine);
             }
         }
 
         if (mode == MDPCompiler.Mode.MD_AND_MDP_NESTABLE || mode == MDPCompiler.Mode.MDP_COMPLETE) {
             for (OutlineElementFactory factory : this.outlineElementTaggedNestableFactoryList) {
-                if (factory.isResponsible(line)) return factory.getInstance(line);
+                if (factory.isResponsible(tagLine)) return factory.getInstance(tagLine);
             }
         }
 
         for (OutlineElementFactory factory : this.outlineElementMDFactoryList) {
-            if (factory.isResponsible(line)) return factory.getInstance(line);
+            if (factory.isResponsible(tagLine)) return factory.getInstance(tagLine);
         }
 
-        return this.defaultElement.getInstance(this.documentIterator.getCurrentLine());
+        return this.defaultElement.getInstance(tagLine);
     }
 
 }

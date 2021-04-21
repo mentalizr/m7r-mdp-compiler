@@ -4,6 +4,7 @@ import org.mentalizr.mdpCompiler.document.Document;
 import org.mentalizr.mdpCompiler.document.DocumentIterator;
 import org.mentalizr.mdpCompiler.document.DocumentSanityChecker;
 import org.mentalizr.mdpCompiler.document.Line;
+import org.mentalizr.mdpCompiler.outlineElement.Extraction;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElement;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRegistry;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRegistryNew;
@@ -50,7 +51,7 @@ public class MDPCompiler {
         DocumentSanityChecker.check(document);
 
         DocumentIterator documentIterator = document.getDocumentIterator();
-        OutlineElementRegistry outlineElementRegistry = new OutlineElementRegistry(result, documentIterator);
+        OutlineElementRegistry outlineElementRegistry = new OutlineElementRegistry();
 
         while (documentIterator.hasNextLine()) {
 
@@ -71,7 +72,7 @@ public class MDPCompiler {
 //        DocumentSanityChecker.check(document);
 //
 //        DocumentIterator documentIterator = document.getDocumentIterator();
-//        OutlineElementRegistryNew outlineElementRegistry = new OutlineElementRegistryNew();
+//        OutlineElementRegistry outlineElementRegistry = new OutlineElementRegistry();
 //
 //        while (documentIterator.hasNextLine()) {
 //
@@ -79,8 +80,9 @@ public class MDPCompiler {
 //
 //            if (line.asString().isBlank()) continue;
 //
-//            OutlineElement outlineElement;
-//            outlineElement = outlineElementRegistry.getMatchingElement(line, Mode.MDP_COMPLETE);
+//            OutlineElement outlineElement = outlineElementRegistry.getMatchingElement(line, Mode.MDP_COMPLETE);
+//            Extraction extraction = outlineElement.getExtraction(documentIterator);
+//
 //            outlineElement.process(compilerContext);
 //
 //        }

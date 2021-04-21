@@ -1,15 +1,13 @@
 package org.mentalizr.mdpCompiler.outlineElement.tagged.video;
 
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
-import org.mentalizr.mdpCompiler.document.DocumentIterator;
 import org.mentalizr.mdpCompiler.document.Line;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModelBuilder;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTagged;
-import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementLinesExtractor;
-import org.mentalizr.mdpCompiler.outlineElement.tagged.MDPTagOnlyLinesExtractor;
+import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementExtractor;
+import org.mentalizr.mdpCompiler.outlineElement.tagged.MDPTagOnlyExtractor;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.OutlineElementTaggedAttributesFactory;
-import org.mentalizr.mdpCompiler.result.Result;
 
 public class Video extends OutlineElementTagged {
 
@@ -30,14 +28,14 @@ public class Video extends OutlineElementTagged {
     }
 
     @Override
-    protected OutlineElementLinesExtractor getOutlineElementLinesExtractor() {
-        return new MDPTagOnlyLinesExtractor();
+    protected OutlineElementExtractor getOutlineElementLinesExtractor() {
+        return new VideoExtractor();
     }
 
     @Override
     protected OutlineElementModelBuilder getOutlineElementModelBuilder() {
         VideoAttributes videoAttributes = (VideoAttributes) this.outlineElementTaggedAttributes;
-        return new VideoModelBuilder(videoAttributes, this.outlineElementLines);
+        return new VideoModelBuilder(videoAttributes);
     }
 
     @Override

@@ -8,5 +8,5 @@ import org.mentalizr.mdpCompiler.MDPSyntaxError;
  */
 public interface OutlineElementModelBuilder {
 
-    public OutlineElementModel getModel() throws MDPSyntaxError;
+    public OutlineElementModel getModel(Extraction extraction) throws MDPSyntaxError;
 }

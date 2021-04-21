@@ -4,6 +4,7 @@ import org.mentalizr.mdpCompiler.document.Document;
 import org.mentalizr.mdpCompiler.document.DocumentIterator;
 import org.mentalizr.mdpCompiler.document.Line;
 import org.junit.jupiter.api.Test;
+import org.mentalizr.mdpCompiler.outlineElement.Extraction;
 
 import java.util.List;
 
@@ -24,12 +25,12 @@ class HeadingLinesExtractorTest {
 
         Line line = documentIterator.getNextLine();
 //        System.out.println(line.asString());
-        HeadingLinesExtractor headingLinesExtractor = new HeadingLinesExtractor();
-        List<Line> extractedLines = headingLinesExtractor.extract(documentIterator);
+        HeadingExtractor headingLinesExtractor = new HeadingExtractor();
+        Extraction extraction = headingLinesExtractor.extract(documentIterator);
 
-        assertNotNull(extractedLines);
-        assertEquals(1, extractedLines.size());
-        assertEquals("# Eine Überschrift", extractedLines.get(0).asString());
+        assertNotNull(extraction);
+        assertEquals(1, extraction.getNrOfLines());
+        assertEquals("# Eine Überschrift", extraction.getTagLine().asString());
     }
 
     @Test
@@ -43,12 +44,12 @@ class HeadingLinesExtractorTest {
         DocumentIterator documentIterator = document.getDocumentIterator();
 
         Line line = documentIterator.getNextLine();
-        HeadingLinesExtractor headingLinesExtractor = new HeadingLinesExtractor();
-        List<Line> extractedLines = headingLinesExtractor.extract(documentIterator);
+        HeadingExtractor headingLinesExtractor = new HeadingExtractor();
+        Extraction extraction = headingLinesExtractor.extract(documentIterator);
 
-        assertNotNull(extractedLines);
-        assertEquals(1, extractedLines.size());
-        assertEquals("## Eine Überschrift", extractedLines.get(0).asString());
+        assertNotNull(extraction);
+        assertEquals(1, extraction.getNrOfLines());
+        assertEquals("## Eine Überschrift", extraction.getTagLine().asString());
     }
 
     @Test
@@ -62,12 +63,12 @@ class HeadingLinesExtractorTest {
         DocumentIterator documentIterator = document.getDocumentIterator();
 
         Line line = documentIterator.getNextLine();
-        HeadingLinesExtractor headingLinesExtractor = new HeadingLinesExtractor();
-        List<Line> extractedLines = headingLinesExtractor.extract(documentIterator);
+        HeadingExtractor headingLinesExtractor = new HeadingExtractor();
+        Extraction extraction = headingLinesExtractor.extract(documentIterator);
 
-        assertNotNull(extractedLines);
-        assertEquals(1, extractedLines.size());
-        assertEquals("##### Eine Überschrift", extractedLines.get(0).asString());
+        assertNotNull(extraction);
+        assertEquals(1, extraction.getNrOfLines());
+        assertEquals("##### Eine Überschrift", extraction.getTagLine().asString());
     }
 
 }

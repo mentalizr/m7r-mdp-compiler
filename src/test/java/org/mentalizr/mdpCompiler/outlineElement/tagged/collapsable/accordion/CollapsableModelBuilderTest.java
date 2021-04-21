@@ -5,10 +5,8 @@ import org.mentalizr.mdpCompiler.attributeProfile.AttributeProfileException;
 import org.mentalizr.mdpCompiler.attributeProfile.attributesBuilder.AttributesBuilder;
 import org.mentalizr.mdpCompiler.document.Document;
 import org.mentalizr.mdpCompiler.document.Line;
-import org.mentalizr.mdpCompiler.outlineElement.tagged.collapsable.CollapsableModelBuilder;
-import org.mentalizr.mdpCompiler.outlineElement.tagged.collapsable.CollapsableModel;
-import org.mentalizr.mdpCompiler.outlineElement.tagged.collapsable.CollapsableCardContent;
-import org.mentalizr.mdpCompiler.outlineElement.tagged.collapsable.CollapsableAttributes;
+import org.mentalizr.mdpCompiler.outlineElement.Extraction;
+import org.mentalizr.mdpCompiler.outlineElement.tagged.collapsable.*;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -30,10 +28,11 @@ class CollapsableModelBuilderTest {
         CollapsableAttributes collapsableAttributes = new CollapsableAttributes(attributesBuilder.build());
 
         Document document = new Document(new File(EXPECTED_DIR, "extractor-plausi-1.expected"));
-        List<Line> lines = document.getLines();
+//        List<Line> lines = document.getLines();
+        Extraction extraction = new CollapsableExtraction(document);
 
-        CollapsableModelBuilder collapsableModelBuilder = new CollapsableModelBuilder(collapsableAttributes, lines);
-        CollapsableModel collapsableModel = collapsableModelBuilder.getModel();
+        CollapsableModelBuilder collapsableModelBuilder = new CollapsableModelBuilder(collapsableAttributes);
+        CollapsableModel collapsableModel = collapsableModelBuilder.getModel(extraction);
         List<CollapsableCardContent> collapsableCardContentList = collapsableModel.getCollapsableCardContentList();
 
         assertEquals(3, collapsableCardContentList.size());
@@ -84,8 +83,8 @@ class CollapsableModelBuilderTest {
             System.out.println(line.asString());
         }
 
-        CollapsableModelBuilder collapsableModelBuilder = new CollapsableModelBuilder(collapsableAttributes, lines);
-        CollapsableModel collapsableModel = collapsableModelBuilder.getModel();
+        CollapsableModelBuilder collapsableModelBuilder = new CollapsableModelBuilder(collapsableAttributes);
+        CollapsableModel collapsableModel = collapsableModelBuilder.getModel(new CollapsableExtraction(lines));
         List<CollapsableCardContent> collapsableCardContentList = collapsableModel.getCollapsableCardContentList();
 
         assertEquals(1, collapsableCardContentList.size());

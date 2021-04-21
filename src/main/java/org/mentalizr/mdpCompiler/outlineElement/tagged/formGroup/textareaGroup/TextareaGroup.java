@@ -4,9 +4,11 @@ import org.mentalizr.mdpCompiler.MDPSyntaxError;
 import org.mentalizr.mdpCompiler.document.DocumentIterator;
 import org.mentalizr.mdpCompiler.document.Line;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
+import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementExtractor;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.OutlineElementTaggedAttributesFactory;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.formGroup.FormGroup;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.TextBlockModel;
+import org.mentalizr.mdpCompiler.outlineElement.tagged.formGroup.inputGroup.InputGroupExtractor;
 import org.mentalizr.mdpCompiler.result.Result;
 
 public class TextareaGroup extends FormGroup {
@@ -15,6 +17,11 @@ public class TextareaGroup extends FormGroup {
 
     public TextareaGroup(Line tagLine) throws MDPSyntaxError {
         super(TAG, tagLine);
+    }
+
+    @Override
+    protected OutlineElementExtractor getOutlineElementLinesExtractor() {
+        return new TextareaGroupExtractor();
     }
 
     @Override

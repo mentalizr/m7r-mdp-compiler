@@ -1,15 +1,12 @@
 package org.mentalizr.mdpCompiler.outlineElement.tagged.imgFluid;
 
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
-import org.mentalizr.mdpCompiler.document.DocumentIterator;
 import org.mentalizr.mdpCompiler.document.Line;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModelBuilder;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTagged;
-import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementLinesExtractor;
-import org.mentalizr.mdpCompiler.outlineElement.tagged.MDPTagOnlyLinesExtractor;
+import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementExtractor;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.OutlineElementTaggedAttributesFactory;
-import org.mentalizr.mdpCompiler.result.Result;
 
 public class ImgFluid extends OutlineElementTagged {
 
@@ -30,14 +27,14 @@ public class ImgFluid extends OutlineElementTagged {
     }
 
     @Override
-    protected OutlineElementLinesExtractor getOutlineElementLinesExtractor() {
-        return new MDPTagOnlyLinesExtractor();
+    protected OutlineElementExtractor getOutlineElementLinesExtractor() {
+        return new ImgFluidExtractor();
     }
 
     @Override
     protected OutlineElementModelBuilder getOutlineElementModelBuilder() {
         ImgFluidAttributes imgFluidAttributes = (ImgFluidAttributes) this.outlineElementTaggedAttributes;
-        return new ImgFluidModelBuilder(imgFluidAttributes, this.outlineElementLines);
+        return new ImgFluidModelBuilder(imgFluidAttributes);
     }
 
     @Override

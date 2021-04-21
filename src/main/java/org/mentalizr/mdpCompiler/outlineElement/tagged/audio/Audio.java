@@ -1,15 +1,13 @@
 package org.mentalizr.mdpCompiler.outlineElement.tagged.audio;
 
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
-import org.mentalizr.mdpCompiler.document.DocumentIterator;
 import org.mentalizr.mdpCompiler.document.Line;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModelBuilder;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTagged;
-import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementLinesExtractor;
-import org.mentalizr.mdpCompiler.outlineElement.tagged.MDPTagOnlyLinesExtractor;
+import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementExtractor;
+import org.mentalizr.mdpCompiler.outlineElement.tagged.MDPTagOnlyExtractor;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.OutlineElementTaggedAttributesFactory;
-import org.mentalizr.mdpCompiler.result.Result;
 
 public class Audio extends OutlineElementTagged {
 
@@ -30,14 +28,14 @@ public class Audio extends OutlineElementTagged {
     }
 
     @Override
-    protected OutlineElementLinesExtractor getOutlineElementLinesExtractor() {
-        return new MDPTagOnlyLinesExtractor();
+    protected OutlineElementExtractor getOutlineElementLinesExtractor() {
+        return new AudioExtractor();
     }
 
     @Override
     protected OutlineElementModelBuilder getOutlineElementModelBuilder() {
         AudioAttributes audioAttributes = (AudioAttributes) this.outlineElementTaggedAttributes;
-        return new AudioModelBuilder(audioAttributes, this.outlineElementLines);
+        return new AudioModelBuilder(audioAttributes);
     }
 
     @Override
