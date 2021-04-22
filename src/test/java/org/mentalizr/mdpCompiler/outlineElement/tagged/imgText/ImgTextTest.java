@@ -1,12 +1,24 @@
 package org.mentalizr.mdpCompiler.outlineElement.tagged.imgText;
 
+import de.arthurpicht.utils.core.collection.Lists;
+import org.junit.jupiter.api.Test;
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
+import org.mentalizr.mdpCompiler.document.Document;
+import org.mentalizr.mdpCompiler.document.DocumentIterator;
+import org.mentalizr.mdpCompiler.document.Line;
+import org.mentalizr.mdpCompiler.document.Lines;
+import org.mentalizr.mdpCompiler.outlineElement.Extraction;
+import org.mentalizr.mdpCompiler.outlineElement.OutlineElement;
+import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
+import org.mentalizr.mdpCompiler.outlineElement.tagged.TextBlockModel;
 import org.mentalizr.mdpCompilerTestResrc.OutlineElementTestBench;
 import org.mentalizr.mdpCompilerTestResrc.OutlineElementTestBenchExecutor;
-import org.junit.jupiter.api.Test;
 
 import java.io.File;
-import java.io.IOException;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SuppressWarnings("SpellCheckingInspection")
 class ImgTextTest {
@@ -14,7 +26,47 @@ class ImgTextTest {
     private static final String RESRC_DIR = "src/test/resrc/outlineElement/tagged/imgText/";
 
     @Test
-    void plausibilityTest() throws MDPSyntaxError, IOException {
+    void extraction() throws MDPSyntaxError {
+
+        Document document = new Document(
+                "@img-text[alt=\"Bild\"](picture.mp3)",
+                "    Some text.");
+
+        Line tagLine = document.getLines().get(0);
+        DocumentIterator documentIterator = new DocumentIterator(document);
+        documentIterator.getNextLine();
+
+        OutlineElement imgText = new ImgText(tagLine);
+        Extraction extraction = imgText.getExtraction(documentIterator);
+
+        List<String> sourceStrings = Lines.asStrings(document.getLines());
+        List<String> extractionStrings = Lines.asStrings(extraction.getLines());
+
+        assertEquals(sourceStrings, extractionStrings);
+    }
+
+    @Test
+    void model() throws MDPSyntaxError {
+
+        List<Line> extractionLines = Lines.create(
+                "@img-text[alt=\"Bild\"](picture.mp3)",
+                "    Some text."
+        );
+        Extraction imgTextExtraction = new ImgTextExtraction(extractionLines);
+        OutlineElement imgText = new ImgText(imgTextExtraction.getTagLine());
+
+        OutlineElementModel outlineElementModel = imgText.getModel(imgTextExtraction);
+
+        assertTrue(outlineElementModel instanceof TextBlockModel);
+        TextBlockModel textBlockModel = (TextBlockModel) outlineElementModel;
+
+        List<Line> textBlockLines = textBlockModel.getTextBlockLines();
+        assertEquals(1, textBlockLines.size());
+        assertEquals("Some text.", textBlockLines.get(0).asString());
+    }
+
+    @Test
+    void plausibilityTest() throws MDPSyntaxError {
 
         OutlineElementTestBench.execute(
                 new ImgTextFactory(),

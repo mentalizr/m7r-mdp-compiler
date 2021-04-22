@@ -19,6 +19,10 @@ public class TextBlockModel extends OutlineElementModel {
         return this.textBlockLines.size();
     }
 
+    public List<Line> getTextBlockLines() {
+        return this.textBlockLines;
+    }
+
     public String getSingleLineAsString() {
         if (getNrOfTextBlockLines() != 1) throw new IllegalStateException("Text block has not a single line. Number of lines: " + getNrOfTextBlockLines());
 

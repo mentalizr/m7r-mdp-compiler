@@ -27,6 +27,6 @@ class MDPTagOnlyLinesExtractorTest {
         Extraction extraction = mdpTagOnlyLinesExtractor.extract(documentIterator);
 
         assertEquals(1, extraction.getNrOfLines());
-        assertEquals("@img-fluid[alt=\"Ein alternativer Text.\"]()", extraction.getTagLine().toString());
+        assertEquals("@img-fluid[alt=\"Ein alternativer Text.\"]()", extraction.getTagLine().asString());
     }
 }

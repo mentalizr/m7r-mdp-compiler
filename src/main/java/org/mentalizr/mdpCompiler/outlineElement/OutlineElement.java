@@ -47,6 +47,10 @@ public abstract class OutlineElement {
         return getOutlineElementLinesExtractor().extract(documentIterator);
     }
 
+    public OutlineElementModel getModel(Extraction extraction) throws MDPSyntaxError {
+        return getOutlineElementModelBuilder().getModel(extraction);
+    }
+
 
 
 }

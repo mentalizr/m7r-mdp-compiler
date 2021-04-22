@@ -17,7 +17,10 @@ class H1Test {
     @Test
     void plausibility() throws MDPSyntaxError {
 
-        DocumentIterator documentIterator = DocumentIterator.getInstance("# Eine Überschrift", "", "Eine Zeile");
+        DocumentIterator documentIterator = DocumentIterator.getInstance(
+                "# Eine Überschrift",
+                "",
+                "Eine Zeile");
         Line firstLine = documentIterator.getNextLine();
         System.out.println("first Line: " + firstLine.asString());
         Result result = new ResultTest();

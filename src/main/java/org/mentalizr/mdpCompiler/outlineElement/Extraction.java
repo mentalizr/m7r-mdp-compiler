@@ -24,7 +24,7 @@ public abstract class Extraction {
 
     public List<Line> getLinesWithoutTagLine() {
         assertNotEmpty();
-        return this.lines.subList(1, this.lines.size() - 1);
+        return this.lines.subList(1, this.lines.size());
     }
 
     public boolean isEmpty() {
