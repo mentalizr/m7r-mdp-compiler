@@ -2,11 +2,12 @@ package org.mentalizr.mdpCompiler.outlineElement.tagged.collapsable;
 
 import org.mentalizr.mdpCompiler.document.Line;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
+import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTaggedModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CollapsableModel extends OutlineElementModel {
+public class CollapsableModel extends OutlineElementTaggedModel {
 
     private final List<CollapsableCardContent> collapsableCardContentList;
     private CollapsableCardContent curCollapsableCardContent;
@@ -32,4 +33,9 @@ public class CollapsableModel extends OutlineElementModel {
     public boolean hasCurCard() {
         return this.curCollapsableCardContent != null;
     }
+
+    public CollapsableAttributes getCollapsableAttributes() {
+        return (CollapsableAttributes) this.mdpTag.getAttributes();
+    }
+
 }

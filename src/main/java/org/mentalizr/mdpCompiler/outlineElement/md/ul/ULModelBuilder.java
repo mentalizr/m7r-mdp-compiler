@@ -1,21 +1,16 @@
 package org.mentalizr.mdpCompiler.outlineElement.md.ul;
 
 import org.mentalizr.mdpCompiler.document.Line;
-import org.mentalizr.mdpCompiler.document.Lines;
 import org.mentalizr.mdpCompiler.outlineElement.Extraction;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModelBuilder;
-import org.mentalizr.mdpCompiler.outlineElement.tagged.alert.AlertExtraction;
+import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTaggedModelBuilder;
 
 import java.util.List;
 
-public class ULModelBuilder implements OutlineElementModelBuilder {
-
-//    private final List<Line> lines;
-//    private ULModel ulModel;
+public class ULModelBuilder extends OutlineElementModelBuilder {
 
     public ULModelBuilder() {
-//        this.lines = Lines.shallowCopy(lines);
-//        this.ulModel = null;
+        super(new UL());
     }
 
     @Override

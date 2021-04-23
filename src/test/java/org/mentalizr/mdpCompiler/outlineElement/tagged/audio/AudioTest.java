@@ -1,15 +1,13 @@
 package org.mentalizr.mdpCompiler.outlineElement.tagged.audio;
 
+import org.junit.jupiter.api.Test;
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
 import org.mentalizr.mdpCompilerTestResrc.OutlineElementTestBench;
-import org.junit.jupiter.api.Test;
-
-import java.io.IOException;
 
 class AudioTest {
 
     @Test
-    void plausibilityTest() throws MDPSyntaxError, IOException {
+    void plausibilityTest() throws MDPSyntaxError {
 
         OutlineElementTestBench.execute(
                 new AudioFactory(),

@@ -2,11 +2,14 @@ package org.mentalizr.mdpCompiler.outlineElement;
 
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
 
-/**
- * Receives all lines belonging to outline element including mdp tag line.
- * Builds respective model.
- */
-public interface OutlineElementModelBuilder {
+public abstract class OutlineElementModelBuilder {
 
-    public OutlineElementModel getModel(Extraction extraction) throws MDPSyntaxError;
+    protected OutlineElement outlineElement;
+
+    public OutlineElementModelBuilder(OutlineElement outlineElement) {
+        this.outlineElement = outlineElement;
+    }
+
+    public abstract OutlineElementModel getModel(Extraction extraction) throws MDPSyntaxError;
+
 }

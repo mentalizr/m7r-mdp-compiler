@@ -1,39 +1,33 @@
 package org.mentalizr.mdpCompiler.outlineElement.tagged;
 
+import org.mentalizr.mdpCompiler.MDPSyntaxError;
 import org.mentalizr.mdpCompiler.document.Line;
-import org.mentalizr.mdpCompiler.document.Lines;
+import org.mentalizr.mdpCompiler.mdpTag.MDPTag;
 import org.mentalizr.mdpCompiler.outlineElement.Extraction;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
-import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModelBuilder;
-import org.mentalizr.mdpCompiler.outlineElement.tagged.alert.AlertModelBuilder;
+import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTaggedModelBuilder;
+import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTagged;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TextBlockModelBuilder implements OutlineElementModelBuilder {
+public class TextBlockModelBuilder extends OutlineElementTaggedModelBuilder {
 
-//    private final List<Line> lines;
-
-//    private final Line mdpTagLine;
-//    private TextBlockModel textBlockModel;
-
-    public TextBlockModelBuilder() {
-
-        // TODO Durch MDPSyntaxError ersetzen, dazu ist die MDP-Line notwendig --> Refactoring
-//        if (lines.size() == 0) throw new IllegalStateException(TextBlockModelBuilder.class.getSimpleName() + ": No lines.");
-
-//        this.lines = Lines.shallowCopy(lines);
-
-//        this.mdpTagLine = lines.get(0);
-//        this.textBlockModel = null;
+    public TextBlockModelBuilder(OutlineElementTagged outlineElementTagged) {
+        super(outlineElementTagged);
     }
 
     @Override
-    public OutlineElementModel getModel(Extraction extraction) {
+    public OutlineElementModel getModel(Extraction extraction) throws MDPSyntaxError {
 
         // TODO Durch MDPSyntaxError ersetzen, dazu ist die MDP-Line notwendig --> Refactoring
         if (extraction.isEmpty())
             throw new IllegalStateException("Insufficient number of lines.");
+
+        TextBlockModel textBlockModel = new TextBlockModel();
+
+        MDPTag mdpTag = parseMdpTagLine(extraction.getTagLine());
+        textBlockModel.setMdpTag(mdpTag);
 
         List<Line> textBlockLines = new ArrayList<>();
 
@@ -52,7 +46,9 @@ public class TextBlockModelBuilder implements OutlineElementModelBuilder {
             }
         }
 
-        return new TextBlockModel(textBlockLines);
+        textBlockModel.setTextBlockLines(textBlockLines);
+
+        return textBlockModel;
     }
 
 }

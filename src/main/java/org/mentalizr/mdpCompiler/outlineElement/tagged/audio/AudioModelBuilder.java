@@ -1,17 +1,14 @@
 package org.mentalizr.mdpCompiler.outlineElement.tagged.audio;
 
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
-import org.mentalizr.mdpCompiler.document.Line;
+import org.mentalizr.mdpCompiler.mdpTag.MDPTag;
 import org.mentalizr.mdpCompiler.outlineElement.Extraction;
-import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModelBuilder;
-import org.mentalizr.mdpCompiler.outlineElement.tagged.alert.AlertExtraction;
-import org.mentalizr.mdpCompiler.outlineElement.tagged.alert.AlertModelBuilder;
+import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTaggedModelBuilder;
 
-import java.util.List;
+public class AudioModelBuilder extends OutlineElementTaggedModelBuilder {
 
-public class AudioModelBuilder implements OutlineElementModelBuilder {
-
-    public AudioModelBuilder(AudioAttributes audioAttributes) {
+    public AudioModelBuilder() {
+        super(new Audio());
     }
 
     @Override
@@ -23,7 +20,12 @@ public class AudioModelBuilder implements OutlineElementModelBuilder {
         if (extraction.isEmpty())
             throw new IllegalStateException(this.getClass().getSimpleName() + ": Insufficient number of lines.");
 
-        return new AudioModel();
+        AudioModel audioModel = new AudioModel();
+
+        MDPTag mdpTag = parseMdpTagLine(extraction.getTagLine());
+        audioModel.setMdpTag(mdpTag);
+
+        return audioModel;
     }
 
 }

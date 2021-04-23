@@ -3,11 +3,12 @@ package org.mentalizr.mdpCompiler.outlineElement.special.comment;
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
 import org.mentalizr.mdpCompiler.outlineElement.Extraction;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModelBuilder;
-import org.mentalizr.mdpCompiler.outlineElement.tagged.alert.AlertExtraction;
+import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTaggedModelBuilder;
 
-public class CommentModelBuilder implements OutlineElementModelBuilder {
+public class CommentModelBuilder extends OutlineElementModelBuilder {
 
     public CommentModelBuilder() {
+        super(new Comment());
     }
 
     @Override

@@ -2,17 +2,23 @@ package org.mentalizr.mdpCompiler.outlineElement.tagged.imgText;
 
 import de.arthurpicht.utils.core.collection.Lists;
 import org.junit.jupiter.api.Test;
+import org.mentalizr.mdpCompiler.CompilerContext;
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
 import org.mentalizr.mdpCompiler.document.Document;
 import org.mentalizr.mdpCompiler.document.DocumentIterator;
 import org.mentalizr.mdpCompiler.document.Line;
 import org.mentalizr.mdpCompiler.document.Lines;
+import org.mentalizr.mdpCompiler.mdpTag.MDPTag;
+import org.mentalizr.mdpCompiler.mdpTag.MDPTagWithLink;
 import org.mentalizr.mdpCompiler.outlineElement.Extraction;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElement;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
+import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTagged;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.TextBlockModel;
+import org.mentalizr.mdpCompiler.result.Result;
 import org.mentalizr.mdpCompilerTestResrc.OutlineElementTestBench;
 import org.mentalizr.mdpCompilerTestResrc.OutlineElementTestBenchExecutor;
+import org.mentalizr.mdpCompilerTestResrc.ResultTest;
 
 import java.io.File;
 import java.util.List;
@@ -26,17 +32,22 @@ class ImgTextTest {
     private static final String RESRC_DIR = "src/test/resrc/outlineElement/tagged/imgText/";
 
     @Test
-    void extraction() throws MDPSyntaxError {
+    void preconditions() {
+        OutlineElementTagged outlineElementTagged = new ImgText();
+        assertEquals(ImgText.TAG, outlineElementTagged.getTagName());
+    }
+
+    @Test
+    void extraction() {
 
         Document document = new Document(
                 "@img-text[alt=\"Bild\"](picture.mp3)",
                 "    Some text.");
 
-        Line tagLine = document.getLines().get(0);
         DocumentIterator documentIterator = new DocumentIterator(document);
         documentIterator.getNextLine();
 
-        OutlineElement imgText = new ImgText(tagLine);
+        OutlineElement imgText = new ImgText();
         Extraction extraction = imgText.getExtraction(documentIterator);
 
         List<String> sourceStrings = Lines.asStrings(document.getLines());
@@ -53,7 +64,7 @@ class ImgTextTest {
                 "    Some text."
         );
         Extraction imgTextExtraction = new ImgTextExtraction(extractionLines);
-        OutlineElement imgText = new ImgText(imgTextExtraction.getTagLine());
+        OutlineElement imgText = new ImgText();
 
         OutlineElementModel outlineElementModel = imgText.getModel(imgTextExtraction);
 
@@ -63,6 +74,37 @@ class ImgTextTest {
         List<Line> textBlockLines = textBlockModel.getTextBlockLines();
         assertEquals(1, textBlockLines.size());
         assertEquals("Some text.", textBlockLines.get(0).asString());
+    }
+
+    @Test
+    void render() throws MDPSyntaxError {
+        OutlineElementTagged imgText = new ImgText();
+
+        Line tagLine = new Line("@img-text[alt=\"Bild\"](picture.mp3)", 0);
+        MDPTag mdpTag = new MDPTagWithLink(imgText, tagLine);
+
+        List<Line> textBlockModelLines = Lines.create(2, "Some text.");
+        TextBlockModel textBlockModel = new TextBlockModel();
+        textBlockModel.setMdpTag(mdpTag);
+        textBlockModel.setTextBlockLines(textBlockModelLines);
+
+        Result result = new ResultTest();
+        CompilerContext compilerContext = CompilerContext.getDefaultTestContext();
+
+        imgText.render(textBlockModel, compilerContext, result);
+        List<String> htmlStrings = result.getResultLines();
+        List<String> expectedHtmlStrings = List.of(
+                "<div class=\"row\" style=\"margin-bottom: 1.0em; margin-top: 1.0em\">",
+                "    <div class=\"col-xs-12 col-sm-5 col-md-5 col-lg-5\">",
+                "        <img src=\"service/v1/mediaImg/picture.mp3\" class=\"img-fluid\" style=\"width: 100%\" alt=\"Bild\">",
+                "    </div>",
+                "    <div class=\"col-xs-12 col-sm-7 col-md-7 col-lg-7\">",
+                "        <p>Some text.</p>",
+                "    </div>",
+                "</div>"
+        );
+
+        assertEquals(expectedHtmlStrings, htmlStrings);
     }
 
     @Test
@@ -97,7 +139,6 @@ class ImgTextTest {
                         .withExpectedFile(new File(RESRC_DIR, "imgtext_with_nested_accordion.expected"))
                         .withExpectedDocumentIteratorIndex(10)
         );
-
     }
 
 }

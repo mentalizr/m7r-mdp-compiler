@@ -2,6 +2,7 @@ package org.mentalizr.mdpCompiler.outlineElement.special.comment;
 
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElement;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModelBuilder;
+import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTaggedModelBuilder;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
 import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementExtractor;
 
@@ -25,7 +26,6 @@ public class Comment extends OutlineElement {
 
     @Override
     protected OutlineElementRenderer getOutlineElementRenderer() {
-        CommentModel commentModel = (CommentModel) this.outlineElementModel;
-        return new CommentRenderer(commentModel);
+        return new CommentRenderer();
     }
 }

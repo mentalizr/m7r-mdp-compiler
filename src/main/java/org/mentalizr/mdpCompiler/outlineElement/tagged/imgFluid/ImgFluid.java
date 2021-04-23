@@ -1,8 +1,6 @@
 package org.mentalizr.mdpCompiler.outlineElement.tagged.imgFluid;
 
-import org.mentalizr.mdpCompiler.MDPSyntaxError;
-import org.mentalizr.mdpCompiler.document.Line;
-import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModelBuilder;
+import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTaggedModelBuilder;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTagged;
 import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementExtractor;
@@ -12,17 +10,17 @@ public class ImgFluid extends OutlineElementTagged {
 
     public static final String TAG = "@img-fluid";
 
-    public ImgFluid(Line tagLine) throws MDPSyntaxError {
-        super(TAG, tagLine);
+    public ImgFluid() {
+        super(TAG);
     }
 
     @Override
-    protected boolean withLink() {
+    public boolean withLink() {
         return true;
     }
 
     @Override
-    protected OutlineElementTaggedAttributesFactory getOutlineElementTaggedAttributesFactory() {
+    public OutlineElementTaggedAttributesFactory getOutlineElementTaggedAttributesFactory() {
         return new ImgFluidAttributesFactory();
     }
 
@@ -32,16 +30,12 @@ public class ImgFluid extends OutlineElementTagged {
     }
 
     @Override
-    protected OutlineElementModelBuilder getOutlineElementModelBuilder() {
-        ImgFluidAttributes imgFluidAttributes = (ImgFluidAttributes) this.outlineElementTaggedAttributes;
-        return new ImgFluidModelBuilder(imgFluidAttributes);
+    protected OutlineElementTaggedModelBuilder getOutlineElementModelBuilder() {
+        return new ImgFluidModelBuilder();
     }
 
     @Override
     protected OutlineElementRenderer getOutlineElementRenderer() {
-        ImgFluidAttributes imgFluidAttributes = (ImgFluidAttributes) this.outlineElementTaggedAttributes;
-        ImgFluidModel imgFluidModel = (ImgFluidModel) this.outlineElementModel;
-        String mdpLinkString = this.mdpTag.getLinkString();
-        return new ImgFluidRenderer(imgFluidAttributes, imgFluidModel, mdpLinkString);
+        return new ImgFluidRenderer();
     }
 }

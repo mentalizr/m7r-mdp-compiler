@@ -34,7 +34,7 @@ class MCQuestionModelBuilderTest {
 //        List<Line> lines = document.getLines();
         Extraction extraction = new McQuestionExtraction(document);
 
-        MCQuestionModelBuilder mcQuestionModelBuilder = new MCQuestionModelBuilder(mcQuestionAttributes);
+        MCQuestionModelBuilder mcQuestionModelBuilder = new MCQuestionModelBuilder();
         MCQuestionModel mcQuestionModel = mcQuestionModelBuilder.getModel(extraction);
 
         assertEquals(MCQuestionModel.MCQuestionType.ONE, mcQuestionModel.getMcQuestionType());

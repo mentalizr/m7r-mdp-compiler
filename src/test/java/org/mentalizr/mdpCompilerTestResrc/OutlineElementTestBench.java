@@ -33,7 +33,6 @@ public class OutlineElementTestBench {
                 outlineElementTestBenchExecutor.getExpectedLines(),
                 outlineElementTestBenchExecutor.getExpectedDocumentIteratorIndex()
         );
-
     }
 
     public static void execute(OutlineElementFactory outlineElementFactory, String[] mdpLines, String[] expectedHtmlLines, int expectedDocumentIteratorIndex) throws MDPSyntaxError {
@@ -63,7 +62,7 @@ public class OutlineElementTestBench {
         documentIterator.getNextLine();
         Result result = new ResultTest();
 
-        OutlineElement outlineElement = outlineElementFactory.getInstance(documentIterator.getCurrentLine());
+        OutlineElement outlineElement = outlineElementFactory.getInstance();
         outlineElement.process(CompilerContext.getDefaultTestContext(), documentIterator, result);
 
         if (SOUT_RESULT) {
@@ -84,15 +83,13 @@ public class OutlineElementTestBench {
         assertEquals(expectedDocumentIteratorIndex, documentIterator.getIndex());
     }
 
-
-
     @Deprecated
     public static void execute(@SuppressWarnings("SpellCheckingInspection") String testname, DocumentIterator documentIterator, OutlineElementFactory outlineElementFactory, File file, int expectedDocumentIteratorIndex) throws MDPSyntaxError, IOException {
 
         documentIterator.getNextLine();
         Result result = new ResultTest();
 
-        OutlineElement outlineElement = outlineElementFactory.getInstance(documentIterator.getCurrentLine());
+        OutlineElement outlineElement = outlineElementFactory.getInstance();
         outlineElement.process(CompilerContext.getDefaultTestContext(), documentIterator, result);
 
         if (SOUT_RESULT) {
@@ -106,7 +103,6 @@ public class OutlineElementTestBench {
         List<String> expectedLines = TextFile.getLinesAsStrings(file);
         assertEquals(expectedLines, result.getResultLines());
         assertEquals(expectedDocumentIteratorIndex, documentIterator.getIndex());
-
     }
 
 }

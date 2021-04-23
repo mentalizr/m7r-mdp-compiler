@@ -2,17 +2,16 @@ package org.mentalizr.mdpCompiler.outlineElement.special.directive;
 
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
 import org.mentalizr.mdpCompiler.document.Line;
-import org.mentalizr.mdpCompiler.document.Lines;
 import org.mentalizr.mdpCompiler.outlineElement.Extraction;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModelBuilder;
-import org.mentalizr.mdpCompiler.outlineElement.tagged.alert.AlertExtraction;
+import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTaggedModelBuilder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class DirectiveModelBuilder implements OutlineElementModelBuilder {
+public class DirectiveModelBuilder extends OutlineElementModelBuilder {
 
     public static final String DIRECTIVE_NAME = "@@name";
     public static final String DIRECTIVE_PERSISTENT = "@@persistent";
@@ -24,6 +23,7 @@ public class DirectiveModelBuilder implements OutlineElementModelBuilder {
 //    private DirectiveModel directiveModel;
 
     public DirectiveModelBuilder() {
+        super(new Directive());
 //        this.lines = Lines.shallowCopy(lines);
 //        this.directiveModel = null;
     }
@@ -73,7 +73,6 @@ public class DirectiveModelBuilder implements OutlineElementModelBuilder {
             if (hasDirectivePersistent && hasDirectiveFeedback) {
                 throw new IllegalCombinationOfDirectivesException(line, DIRECTIVE_PERSISTENT, DIRECTIVE_FEEDBACK);
             }
-
         }
 
     }

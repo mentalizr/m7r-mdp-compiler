@@ -1,31 +1,27 @@
 package org.mentalizr.mdpCompiler.outlineElement.tagged.imgText;
 
-import org.mentalizr.mdpCompiler.MDPSyntaxError;
-import org.mentalizr.mdpCompiler.document.Line;
-import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModelBuilder;
+import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTaggedModelBuilder;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTagged;
 import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementExtractor;
-import org.mentalizr.mdpCompiler.outlineElement.tagged.TextBlockExtractor;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.OutlineElementTaggedAttributesFactory;
-import org.mentalizr.mdpCompiler.outlineElement.tagged.TextBlockModel;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.TextBlockModelBuilder;
 
 public class ImgText extends OutlineElementTagged {
 
     public static final String TAG = "@img-text";
 
-    public ImgText(Line tagLine) throws MDPSyntaxError {
-        super(TAG, tagLine);
+    public ImgText() {
+        super(TAG);
     }
 
     @Override
-    protected boolean withLink() {
+    public boolean withLink() {
         return true;
     }
 
     @Override
-    protected OutlineElementTaggedAttributesFactory getOutlineElementTaggedAttributesFactory() {
+    public OutlineElementTaggedAttributesFactory getOutlineElementTaggedAttributesFactory() {
         return new ImgTextAttributesFactory();
     }
 
@@ -35,15 +31,12 @@ public class ImgText extends OutlineElementTagged {
     }
 
     @Override
-    protected OutlineElementModelBuilder getOutlineElementModelBuilder() {
-        return new TextBlockModelBuilder();
+    protected OutlineElementTaggedModelBuilder getOutlineElementModelBuilder() {
+        return new TextBlockModelBuilder(this);
     }
 
     @Override
     protected OutlineElementRenderer getOutlineElementRenderer() {
-        ImgTextAttributes imgTextAttributes = (ImgTextAttributes) this.outlineElementTaggedAttributes;
-        TextBlockModel textBlockModel = (TextBlockModel) this.outlineElementModel;
-        String mdpLinkString = this.mdpTag.getLinkString();
-        return new ImgTextRenderer(imgTextAttributes, textBlockModel, mdpLinkString);
+        return new ImgTextRenderer();
     }
 }

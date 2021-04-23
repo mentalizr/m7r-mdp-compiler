@@ -1,31 +1,26 @@
 package org.mentalizr.mdpCompiler.outlineElement.special.directive;
 
+import org.junit.jupiter.api.Test;
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
 import org.mentalizr.mdpCompiler.document.DocumentIterator;
 import org.mentalizr.mdpCompiler.document.Line;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElement;
-import org.mentalizr.mdpCompiler.result.Result;
-import org.mentalizr.mdpCompilerTestResrc.ResultTest;
-import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class DirectiveFactoryTest {
 
     @Test
     void getInstance() throws MDPSyntaxError {
-
-        DocumentIterator documentIterator = DocumentIterator.getInstance("@@name=myName", "@@persistent");
-        Result result = new ResultTest();
         DirectiveFactory directiveFactory = new DirectiveFactory();
-        OutlineElement outlineElement = directiveFactory.getInstance(documentIterator.getNextLine());
+        OutlineElement outlineElement = directiveFactory.getInstance();
 
         assertTrue(outlineElement instanceof Directive);
     }
 
     @Test
     void isResponsible() {
-
         DocumentIterator documentIterator = DocumentIterator.getInstance(
                 "@@name=myName",
                 "@@persistent");
@@ -39,7 +34,6 @@ class DirectiveFactoryTest {
 
     @Test
     void isResponsibleNegative() {
-
         DocumentIterator documentIterator = DocumentIterator.getInstance(
                 "",
                 "@@name=myName",

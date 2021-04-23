@@ -1,16 +1,16 @@
 package org.mentalizr.mdpCompiler.outlineElement.md.ul;
 
 import de.arthurpicht.utils.io.textfile.TextFile;
+import org.junit.jupiter.api.Test;
 import org.mentalizr.mdpCompiler.CompilerContext;
 import org.mentalizr.mdpCompiler.result.Result;
 import org.mentalizr.mdpCompilerTestResrc.ResultTest;
-import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ULRendererTest {
 
@@ -25,8 +25,8 @@ class ULRendererTest {
         ulModel.addItem("second Item");
         ulModel.addItem("third Item");
 
-        ULRenderer ulRenderer = new ULRenderer(ulModel);
-        ulRenderer.render(CompilerContext.getDefaultTestContext(), result);
+        ULRenderer ulRenderer = new ULRenderer();
+        ulRenderer.render(ulModel, CompilerContext.getDefaultTestContext(), result);
 
         for (String string : result.getResultLines()) {
             System.out.println(string);

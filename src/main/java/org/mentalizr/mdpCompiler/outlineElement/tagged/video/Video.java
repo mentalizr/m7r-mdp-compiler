@@ -1,29 +1,27 @@
 package org.mentalizr.mdpCompiler.outlineElement.tagged.video;
 
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
-import org.mentalizr.mdpCompiler.document.Line;
-import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModelBuilder;
+import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTaggedModelBuilder;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTagged;
 import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementExtractor;
-import org.mentalizr.mdpCompiler.outlineElement.tagged.MDPTagOnlyExtractor;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.OutlineElementTaggedAttributesFactory;
 
 public class Video extends OutlineElementTagged {
 
     public static final String TAG = "@video";
 
-    public Video(Line tagLine) throws MDPSyntaxError {
-        super(TAG, tagLine);
+    public Video() {
+        super(TAG);
     }
 
     @Override
-    protected boolean withLink() {
+    public boolean withLink() {
         return true;
     }
 
     @Override
-    protected OutlineElementTaggedAttributesFactory getOutlineElementTaggedAttributesFactory() {
+    public OutlineElementTaggedAttributesFactory getOutlineElementTaggedAttributesFactory() {
         return new VideoAttributesFactory();
     }
 
@@ -33,16 +31,12 @@ public class Video extends OutlineElementTagged {
     }
 
     @Override
-    protected OutlineElementModelBuilder getOutlineElementModelBuilder() {
-        VideoAttributes videoAttributes = (VideoAttributes) this.outlineElementTaggedAttributes;
-        return new VideoModelBuilder(videoAttributes);
+    protected OutlineElementTaggedModelBuilder getOutlineElementModelBuilder() throws MDPSyntaxError {
+        return new VideoModelBuilder();
     }
 
     @Override
     protected OutlineElementRenderer getOutlineElementRenderer() {
-        VideoAttributes videoAttributes = (VideoAttributes) this.outlineElementTaggedAttributes;
-        VideoModel videoModel = (VideoModel) this.outlineElementModel;
-        String mdpLinkString = this.mdpTag.getLinkString();
-        return new VideoRenderer(videoAttributes, videoModel, mdpLinkString);
+        return new VideoRenderer();
     }
 }

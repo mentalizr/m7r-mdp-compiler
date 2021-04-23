@@ -2,23 +2,18 @@ package org.mentalizr.mdpCompiler.outlineElement.tagged.mcQuestion;
 
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
 import org.mentalizr.mdpCompiler.document.Line;
+import org.mentalizr.mdpCompiler.mdpTag.MDPTag;
 import org.mentalizr.mdpCompiler.outlineElement.Extraction;
-import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModelBuilder;
+import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTaggedModelBuilder;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.mcQuestion.MCQuestionModel.MCQuestionType;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MCQuestionModelBuilder implements OutlineElementModelBuilder {
+public class MCQuestionModelBuilder extends OutlineElementTaggedModelBuilder {
 
-    private final MCQuestionAttributes mcQuestionAttributes;
-//    private final List<Line> lines;
-//
-//    private MCQuestionModel mcQuestionModel = null;
-
-    public MCQuestionModelBuilder(MCQuestionAttributes mcQuestionAttributes) {
-        this.mcQuestionAttributes = mcQuestionAttributes;
-//        this.lines = Lines.shallowCopy(lines);
+    public MCQuestionModelBuilder() {
+        super(new MCQuestion());
     }
 
     public MCQuestionModel getModel(Extraction extraction) throws MDPSyntaxError {
@@ -29,13 +24,8 @@ public class MCQuestionModelBuilder implements OutlineElementModelBuilder {
         if (extraction.isEmpty())
             throw new IllegalStateException("Insufficient number of lines.");
 
-//        if (this.mcQuestionModel == null) {
-//            buildModel();
-//        }
-//        return this.mcQuestionModel;
-//    }
-//
-//    public void buildModel() throws MDPSyntaxError {
+        MDPTag mdpTag = parseMdpTagLine(extraction.getTagLine());
+        MCQuestionAttributes mcQuestionAttributes = (MCQuestionAttributes) mdpTag.getAttributes();
 
         List<Line> lines = extraction.getLines();
 
@@ -74,9 +64,12 @@ public class MCQuestionModelBuilder implements OutlineElementModelBuilder {
         int nrOfCorrectOptions = getNrOfCorrectOptions(mcQuestionAnsweringOptions);
         if (nrOfCorrectOptions == 0)
             throw new MDPSyntaxError(lines.get(0), "No answering option of mc-question marked as correct.");
-        MCQuestionType mcQuestionType = getMCQuestionType(nrOfCorrectOptions, extraction);
+        MCQuestionType mcQuestionType = getMCQuestionType(mcQuestionAttributes, nrOfCorrectOptions, extraction);
 
-        return new MCQuestionModel(title, question, mcQuestionAnsweringOptions, mcQuestionType);
+        MCQuestionModel mcQuestionModel = new MCQuestionModel(title, question, mcQuestionAnsweringOptions, mcQuestionType, mcQuestionAttributes);
+        mcQuestionModel.setMdpTag(mdpTag);
+
+        return mcQuestionModel;
     }
 
     private boolean notMarkedAsAnsweringOption(String content) {
@@ -111,15 +104,15 @@ public class MCQuestionModelBuilder implements OutlineElementModelBuilder {
         return nrOfCorrectOptions;
     }
 
-    private MCQuestionType getMCQuestionType(int nrOfCorrectOptions, Extraction extraction) throws MDPSyntaxError {
+    private MCQuestionType getMCQuestionType(MCQuestionAttributes mcQuestionAttributes, int nrOfCorrectOptions, Extraction extraction) throws MDPSyntaxError {
 
-        if (this.mcQuestionAttributes.getType().equals(MCQuestionAttributes.TYPE_VALUE_AUTO)) {
+        if (mcQuestionAttributes.getType().equals(MCQuestionAttributes.TYPE_VALUE_AUTO)) {
             if (nrOfCorrectOptions == 1) {
                 return MCQuestionType.ONE;
             } else {
                 return MCQuestionType.MULTI;
             }
-        } else if (this.mcQuestionAttributes.getType().equals(MCQuestionAttributes.TYPE_VALUE_ONE)) {
+        } else if (mcQuestionAttributes.getType().equals(MCQuestionAttributes.TYPE_VALUE_ONE)) {
             if (nrOfCorrectOptions == 1) {
                 return MCQuestionType.ONE;
             } else {

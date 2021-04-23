@@ -1,20 +1,17 @@
 package org.mentalizr.mdpCompiler.outlineElement.tagged.mcQuestion;
 
-import org.mentalizr.mdpCompiler.MDPSyntaxError;
-import org.mentalizr.mdpCompiler.document.Line;
-import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModelBuilder;
+import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTaggedModelBuilder;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTagged;
 import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementExtractor;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.OutlineElementTaggedAttributesFactory;
-import org.mentalizr.mdpCompiler.outlineElement.tagged.TextBlockExtractor;
 
 public class MCQuestion extends OutlineElementTagged {
 
     public static final String TAG = "@mc-question";
 
-    public MCQuestion(Line tagLine) throws MDPSyntaxError {
-        super(TAG, tagLine);
+    public MCQuestion() {
+        super(TAG);
     }
 
     @Override
@@ -23,20 +20,17 @@ public class MCQuestion extends OutlineElementTagged {
     }
 
     @Override
-    protected OutlineElementModelBuilder getOutlineElementModelBuilder() {
-        MCQuestionAttributes mcQuestionAttributes = (MCQuestionAttributes) this.outlineElementTaggedAttributes;
-        return new MCQuestionModelBuilder(mcQuestionAttributes);
+    protected OutlineElementTaggedModelBuilder getOutlineElementModelBuilder() {
+        return new MCQuestionModelBuilder();
     }
 
     @Override
     protected OutlineElementRenderer getOutlineElementRenderer() {
-        MCQuestionAttributes mcQuestionAttributes = (MCQuestionAttributes) this.outlineElementTaggedAttributes;
-        MCQuestionModel mcQuestionModel = (MCQuestionModel) this.outlineElementModel;
-        return new MCQuestionRenderer(mcQuestionAttributes, mcQuestionModel);
+        return new MCQuestionRenderer();
     }
 
     @Override
-    protected OutlineElementTaggedAttributesFactory getOutlineElementTaggedAttributesFactory() {
+    public OutlineElementTaggedAttributesFactory getOutlineElementTaggedAttributesFactory() {
         return new MCQuestionAttributesFactory();
     }
 

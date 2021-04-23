@@ -1,37 +1,34 @@
 package org.mentalizr.mdpCompiler.outlineElement.tagged.collapsable.accordion;
 
+import org.junit.jupiter.api.Test;
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
-import org.mentalizr.mdpCompiler.attributeProfile.AttributeProfileException;
-import org.mentalizr.mdpCompiler.attributeProfile.attributesBuilder.AttributesBuilder;
 import org.mentalizr.mdpCompiler.document.Document;
 import org.mentalizr.mdpCompiler.document.Line;
 import org.mentalizr.mdpCompiler.outlineElement.Extraction;
-import org.mentalizr.mdpCompiler.outlineElement.tagged.collapsable.*;
-import org.junit.jupiter.api.Test;
+import org.mentalizr.mdpCompiler.outlineElement.tagged.collapsable.CollapsableCardContent;
+import org.mentalizr.mdpCompiler.outlineElement.tagged.collapsable.CollapsableExtraction;
+import org.mentalizr.mdpCompiler.outlineElement.tagged.collapsable.CollapsableModel;
+import org.mentalizr.mdpCompiler.outlineElement.tagged.collapsable.CollapsableModelBuilder;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CollapsableModelBuilderTest {
 
     private static final String EXPECTED_DIR = "src/test/resrc/outlineElement/tagged/accordion/";
 
     @Test
-    void buildModel() throws IOException, MDPSyntaxError, AttributeProfileException {
-
-        AttributesBuilder attributesBuilder = new AttributesBuilder()
-                .addAttribute(CollapsableAttributes.ID, "4711")
-                .addSimpleAttribute(CollapsableAttributes.SHOW_FIRST);
-        CollapsableAttributes collapsableAttributes = new CollapsableAttributes(attributesBuilder.build());
+    void buildModel() throws IOException, MDPSyntaxError {
 
         Document document = new Document(new File(EXPECTED_DIR, "extractor-plausi-1.expected"));
-//        List<Line> lines = document.getLines();
         Extraction extraction = new CollapsableExtraction(document);
 
-        CollapsableModelBuilder collapsableModelBuilder = new CollapsableModelBuilder(collapsableAttributes);
+        Accordion accordion = new Accordion();
+        CollapsableModelBuilder collapsableModelBuilder = new CollapsableModelBuilder(accordion);
+
         CollapsableModel collapsableModel = collapsableModelBuilder.getModel(extraction);
         List<CollapsableCardContent> collapsableCardContentList = collapsableModel.getCollapsableCardContentList();
 
@@ -63,12 +60,7 @@ class CollapsableModelBuilderTest {
     }
 
     @Test
-    void nestedContent() throws MDPSyntaxError, AttributeProfileException {
-
-        AttributesBuilder attributesBuilder = new AttributesBuilder()
-                .addAttribute(CollapsableAttributes.ID, "4711")
-                .addSimpleAttribute(CollapsableAttributes.SHOW_FIRST);
-        CollapsableAttributes collapsableAttributes = new CollapsableAttributes(attributesBuilder.build());
+    void nestedContent() throws MDPSyntaxError {
 
         Document document = new Document(
                 "@accordion[]",
@@ -83,7 +75,8 @@ class CollapsableModelBuilderTest {
             System.out.println(line.asString());
         }
 
-        CollapsableModelBuilder collapsableModelBuilder = new CollapsableModelBuilder(collapsableAttributes);
+        Accordion accordion = new Accordion();
+        CollapsableModelBuilder collapsableModelBuilder = new CollapsableModelBuilder(accordion);
         CollapsableModel collapsableModel = collapsableModelBuilder.getModel(new CollapsableExtraction(lines));
         List<CollapsableCardContent> collapsableCardContentList = collapsableModel.getCollapsableCardContentList();
 

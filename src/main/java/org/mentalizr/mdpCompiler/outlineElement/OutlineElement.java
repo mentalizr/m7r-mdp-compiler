@@ -10,7 +10,6 @@ public abstract class OutlineElement {
 
     protected String prefix;
 
-//    protected List<Line> outlineElementLines;
     protected OutlineElementModel outlineElementModel;
 
     public OutlineElement(String prefix) {
@@ -19,7 +18,7 @@ public abstract class OutlineElement {
 
     protected abstract OutlineElementExtractor getOutlineElementLinesExtractor();
 
-    protected abstract OutlineElementModelBuilder getOutlineElementModelBuilder();
+    protected abstract OutlineElementModelBuilder getOutlineElementModelBuilder() throws MDPSyntaxError;
 
     protected abstract OutlineElementRenderer getOutlineElementRenderer();
 
@@ -31,15 +30,9 @@ public abstract class OutlineElement {
 
         Extraction extraction = getOutlineElementLinesExtractor().extract(documentIterator);
 
-//        System.out.println("extr. Lines:");
-//        for (Line line : this.outlineElementLines) {
-//            System.out.println(line.asString());
-//        }
-//        System.out.println("---");
-
         this.outlineElementModel = getOutlineElementModelBuilder().getModel(extraction);
 
-        this.getOutlineElementRenderer().render(compilerContext, result);
+        this.getOutlineElementRenderer().render(outlineElementModel, compilerContext, result);
 
     }
 
@@ -51,6 +44,8 @@ public abstract class OutlineElement {
         return getOutlineElementModelBuilder().getModel(extraction);
     }
 
-
+    public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, Result result) throws MDPSyntaxError {
+        getOutlineElementRenderer().render(outlineElementModel, compilerContext, result);
+    }
 
 }

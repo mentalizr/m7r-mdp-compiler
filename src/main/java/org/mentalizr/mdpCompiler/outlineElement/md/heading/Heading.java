@@ -2,6 +2,7 @@ package org.mentalizr.mdpCompiler.outlineElement.md.heading;
 
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElement;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModelBuilder;
+import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTaggedModelBuilder;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
 import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementExtractor;
 
@@ -27,8 +28,8 @@ public abstract class Heading extends OutlineElement {
 
     @Override
     protected OutlineElementRenderer getOutlineElementRenderer() {
-        HeadingModel headingModel = (HeadingModel) this.outlineElementModel;
-        return new HeadingRenderer(headingModel, getHeadingLevel());
+//        HeadingModel headingModel = (HeadingModel) this.outlineElementModel;
+        return new HeadingRenderer(getHeadingLevel());
     }
 
 }

@@ -1,20 +1,20 @@
 package org.mentalizr.mdpCompiler.outlineElement.tagged.collapsable.collapse;
 
-import org.mentalizr.mdpCompiler.MDPSyntaxError;
-import org.mentalizr.mdpCompiler.document.Line;
-import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModelBuilder;
+import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTaggedModelBuilder;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTagged;
 import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementExtractor;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.OutlineElementTaggedAttributesFactory;
-import org.mentalizr.mdpCompiler.outlineElement.tagged.collapsable.*;
+import org.mentalizr.mdpCompiler.outlineElement.tagged.collapsable.CollapsableAttributesFactory;
+import org.mentalizr.mdpCompiler.outlineElement.tagged.collapsable.CollapsableExtractor;
+import org.mentalizr.mdpCompiler.outlineElement.tagged.collapsable.CollapsableModelBuilder;
 
 public class Collapse extends OutlineElementTagged {
 
     public static final String TAG = "@collapse";
 
-    public Collapse(Line tagLine) throws MDPSyntaxError {
-        super(TAG, tagLine);
+    public Collapse() {
+        super(TAG);
     }
 
     @Override
@@ -23,20 +23,17 @@ public class Collapse extends OutlineElementTagged {
     }
 
     @Override
-    protected OutlineElementModelBuilder getOutlineElementModelBuilder() {
-        CollapsableAttributes collapsableAttributes = (CollapsableAttributes) this.outlineElementTaggedAttributes;
-        return new CollapsableModelBuilder(collapsableAttributes);
+    protected OutlineElementTaggedModelBuilder getOutlineElementModelBuilder() {
+        return new CollapsableModelBuilder(this);
     }
 
     @Override
     protected OutlineElementRenderer getOutlineElementRenderer() {
-        CollapsableAttributes collapsableAttributes = (CollapsableAttributes) this.outlineElementTaggedAttributes;
-        CollapsableModel collapsableModel = (CollapsableModel) this.outlineElementModel;
-        return new CollapseRenderer(collapsableAttributes, collapsableModel);
+        return new CollapseRenderer();
     }
 
     @Override
-    protected OutlineElementTaggedAttributesFactory getOutlineElementTaggedAttributesFactory() {
+    public OutlineElementTaggedAttributesFactory getOutlineElementTaggedAttributesFactory() {
         return new CollapsableAttributesFactory();
     }
 

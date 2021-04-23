@@ -2,23 +2,17 @@ package org.mentalizr.mdpCompiler.outlineElement.tagged.collapsable;
 
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
 import org.mentalizr.mdpCompiler.document.Line;
-import org.mentalizr.mdpCompiler.document.Lines;
+import org.mentalizr.mdpCompiler.mdpTag.MDPTag;
 import org.mentalizr.mdpCompiler.outlineElement.Extraction;
-import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModelBuilder;
-import org.mentalizr.mdpCompiler.outlineElement.tagged.alert.AlertExtraction;
+import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTaggedModelBuilder;
+import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTagged;
 
 import java.util.List;
 
-public class CollapsableModelBuilder implements OutlineElementModelBuilder {
+public class CollapsableModelBuilder extends OutlineElementTaggedModelBuilder {
 
-    private final CollapsableAttributes collapsableAttributes;
-//    private final List<Line> lines;
-//
-//    private CollapsableModel collapsableModel = null;
-
-    public CollapsableModelBuilder(CollapsableAttributes collapsableAttributes) {
-        this.collapsableAttributes = collapsableAttributes;
-//        this.lines = Lines.shallowCopy(lines);
+    public CollapsableModelBuilder(OutlineElementTagged outlineElementTagged) {
+        super(outlineElementTagged);
     }
 
     @Override
@@ -31,6 +25,9 @@ public class CollapsableModelBuilder implements OutlineElementModelBuilder {
             throw new IllegalStateException("Insufficient number of lines.");
 
         CollapsableModel collapsableModel = new CollapsableModel();
+        MDPTag mdpTag = parseMdpTagLine(extraction.getTagLine());
+        collapsableModel.setMdpTag(mdpTag);
+
         int tagLineIndex = extraction.getTagLineIndex();
         List<Line> lines = extraction.getLinesWithoutTagLine();
 
@@ -56,12 +53,6 @@ public class CollapsableModelBuilder implements OutlineElementModelBuilder {
 
         return collapsableModel;
     }
-
-//    private int removeTagLine() {
-//        int tagLineIndex = this.lines.get(0).getLineIndex();
-//        this.lines.remove(0);
-//        return tagLineIndex;
-//    }
 
     private void processIndentedContent(Line line, CollapsableModel collapsableModel) throws MDPSyntaxError {
 

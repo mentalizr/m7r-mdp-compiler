@@ -1,16 +1,14 @@
 package org.mentalizr.mdpCompiler.outlineElement.tagged.video;
 
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
-import org.mentalizr.mdpCompiler.document.Line;
+import org.mentalizr.mdpCompiler.mdpTag.MDPTag;
 import org.mentalizr.mdpCompiler.outlineElement.Extraction;
-import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModelBuilder;
-import org.mentalizr.mdpCompiler.outlineElement.tagged.alert.AlertExtraction;
+import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTaggedModelBuilder;
 
-import java.util.List;
+public class VideoModelBuilder extends OutlineElementTaggedModelBuilder {
 
-public class VideoModelBuilder implements OutlineElementModelBuilder {
-
-    public VideoModelBuilder(VideoAttributes videoAttributes) {
+    public VideoModelBuilder() {
+        super(new Video());
     }
 
     @Override
@@ -19,7 +17,12 @@ public class VideoModelBuilder implements OutlineElementModelBuilder {
         if (!(extraction instanceof VideoExtraction))
             throw new RuntimeException(VideoExtraction.class.getSimpleName() + " expected.");
 
-        return new VideoModel();
+        VideoModel videoModel = new VideoModel();
+
+        MDPTag mdpTag = parseMdpTagLine(extraction.getTagLine());
+        videoModel.setMdpTag(mdpTag);
+
+        return videoModel;
     }
 
 }

@@ -1,20 +1,19 @@
 package org.mentalizr.mdpCompiler.outlineElement.md.heading;
 
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
-import org.mentalizr.mdpCompiler.document.Line;
 import org.mentalizr.mdpCompiler.outlineElement.Extraction;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModelBuilder;
-import org.mentalizr.mdpCompiler.outlineElement.tagged.alert.AlertExtraction;
+import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTaggedModelBuilder;
 
-import java.util.List;
-
-public class HeadingModelBuilder implements OutlineElementModelBuilder {
+public class HeadingModelBuilder extends OutlineElementModelBuilder {
 
 //    private final List<Line> lines;
     private final int headerLevel;
 //    private HeadingModel headingModel;
 
     public HeadingModelBuilder(int headerLevel) {
+        // TODO works???
+        super(new H1());
 //        this.lines = lines;
         this.headerLevel = headerLevel;
 //        this.headingModel = null;

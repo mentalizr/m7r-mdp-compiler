@@ -2,22 +2,16 @@ package org.mentalizr.mdpCompiler.outlineElement.tagged.grid;
 
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
 import org.mentalizr.mdpCompiler.document.Line;
-import org.mentalizr.mdpCompiler.document.Lines;
+import org.mentalizr.mdpCompiler.mdpTag.MDPTag;
 import org.mentalizr.mdpCompiler.outlineElement.Extraction;
-import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModelBuilder;
+import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTaggedModelBuilder;
 
 import java.util.List;
 
-public class GridModelBuilder implements OutlineElementModelBuilder {
+public class GridModelBuilder extends OutlineElementTaggedModelBuilder {
 
-    private final GridAttributes gridAttributes;
-//    private final List<Line> lines;
-
-//    private GridModel gridModel = null;
-
-    public GridModelBuilder(GridAttributes gridAttributes) {
-        this.gridAttributes = gridAttributes;
-//        this.lines = Lines.shallowCopy(lines);
+    public GridModelBuilder() {
+        super(new Grid());
     }
 
     @Override
@@ -30,6 +24,9 @@ public class GridModelBuilder implements OutlineElementModelBuilder {
             throw new IllegalStateException("Insufficient number of lines.");
 
         GridModel gridModel = new GridModel();
+        MDPTag mdpTag = parseMdpTagLine(extraction.getTagLine());
+        gridModel.setMdpTag(mdpTag);
+
         List<Line> lines = extraction.getLinesWithoutTagLine();
 
         for (Line line : lines) {
@@ -54,10 +51,6 @@ public class GridModelBuilder implements OutlineElementModelBuilder {
 
         return gridModel;
     }
-
-//    private void removeTagLine() {
-//        this.lines.remove(0);
-//    }
 
     private void processIndentedContent(Line line, GridModel gridModel) throws MDPSyntaxError {
 

@@ -1,26 +1,20 @@
 package org.mentalizr.mdpCompiler.mdpTag;
 
-import de.arthurpicht.utils.core.assertion.AssertMethodPrecondition;
 import de.arthurpicht.utils.core.strings.Strings;
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
 import org.mentalizr.mdpCompiler.document.Line;
+import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTagged;
 
-public class MDPTagSimple implements MDPTag {
+public class MDPTagSimple extends MDPTag {
 
     // z.B.: @TAG[hier der attribute String]
 
     private static final String END_DELIMITER = "]";
 
-    private final String pre;
-    private final String attributeString;
-    private final String post;
+    public MDPTagSimple(OutlineElementTagged outlineElementTagged, Line line) throws MDPSyntaxError {
+        super(outlineElementTagged, line);
 
-    public MDPTagSimple(String tagName, Line line) throws MDPSyntaxError {
-
-        AssertMethodPrecondition.parameterNotNullAndNotEmpty("tagName", tagName);
-        AssertMethodPrecondition.parameterNotNull("line", line);
-
-        String prefix = tagName + "[";
+        String prefix = getTagName() + "[";
 
         String[] splitLineArray;
         try {
@@ -34,16 +28,8 @@ public class MDPTagSimple implements MDPTag {
         this.pre = splitLineArray[0];
         this.attributeString = splitLineArray[1].trim();
         this.post = splitLineArray[2];
-    }
 
-    @Override
-    public String getPre() {
-        return this.pre;
-    }
-
-    @Override
-    public String getAttributeString() {
-        return this.attributeString.trim();
+        createAttributes();
     }
 
     @Override
@@ -51,8 +37,4 @@ public class MDPTagSimple implements MDPTag {
         throw new IllegalStateException("Method not provided.");
     }
 
-    @Override
-    public String getPost() {
-        return this.post;
-    }
 }

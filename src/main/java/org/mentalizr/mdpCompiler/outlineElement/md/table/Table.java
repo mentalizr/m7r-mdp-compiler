@@ -25,8 +25,7 @@ public class Table extends OutlineElement {
 
     @Override
     protected OutlineElementRenderer getOutlineElementRenderer() {
-        TableModel tableModel = (TableModel) this.outlineElementModel;
-        return new TableRenderer(tableModel);
+        return new TableRenderer();
     }
 
 }

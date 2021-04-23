@@ -1,27 +1,27 @@
-<div class="accordion mt-3 mb-3" id="4711">
+<div class="accordion mt-3 mb-3" id="i4711">
     <div class="card">
-        <div class="card-header" id="4711_heading_0">
+        <div class="card-header" id="i4711_heading_0">
             <h5 class="mb-0">
-                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#4711_collapse_0" aria-expanded="true" aria-controls="4711_collapse_0">
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#i4711_collapse_0" aria-expanded="true" aria-controls="i4711_collapse_0">
                     Header 1
                 </button>
             </h5>
         </div>
-        <div id="4711_collapse_0" class="collapse show" aria-labelledby="4711_heading_0" data-parent="#4711">
+        <div id="i4711_collapse_0" class="collapse show" aria-labelledby="i4711_heading_0" data-parent="#i4711">
             <div class="card-body">
                     Content Card 1
             </div>
         </div>
     </div>
     <div class="card">
-        <div class="card-header" id="4711_heading_1">
+        <div class="card-header" id="i4711_heading_1">
             <h5 class="mb-0">
-                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#4711_collapse_1" aria-expanded="true" aria-controls="4711_collapse_1">
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#i4711_collapse_1" aria-expanded="true" aria-controls="i4711_collapse_1">
                     Header 2
                 </button>
             </h5>
         </div>
-        <div id="4711_collapse_1" class="collapse" aria-labelledby="4711_heading_1" data-parent="#4711">
+        <div id="i4711_collapse_1" class="collapse" aria-labelledby="i4711_heading_1" data-parent="#i4711">
             <div class="card-body">
                 <p class="h1 mt-4 mb-4">Content Card 2</p>
                 <ul class="mb-2">
@@ -32,14 +32,14 @@
         </div>
     </div>
     <div class="card">
-        <div class="card-header" id="4711_heading_2">
+        <div class="card-header" id="i4711_heading_2">
             <h5 class="mb-0">
-                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#4711_collapse_2" aria-expanded="true" aria-controls="4711_collapse_2">
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#i4711_collapse_2" aria-expanded="true" aria-controls="i4711_collapse_2">
                     Header 3
                 </button>
             </h5>
         </div>
-        <div id="4711_collapse_2" class="collapse" aria-labelledby="4711_heading_2" data-parent="#4711">
+        <div id="i4711_collapse_2" class="collapse" aria-labelledby="i4711_heading_2" data-parent="#i4711">
             <div class="card-body">
                     Content Card 3
             </div>

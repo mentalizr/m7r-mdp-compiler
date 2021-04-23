@@ -11,27 +11,12 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class TableModelBuilder implements OutlineElementModelBuilder {
+public class TableModelBuilder extends OutlineElementModelBuilder {
 
-//    private final List<Line> lines;
-
-//    private TableModelRow header;
-//    private final List<TableModelRow> rows;
-//    private TableModelColMetaData tableModelColMetaData;
-//
     private final Pattern headerMarkPattern = Pattern.compile("^:?-+:?$");
 
-//    private TableModel tableModel;
-
     public TableModelBuilder() {
-//        this.lines = lines;
-
-//        this.header = null;
-//        this.rows = new ArrayList<>();
-//        this.tableModelColMetaData = null;
-//        this.headerMarkPattern = Pattern.compile("^:?-+:?$");
-
-//        this.tableModel = null;
+        super(new Table());
     }
 
     @Override

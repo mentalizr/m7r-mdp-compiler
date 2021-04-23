@@ -1,12 +1,12 @@
 package org.mentalizr.mdpCompiler.outlineElement.tagged.grid;
 
 import org.mentalizr.mdpCompiler.document.Line;
-import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
+import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTaggedModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class GridModel extends OutlineElementModel {
+public class GridModel extends OutlineElementTaggedModel {
 
     private final List<ColumnContent> columnContentList;
     private ColumnContent curColumnContent;
@@ -32,4 +32,9 @@ public class GridModel extends OutlineElementModel {
     public boolean hasCurCard() {
         return this.curColumnContent != null;
     }
+
+    public GridAttributes getGridAttributes() {
+        return (GridAttributes) this.mdpTag.getAttributes();
+    }
+
 }

@@ -1,8 +1,6 @@
 package org.mentalizr.mdpCompiler.outlineElement.tagged.grid;
 
-import org.mentalizr.mdpCompiler.MDPSyntaxError;
-import org.mentalizr.mdpCompiler.document.Line;
-import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModelBuilder;
+import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTaggedModelBuilder;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTagged;
 import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementExtractor;
@@ -12,8 +10,8 @@ public class Grid extends OutlineElementTagged {
 
     public static final String TAG = "@grid";
 
-    public Grid(Line tagLine) throws MDPSyntaxError {
-        super(TAG, tagLine);
+    public Grid() {
+        super(TAG);
     }
 
     @Override
@@ -22,20 +20,17 @@ public class Grid extends OutlineElementTagged {
     }
 
     @Override
-    protected OutlineElementModelBuilder getOutlineElementModelBuilder() {
-        GridAttributes gridAttributes = (GridAttributes) this.outlineElementTaggedAttributes;
-        return new GridModelBuilder(gridAttributes);
+    protected OutlineElementTaggedModelBuilder getOutlineElementModelBuilder() {
+        return new GridModelBuilder();
     }
 
     @Override
     protected OutlineElementRenderer getOutlineElementRenderer() {
-        GridAttributes gridAttributes = (GridAttributes) this.outlineElementTaggedAttributes;
-        GridModel gridModel = (GridModel) this.outlineElementModel;
-        return new GridRenderer(gridAttributes, gridModel);
+        return new GridRenderer();
     }
 
     @Override
-    protected OutlineElementTaggedAttributesFactory getOutlineElementTaggedAttributesFactory() {
+    public OutlineElementTaggedAttributesFactory getOutlineElementTaggedAttributesFactory() {
         return new GridAttributesFactory();
     }
 

@@ -2,7 +2,6 @@ package org.mentalizr.mdpCompiler.outlineElement;
 
 import org.mentalizr.mdpCompiler.MDPCompiler;
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
-import org.mentalizr.mdpCompiler.document.DocumentIterator;
 import org.mentalizr.mdpCompiler.document.Line;
 import org.mentalizr.mdpCompiler.outlineElement.md.heading.*;
 import org.mentalizr.mdpCompiler.outlineElement.md.hr.HRFactory;
@@ -26,7 +25,6 @@ import org.mentalizr.mdpCompiler.outlineElement.tagged.imgFluid.ImgFluidFactory;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.imgText.ImgTextFactory;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.mcQuestion.MCQuestionFactory;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.video.VideoFactory;
-import org.mentalizr.mdpCompiler.result.Result;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,25 +73,25 @@ public class OutlineElementRegistry {
         this.outlineElementTaggedFactoryList.add(new DirectiveFactory());
     }
 
-    public OutlineElement getMatchingElement(Line tagLine, MDPCompiler.Mode mode) throws MDPSyntaxError {
+    public OutlineElement getMatchingElement(Line tagLine, MDPCompiler.Mode mode) {
 
         if (mode == MDPCompiler.Mode.MDP_COMPLETE) {
             for (OutlineElementFactory factory : this.outlineElementTaggedFactoryList) {
-                if (factory.isResponsible(tagLine)) return factory.getInstance(tagLine);
+                if (factory.isResponsible(tagLine)) return factory.getInstance();
             }
         }
 
         if (mode == MDPCompiler.Mode.MD_AND_MDP_NESTABLE || mode == MDPCompiler.Mode.MDP_COMPLETE) {
             for (OutlineElementFactory factory : this.outlineElementTaggedNestableFactoryList) {
-                if (factory.isResponsible(tagLine)) return factory.getInstance(tagLine);
+                if (factory.isResponsible(tagLine)) return factory.getInstance();
             }
         }
 
         for (OutlineElementFactory factory : this.outlineElementMDFactoryList) {
-            if (factory.isResponsible(tagLine)) return factory.getInstance(tagLine);
+            if (factory.isResponsible(tagLine)) return factory.getInstance();
         }
 
-        return this.defaultElement.getInstance(tagLine);
+        return this.defaultElement.getInstance();
     }
 
 }

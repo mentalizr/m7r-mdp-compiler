@@ -13,5 +13,5 @@ public abstract class OutlineElementRenderer {
         this.inlineParserMDP = new InlineParserMDP();
     }
 
-    abstract public void render(CompilerContext compilerContext, Result result) throws MDPSyntaxError;
+    abstract public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, Result result) throws MDPSyntaxError;
 }
