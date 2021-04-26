@@ -7,8 +7,8 @@ import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTaggedModelBuilder
 
 public class AlertModelBuilder extends OutlineElementTaggedModelBuilder {
 
-    public AlertModelBuilder(Alert alert) {
-        super(alert);
+    public AlertModelBuilder() {
+        super(new Alert());
     }
 
     @Override

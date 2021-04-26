@@ -13,7 +13,7 @@ public class CardRenderer extends OutlineElementRenderer {
     public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, Result result) throws MDPSyntaxError {
 
         CardModel cardModel = (CardModel) outlineElementModel;
-        CardAttributes cardAttributes = (CardAttributes) cardModel.getOutlineElementTaggedAttributes();
+        CardAttributes cardAttributes = cardModel.getOutlineElementTaggedAttributes();
 
         int indent = compilerContext.getIndentLevel();
 

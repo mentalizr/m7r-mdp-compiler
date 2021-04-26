@@ -3,7 +3,6 @@ package org.mentalizr.mdpCompiler.outlineElement.md.ul;
 import org.mentalizr.mdpCompiler.document.Line;
 import org.mentalizr.mdpCompiler.outlineElement.Extraction;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModelBuilder;
-import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTaggedModelBuilder;
 
 import java.util.List;
 

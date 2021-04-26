@@ -21,7 +21,7 @@ public class Alert extends OutlineElementTagged {
 
     @Override
     protected OutlineElementTaggedModelBuilder getOutlineElementModelBuilder() {
-        return new AlertModelBuilder(this);
+        return new AlertModelBuilder();
     }
 
     @Override

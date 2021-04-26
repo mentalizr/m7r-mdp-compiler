@@ -24,8 +24,7 @@ class CardModelBuilderTest {
         );
         Extraction extraction = new AlertExtraction(document);
 
-        Card card = new Card();
-        CardModelBuilder cardModelBuilder = new CardModelBuilder(card);
+        CardModelBuilder cardModelBuilder = new CardModelBuilder();
         CardModel cardModel = cardModelBuilder.getModel(extraction);
 
         assertNotNull(cardModel);
@@ -44,8 +43,7 @@ class CardModelBuilderTest {
         );
         Extraction extraction = new AlertExtraction(document);
 
-        Card card = new Card();
-        CardModelBuilder cardModelBuilder = new CardModelBuilder(card);
+        CardModelBuilder cardModelBuilder = new CardModelBuilder();
         CardModel cardModel = cardModelBuilder.getModel(extraction);
 
         assertNotNull(cardModel);
@@ -79,8 +77,7 @@ class CardModelBuilderTest {
         );
         Extraction extraction = new AlertExtraction(document);
 
-        Card card = new Card();
-        CardModelBuilder cardModelBuilder = new CardModelBuilder(card);
+        CardModelBuilder cardModelBuilder = new CardModelBuilder();
         CardModel cardModel = cardModelBuilder.getModel(extraction);
 
         assertNotNull(cardModel);
@@ -115,8 +112,7 @@ class CardModelBuilderTest {
         );
         Extraction extraction = new AlertExtraction(document);
 
-        Card card = new Card();
-        CardModelBuilder cardModelBuilder = new CardModelBuilder(card);
+        CardModelBuilder cardModelBuilder = new CardModelBuilder();
         CardModel cardModel = cardModelBuilder.getModel(extraction);
 
         assertNotNull(cardModel);

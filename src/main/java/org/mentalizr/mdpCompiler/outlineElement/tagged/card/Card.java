@@ -5,7 +5,6 @@ import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTagged;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTaggedModelBuilder;
 import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementExtractor;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.OutlineElementTaggedAttributesFactory;
-import org.mentalizr.mdpCompiler.outlineElement.tagged.TextBlockModelBuilder;
 
 public class Card extends OutlineElementTagged {
 
@@ -22,7 +21,7 @@ public class Card extends OutlineElementTagged {
 
     @Override
     protected OutlineElementTaggedModelBuilder getOutlineElementModelBuilder() {
-        return new CardModelBuilder(this);
+        return new CardModelBuilder();
     }
 
     @Override

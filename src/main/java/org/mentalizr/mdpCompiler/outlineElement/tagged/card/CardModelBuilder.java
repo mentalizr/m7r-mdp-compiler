@@ -5,7 +5,6 @@ import org.mentalizr.mdpCompiler.MDPSyntaxError;
 import org.mentalizr.mdpCompiler.document.Document;
 import org.mentalizr.mdpCompiler.outlineElement.Extraction;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
-import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTagged;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.TextBlockModel;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.TextBlockModelBuilder;
 
@@ -16,9 +15,8 @@ public class CardModelBuilder extends TextBlockModelBuilder {
 
     private List<OutlineElementModel> outlineElementModelList;
 
-    public CardModelBuilder(OutlineElementTagged outlineElementTagged) {
-        //TODO: super(new Card()), Constructor parameter löschen
-        super(outlineElementTagged);
+    public CardModelBuilder() {
+        super(new Card());
         this.outlineElementModelList = new ArrayList<>();
     }
 

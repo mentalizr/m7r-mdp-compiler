@@ -47,8 +47,8 @@ public class CardModel extends OutlineElementTaggedModel {
         return this.singleLine;
     }
 
-    public OutlineElementTaggedAttributes getOutlineElementTaggedAttributes() {
-        return this.mdpTag.getAttributes();
+    public CardAttributes getOutlineElementTaggedAttributes() {
+        return (CardAttributes) this.mdpTag.getAttributes();
     }
 
 }

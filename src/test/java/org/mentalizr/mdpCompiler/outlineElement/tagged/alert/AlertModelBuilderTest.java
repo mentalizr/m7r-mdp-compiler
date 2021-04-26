@@ -26,8 +26,7 @@ class AlertModelBuilderTest {
         );
         Extraction extraction = new AlertExtraction(document);
 
-        Alert alert = new Alert();
-        AlertModelBuilder alertModelBuilder = new AlertModelBuilder(alert);
+        AlertModelBuilder alertModelBuilder = new AlertModelBuilder();
         AlertModel alertModel = alertModelBuilder.getModel(extraction);
 
         assertNotNull(alertModel);
