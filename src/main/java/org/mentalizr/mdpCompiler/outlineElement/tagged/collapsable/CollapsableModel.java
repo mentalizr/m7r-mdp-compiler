@@ -1,6 +1,7 @@
 package org.mentalizr.mdpCompiler.outlineElement.tagged.collapsable;
 
 import org.mentalizr.mdpCompiler.document.Line;
+import org.mentalizr.mdpCompiler.outlineElement.OutlineElement;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTaggedModel;
 
@@ -12,7 +13,8 @@ public class CollapsableModel extends OutlineElementTaggedModel {
     private final List<CollapsableCardContent> collapsableCardContentList;
     private CollapsableCardContent curCollapsableCardContent;
 
-    public CollapsableModel() {
+    public CollapsableModel(OutlineElement outlineElement) {
+        super(outlineElement);
         this.collapsableCardContentList = new ArrayList<>();
         this.curCollapsableCardContent = null;
     }

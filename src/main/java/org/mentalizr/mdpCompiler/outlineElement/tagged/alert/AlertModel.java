@@ -7,6 +7,7 @@ public class AlertModel extends OutlineElementTaggedModel {
     private String text;
 
     public AlertModel() {
+        super(new Alert());
         this.text = "";
     }
 

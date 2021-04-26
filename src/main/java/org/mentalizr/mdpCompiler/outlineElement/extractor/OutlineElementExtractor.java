@@ -19,7 +19,6 @@ public abstract class OutlineElementExtractor {
         this.extractedOutlineElementBuffer = new ExtractedOutlineElementBuffer();
     }
 
-//    public List<Line> extract(DocumentIterator documentIterator) {
     public Extraction extract(DocumentIterator documentIterator) {
 
         if (!documentIterator.hasCurrentLine())

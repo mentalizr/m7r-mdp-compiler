@@ -2,6 +2,8 @@ package org.mentalizr.mdpCompiler.outlineElement.tagged;
 
 import org.mentalizr.mdpCompiler.document.Document;
 import org.mentalizr.mdpCompiler.document.Line;
+import org.mentalizr.mdpCompiler.outlineElement.OutlineElement;
+import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTaggedModel;
 
 import java.util.List;
@@ -10,7 +12,8 @@ public class TextBlockModel extends OutlineElementTaggedModel {
 
     private List<Line> textBlockLines;
 
-    public TextBlockModel() {
+    public TextBlockModel(OutlineElement outlineElement) {
+        super(outlineElement);
     }
 
     public void setTextBlockLines(List<Line> textBlockLines) {

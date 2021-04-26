@@ -10,6 +10,7 @@ public class ParagraphModel extends OutlineElementModel {
     private final List<String> textLines;
 
     public ParagraphModel() {
+        super(new Paragraph());
         this.textLines = new ArrayList<>();
     }
 

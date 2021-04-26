@@ -24,7 +24,7 @@ public class CollapsableModelBuilder extends OutlineElementTaggedModelBuilder {
         if (extraction.isEmpty())
             throw new IllegalStateException("Insufficient number of lines.");
 
-        CollapsableModel collapsableModel = new CollapsableModel();
+        CollapsableModel collapsableModel = new CollapsableModel(this.outlineElement);
         MDPTag mdpTag = parseMdpTagLine(extraction.getTagLine());
         collapsableModel.setMdpTag(mdpTag);
 

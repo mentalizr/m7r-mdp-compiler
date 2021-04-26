@@ -12,6 +12,7 @@ public class GridModel extends OutlineElementTaggedModel {
     private ColumnContent curColumnContent;
 
     public GridModel() {
+        super(new Grid());
         this.columnContentList = new ArrayList<>();
         this.curColumnContent = null;
     }

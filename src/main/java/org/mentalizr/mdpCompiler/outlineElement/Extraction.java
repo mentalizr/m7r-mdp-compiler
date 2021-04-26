@@ -4,6 +4,7 @@ import org.mentalizr.mdpCompiler.document.Document;
 import org.mentalizr.mdpCompiler.document.Line;
 import org.mentalizr.mdpCompiler.document.Lines;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Extraction {
@@ -25,6 +26,16 @@ public abstract class Extraction {
     public List<Line> getLinesWithoutTagLine() {
         assertNotEmpty();
         return this.lines.subList(1, this.lines.size());
+    }
+
+    public List<String> asStrings() {
+        List<String> strings = new ArrayList<>();
+        for (Line line : lines) strings.add(line.asString());
+        return strings;
+    }
+
+    public String[] asStringArray() {
+        return asStrings().toArray(new String[0]);
     }
 
     public boolean isEmpty() {

@@ -22,7 +22,7 @@ public class Card extends OutlineElementTagged {
 
     @Override
     protected OutlineElementTaggedModelBuilder getOutlineElementModelBuilder() {
-        return new TextBlockModelBuilder(this);
+        return new CardModelBuilder(this);
     }
 
     @Override

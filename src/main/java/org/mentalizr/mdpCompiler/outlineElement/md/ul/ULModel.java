@@ -10,6 +10,7 @@ public class ULModel extends OutlineElementModel {
     private final List<String> itemList;
 
     public ULModel() {
+        super(new UL());
         this.itemList = new ArrayList<>();
     }
 

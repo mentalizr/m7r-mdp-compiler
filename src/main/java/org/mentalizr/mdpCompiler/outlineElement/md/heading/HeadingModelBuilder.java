@@ -30,7 +30,7 @@ public class HeadingModelBuilder extends OutlineElementModelBuilder {
 
         String tagLine = extraction.getTagLine().asString();
 
-        HeadingModel headingModel = new HeadingModel();
+        HeadingModel headingModel = new HeadingModel(this.outlineElement);
         String heading = tagLine.substring(this.headerLevel).trim();
         headingModel.addHeading(heading);
 

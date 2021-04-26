@@ -30,7 +30,7 @@ class AccordionRendererTest {
 
         Result result = new ResultTest();
 
-        CollapsableModel collapsableModel = new CollapsableModel();
+        CollapsableModel collapsableModel = new CollapsableModel(new Accordion());
         Line tagLine = new Line("@accordion[id=\"i4711\" \"showFirst\"]", 0);
         MDPTag mdpTag = new MDPTagSimple(new Accordion(), tagLine);
         collapsableModel.setMdpTag(mdpTag);

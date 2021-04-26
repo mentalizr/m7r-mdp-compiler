@@ -20,25 +20,54 @@ public class OutlineElementLinesExtractorBench {
 
     public static void execute(@SuppressWarnings("SpellCheckingInspection") String testname, DocumentIterator documentIterator, OutlineElementExtractor outlineElementExtractor, File file, int expectedDocumentIteratorIndex) throws IOException {
 
+        List<String> expectedLines = TextFile.getLinesAsStrings(file);
+        execute(testname, documentIterator, outlineElementExtractor, expectedLines, expectedDocumentIteratorIndex);
+
+//        documentIterator.getNextLine();
+//        Extraction extraction = outlineElementExtractor.extract(documentIterator);
+//
+//        List<String> mdpLinesAsString = new ArrayList<>();
+//        for (Line extractedLine : extraction.getLines()) {
+//            String mdpLineAsString = extractedLine.asString();
+//            mdpLinesAsString.add(mdpLineAsString);
+//        }
+//
+//        if (SOUT_RESULT) {
+//            System.out.println("### Begin [OutlineElementLinesExtractorBench] " + testname);
+//            for (String mdpLineAsString : mdpLinesAsString) {
+//                System.out.println(mdpLineAsString);
+//            }
+//            System.out.println("### End -----");
+//        }
+//
+//        List<String> expectedLines = TextFile.getLinesAsStrings(file);
+//        assertEquals(expectedLines, mdpLinesAsString);
+//        assertEquals(expectedDocumentIteratorIndex, documentIterator.getIndex());
+    }
+
+    public static void execute(@SuppressWarnings("SpellCheckingInspection") String testname, DocumentIterator documentIterator, OutlineElementExtractor outlineElementExtractor, List<String> expectedLines, int expectedDocumentIteratorIndex) throws IOException {
+
         documentIterator.getNextLine();
         Extraction extraction = outlineElementExtractor.extract(documentIterator);
 
-        List<String> mdpLinesAsString = new ArrayList<>();
-        for (Line extractedLine : extraction.getLines()) {
-            String mdpLineAsString = extractedLine.asString();
-            mdpLinesAsString.add(mdpLineAsString);
-        }
+        List<String> mdpLinesAsStrings = extraction.asStrings();
+
+//        List<String> mdpLinesAsString = new ArrayList<>();
+//        for (Line extractedLine : extraction.getLines()) {
+//            String mdpLineAsString = extractedLine.asString();
+//            mdpLinesAsString.add(mdpLineAsString);
+//        }
 
         if (SOUT_RESULT) {
             System.out.println("### Begin [OutlineElementLinesExtractorBench] " + testname);
-            for (String mdpLineAsString : mdpLinesAsString) {
+            for (String mdpLineAsString : mdpLinesAsStrings) {
                 System.out.println(mdpLineAsString);
             }
             System.out.println("### End -----");
         }
 
-        List<String> expectedLines = TextFile.getLinesAsStrings(file);
-        assertEquals(expectedLines, mdpLinesAsString);
+
+        assertEquals(expectedLines, mdpLinesAsStrings);
         assertEquals(expectedDocumentIteratorIndex, documentIterator.getIndex());
     }
 

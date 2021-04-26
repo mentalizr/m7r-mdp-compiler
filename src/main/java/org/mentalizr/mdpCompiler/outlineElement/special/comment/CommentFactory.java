@@ -13,4 +13,5 @@ public class CommentFactory extends OutlineElementFactory {
     public OutlineElement getInstance() {
         return new Comment();
     }
+
 }

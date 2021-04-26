@@ -16,21 +16,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class AlertModelBuilderTest {
 
-    private static final String EXPECTED_DIR = "src/test/resrc/outlineElement/tagged/alert/";
 
     @Test
-    void getModel() throws IOException, MDPSyntaxError, AttributeProfileException {
+    void getModel() throws MDPSyntaxError {
 
-        AttributesBuilder attributesBuilder = new AttributesBuilder()
-                .addAttribute(AlertAttributes.ATTRIBUTE_NAME_TYPE, "info")
-                .addAttribute(AlertAttributes.ATTRIBUTE_NAME_HEADERSIZE, "3");
-
-        AlertAttributes alertAttributes = new AlertAttributes(attributesBuilder.build());
-//        AlertAttributesParser alertAttributes = new AlertAttributesParser(AlertAttributes.ATTRIBUTE_NAME_TYPE + "=\"info\" " + AlertAttributes.ATTRIBUTE_NAME_HEADERSIZE + "=\"3\"");
-
-        Document document = new Document(new File(EXPECTED_DIR, "extractor-plausi-1.expected"));
+        Document document = new Document(
+                "@alert[type=\"info\" headersize=\"3\"]",
+                "    Hier der Info-Text!"
+        );
         Extraction extraction = new AlertExtraction(document);
-//        List<Line> lines = document.getLines();
 
         Alert alert = new Alert();
         AlertModelBuilder alertModelBuilder = new AlertModelBuilder(alert);
@@ -38,6 +32,10 @@ class AlertModelBuilderTest {
 
         assertNotNull(alertModel);
         assertEquals("Hier der Info-Text!", alertModel.getText());
+
+        AlertAttributes alertAttributes = alertModel.getAlertAttributes();
+        assertEquals("info", alertAttributes.getType());
+        assertEquals("3", alertAttributes.getHeadersize());
     }
 
 }

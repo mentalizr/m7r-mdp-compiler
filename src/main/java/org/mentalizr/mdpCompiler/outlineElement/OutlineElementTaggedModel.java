@@ -6,6 +6,10 @@ public class OutlineElementTaggedModel extends OutlineElementModel {
 
     protected MDPTag mdpTag;
 
+    public OutlineElementTaggedModel(OutlineElement outlineElement) {
+        super(outlineElement);
+    }
+
     public MDPTag getMdpTag() {
         return mdpTag;
     }

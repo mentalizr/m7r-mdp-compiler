@@ -10,6 +10,10 @@ public abstract class OutlineElementModelBuilder {
         this.outlineElement = outlineElement;
     }
 
+    public OutlineElement getOutlineElement() {
+        return this.outlineElement;
+    }
+
     public abstract OutlineElementModel getModel(Extraction extraction) throws MDPSyntaxError;
 
 }

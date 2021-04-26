@@ -84,7 +84,7 @@ class ImgTextTest {
         MDPTag mdpTag = new MDPTagWithLink(imgText, tagLine);
 
         List<Line> textBlockModelLines = Lines.create(2, "Some text.");
-        TextBlockModel textBlockModel = new TextBlockModel();
+        TextBlockModel textBlockModel = new TextBlockModel(imgText);
         textBlockModel.setMdpTag(mdpTag);
         textBlockModel.setTextBlockLines(textBlockModelLines);
 

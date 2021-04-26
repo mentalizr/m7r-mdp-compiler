@@ -1,9 +1,8 @@
 package org.mentalizr.mdpCompiler.outlineElement;
 
-import org.mentalizr.mdpCompiler.MDPSyntaxError;
-import org.mentalizr.mdpCompiler.document.DocumentIterator;
 import org.mentalizr.mdpCompiler.document.Line;
-import org.mentalizr.mdpCompiler.result.Result;
+
+import java.util.Objects;
 
 public abstract class OutlineElementFactory {
 
@@ -19,4 +18,16 @@ public abstract class OutlineElementFactory {
 
     public abstract OutlineElement getInstance();
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OutlineElementFactory that = (OutlineElementFactory) o;
+        return prefix.equals(that.prefix);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(prefix);
+    }
 }

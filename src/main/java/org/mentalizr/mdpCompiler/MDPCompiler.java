@@ -6,13 +6,14 @@ import org.mentalizr.mdpCompiler.document.DocumentSanityChecker;
 import org.mentalizr.mdpCompiler.document.Line;
 import org.mentalizr.mdpCompiler.outlineElement.Extraction;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElement;
+import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRegistry;
-import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRegistryNew;
 import org.mentalizr.mdpCompiler.result.Result;
 import org.mentalizr.mdpCompiler.result.ResultWriter;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MDPCompiler {
@@ -65,6 +66,37 @@ public class MDPCompiler {
 
         }
     }
+
+    public static List<OutlineElementModel> getModelsForSubdocument(Document document) throws MDPSyntaxError {
+
+        DocumentIterator documentIterator = document.getDocumentIterator();
+        OutlineElementRegistry outlineElementRegistry = new OutlineElementRegistry();
+
+        List<OutlineElementModel> modelList = new ArrayList<>();
+
+        while (documentIterator.hasNextLine()) {
+
+            Line line = documentIterator.getNextLine();
+
+            if (line.asString().isBlank()) continue;
+
+            OutlineElement outlineElement = outlineElementRegistry.getMatchingElement(line, Mode.MD_AND_MDP_NESTABLE);
+
+            Extraction extraction = outlineElement.getExtraction(documentIterator);
+            OutlineElementModel outlineElementModel = outlineElement.getModel(extraction);
+            modelList.add(outlineElementModel);
+        }
+
+        return modelList;
+    }
+
+    public static void renderSubdocument(List<OutlineElementModel> outlineElementModelList, Result result, CompilerContext compilerContext) throws MDPSyntaxError {
+
+        for (OutlineElementModel outlineElementModel : outlineElementModelList) {
+            outlineElementModel.getOutlineElement().render(outlineElementModel, new CompilerContext(false, compilerContext.getIndentLevel() + 1), result);
+        }
+    }
+
 
 //    public static void buildAbstractSyntaxTree(Document document) throws MDPSyntaxError {
 //        CompilerContext compilerContext = new CompilerContext(true, 0);

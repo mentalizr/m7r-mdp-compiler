@@ -24,7 +24,7 @@ public class TextBlockModelBuilder extends OutlineElementTaggedModelBuilder {
         if (extraction.isEmpty())
             throw new IllegalStateException("Insufficient number of lines.");
 
-        TextBlockModel textBlockModel = new TextBlockModel();
+        TextBlockModel textBlockModel = new TextBlockModel(this.outlineElement);
 
         MDPTag mdpTag = parseMdpTagLine(extraction.getTagLine());
         textBlockModel.setMdpTag(mdpTag);
@@ -42,7 +42,7 @@ public class TextBlockModelBuilder extends OutlineElementTaggedModelBuilder {
             } else if (lineString.isBlank()) {
                 textBlockLines.add(new Line("", line.getLineIndex()));
             } else {
-                throw new IllegalStateException("Unrecognized content found. Should have lead to termination in extraction stage. " + line.asString());
+                throw new IllegalStateException("Unrecognized content found. Should have led to termination in extraction stage. " + line.asString());
             }
         }
 

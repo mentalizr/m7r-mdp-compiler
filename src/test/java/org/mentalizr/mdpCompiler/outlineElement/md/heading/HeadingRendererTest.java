@@ -15,7 +15,7 @@ class HeadingRendererTest {
     @Test
     void plausi_pos_h1() throws MDPSyntaxError {
 
-        HeadingModel headingModel = new HeadingModel();
+        HeadingModel headingModel = new HeadingModel(new H1());
         headingModel.addHeading("Eine Überschrift");
 
         Result testResult = new ResultTest();
@@ -33,7 +33,7 @@ class HeadingRendererTest {
     @Test
     void plausi_pos_h2() throws MDPSyntaxError {
 
-        HeadingModel headingModel = new HeadingModel();
+        HeadingModel headingModel = new HeadingModel(new H2());
         headingModel.addHeading("Eine Überschrift");
 
         Result testResult = new ResultTest();
@@ -51,7 +51,7 @@ class HeadingRendererTest {
     @Test
     void plausi_pos_h5() throws MDPSyntaxError {
 
-        HeadingModel headingModel = new HeadingModel();
+        HeadingModel headingModel = new HeadingModel(new H5());
         headingModel.addHeading("Eine Überschrift");
 
         Result testResult = new ResultTest();
