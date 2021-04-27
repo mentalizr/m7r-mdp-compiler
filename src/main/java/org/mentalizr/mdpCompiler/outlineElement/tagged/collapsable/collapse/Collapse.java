@@ -24,7 +24,7 @@ public class Collapse extends OutlineElementTagged {
 
     @Override
     protected OutlineElementTaggedModelBuilder getOutlineElementModelBuilder() {
-        return new CollapsableModelBuilder(this);
+        return new CollapseModelBuilder();
     }
 
     @Override

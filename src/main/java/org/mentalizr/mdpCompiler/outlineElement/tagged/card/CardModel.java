@@ -12,7 +12,6 @@ public class CardModel extends OutlineElementTaggedModel {
     private final String singleLine;
     private final List<OutlineElementModel> childModels;
 
-
     public CardModel(MDPTag mdpTag, String singleLine) {
         super(new Card());
         setMdpTag(mdpTag);
