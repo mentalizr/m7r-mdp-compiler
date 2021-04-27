@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CollapsableModelBuilderTest {
 
-    private static final String EXPECTED_DIR = "src/test/resrc/outlineElement/tagged/accordion/";
+    private static final String EXPECTED_DIR = "src/test/resrc/outlineElement/tagged/collapsable/accordion/";
 
     @Test
     void buildModel() throws IOException, MDPSyntaxError {

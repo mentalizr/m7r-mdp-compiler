@@ -47,7 +47,7 @@ public class CollapsableModelBuilder extends OutlineElementTaggedModelBuilder {
                 collapsableModel.addContentLine(line);
 
             } else {
-                throw new IllegalStateException("Unrecognized content found. Should have lead to termination in extraction stage. " + line.asString());
+                throw new IllegalStateException("Unrecognized content found. Should have led to termination in extraction stage. " + line.asString());
             }
         }
 

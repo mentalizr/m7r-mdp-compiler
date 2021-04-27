@@ -4,13 +4,9 @@ import de.arthurpicht.utils.io.textfile.TextFile;
 import org.junit.jupiter.api.Test;
 import org.mentalizr.mdpCompiler.CompilerContext;
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
-import org.mentalizr.mdpCompiler.attributeProfile.AttributeProfileException;
-import org.mentalizr.mdpCompiler.attributeProfile.attributesBuilder.AttributesBuilder;
 import org.mentalizr.mdpCompiler.document.Line;
 import org.mentalizr.mdpCompiler.mdpTag.MDPTag;
 import org.mentalizr.mdpCompiler.mdpTag.MDPTagSimple;
-import org.mentalizr.mdpCompiler.mdpTag.MDPTagWithLink;
-import org.mentalizr.mdpCompiler.outlineElement.tagged.collapsable.CollapsableAttributes;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.collapsable.CollapsableModel;
 import org.mentalizr.mdpCompiler.result.Result;
 import org.mentalizr.mdpCompilerTestResrc.ResultTest;
@@ -23,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AccordionRendererTest {
 
-    private static final String RESRC_DIR = "src/test/resrc/outlineElement/tagged/accordion/";
+    private static final String RESRC_DIR = "src/test/resrc/outlineElement/tagged/collapsable/accordion/";
 
     @Test
     void render() throws MDPSyntaxError, IOException {

@@ -1,8 +1,8 @@
 package org.mentalizr.mdpCompiler.outlineElement.tagged.collapsable.accordion;
 
+import org.junit.jupiter.api.Test;
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
 import org.mentalizr.mdpCompilerTestResrc.OutlineElementTestBench;
-import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 class AccordionTest {
 
-    private static final String RESRC_DIR = "src/test/resrc/outlineElement/tagged/accordion/";
+    private static final String RESRC_DIR = "src/test/resrc/outlineElement/tagged/collapsable/accordion/";
 
     @Test
     void plausibility_pos_1() throws MDPSyntaxError, IOException {
@@ -142,7 +142,7 @@ class AccordionTest {
     }
 
     @Test
-    void provocation_noContent() throws IOException, MDPSyntaxError {
+    void provocation_noContent() throws MDPSyntaxError {
 
         OutlineElementTestBench.execute(
                 new AccordionFactory(),

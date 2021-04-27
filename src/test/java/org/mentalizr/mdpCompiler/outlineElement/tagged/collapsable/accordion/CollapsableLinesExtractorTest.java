@@ -10,7 +10,7 @@ import java.io.IOException;
 
 class CollapsableLinesExtractorTest {
 
-    private static final String EXPECTED_DIR = "src/test/resrc/outlineElement/tagged/accordion/";
+    private static final String EXPECTED_DIR = "src/test/resrc/outlineElement/tagged/collapsable/accordion/";
 
     @Test
     void plausibility_1() throws IOException {
