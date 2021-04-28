@@ -32,7 +32,7 @@ public class ImgText extends OutlineElementTagged {
 
     @Override
     protected OutlineElementTaggedModelBuilder getOutlineElementModelBuilder() {
-        return new TextBlockModelBuilder(this);
+        return new ImgTextModelBuilder();
     }
 
     @Override

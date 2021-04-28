@@ -5,7 +5,6 @@ import org.mentalizr.mdpCompiler.MDPCompiler;
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
-import org.mentalizr.mdpCompiler.outlineElement.tagged.TextBlockModel;
 import org.mentalizr.mdpCompiler.result.Result;
 
 public class ImgTextRenderer extends OutlineElementRenderer {
@@ -13,9 +12,9 @@ public class ImgTextRenderer extends OutlineElementRenderer {
     @Override
     public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, Result result) throws MDPSyntaxError {
 
-        TextBlockModel textBlockModel = (TextBlockModel) outlineElementModel;
-        ImgTextAttributes imgTextAttributes = (ImgTextAttributes) textBlockModel.getOutlineElementTaggedAttributes();
-        String mdpTagLink = textBlockModel.getMdpTag().getLinkString();
+        ImgTextModel imgTextModel = (ImgTextModel) outlineElementModel;
+        ImgTextAttributes imgTextAttributes = imgTextModel.getImgTextAttributes();
+        String mdpTagLink = imgTextModel.getMdpTag().getLinkString();
 
         String contextUrl = compilerContext.getServiceContextURL() + "mediaImg/";
         int indent = compilerContext.getIndentLevel();
@@ -50,10 +49,16 @@ public class ImgTextRenderer extends OutlineElementRenderer {
         result.addLn(indent + 1, "</div>");
         result.addLn(indent + 1, "<div class=\"col-xs-12 col-sm-" + textColWidth + " col-md-" + textColWidth + " col-lg-" + textColWidth + "\">");
 
-        MDPCompiler.compileSubdocument(
-                textBlockModel.asDocument(),
+        MDPCompiler.renderSubdocument(
+                imgTextModel.getChildModels(),
                 result,
-                new CompilerContext(false, compilerContext.getIndentLevel() + 1));
+                new CompilerContext(false, compilerContext.getIndentLevel() + 1)
+        );
+
+//        MDPCompiler.compileSubdocument(
+//                imgTextModel.asDocument(),
+//                result,
+//                new CompilerContext(false, compilerContext.getIndentLevel() + 1));
 
         result.addLn(indent + 1, "</div>");
         result.addLn(indent, "</div>");

@@ -12,6 +12,7 @@ import org.mentalizr.mdpCompiler.outlineElement.md.paragraph.ParagraphModel;
 import org.mentalizr.mdpCompiler.outlineElement.md.ul.ULModel;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.TextBlockModel;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.collapsable.*;
+import org.mentalizr.mdpCompiler.outlineElement.tagged.imgText.ImgTextModel;
 
 import java.io.File;
 import java.io.IOException;
@@ -96,7 +97,7 @@ class CollapsableModelBuilderTest {
         List<OutlineElementModel> childElements = collapsableCardContent1.getChildElements();
         assertEquals(1, childElements.size());
         OutlineElementModel childElement = childElements.get(0);
-        assertTrue(childElement instanceof TextBlockModel);
+        assertTrue(childElement instanceof ImgTextModel);
         // TODO umbauen, wenn ImgText Modell vollständig refactored
 
 //        List<Line> cardContent1Content = collapsableCardContent1.getContent();

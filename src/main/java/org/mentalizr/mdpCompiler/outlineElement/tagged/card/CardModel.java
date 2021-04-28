@@ -18,7 +18,7 @@ public class CardModel extends SubModelsWithSingleLine {
         super(new Card(), mdpTag, childModels);
     }
 
-    public CardAttributes getOutlineElementTaggedAttributes() {
+    public CardAttributes getCardAttributes() {
         return (CardAttributes) this.mdpTag.getAttributes();
     }
 
