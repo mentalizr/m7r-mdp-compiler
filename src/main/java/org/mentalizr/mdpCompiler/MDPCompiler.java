@@ -40,14 +40,10 @@ public class MDPCompiler {
      * @throws MDPSyntaxError
      */
     public static void compileMdpDocument(Document document, Result result) throws MDPSyntaxError {
-        compile(document, result, Mode.MDP_COMPLETE, new CompilerContext(true, 0));
+        compile(document, result, new CompilerContext(true, 0));
     }
 
-    public static void compileSubdocument(Document document, Result result, CompilerContext compilerContext) throws MDPSyntaxError {
-        compile(document, result, Mode.MD_AND_MDP_NESTABLE, new CompilerContext(false, compilerContext.getIndentLevel() + 1));
-    }
-
-    private static void compile(Document document, Result result, Mode mode, CompilerContext compilerContext) throws MDPSyntaxError {
+    private static void compile(Document document, Result result, CompilerContext compilerContext) throws MDPSyntaxError {
 
         DocumentSanityChecker.check(document);
 
@@ -61,7 +57,7 @@ public class MDPCompiler {
             if (line.asString().isBlank()) continue;
 
             OutlineElement outlineElement;
-            outlineElement = outlineElementRegistry.getMatchingElement(line, mode);
+            outlineElement = outlineElementRegistry.getMatchingElement(line, Mode.MDP_COMPLETE);
             outlineElement.process(compilerContext, documentIterator, result);
 
         }
@@ -93,10 +89,13 @@ public class MDPCompiler {
     public static void renderSubdocument(List<OutlineElementModel> outlineElementModelList, Result result, CompilerContext compilerContext) throws MDPSyntaxError {
 
         for (OutlineElementModel outlineElementModel : outlineElementModelList) {
-            outlineElementModel.getOutlineElement().render(outlineElementModel, new CompilerContext(false, compilerContext.getIndentLevel() + 1), result);
+            outlineElementModel.getOutlineElement().render(
+                    outlineElementModel,
+                    new CompilerContext(false, compilerContext.getIndentLevel() + 1),
+                    result
+            );
         }
     }
-
 
 //    public static void buildAbstractSyntaxTree(Document document) throws MDPSyntaxError {
 //        CompilerContext compilerContext = new CompilerContext(true, 0);
