@@ -1,14 +1,13 @@
 package org.mentalizr.mdpCompiler.outlineElement.md.heading;
 
-import org.mentalizr.mdpCompiler.outlineElement.OutlineElement;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
 
 public class HeadingModel extends OutlineElementModel {
 
     private String heading;
 
-    public HeadingModel(OutlineElement outlineElement) {
-        super(outlineElement);
+    public HeadingModel(Heading heading) {
+        super(heading);
         this.heading = "";
     }
 
@@ -18,5 +17,10 @@ public class HeadingModel extends OutlineElementModel {
 
     public String getHeading() {
         return this.heading;
+    }
+
+    public int getHeadingLevel() {
+        Heading heading = (Heading) this.outlineElement;
+        return heading.getHeadingLevel();
     }
 }

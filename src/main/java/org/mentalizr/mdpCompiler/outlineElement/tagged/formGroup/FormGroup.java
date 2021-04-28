@@ -10,9 +10,4 @@ public abstract class FormGroup extends OutlineElementTagged {
         super(tagName);
     }
 
-    @Override
-    protected OutlineElementTaggedModelBuilder getOutlineElementModelBuilder() {
-        return new TextBlockModelBuilder(this);
-    }
-
 }

@@ -12,7 +12,7 @@ public abstract class Heading extends OutlineElement {
         super(prefix);
     }
 
-    private int getHeadingLevel() {
+    public int getHeadingLevel() {
         return this.prefix.length() - 1;
     }
 
@@ -23,13 +23,12 @@ public abstract class Heading extends OutlineElement {
 
     @Override
     protected OutlineElementModelBuilder getOutlineElementModelBuilder() {
-        return new HeadingModelBuilder(getHeadingLevel());
+        return new HeadingModelBuilder(this);
     }
 
     @Override
     protected OutlineElementRenderer getOutlineElementRenderer() {
-//        HeadingModel headingModel = (HeadingModel) this.outlineElementModel;
-        return new HeadingRenderer(getHeadingLevel());
+        return new HeadingRenderer();
     }
 
 }

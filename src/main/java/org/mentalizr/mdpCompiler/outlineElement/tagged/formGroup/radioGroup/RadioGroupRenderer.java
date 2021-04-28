@@ -5,7 +5,6 @@ import org.mentalizr.mdpCompiler.MDPCompiler;
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
-import org.mentalizr.mdpCompiler.outlineElement.tagged.TextBlockModel;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.formGroup.inputGroup.InputGroupAttributes;
 import org.mentalizr.mdpCompiler.result.Result;
 
@@ -14,8 +13,8 @@ public class RadioGroupRenderer extends OutlineElementRenderer {
     @Override
     public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, Result result) throws MDPSyntaxError {
 
-        TextBlockModel textBlockModel = (TextBlockModel) outlineElementModel;
-        RadioGroupAttributes radioGroupAttributes = (RadioGroupAttributes) textBlockModel.getOutlineElementTaggedAttributes();
+        RadioGroupModel radioGroupModel = (RadioGroupModel) outlineElementModel;
+        RadioGroupAttributes radioGroupAttributes = radioGroupModel.getRadioGroupAttributes();
 
         int indent = compilerContext.getIndentLevel();
 
@@ -32,15 +31,21 @@ public class RadioGroupRenderer extends OutlineElementRenderer {
         stringBuilder.append(">");
         result.addLn(indent, stringBuilder.toString());
 
-        if (textBlockModel.getNrOfTextBlockLines() == 1) {
-            String label = textBlockModel.getSingleLineAsString();
+        if (radioGroupModel.hasSingleLine()) {
+            String label = radioGroupModel.getSingleLine();
             String labelPreprocessed = this.inlineParserMDP.parse(label);
             result.addLn(indent + 1, "<div>" + labelPreprocessed + "</div>");
         } else {
-            MDPCompiler.compileSubdocument(
-                    textBlockModel.asDocument(),
+            MDPCompiler.renderSubdocument(
+                    radioGroupModel.getChildModels(),
                     result,
-                    compilerContext);
+                    compilerContext
+            );
+
+//            MDPCompiler.compileSubdocument(
+//                    radioGroupModel.asDocument(),
+//                    result,
+//                    compilerContext);
 
             // TODO div-Container um header notwendig?
             // TODO stimmt mb-2 bei Subdocument?

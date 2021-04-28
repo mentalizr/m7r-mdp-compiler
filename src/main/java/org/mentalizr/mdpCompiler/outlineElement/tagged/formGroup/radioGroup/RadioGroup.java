@@ -1,8 +1,10 @@
 package org.mentalizr.mdpCompiler.outlineElement.tagged.formGroup.radioGroup;
 
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
+import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTaggedModelBuilder;
 import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementExtractor;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.OutlineElementTaggedAttributesFactory;
+import org.mentalizr.mdpCompiler.outlineElement.tagged.TextBlockModelBuilder;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.formGroup.FormGroup;
 
 public class RadioGroup extends FormGroup {
@@ -16,6 +18,11 @@ public class RadioGroup extends FormGroup {
     @Override
     protected OutlineElementExtractor getOutlineElementLinesExtractor() {
         return new RadioGroupExtractor();
+    }
+
+    @Override
+    protected OutlineElementTaggedModelBuilder getOutlineElementModelBuilder() {
+        return new RadioGroupModelBuilder();
     }
 
     @Override

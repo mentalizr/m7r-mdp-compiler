@@ -15,7 +15,7 @@ class HeadingModelBuilderTest {
     void plausi_pos_h1() throws MDPSyntaxError {
 
         List<Line> listOfLines = Arrays.asList(Line.createLine0("# Eine Überschrift"));
-        HeadingModelBuilder headingModelBuilder = new HeadingModelBuilder(1);
+        HeadingModelBuilder headingModelBuilder = new HeadingModelBuilder(new H1());
         HeadingModel headingModel = headingModelBuilder.getModel(new HeadingExtraction(listOfLines));
 
         assertEquals("Eine Überschrift", headingModel.getHeading());
@@ -25,7 +25,7 @@ class HeadingModelBuilderTest {
     void plausi_pos_h2() throws MDPSyntaxError {
 
         List<Line> listOfLines = Arrays.asList(Line.createLine0("## Eine Überschrift"));
-        HeadingModelBuilder headingModelBuilder = new HeadingModelBuilder(2);
+        HeadingModelBuilder headingModelBuilder = new HeadingModelBuilder(new H2());
         HeadingModel headingModel = headingModelBuilder.getModel(new HeadingExtraction(listOfLines));
 
         assertEquals("Eine Überschrift", headingModel.getHeading());
@@ -35,7 +35,7 @@ class HeadingModelBuilderTest {
     void plausi_pos_h5() throws MDPSyntaxError {
 
         List<Line> listOfLines = Arrays.asList(Line.createLine0("##### Eine Überschrift"));
-        HeadingModelBuilder headingModelBuilder = new HeadingModelBuilder(5);
+        HeadingModelBuilder headingModelBuilder = new HeadingModelBuilder(new H5());
         HeadingModel headingModel = headingModelBuilder.getModel(new HeadingExtraction(listOfLines));
 
         assertEquals("Eine Überschrift", headingModel.getHeading());

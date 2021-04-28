@@ -6,11 +6,8 @@ import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModelBuilder;
 
 public class HeadingModelBuilder extends OutlineElementModelBuilder {
 
-    private final int headerLevel;
-
-    public HeadingModelBuilder(int headerLevel) {
-        super(new H1());
-        this.headerLevel = headerLevel;
+    public HeadingModelBuilder(Heading heading) {
+        super(heading);
     }
 
     @Override
@@ -24,9 +21,13 @@ public class HeadingModelBuilder extends OutlineElementModelBuilder {
 
         String tagLine = extraction.getTagLine().asString();
 
-        HeadingModel headingModel = new HeadingModel(this.outlineElement);
-        String heading = tagLine.substring(this.headerLevel).trim();
-        headingModel.addHeading(heading);
+        Heading heading = (Heading) this.outlineElement;
+        HeadingModel headingModel = new HeadingModel(heading);
+
+        int headingLevel = heading.getHeadingLevel();
+        String headingString = tagLine.substring(headingLevel).trim();
+
+        headingModel.addHeading(headingString);
 
         return headingModel;
     }

@@ -4,7 +4,6 @@ import org.mentalizr.mdpCompiler.CompilerContext;
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
-import org.mentalizr.mdpCompiler.outlineElement.tagged.TextBlockModel;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.formGroup.FormGroupRendererHelper;
 import org.mentalizr.mdpCompiler.result.Result;
 
@@ -13,8 +12,8 @@ public class InputGroupRenderer extends OutlineElementRenderer {
     @Override
     public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, Result result) throws MDPSyntaxError {
 
-        TextBlockModel textBlockModel = (TextBlockModel) outlineElementModel;
-        InputGroupAttributes inputGroupAttributes = (InputGroupAttributes) textBlockModel.getOutlineElementTaggedAttributes();
+        InputGroupModel inputGroupModel = (InputGroupModel) outlineElementModel;
+        InputGroupAttributes inputGroupAttributes = inputGroupModel.getInputGroupAttributes();
 
         String cssPseudoClass = "ns_input";
 
@@ -22,7 +21,7 @@ public class InputGroupRenderer extends OutlineElementRenderer {
 
         result.addLn("<div class=\"form-group\">");
 
-        FormGroupRendererHelper.renderHeaderLines(textBlockModel, inputGroupAttributes.getId(), result, compilerContext);
+        FormGroupRendererHelper.renderHeaderLines(inputGroupModel, inputGroupAttributes.getId(), result, compilerContext);
 
         StringBuilder stringBuilder = new StringBuilder("<input ");
         stringBuilder.append("type=\"").append(inputGroupAttributes.getInputtype()).append("\" ");
