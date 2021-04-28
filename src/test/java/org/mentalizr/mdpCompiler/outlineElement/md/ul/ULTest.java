@@ -1,9 +1,9 @@
 package org.mentalizr.mdpCompiler.outlineElement.md.ul;
 
+import org.junit.jupiter.api.Test;
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
 import org.mentalizr.mdpCompilerTestResrc.OutlineElementTestBench;
 import org.mentalizr.mdpCompilerTestResrc.OutlineElementTestBenchExecutor;
-import org.junit.jupiter.api.Test;
 
 import java.io.File;
 
@@ -15,7 +15,7 @@ class ULTest {
     void plausi1() throws MDPSyntaxError {
 
         OutlineElementTestBenchExecutor outlineElementTestBenchExecutor
-                = new OutlineElementTestBenchExecutor(new ULFactory())
+                = new OutlineElementTestBenchExecutor(new UL())
                 .withMDPLines(
                         "* first Item",
                         "* second Item",
@@ -33,7 +33,7 @@ class ULTest {
     void plausiInline() throws MDPSyntaxError {
 
         OutlineElementTestBench.execute(
-                new ULFactory(),
+                new UL(),
                 new String[]{
                         "* first *italic* Item",
                         "* second **bold** Item",

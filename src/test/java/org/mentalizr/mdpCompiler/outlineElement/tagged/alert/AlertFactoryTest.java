@@ -8,9 +8,9 @@ class AlertFactoryTest {
 
     @Test
     void isResponsible() {
-        AlertFactory alertFactory = new AlertFactory();
+        Alert alert = new Alert();
         Line line = Line.createLine0("@alert[type=\"info\" headersize=\"3\"]");
 
-        Assertions.assertTrue(alertFactory.isResponsible(line));
+        Assertions.assertTrue(alert.isResponsible(line));
     }
 }

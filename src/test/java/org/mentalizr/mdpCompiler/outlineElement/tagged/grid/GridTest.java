@@ -1,8 +1,8 @@
 package org.mentalizr.mdpCompiler.outlineElement.tagged.grid;
 
+import org.junit.jupiter.api.Test;
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
 import org.mentalizr.mdpCompilerTestResrc.OutlineElementTestBench;
-import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,7 +16,7 @@ class GridTest {
     void plausibility_pos_1() throws MDPSyntaxError, IOException {
 
         OutlineElementTestBench.execute(
-                new GridFactory(),
+                new Grid(),
                 new String[]{
                         "@grid[id=\"i4711\"]",
                         "--- col-4",
@@ -41,7 +41,7 @@ class GridTest {
     void default_col_definition() throws MDPSyntaxError, IOException {
 
         OutlineElementTestBench.execute(
-                new GridFactory(),
+                new Grid(),
                 new String[]{
                         "@grid[id=\"i4711\"]",
                         "---",
@@ -66,7 +66,7 @@ class GridTest {
     void default_col_definition_single_col() throws MDPSyntaxError, IOException {
 
         OutlineElementTestBench.execute(
-                new GridFactory(),
+                new Grid(),
                 new String[]{
                         "@grid[id=\"i4711\"]",
                         "--- col-4",

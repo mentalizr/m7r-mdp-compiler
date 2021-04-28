@@ -1,13 +1,12 @@
 package org.mentalizr.mdpCompiler.outlineElement.md.table;
 
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
 import org.mentalizr.mdpCompilerTestResrc.OutlineElementTestBench;
 import org.mentalizr.mdpCompilerTestResrc.OutlineElementTestBenchExecutor;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 
 import java.io.File;
-import java.io.IOException;
 
 class TableTest {
 
@@ -15,10 +14,10 @@ class TableTest {
 
     @Test
     @DisplayName("basic-1")
-    void basic1() throws MDPSyntaxError, IOException {
+    void basic1() throws MDPSyntaxError {
 
         OutlineElementTestBenchExecutor outlineElementTestBenchExecutor
-                = new OutlineElementTestBenchExecutor(new TableFactory())
+                = new OutlineElementTestBenchExecutor(new Table())
                 .withMDPLines(
                         "| Header 1 | Header 2 | Header 3 |",
                         "| ---- | :----: | ----: |",
@@ -35,10 +34,10 @@ class TableTest {
 
     @Test
     @DisplayName("withoutHeader")
-    void withoutHeader() throws MDPSyntaxError, IOException {
+    void withoutHeader() throws MDPSyntaxError {
 
         OutlineElementTestBenchExecutor outlineElementTestBenchExecutor
-                = new OutlineElementTestBenchExecutor(new TableFactory())
+                = new OutlineElementTestBenchExecutor(new Table())
                 .withMDPLines(
                         "|",
                         "| ---- | :----: | ----: |",
@@ -54,10 +53,10 @@ class TableTest {
 
     @Test
     @DisplayName("inlineElements1")
-    void inlineElements1() throws MDPSyntaxError, IOException {
+    void inlineElements1() throws MDPSyntaxError {
 
         OutlineElementTestBenchExecutor outlineElementTestBenchExecutor
-                = new OutlineElementTestBenchExecutor(new TableFactory())
+                = new OutlineElementTestBenchExecutor(new Table())
                 .withMDPLines(
                         "| Header 1 | Header 2 | Header 3 |",
                         "| ---- | :----: | ----: |",

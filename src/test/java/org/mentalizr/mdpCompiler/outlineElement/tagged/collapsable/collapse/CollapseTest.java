@@ -1,13 +1,11 @@
 package org.mentalizr.mdpCompiler.outlineElement.tagged.collapsable.collapse;
 
+import org.junit.jupiter.api.Test;
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
-import org.mentalizr.mdpCompiler.outlineElement.tagged.collapsable.accordion.AccordionFactory;
 import org.mentalizr.mdpCompilerTestResrc.OutlineElementTestBench;
 import org.mentalizr.mdpCompilerTestResrc.OutlineElementTestBenchExecutor;
-import org.junit.jupiter.api.Test;
 
 import java.io.File;
-import java.io.IOException;
 
 @SuppressWarnings("SpellCheckingInspection")
 class CollapseTest {
@@ -18,7 +16,7 @@ class CollapseTest {
     public void plausibility() throws MDPSyntaxError {
 
         OutlineElementTestBench.execute(
-                new OutlineElementTestBenchExecutor(new CollapseFactory())
+                new OutlineElementTestBenchExecutor(new Collapse())
                         .withMDPLines("@collapse[id=\"id4711\"]",
                                 "--- One",
                                 "    Here some content",
@@ -38,7 +36,7 @@ class CollapseTest {
     void nestedImgText() throws MDPSyntaxError {
 
         OutlineElementTestBench.execute(
-                new OutlineElementTestBenchExecutor(new CollapseFactory())
+                new OutlineElementTestBenchExecutor(new Collapse())
                         .withMDPLines(
                                 "@collapse[id=\"id4711\" \"showFirst\"]",
                                 "--- Header 1",

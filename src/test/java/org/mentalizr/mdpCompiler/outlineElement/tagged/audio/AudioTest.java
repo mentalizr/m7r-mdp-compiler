@@ -10,7 +10,7 @@ class AudioTest {
     void plausibilityTest() throws MDPSyntaxError {
 
         OutlineElementTestBench.execute(
-                new AudioFactory(),
+                new Audio(),
                 new String[] {
                         "@audio[](myAudio.mp3)",
                         "Something completely different ..."

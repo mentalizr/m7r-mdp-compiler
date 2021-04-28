@@ -1,8 +1,8 @@
 package org.mentalizr.mdpCompiler.outlineElement.tagged.imgFluid;
 
+import org.junit.jupiter.api.Test;
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
 import org.mentalizr.mdpCompilerTestResrc.OutlineElementTestBench;
-import org.junit.jupiter.api.Test;
 
 @SuppressWarnings("SpellCheckingInspection")
 class ImgFluidTest {
@@ -11,7 +11,7 @@ class ImgFluidTest {
     void plausibilityTest() throws MDPSyntaxError {
 
         OutlineElementTestBench.execute(
-                new ImgFluidFactory(),
+                new ImgFluid(),
                 new String[]{
                         "@img-fluid[alt=\"Ein alternativer Text\"](link)",
                         "Something completely different ..."
@@ -27,7 +27,7 @@ class ImgFluidTest {
     void marginTopTest() throws MDPSyntaxError {
 
         OutlineElementTestBench.execute(
-                new ImgFluidFactory(),
+                new ImgFluid(),
                 new String[]{
                         "@img-fluid[alt=\"Ein alternativer Text\" margin-top=\"2\"](link)",
                         "Something completely different ..."
@@ -43,7 +43,7 @@ class ImgFluidTest {
     void marginBottomTest() throws MDPSyntaxError {
 
         OutlineElementTestBench.execute(
-                new ImgFluidFactory(),
+                new ImgFluid(),
                 new String[]{
                         "@img-fluid[alt=\"Ein alternativer Text\" margin-bottom=\"1\"](link)",
                         "Something completely different ..."

@@ -126,7 +126,7 @@ class ImgTextTest {
     void plausibilityTest() throws MDPSyntaxError {
 
         OutlineElementTestBench.execute(
-                new ImgTextFactory(),
+                new ImgText(),
                 new String[] {
                         "@img-text[alt=\"Bild\"](picture.mp3)",
                         "    Some text."
@@ -149,7 +149,7 @@ class ImgTextTest {
     void nestedAccordion() throws MDPSyntaxError {
 
         OutlineElementTestBench.execute(
-                new OutlineElementTestBenchExecutor(new ImgTextFactory())
+                new OutlineElementTestBenchExecutor(new ImgText())
                         .withMDPFile(new File(RESRC_DIR, "imgtext_with_nested_accordion.mdp"))
                         .withExpectedFile(new File(RESRC_DIR, "imgtext_with_nested_accordion.expected"))
                         .withExpectedDocumentIteratorIndex(10)

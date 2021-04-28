@@ -28,23 +28,23 @@ public class OutlineElementTestBench {
 
         execute(
                 testName,
-                outlineElementTestBenchExecutor.getOutlineElementFactory(),
+                outlineElementTestBenchExecutor.getOutlineElement(),
                 outlineElementTestBenchExecutor.getMdpLines(),
                 outlineElementTestBenchExecutor.getExpectedLines(),
                 outlineElementTestBenchExecutor.getExpectedDocumentIteratorIndex()
         );
     }
 
-    public static void execute(OutlineElementFactory outlineElementFactory, String[] mdpLines, String[] expectedHtmlLines, int expectedDocumentIteratorIndex) throws MDPSyntaxError {
+    public static void execute(OutlineElement outlineElement, String[] mdpLines, String[] expectedHtmlLines, int expectedDocumentIteratorIndex) throws MDPSyntaxError {
 
         StackTraceElement[] stackTraceElements = new Throwable().getStackTrace();
         if (stackTraceElements.length < 2) throw new RuntimeException("Call from external method expected.");
         String testName = "[TEST: " + stackTraceElements[1].getMethodName() + "] [CLASS: " + stackTraceElements[1].getClassName() + "]";
 
-        execute(testName, outlineElementFactory, mdpLines, expectedHtmlLines, expectedDocumentIteratorIndex);
+        execute(testName, outlineElement, mdpLines, expectedHtmlLines, expectedDocumentIteratorIndex);
     }
 
-    public static void execute(OutlineElementFactory outlineElementFactory, String[] mdpLines, File expectedHtmlFile, int expectedDocumentIteratorIndex) throws IOException, MDPSyntaxError {
+    public static void execute(OutlineElement outlineElement, String[] mdpLines, File expectedHtmlFile, int expectedDocumentIteratorIndex) throws IOException, MDPSyntaxError {
 
         StackTraceElement[] stackTraceElements = new Throwable().getStackTrace();
         if (stackTraceElements.length < 2) throw new RuntimeException("Call from external method expected.");
@@ -53,16 +53,15 @@ public class OutlineElementTestBench {
         List<String> expectedLinesAsList = TextFile.getLinesAsStrings(expectedHtmlFile);
         String[] expectedLines = expectedLinesAsList.toArray(new String[0]);
 
-        execute(testName, outlineElementFactory, mdpLines, expectedLines, expectedDocumentIteratorIndex);
+        execute(testName, outlineElement, mdpLines, expectedLines, expectedDocumentIteratorIndex);
     }
 
-    private static void execute(String testName, OutlineElementFactory outlineElementFactory, String[] mdpLines, String[] expectedHtmlLines, int expectedDocumentIteratorIndex) throws MDPSyntaxError {
+    private static void execute(String testName, OutlineElement outlineElement, String[] mdpLines, String[] expectedHtmlLines, int expectedDocumentIteratorIndex) throws MDPSyntaxError {
 
         DocumentIterator documentIterator = DocumentIterator.getInstance(mdpLines);
         documentIterator.getNextLine();
         Result result = new ResultTest();
 
-        OutlineElement outlineElement = outlineElementFactory.getInstance();
         outlineElement.process(CompilerContext.getDefaultTestContext(), documentIterator, result);
 
         if (SOUT_RESULT) {
@@ -84,12 +83,11 @@ public class OutlineElementTestBench {
     }
 
     @Deprecated
-    public static void execute(@SuppressWarnings("SpellCheckingInspection") String testname, DocumentIterator documentIterator, OutlineElementFactory outlineElementFactory, File file, int expectedDocumentIteratorIndex) throws MDPSyntaxError, IOException {
+    public static void execute(@SuppressWarnings("SpellCheckingInspection") String testname, DocumentIterator documentIterator, OutlineElement outlineElement, File file, int expectedDocumentIteratorIndex) throws MDPSyntaxError, IOException {
 
         documentIterator.getNextLine();
         Result result = new ResultTest();
 
-        OutlineElement outlineElement = outlineElementFactory.getInstance();
         outlineElement.process(CompilerContext.getDefaultTestContext(), documentIterator, result);
 
         if (SOUT_RESULT) {

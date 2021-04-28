@@ -11,7 +11,7 @@ class VideoTest {
     void plausibilityTest() throws MDPSyntaxError {
 
         OutlineElementTestBench.execute(
-                new VideoFactory(),
+                new Video(),
                 new String[]{
                         "@video[](myVideo.mp4)",
                         "Something completely different ..."
@@ -29,7 +29,7 @@ class VideoTest {
     void posterTest() throws MDPSyntaxError {
 
         OutlineElementTestBench.execute(
-                new VideoFactory(),
+                new Video(),
                 new String[]{
                         "@video[poster=\"background.png\"](myVideo.mp4)",
                         "Something completely different ..."
@@ -47,7 +47,7 @@ class VideoTest {
     void marginTest() throws MDPSyntaxError {
 
         OutlineElementTestBench.execute(
-                new VideoFactory(),
+                new Video(),
                 new String[]{
                         "@video[poster=\"background.png\" margin-top=\"1\" margin-bottom=\"2\"](myVideo.mp4)",
                         "Something completely different ..."

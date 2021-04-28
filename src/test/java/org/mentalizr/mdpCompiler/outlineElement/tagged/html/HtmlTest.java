@@ -1,9 +1,9 @@
 package org.mentalizr.mdpCompiler.outlineElement.tagged.html;
 
+import org.junit.jupiter.api.Test;
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
 import org.mentalizr.mdpCompilerTestResrc.OutlineElementTestBench;
 import org.mentalizr.mdpCompilerTestResrc.OutlineElementTestBenchExecutor;
-import org.junit.jupiter.api.Test;
 
 class HtmlTest {
 
@@ -11,7 +11,7 @@ class HtmlTest {
     void plausibilityTest() throws MDPSyntaxError {
 
         OutlineElementTestBench.execute(
-                new OutlineElementTestBenchExecutor(new HtmlFactory())
+                new OutlineElementTestBenchExecutor(new Html())
                         .withMDPLines("@html[]",
                                 "    <p>This is made by custom html</p>")
                         .withExpectedLines(new String[]{
@@ -26,7 +26,7 @@ class HtmlTest {
     void withId() throws MDPSyntaxError {
 
         OutlineElementTestBench.execute(
-                new OutlineElementTestBenchExecutor(new HtmlFactory())
+                new OutlineElementTestBenchExecutor(new Html())
                         .withMDPLines("@html[id=\"id4711\"]",
                                 "    <p>This is made by custom html</p>")
                         .withExpectedLines(new String[]{
@@ -41,7 +41,7 @@ class HtmlTest {
     void withIdAndMargins() throws MDPSyntaxError {
 
         OutlineElementTestBench.execute(
-                new OutlineElementTestBenchExecutor(new HtmlFactory())
+                new OutlineElementTestBenchExecutor(new Html())
                         .withMDPLines("@html[id=\"id4711\" margin-bottom=\"1\" margin-top=\"2\"]",
                                 "    <p>This is made by custom html</p>")
                         .withExpectedLines(new String[]{

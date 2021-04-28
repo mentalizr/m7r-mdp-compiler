@@ -1,8 +1,8 @@
 package org.mentalizr.mdpCompiler.outlineElement.tagged.imgCenter;
 
+import org.junit.jupiter.api.Test;
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
 import org.mentalizr.mdpCompilerTestResrc.OutlineElementTestBench;
-import org.junit.jupiter.api.Test;
 
 @SuppressWarnings("SpellCheckingInspection")
 class ImgCenterTest {
@@ -11,7 +11,7 @@ class ImgCenterTest {
     void plausibilityTest() throws MDPSyntaxError {
 
         OutlineElementTestBench.execute(
-                new ImgCenterFactory(),
+                new ImgCenter(),
                 new String[]{
                         "@img-center[alt=\"Ein alternativer Text\"](link)",
                         "Something completely different ..."

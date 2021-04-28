@@ -1,5 +1,6 @@
 package org.mentalizr.mdpCompiler.outlineElement.md.table;
 
+import org.mentalizr.mdpCompiler.document.Line;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElement;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModelBuilder;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
@@ -11,6 +12,11 @@ public class Table extends OutlineElement {
 
     public Table() {
         super("| ");
+    }
+
+    @Override
+    public boolean isResponsible(Line line) {
+        return line.asString().startsWith(this.prefix) && line.asString().trim().endsWith(this.prefix.trim());
     }
 
     @Override

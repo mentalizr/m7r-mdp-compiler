@@ -1,6 +1,7 @@
 package org.mentalizr.mdpCompilerTestResrc;
 
 import org.mentalizr.mdpCompiler.helper.TextFile;
+import org.mentalizr.mdpCompiler.outlineElement.OutlineElement;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementFactory;
 
 import java.io.File;
@@ -8,17 +9,17 @@ import java.io.IOException;
 
 public class OutlineElementTestBenchExecutor {
 
-    private final OutlineElementFactory outlineElementFactory;
+    private final OutlineElement outlineElement;
     private String[] mdpLines;
     private String[] expectedLines;
     private int expectedDocumentIteratorIndex = -1;
 
-    public OutlineElementTestBenchExecutor(OutlineElementFactory outlineElementFactory) {
-        this.outlineElementFactory = outlineElementFactory;
+    public OutlineElementTestBenchExecutor(OutlineElement outlineElement) {
+        this.outlineElement = outlineElement;
     }
 
-    public OutlineElementFactory getOutlineElementFactory() {
-        return this.outlineElementFactory;
+    public OutlineElement getOutlineElement() {
+        return this.outlineElement;
     }
 
 //    public OutlineElementTestBenchExecutor withMDPLines(String[] mdpLines) {

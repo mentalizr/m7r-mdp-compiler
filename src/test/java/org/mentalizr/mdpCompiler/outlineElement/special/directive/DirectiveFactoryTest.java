@@ -12,24 +12,16 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class DirectiveFactoryTest {
 
     @Test
-    void getInstance() throws MDPSyntaxError {
-        DirectiveFactory directiveFactory = new DirectiveFactory();
-        OutlineElement outlineElement = directiveFactory.getInstance();
-
-        assertTrue(outlineElement instanceof Directive);
-    }
-
-    @Test
     void isResponsible() {
         DocumentIterator documentIterator = DocumentIterator.getInstance(
                 "@@name=myName",
                 "@@persistent");
-        DirectiveFactory directiveFactory = new DirectiveFactory();
+        Directive directive = new Directive();
 
         Line firstLine = documentIterator.getNextLine();
         System.out.println(firstLine.getLineIndex() + ": " + firstLine.asString());
 
-        assertTrue(directiveFactory.isResponsible(firstLine));
+        assertTrue(directive.isResponsible(firstLine));
     }
 
     @Test
@@ -38,12 +30,12 @@ class DirectiveFactoryTest {
                 "",
                 "@@name=myName",
                 "@@persistent");
-        DirectiveFactory directiveFactory = new DirectiveFactory();
+        Directive directive = new Directive();
 
         Line firstLine = documentIterator.getNextLine();
         System.out.println(firstLine.getLineIndex() + ": " + firstLine.asString());
 
-        assertFalse(directiveFactory.isResponsible(firstLine));
+        assertFalse(directive.isResponsible(firstLine));
     }
 
 }

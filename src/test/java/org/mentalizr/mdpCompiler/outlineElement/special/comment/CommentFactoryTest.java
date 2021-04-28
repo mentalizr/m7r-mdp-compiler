@@ -10,19 +10,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class CommentFactoryTest {
 
     @Test
-    void getInstance() throws MDPSyntaxError {
-        CommentFactory commentFactory = new CommentFactory();
-        OutlineElement outlineElement = commentFactory.getInstance();
-
-        assertTrue(outlineElement instanceof Comment);
-    }
-
-    @Test
     void isResponsible() {
-        CommentFactory commentFactory = new CommentFactory();
+        Comment comment = new Comment();
         Line line = Line.createLine0("// some comment");
 
-        assertTrue(commentFactory.isResponsible(line));
+        assertTrue(comment.isResponsible(line));
     }
 
 }

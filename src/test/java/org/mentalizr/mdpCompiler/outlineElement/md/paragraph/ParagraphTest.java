@@ -1,10 +1,10 @@
 package org.mentalizr.mdpCompiler.outlineElement.md.paragraph;
 
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
 import org.mentalizr.mdpCompilerTestResrc.OutlineElementTestBench;
 import org.mentalizr.mdpCompilerTestResrc.OutlineElementTestBenchExecutor;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 
 import java.io.File;
 
@@ -17,7 +17,7 @@ class ParagraphTest {
     void oneLine() throws MDPSyntaxError {
 
         OutlineElementTestBenchExecutor outlineElementTestBenchExecutor
-                = new OutlineElementTestBenchExecutor(new ParagraphFactory())
+                = new OutlineElementTestBenchExecutor(new Paragraph())
                 .withMDPLines(
                         "Was ist eigentlich mit mir los, was stimmt mit mir nicht ...",
                         "")
@@ -32,7 +32,7 @@ class ParagraphTest {
     void oneLineEOF() throws MDPSyntaxError {
 
         OutlineElementTestBenchExecutor outlineElementTestBenchExecutor
-                = new OutlineElementTestBenchExecutor(new ParagraphFactory())
+                = new OutlineElementTestBenchExecutor(new Paragraph())
                 .withMDPLines("Was ist eigentlich mit mir los, was stimmt mit mir nicht ...")
                 .withExpectedFile(new File(EXPECTED_DIR, "oneLine-1.expected"))
                 .withExpectedDocumentIteratorIndex(0);
@@ -45,7 +45,7 @@ class ParagraphTest {
     void multiLine() throws MDPSyntaxError {
 
         OutlineElementTestBenchExecutor outlineElementTestBenchExecutor
-                = new OutlineElementTestBenchExecutor(new ParagraphFactory())
+                = new OutlineElementTestBenchExecutor(new Paragraph())
                 .withMDPLines(
                         "Was ist eigentlich mit mir los, was stimmt mit mir nicht ...",
                         "eine zeite Zeile",
@@ -62,7 +62,7 @@ class ParagraphTest {
     void multiLineWithInlineContent() throws MDPSyntaxError {
 
         OutlineElementTestBench.execute(
-                new ParagraphFactory(),
+                new Paragraph(),
                 new String[]{
                         "Was ist eigentlich mit mir los, was stimmt mit mir nicht ...",
                         "eine zeite Zeile mit *kursivem* und **fettem** Inhalt",

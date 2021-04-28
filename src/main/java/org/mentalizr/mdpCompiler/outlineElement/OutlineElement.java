@@ -3,14 +3,15 @@ package org.mentalizr.mdpCompiler.outlineElement;
 import org.mentalizr.mdpCompiler.CompilerContext;
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
 import org.mentalizr.mdpCompiler.document.DocumentIterator;
+import org.mentalizr.mdpCompiler.document.Line;
 import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementExtractor;
 import org.mentalizr.mdpCompiler.result.Result;
+
+import java.util.Objects;
 
 public abstract class OutlineElement {
 
     protected String prefix;
-
-    protected OutlineElementModel outlineElementModel;
 
     public OutlineElement(String prefix) {
         this.prefix = prefix;
@@ -26,11 +27,15 @@ public abstract class OutlineElement {
         return this.prefix;
     }
 
+    public boolean isResponsible(Line line) {
+        return line.asString().startsWith(this.prefix);
+    }
+
     public void process(CompilerContext compilerContext, DocumentIterator documentIterator, Result result) throws MDPSyntaxError {
 
         Extraction extraction = getOutlineElementLinesExtractor().extract(documentIterator);
 
-        this.outlineElementModel = getOutlineElementModelBuilder().getModel(extraction);
+        OutlineElementModel outlineElementModel = getOutlineElementModelBuilder().getModel(extraction);
 
         this.getOutlineElementRenderer().render(outlineElementModel, compilerContext, result);
 
@@ -48,4 +53,16 @@ public abstract class OutlineElement {
         getOutlineElementRenderer().render(outlineElementModel, compilerContext, result);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OutlineElement that = (OutlineElement) o;
+        return prefix.equals(that.prefix);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(prefix);
+    }
 }

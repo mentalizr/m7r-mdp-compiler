@@ -1,8 +1,8 @@
 package org.mentalizr.mdpCompiler.outlineElement.tagged.card;
 
+import org.junit.jupiter.api.Test;
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
 import org.mentalizr.mdpCompilerTestResrc.OutlineElementTestBench;
-import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,7 +15,7 @@ class CardTest {
     void plausibilitySingleLine() throws MDPSyntaxError, IOException {
 
         OutlineElementTestBench.execute(
-                new CardFactory(),
+                new Card(),
                 new String[]{
                         "@card[]",
                         "    Hier der Text!",
@@ -31,7 +31,7 @@ class CardTest {
     void plausibilityMultiLine() throws MDPSyntaxError, IOException {
 
         OutlineElementTestBench.execute(
-                new CardFactory(),
+                new Card(),
                 new String[]{
                         "@card[]",
                         "    Here some text!",

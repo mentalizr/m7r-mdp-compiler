@@ -17,7 +17,7 @@ class AccordionTest {
     void plausibility_pos_1() throws MDPSyntaxError, IOException {
 
         OutlineElementTestBench.execute(
-                new AccordionFactory(),
+                new Accordion(),
                 new String[]{
                         "@accordion[id=\"i4711\"]",
                         "--- Header 1",
@@ -42,7 +42,7 @@ class AccordionTest {
     void inline() throws MDPSyntaxError, IOException {
 
         OutlineElementTestBench.execute(
-                new AccordionFactory(),
+                new Accordion(),
                 new String[]{
                         "@accordion[id=\"i4711\"]",
                         "--- Header 1",
@@ -68,7 +68,7 @@ class AccordionTest {
     void nestedImgText() throws MDPSyntaxError, IOException {
 
         OutlineElementTestBench.execute(
-                new AccordionFactory(),
+                new Accordion(),
                 new String[]{
                         "@accordion[id=\"id4711\" \"showFirst\"]",
                         "--- Header 1",
@@ -97,7 +97,7 @@ class AccordionTest {
     void nestedTwoTimes() throws IOException, MDPSyntaxError {
 
         OutlineElementTestBench.execute(
-                new AccordionFactory(),
+                new Accordion(),
                 new String[]{
                         "@accordion[id=\"id4711\" \"showFirst\"]",
                         "--- Header 1",
@@ -128,7 +128,7 @@ class AccordionTest {
     void provocation_noCardContent() throws IOException, MDPSyntaxError {
 
         OutlineElementTestBench.execute(
-                new AccordionFactory(),
+                new Accordion(),
                 new String[]{
                         "@accordion[id=\"id4711\" \"showFirst\"]",
                         "--- Header 1",
@@ -145,7 +145,7 @@ class AccordionTest {
     void provocation_noContent() throws MDPSyntaxError {
 
         OutlineElementTestBench.execute(
-                new AccordionFactory(),
+                new Accordion(),
                 new String[]{
                         "@accordion[id=\"id4711\" \"showFirst\"]",
                         "",
@@ -165,7 +165,7 @@ class AccordionTest {
 
         try {
             OutlineElementTestBench.execute(
-                    new AccordionFactory(),
+                    new Accordion(),
                     new String[]{
                             "@accordion[id=\"id4711\" \"showFirst\"]",
                             "",
