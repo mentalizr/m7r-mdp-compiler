@@ -15,11 +15,8 @@ import java.util.List;
 
 public class TextareaGroupModelBuilder extends TextBlockModelBuilder {
 
-    private List<OutlineElementModel> outlineElementModelList;
-
     public TextareaGroupModelBuilder() {
         super(new TextareaGroup());
-        this.outlineElementModelList = new ArrayList<>();
     }
 
     @Override
@@ -29,8 +26,8 @@ public class TextareaGroupModelBuilder extends TextBlockModelBuilder {
             return new TextareaGroupModel(textBlockModel.getMdpTag(), textBlockModel.getSingleLineAsString());
         } else {
             Document document = textBlockModel.asDocument();
-            this.outlineElementModelList = MDPCompiler.getModelsForSubdocument(document);
-            return new TextareaGroupModel(textBlockModel.getMdpTag(), this.outlineElementModelList);
+            List<OutlineElementModel> childElements = MDPCompiler.getModelsForSubdocument(document);
+            return new TextareaGroupModel(textBlockModel.getMdpTag(), childElements);
         }
     }
 

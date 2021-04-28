@@ -44,13 +44,13 @@ public class GridRenderer extends OutlineElementRenderer {
     private void createRow(GridModel gridModel, int rowIndex, CompilerContext compilerContext, Result result) throws MDPSyntaxError {
 
         ColumnContent columnContent = gridModel.getColumnContentList().get(rowIndex);
-
         result.addLn(compilerContext.getIndentLevel() + 1, "<div class=\"" + columnContent.getClassValue() + "\">");
 
-        MDPCompiler.compileSubdocument(
-                columnContent.asDocument(),
+        MDPCompiler.renderSubdocument(
+                columnContent.getChildElements(),
                 result,
-                new CompilerContext(false, compilerContext.getIndentLevel() + 1));
+                new CompilerContext(false, compilerContext.getIndentLevel() + 1)
+        );
 
         result.addLn(compilerContext.getIndentLevel() + 1,"</div>");
     }

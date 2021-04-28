@@ -2,27 +2,29 @@ package org.mentalizr.mdpCompiler.outlineElement.tagged.grid;
 
 import org.mentalizr.mdpCompiler.document.Document;
 import org.mentalizr.mdpCompiler.document.Line;
-import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ColumnContent {
+public class ColumnLineContent {
 
     private final String classValue;
-    private final List<OutlineElementModel> childElements;
+    private final List<Line> content;
 
-    public ColumnContent(String classValue, List<OutlineElementModel> childElements) {
+    public ColumnLineContent(String classValue) {
         this.classValue = classValue;
-        this.childElements = childElements;
+        this.content = new ArrayList<>();
+    }
+
+    public void add(Line lineOfContent) {
+        this.content.add(lineOfContent);
     }
 
     public String getClassValue() {
         return this.classValue;
     }
 
-    public List<OutlineElementModel> getChildElements() {
-        return this.childElements;
+    public Document asDocument() {
+        return new Document(this.content);
     }
-
 }

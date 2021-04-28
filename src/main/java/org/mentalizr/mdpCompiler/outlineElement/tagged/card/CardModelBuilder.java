@@ -13,11 +13,8 @@ import java.util.List;
 
 public class CardModelBuilder extends TextBlockModelBuilder {
 
-    private List<OutlineElementModel> outlineElementModelList;
-
     public CardModelBuilder() {
         super(new Card());
-        this.outlineElementModelList = new ArrayList<>();
     }
 
     @Override
@@ -27,8 +24,8 @@ public class CardModelBuilder extends TextBlockModelBuilder {
             return new CardModel(textBlockModel.getMdpTag(), textBlockModel.getSingleLineAsString());
         } else {
             Document document = textBlockModel.asDocument();
-            this.outlineElementModelList = MDPCompiler.getModelsForSubdocument(document);
-            return new CardModel(textBlockModel.getMdpTag(), this.outlineElementModelList);
+            List<OutlineElementModel> childElement = MDPCompiler.getModelsForSubdocument(document);
+            return new CardModel(textBlockModel.getMdpTag(), childElement);
         }
     }
 

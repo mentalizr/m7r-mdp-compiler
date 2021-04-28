@@ -15,11 +15,8 @@ import java.util.List;
 
 public class RadioGroupModelBuilder extends TextBlockModelBuilder {
 
-    private List<OutlineElementModel> outlineElementModelList;
-
     public RadioGroupModelBuilder() {
         super(new RadioGroup());
-        this.outlineElementModelList = new ArrayList<>();
     }
 
     @Override
@@ -29,8 +26,8 @@ public class RadioGroupModelBuilder extends TextBlockModelBuilder {
             return new RadioGroupModel(textBlockModel.getMdpTag(), textBlockModel.getSingleLineAsString());
         } else {
             Document document = textBlockModel.asDocument();
-            this.outlineElementModelList = MDPCompiler.getModelsForSubdocument(document);
-            return new RadioGroupModel(textBlockModel.getMdpTag(), this.outlineElementModelList);
+            List<OutlineElementModel> childElements = MDPCompiler.getModelsForSubdocument(document);
+            return new RadioGroupModel(textBlockModel.getMdpTag(), childElements);
         }
     }
 

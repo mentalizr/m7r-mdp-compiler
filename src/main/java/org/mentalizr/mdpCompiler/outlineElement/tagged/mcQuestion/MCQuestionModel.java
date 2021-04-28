@@ -1,6 +1,5 @@
 package org.mentalizr.mdpCompiler.outlineElement.tagged.mcQuestion;
 
-import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTaggedModel;
 
 import java.util.List;

@@ -7,18 +7,19 @@ import org.mentalizr.mdpCompiler.document.Line;
 import org.mentalizr.mdpCompiler.outlineElement.Extraction;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
 import org.mentalizr.mdpCompiler.outlineElement.md.heading.HeadingModel;
-import org.mentalizr.mdpCompiler.outlineElement.md.paragraph.Paragraph;
-import org.mentalizr.mdpCompiler.outlineElement.md.paragraph.ParagraphModel;
 import org.mentalizr.mdpCompiler.outlineElement.md.ul.ULModel;
-import org.mentalizr.mdpCompiler.outlineElement.tagged.TextBlockModel;
-import org.mentalizr.mdpCompiler.outlineElement.tagged.collapsable.*;
+import org.mentalizr.mdpCompiler.outlineElement.tagged.collapsable.CollapsableCardContent;
+import org.mentalizr.mdpCompiler.outlineElement.tagged.collapsable.CollapsableExtraction;
+import org.mentalizr.mdpCompiler.outlineElement.tagged.collapsable.CollapsableModel;
+import org.mentalizr.mdpCompiler.outlineElement.tagged.collapsable.CollapsableModelBuilder;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.imgText.ImgTextModel;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class CollapsableModelBuilderTest {
 
