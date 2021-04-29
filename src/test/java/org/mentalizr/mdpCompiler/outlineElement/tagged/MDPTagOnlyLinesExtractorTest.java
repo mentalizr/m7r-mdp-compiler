@@ -1,12 +1,9 @@
 package org.mentalizr.mdpCompiler.outlineElement.tagged;
 
-import org.mentalizr.mdpCompiler.document.DocumentIterator;
-import org.mentalizr.mdpCompiler.document.Line;
 import org.junit.jupiter.api.Test;
+import org.mentalizr.mdpCompiler.document.DocumentIterator;
 import org.mentalizr.mdpCompiler.outlineElement.Extraction;
-import org.mentalizr.mdpCompiler.outlineElement.tagged.imgFluid.ImgFluidExtractionFactory;
-
-import java.util.List;
+import org.mentalizr.mdpCompiler.outlineElement.tagged.imgFluid.ImgFluidExtractor;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -23,8 +20,8 @@ class MDPTagOnlyLinesExtractorTest {
         );
         documentIterator.getNextLine();
 
-        MDPTagOnlyExtractor mdpTagOnlyLinesExtractor = new MDPTagOnlyExtractor(new ImgFluidExtractionFactory());
-        Extraction extraction = mdpTagOnlyLinesExtractor.extract(documentIterator);
+        ImgFluidExtractor imgFluidExtractor = new ImgFluidExtractor();
+        Extraction extraction = imgFluidExtractor.extract(documentIterator);
 
         assertEquals(1, extraction.getNrOfLines());
         assertEquals("@img-fluid[alt=\"Ein alternativer Text.\"]()", extraction.getTagLine().asString());

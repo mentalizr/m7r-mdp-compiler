@@ -1,12 +1,16 @@
 package org.mentalizr.mdpCompiler.outlineElement.tagged.video;
 
+import org.mentalizr.mdpCompiler.document.Line;
+import org.mentalizr.mdpCompiler.outlineElement.Extraction;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.MDPTagOnlyExtractor;
-import org.mentalizr.mdpCompiler.outlineElement.tagged.audio.AudioExtractionFactory;
+
+import java.util.List;
 
 public class VideoExtractor extends MDPTagOnlyExtractor {
 
-    public VideoExtractor() {
-        super(new VideoExtractionFactory());
+    @Override
+    protected Extraction createExtraction(List<Line> lines) {
+        return new VideoExtraction(lines);
     }
 
 }

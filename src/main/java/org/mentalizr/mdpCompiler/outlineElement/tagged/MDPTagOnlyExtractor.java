@@ -4,11 +4,11 @@ import org.mentalizr.mdpCompiler.document.Line;
 import org.mentalizr.mdpCompiler.outlineElement.ExtractionFactory;
 import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementExtractor;
 
-public class MDPTagOnlyExtractor extends OutlineElementExtractor {
+public abstract class MDPTagOnlyExtractor extends OutlineElementExtractor {
 
-    public MDPTagOnlyExtractor(ExtractionFactory extractionFactory) {
-        super(extractionFactory);
-    }
+//    public MDPTagOnlyExtractor(ExtractionFactory extractionFactory) {
+//        super(extractionFactory);
+//    }
 
     @Override
     protected boolean isTerminated(Line line) {

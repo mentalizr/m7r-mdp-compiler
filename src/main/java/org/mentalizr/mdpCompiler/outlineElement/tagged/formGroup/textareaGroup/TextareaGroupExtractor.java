@@ -1,12 +1,16 @@
 package org.mentalizr.mdpCompiler.outlineElement.tagged.formGroup.textareaGroup;
 
+import org.mentalizr.mdpCompiler.document.Line;
+import org.mentalizr.mdpCompiler.outlineElement.Extraction;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.TextBlockExtractor;
-import org.mentalizr.mdpCompiler.outlineElement.tagged.formGroup.radioGroup.RadioGroupExtractionFactory;
+
+import java.util.List;
 
 public class TextareaGroupExtractor extends TextBlockExtractor {
 
-    public TextareaGroupExtractor() {
-        super(new TextareaGroupExtractionFactory());
+    @Override
+    protected Extraction createExtraction(List<Line> lines) {
+        return new TextareaGroupExtraction(lines);
     }
 
 }

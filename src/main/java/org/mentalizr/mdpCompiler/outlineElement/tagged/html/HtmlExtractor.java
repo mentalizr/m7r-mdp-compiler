@@ -1,12 +1,16 @@
 package org.mentalizr.mdpCompiler.outlineElement.tagged.html;
 
+import org.mentalizr.mdpCompiler.document.Line;
+import org.mentalizr.mdpCompiler.outlineElement.Extraction;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.TextBlockExtractor;
-import org.mentalizr.mdpCompiler.outlineElement.tagged.card.CardExtractionFactory;
+
+import java.util.List;
 
 public class HtmlExtractor extends TextBlockExtractor {
 
-    public HtmlExtractor() {
-        super(new HtmlExtractionFactory());
+    @Override
+    protected Extraction createExtraction(List<Line> lines) {
+        return new HtmlExtraction(lines);
     }
 
 }

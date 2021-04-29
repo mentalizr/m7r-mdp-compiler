@@ -11,11 +11,9 @@ public abstract class OutlineElementExtractor {
 
     public enum TerminationStrategy { INCLUDE, EXCLUDE_IGNORE, EXCLUDE_REPROCESS }
 
-    protected ExtractionFactory extractionFactory;
     protected ExtractedOutlineElementBuffer extractedOutlineElementBuffer;
 
-    public OutlineElementExtractor(ExtractionFactory extractionFactory) {
-        this.extractionFactory = extractionFactory;
+    public OutlineElementExtractor() {
         this.extractedOutlineElementBuffer = new ExtractedOutlineElementBuffer();
     }
 
@@ -51,19 +49,19 @@ public abstract class OutlineElementExtractor {
         extractedOutlineElementBuffer.stripTrailingEmptyLines();
 
         List<Line> lines = extractedOutlineElementBuffer.getLines();
-        return this.extractionFactory.createInstance(lines);
+        return createExtraction(lines);
     }
 
     protected abstract boolean isTerminated(Line line);
 
     protected abstract TerminationStrategy getTerminationStrategy();
 
+    protected abstract Extraction createExtraction(List<Line> lines);
+
     /**
      * Override this method if some further custom modification of extracted lines is necessary,
      * e.g. stripping empty lines.
      */
-    protected void postProcessExtractedLines() {
-
-    }
+    protected void postProcessExtractedLines() {}
 
 }

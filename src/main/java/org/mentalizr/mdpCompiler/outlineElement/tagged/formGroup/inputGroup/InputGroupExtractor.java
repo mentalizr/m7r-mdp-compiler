@@ -1,12 +1,16 @@
 package org.mentalizr.mdpCompiler.outlineElement.tagged.formGroup.inputGroup;
 
+import org.mentalizr.mdpCompiler.document.Line;
+import org.mentalizr.mdpCompiler.outlineElement.Extraction;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.TextBlockExtractor;
-import org.mentalizr.mdpCompiler.outlineElement.tagged.card.CardExtractionFactory;
+
+import java.util.List;
 
 public class InputGroupExtractor extends TextBlockExtractor {
 
-    public InputGroupExtractor() {
-        super(new InputGroupExtractionFactory());
+    @Override
+    protected Extraction createExtraction(List<Line> lines) {
+        return new InputGroupExtraction(lines);
     }
 
 }

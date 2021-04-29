@@ -1,13 +1,12 @@
 package org.mentalizr.mdpCompiler.outlineElement.md.ul;
 
 import org.mentalizr.mdpCompiler.document.Line;
+import org.mentalizr.mdpCompiler.outlineElement.Extraction;
 import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementExtractor;
 
-public class ULExtractor extends OutlineElementExtractor {
+import java.util.List;
 
-    public ULExtractor() {
-        super(new ULExtractionFactory());
-    }
+public class ULExtractor extends OutlineElementExtractor {
 
     @Override
     protected boolean isTerminated(Line line) {
@@ -17,6 +16,11 @@ public class ULExtractor extends OutlineElementExtractor {
     @Override
     protected TerminationStrategy getTerminationStrategy() {
         return TerminationStrategy.EXCLUDE_REPROCESS;
+    }
+
+    @Override
+    protected Extraction createExtraction(List<Line> lines) {
+        return new ULExtraction(lines);
     }
 
 }

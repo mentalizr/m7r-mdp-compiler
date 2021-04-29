@@ -1,12 +1,16 @@
 package org.mentalizr.mdpCompiler.outlineElement.tagged.imgFluid;
 
+import org.mentalizr.mdpCompiler.document.Line;
+import org.mentalizr.mdpCompiler.outlineElement.Extraction;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.MDPTagOnlyExtractor;
-import org.mentalizr.mdpCompiler.outlineElement.tagged.imgCenter.ImgCenterExtractionFactory;
+
+import java.util.List;
 
 public class ImgFluidExtractor extends MDPTagOnlyExtractor {
 
-    public ImgFluidExtractor() {
-        super(new ImgFluidExtractionFactory());
+    @Override
+    protected Extraction createExtraction(List<Line> lines) {
+        return new ImgFluidExtraction(lines);
     }
 
 }
