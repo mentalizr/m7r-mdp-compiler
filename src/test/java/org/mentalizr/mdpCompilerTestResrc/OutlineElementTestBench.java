@@ -4,8 +4,9 @@ import de.arthurpicht.utils.io.textfile.TextFile;
 import org.mentalizr.mdpCompiler.CompilerContext;
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
 import org.mentalizr.mdpCompiler.document.DocumentIterator;
+import org.mentalizr.mdpCompiler.outlineElement.Extraction;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElement;
-import org.mentalizr.mdpCompiler.outlineElement.OutlineElementFactory;
+import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
 import org.mentalizr.mdpCompiler.result.Result;
 
 import java.io.File;
@@ -58,11 +59,12 @@ public class OutlineElementTestBench {
 
     private static void execute(String testName, OutlineElement outlineElement, String[] mdpLines, String[] expectedHtmlLines, int expectedDocumentIteratorIndex) throws MDPSyntaxError {
 
-        DocumentIterator documentIterator = DocumentIterator.getInstance(mdpLines);
-        documentIterator.getNextLine();
-        Result result = new ResultTest();
+        DocumentIterator documentIterator = DocumentIterator.getInstanceWithIndexOnFirstLine(mdpLines);
+        Result result = new Result();
 
-        outlineElement.process(CompilerContext.getDefaultTestContext(), documentIterator, result);
+        Extraction extraction = outlineElement.getExtraction(documentIterator);
+        OutlineElementModel outlineElementModel = outlineElement.getModel(extraction);
+        outlineElement.render(outlineElementModel, CompilerContext.getDefaultTestContext(), result);
 
         if (SOUT_RESULT) {
             System.out.println(">>>[OutlineElementTestBench: " + testName + "] generated HTML:");
@@ -82,25 +84,5 @@ public class OutlineElementTestBench {
         assertEquals(expectedDocumentIteratorIndex, documentIterator.getIndex());
     }
 
-    @Deprecated
-    public static void execute(@SuppressWarnings("SpellCheckingInspection") String testname, DocumentIterator documentIterator, OutlineElement outlineElement, File file, int expectedDocumentIteratorIndex) throws MDPSyntaxError, IOException {
-
-        documentIterator.getNextLine();
-        Result result = new ResultTest();
-
-        outlineElement.process(CompilerContext.getDefaultTestContext(), documentIterator, result);
-
-        if (SOUT_RESULT) {
-            System.out.println("###[OutlineElementTestBench] " + testname);
-            for (String htmlLine : result.getResultLines()) {
-                System.out.println(htmlLine);
-            }
-            System.out.println("---");
-        }
-
-        List<String> expectedLines = TextFile.getLinesAsStrings(file);
-        assertEquals(expectedLines, result.getResultLines());
-        assertEquals(expectedDocumentIteratorIndex, documentIterator.getIndex());
-    }
 
 }

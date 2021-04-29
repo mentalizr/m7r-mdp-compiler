@@ -1,7 +1,6 @@
 package org.mentalizr.mdpCompiler.outlineElement.tagged.imgFluid;
 
 import org.mentalizr.mdpCompiler.CompilerContext;
-import org.mentalizr.mdpCompiler.MDPSyntaxError;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
 import org.mentalizr.mdpCompiler.result.Result;
@@ -9,7 +8,7 @@ import org.mentalizr.mdpCompiler.result.Result;
 public class ImgFluidRenderer extends OutlineElementRenderer {
 
     @Override
-    public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, Result result) throws MDPSyntaxError {
+    public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, Result result) {
 
         ImgFluidModel imgFluidModel = (ImgFluidModel) outlineElementModel;
         ImgFluidAttributes imgFluidAttributes = imgFluidModel.getImgFluidAttributes();

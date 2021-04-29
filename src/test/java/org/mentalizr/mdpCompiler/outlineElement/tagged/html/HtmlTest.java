@@ -12,12 +12,15 @@ class HtmlTest {
 
         OutlineElementTestBench.execute(
                 new OutlineElementTestBenchExecutor(new Html())
-                        .withMDPLines("@html[]",
-                                "    <p>This is made by custom html</p>")
-                        .withExpectedLines(new String[]{
+                        .withMDPLines(
+                                "@html[]",
+                                "    <p>This is made by custom html</p>"
+                        )
+                        .withExpectedLines(
                                 "<div class=\"mt-0 mb-0\">",
                                 "    <p>This is made by custom html</p>",
-                                "</div>"})
+                                "</div>"
+                        )
                         .withExpectedDocumentIteratorIndex(1)
         );
     }
@@ -27,12 +30,15 @@ class HtmlTest {
 
         OutlineElementTestBench.execute(
                 new OutlineElementTestBenchExecutor(new Html())
-                        .withMDPLines("@html[id=\"id4711\"]",
-                                "    <p>This is made by custom html</p>")
-                        .withExpectedLines(new String[]{
+                        .withMDPLines(
+                                "@html[id=\"id4711\"]",
+                                "    <p>This is made by custom html</p>"
+                        )
+                        .withExpectedLines(
                                 "<div id=\"id4711\" class=\"mt-0 mb-0\">",
                                 "    <p>This is made by custom html</p>",
-                                "</div>"})
+                                "</div>"
+                        )
                         .withExpectedDocumentIteratorIndex(1)
         );
     }
@@ -44,10 +50,11 @@ class HtmlTest {
                 new OutlineElementTestBenchExecutor(new Html())
                         .withMDPLines("@html[id=\"id4711\" margin-bottom=\"1\" margin-top=\"2\"]",
                                 "    <p>This is made by custom html</p>")
-                        .withExpectedLines(new String[]{
+                        .withExpectedLines(
                                 "<div id=\"id4711\" class=\"mt-2 mb-1\">",
                                 "    <p>This is made by custom html</p>",
-                                "</div>"})
+                                "</div>"
+                        )
                         .withExpectedDocumentIteratorIndex(1)
         );
     }

@@ -1,68 +1,62 @@
 package org.mentalizr.mdpCompiler.outlineElement.md.heading;
 
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.mentalizr.mdpCompiler.CompilerContext;
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
-import org.mentalizr.mdpCompiler.document.DocumentIterator;
-import org.mentalizr.mdpCompiler.document.Line;
 import org.mentalizr.mdpCompiler.result.Result;
-import org.mentalizr.mdpCompilerTestResrc.ResultTest;
-import org.junit.jupiter.api.Test;
+import org.mentalizr.mdpCompilerTestResrc.OutlineElementTestBench;
+import org.mentalizr.mdpCompilerTestResrc.OutlineElementTestBenchExecutor;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class H1Test {
 
     @Test
+    @DisplayName("Plausibility test")
     void plausibility() throws MDPSyntaxError {
-
-        DocumentIterator documentIterator = DocumentIterator.getInstance(
-                "# Eine Überschrift",
-                "",
-                "Eine Zeile");
-        Line firstLine = documentIterator.getNextLine();
-        System.out.println("first Line: " + firstLine.asString());
-        Result result = new ResultTest();
-
-        H1 h1 = new H1();
-        h1.process(CompilerContext.getDefaultTestContext(), documentIterator, result);
-
-        List<String> htmlLines = result.getResultLines();
-
-        assertNotNull(htmlLines);
-        assertEquals(1, htmlLines.size());
-        assertEquals("<p class=\"h1 mt-4 mb-4\">Eine Überschrift</p>", htmlLines.get(0));
+        OutlineElementTestBenchExecutor outlineElementTestBenchExecutor
+                = new OutlineElementTestBenchExecutor(new H1())
+                .withMDPLines(
+                        "# Eine Überschrift",
+                        "",
+                        "Eine Zeile"
+                )
+                .withExpectedLines(
+                        "<p class=\"h1 mt-4 mb-4\">Eine Überschrift</p>"
+                )
+                .withExpectedDocumentIteratorIndex(0);
+        OutlineElementTestBench.execute(outlineElementTestBenchExecutor);
     }
 
     @Test
     void testNoEmptyLineAfter() throws MDPSyntaxError {
 
-        DocumentIterator documentIterator = DocumentIterator.getInstance("# Eine Überschrift", "Eine Zeile");
-        Line firstLine = documentIterator.getNextLine();
-        System.out.println("first Line: " + firstLine.asString());
-        Result result = new ResultTest();
-
-        H1 h1 = new H1();
-        h1.process(CompilerContext.getDefaultTestContext(), documentIterator, result);
-
-        List<String> htmlLines = result.getResultLines();
-
-        assertNotNull(htmlLines);
-        assertEquals(1, htmlLines.size());
-        assertEquals("<p class=\"h1 mt-4 mb-4\">Eine Überschrift</p>", htmlLines.get(0));
+        OutlineElementTestBenchExecutor outlineElementTestBenchExecutor
+                = new OutlineElementTestBenchExecutor(new H1())
+                .withMDPLines(
+                        "# Eine Überschrift",
+                        "Eine Zeile"
+                )
+                .withExpectedLines(
+                        "<p class=\"h1 mt-4 mb-4\">Eine Überschrift</p>"
+                )
+                .withExpectedDocumentIteratorIndex(0);
+        OutlineElementTestBench.execute(outlineElementTestBenchExecutor);
     }
 
     @Test
-    void indentationLevelOne() throws MDPSyntaxError {
-
-        DocumentIterator documentIterator = DocumentIterator.getInstance("# Eine Überschrift", "", "Eine Zeile");
-        Line firstLine = documentIterator.getNextLine();
-        System.out.println("first Line: " + firstLine.asString());
-        Result result = new ResultTest();
-
+    void indentationLevelOne() {
         H1 h1 = new H1();
-        h1.process(new CompilerContext(false, 1), documentIterator, result);
+        HeadingModel headingModel = new HeadingModel(h1);
+        headingModel.addHeading("Eine Überschrift");
+
+        CompilerContext compilerContext = new CompilerContext(false, 1);
+        Result result = new Result();
+        h1.render(headingModel, compilerContext, result);
 
         List<String> htmlLines = result.getResultLines();
 
@@ -72,15 +66,14 @@ class H1Test {
     }
 
     @Test
-    void indentationLevelTwo() throws MDPSyntaxError {
-
-        DocumentIterator documentIterator = DocumentIterator.getInstance("# Eine Überschrift", "", "Eine Zeile");
-        Line firstLine = documentIterator.getNextLine();
-        System.out.println("first Line: " + firstLine.asString());
-        Result result = new ResultTest();
-
+    void indentationLevelTwo() {
         H1 h1 = new H1();
-        h1.process(new CompilerContext(false, 2), documentIterator, result);
+        HeadingModel headingModel = new HeadingModel(h1);
+        headingModel.addHeading("Eine Überschrift");
+
+        CompilerContext compilerContext = new CompilerContext(false, 2);
+        Result result = new Result();
+        h1.render(headingModel, compilerContext, result);
 
         List<String> htmlLines = result.getResultLines();
 

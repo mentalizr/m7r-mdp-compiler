@@ -1,7 +1,6 @@
 package org.mentalizr.mdpCompiler.outlineElement.tagged.mcQuestion;
 
 import org.mentalizr.mdpCompiler.CompilerContext;
-import org.mentalizr.mdpCompiler.MDPSyntaxError;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
 import org.mentalizr.mdpCompiler.result.Result;
@@ -12,7 +11,7 @@ import java.util.UUID;
 public class MCQuestionRenderer extends OutlineElementRenderer {
 
     @Override
-    public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, Result result) throws MDPSyntaxError {
+    public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, Result result) {
 
         MCQuestionModel mcQuestionModel = (MCQuestionModel) outlineElementModel;
         MCQuestionAttributes mcQuestionAttributes = mcQuestionModel.getMcQuestionAttributes();

@@ -1,22 +1,19 @@
 package org.mentalizr.mdpCompiler.outlineElement.tagged.alert;
 
 import de.arthurpicht.utils.io.textfile.TextFile;
+import org.junit.jupiter.api.Test;
 import org.mentalizr.mdpCompiler.CompilerContext;
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
-import org.mentalizr.mdpCompiler.attributeProfile.AttributeProfileException;
-import org.mentalizr.mdpCompiler.attributeProfile.attributesBuilder.AttributesBuilder;
 import org.mentalizr.mdpCompiler.document.Line;
 import org.mentalizr.mdpCompiler.mdpTag.MDPTag;
 import org.mentalizr.mdpCompiler.mdpTag.MDPTagSimple;
 import org.mentalizr.mdpCompiler.result.Result;
-import org.mentalizr.mdpCompilerTestResrc.ResultTest;
-import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AlertRendererTest {
 
@@ -25,7 +22,7 @@ class AlertRendererTest {
     @Test
     void render() throws MDPSyntaxError, IOException {
 
-        Result result = new ResultTest();
+        Result result = new Result();
 
         AlertModel alertModel = new AlertModel();
         MDPTag mdpTag = new MDPTagSimple(new Alert(), new Line("@alert[type=\"info\" headersize=\"3\"]", 0));

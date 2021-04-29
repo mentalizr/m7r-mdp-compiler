@@ -1,7 +1,6 @@
 package org.mentalizr.mdpCompiler.outlineElement;
 
 import org.mentalizr.mdpCompiler.CompilerContext;
-import org.mentalizr.mdpCompiler.MDPSyntaxError;
 import org.mentalizr.mdpCompiler.inlineElement.inlineParser.InlineParserMDP;
 import org.mentalizr.mdpCompiler.result.Result;
 
@@ -13,5 +12,5 @@ public abstract class OutlineElementRenderer {
         this.inlineParserMDP = new InlineParserMDP();
     }
 
-    abstract public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, Result result) throws MDPSyntaxError;
+    abstract public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, Result result);
 }

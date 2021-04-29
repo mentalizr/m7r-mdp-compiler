@@ -1,20 +1,19 @@
 package org.mentalizr.mdpCompiler;
 
+import org.junit.jupiter.api.Test;
 import org.mentalizr.mdpCompiler.document.Document;
 import org.mentalizr.mdpCompiler.helper.TextFile;
-import org.mentalizr.mdpCompiler.outlineElement.OutlineElement;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
 import org.mentalizr.mdpCompiler.outlineElement.md.heading.HeadingModel;
 import org.mentalizr.mdpCompiler.outlineElement.md.ul.ULModel;
 import org.mentalizr.mdpCompiler.result.Result;
-import org.mentalizr.mdpCompilerTestResrc.ResultTest;
-import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SuppressWarnings("SpellCheckingInspection")
 class MDPCompilerTest {
@@ -65,7 +64,7 @@ class MDPCompilerTest {
         );
 
         List<OutlineElementModel> models = MDPCompiler.getModelsForSubdocument(document);
-        Result result = new ResultTest();
+        Result result = new Result();
         CompilerContext compilerContext = new CompilerContext(true, 0);
         MDPCompiler.renderSubdocument(models, result, compilerContext);
 

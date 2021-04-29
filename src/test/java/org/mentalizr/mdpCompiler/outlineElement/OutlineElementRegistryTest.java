@@ -1,18 +1,17 @@
 package org.mentalizr.mdpCompiler.outlineElement;
 
+import org.junit.jupiter.api.Test;
 import org.mentalizr.mdpCompiler.MDPCompiler;
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
 import org.mentalizr.mdpCompiler.document.Document;
 import org.mentalizr.mdpCompiler.document.DocumentIterator;
 import org.mentalizr.mdpCompiler.outlineElement.md.heading.H3;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.formGroup.radioGroup.RadioGroup;
-import org.mentalizr.mdpCompilerTestResrc.ResultTest;
-import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.fail;
 
 @SuppressWarnings("SpellCheckingInspection")
 class OutlineElementRegistryTest {
@@ -24,7 +23,6 @@ class OutlineElementRegistryTest {
         Document document = new Document(0, listOfLines);
         DocumentIterator documentIterator = document.getDocumentIterator();
 
-        ResultTest resultTest = new ResultTest();
         OutlineElementRegistry outlineElementRegistry = new OutlineElementRegistry();
 
         OutlineElement element = outlineElementRegistry.getMatchingElement(documentIterator.getNextLine(), MDPCompiler.Mode.MDP_COMPLETE);
@@ -41,9 +39,7 @@ class OutlineElementRegistryTest {
         Document document = new Document(0, listOfLines);
         DocumentIterator documentIterator = document.getDocumentIterator();
 
-        ResultTest resultTest = new ResultTest();
         OutlineElementRegistry outlineElementRegistry = new OutlineElementRegistry();
-//        OutlineElementRegistry outlineElementRegistry = new OutlineElementRegistry(resultTest, documentIterator);
 
         OutlineElement element = outlineElementRegistry.getMatchingElement(documentIterator.getNextLine(), MDPCompiler.Mode.MDP_COMPLETE);
 

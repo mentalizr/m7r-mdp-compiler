@@ -2,7 +2,6 @@ package org.mentalizr.mdpCompiler.outlineElement.tagged.collapsable.collapse;
 
 import org.mentalizr.mdpCompiler.CompilerContext;
 import org.mentalizr.mdpCompiler.MDPCompiler;
-import org.mentalizr.mdpCompiler.MDPSyntaxError;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.collapsable.CollapsableAttributes;
@@ -16,7 +15,7 @@ import java.util.UUID;
 public class CollapseRenderer extends OutlineElementRenderer {
 
     @Override
-    public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, Result result) throws MDPSyntaxError {
+    public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, Result result) {
 
         CollapseModel collapseModel = (CollapseModel) outlineElementModel;
         CollapsableAttributes collapsableAttributes = collapseModel.getCollapsableAttributes();
@@ -57,7 +56,7 @@ public class CollapseRenderer extends OutlineElementRenderer {
         result.addLn(indent + 1, "</p>");
     }
 
-    private void renderCollapseList(CollapsableModel collapsableModel, int indent, String id, Result result) throws MDPSyntaxError {
+    private void renderCollapseList(CollapsableModel collapsableModel, int indent, String id, Result result) {
 
         CollapsableAttributes collapsableAttributes = collapsableModel.getCollapsableAttributes();
         for (CollapsableCardContent collapsableCardContent : collapsableModel.getCollapsableCardContentList()) {
@@ -67,7 +66,7 @@ public class CollapseRenderer extends OutlineElementRenderer {
 
     }
 
-    private void renderCollapse(int collapsableIndex, CollapsableAttributes collapsableAttributes, int indent, String id, CollapsableCardContent collapsableCardContent, Result result) throws MDPSyntaxError {
+    private void renderCollapse(int collapsableIndex, CollapsableAttributes collapsableAttributes, int indent, String id, CollapsableCardContent collapsableCardContent, Result result) {
         String elementId = id + "_collapse_" + collapsableIndex;
 
         result.addLn(indent + 1, "<div class=\"collapse" + this.getShowFirst(collapsableAttributes, collapsableIndex) + "\" id=\"" + elementId + "\" data-parent=\"#" + id + "\">");
@@ -79,7 +78,7 @@ public class CollapseRenderer extends OutlineElementRenderer {
         result.addLn(indent + 1, "</div>");
     }
 
-    private void processCardContent(CollapsableCardContent collapsableCardContent, int indent, Result result) throws MDPSyntaxError {
+    private void processCardContent(CollapsableCardContent collapsableCardContent, int indent, Result result) {
 
         if (collapsableCardContent.hasSingleLine()) {
             String cardContentSingleLine = collapsableCardContent.getSingleLine();

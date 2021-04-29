@@ -2,7 +2,6 @@ package org.mentalizr.mdpCompiler.outlineElement.tagged.formGroup.radioGroup;
 
 import org.mentalizr.mdpCompiler.CompilerContext;
 import org.mentalizr.mdpCompiler.MDPCompiler;
-import org.mentalizr.mdpCompiler.MDPSyntaxError;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.formGroup.inputGroup.InputGroupAttributes;
@@ -11,7 +10,7 @@ import org.mentalizr.mdpCompiler.result.Result;
 public class RadioGroupRenderer extends OutlineElementRenderer {
 
     @Override
-    public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, Result result) throws MDPSyntaxError {
+    public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, Result result) {
 
         RadioGroupModel radioGroupModel = (RadioGroupModel) outlineElementModel;
         RadioGroupAttributes radioGroupAttributes = radioGroupModel.getRadioGroupAttributes();

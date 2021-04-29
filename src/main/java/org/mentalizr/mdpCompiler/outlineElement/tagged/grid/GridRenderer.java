@@ -2,7 +2,6 @@ package org.mentalizr.mdpCompiler.outlineElement.tagged.grid;
 
 import org.mentalizr.mdpCompiler.CompilerContext;
 import org.mentalizr.mdpCompiler.MDPCompiler;
-import org.mentalizr.mdpCompiler.MDPSyntaxError;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
 import org.mentalizr.mdpCompiler.result.Result;
@@ -16,7 +15,7 @@ public class GridRenderer extends OutlineElementRenderer {
     }
 
     @Override
-    public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, Result result) throws MDPSyntaxError {
+    public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, Result result) {
 
         GridModel gridModel = (GridModel) outlineElementModel;
         GridAttributes gridAttributes = gridModel.getGridAttributes();
@@ -41,7 +40,7 @@ public class GridRenderer extends OutlineElementRenderer {
         return "genId-" + UUID.randomUUID();
     }
 
-    private void createRow(GridModel gridModel, int rowIndex, CompilerContext compilerContext, Result result) throws MDPSyntaxError {
+    private void createRow(GridModel gridModel, int rowIndex, CompilerContext compilerContext, Result result) {
 
         ColumnContent columnContent = gridModel.getColumnContentList().get(rowIndex);
         result.addLn(compilerContext.getIndentLevel() + 1, "<div class=\"" + columnContent.getClassValue() + "\">");

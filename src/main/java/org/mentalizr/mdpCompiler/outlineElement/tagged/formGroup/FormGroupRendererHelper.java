@@ -2,15 +2,13 @@ package org.mentalizr.mdpCompiler.outlineElement.tagged.formGroup;
 
 import org.mentalizr.mdpCompiler.CompilerContext;
 import org.mentalizr.mdpCompiler.MDPCompiler;
-import org.mentalizr.mdpCompiler.MDPSyntaxError;
 import org.mentalizr.mdpCompiler.inlineElement.inlineParser.InlineParserMDP;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.SubModelsWithSingleLine;
-import org.mentalizr.mdpCompiler.outlineElement.tagged.TextBlockModel;
 import org.mentalizr.mdpCompiler.result.Result;
 
 public class FormGroupRendererHelper {
 
-    public static void renderHeaderLines(SubModelsWithSingleLine subModelsWithSingleLine, String id, Result result, CompilerContext compilerContext) throws MDPSyntaxError {
+    public static void renderHeaderLines(SubModelsWithSingleLine subModelsWithSingleLine, String id, Result result, CompilerContext compilerContext) {
 
         int indent = compilerContext.getIndentLevel();
 
@@ -25,11 +23,6 @@ public class FormGroupRendererHelper {
                     result,
                     compilerContext
             );
-
-//            MDPCompiler.compileSubdocument(
-//                    subModelsWithSingleLine.asDocument(),
-//                    result,
-//                    compilerContext);
         }
     }
 

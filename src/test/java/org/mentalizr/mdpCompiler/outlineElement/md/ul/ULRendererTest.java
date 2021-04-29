@@ -4,7 +4,6 @@ import de.arthurpicht.utils.io.textfile.TextFile;
 import org.junit.jupiter.api.Test;
 import org.mentalizr.mdpCompiler.CompilerContext;
 import org.mentalizr.mdpCompiler.result.Result;
-import org.mentalizr.mdpCompilerTestResrc.ResultTest;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,7 +18,7 @@ class ULRendererTest {
     @Test
     void render() throws IOException {
 
-        Result result = new ResultTest();
+        Result result = new Result();
         ULModel ulModel = new ULModel();
         ulModel.addItem("first Item");
         ulModel.addItem("second Item");

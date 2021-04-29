@@ -2,7 +2,6 @@ package org.mentalizr.mdpCompiler.outlineElement.tagged.collapsable.accordion;
 
 import org.mentalizr.mdpCompiler.CompilerContext;
 import org.mentalizr.mdpCompiler.MDPCompiler;
-import org.mentalizr.mdpCompiler.MDPSyntaxError;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.collapsable.CollapsableAttributes;
@@ -14,7 +13,7 @@ import java.util.UUID;
 public class AccordionRenderer extends OutlineElementRenderer {
 
     @Override
-    public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, Result result) throws MDPSyntaxError {
+    public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, Result result) {
 
         AccordionModel accordionModel = (AccordionModel) outlineElementModel;
         CollapsableAttributes collapsableAttributes = accordionModel.getCollapsableAttributes();
@@ -60,7 +59,7 @@ public class AccordionRenderer extends OutlineElementRenderer {
         result.addLn(indent + 2, "</div>");
     }
 
-    private void createCardBody(AccordionModel collapsableModel, CollapsableAttributes collapsableAttributes, String id, int cardIndex, int indent, Result result) throws MDPSyntaxError {
+    private void createCardBody(AccordionModel collapsableModel, CollapsableAttributes collapsableAttributes, String id, int cardIndex, int indent, Result result) {
         String cardHeaderId = getCardHeaderId(id, cardIndex);
         String cardCollapseId = getCardCollapseId(id, cardIndex);
         CollapsableCardContent collapsableCardContent = collapsableModel.getCollapsableCardContentList().get(cardIndex);
@@ -76,7 +75,7 @@ public class AccordionRenderer extends OutlineElementRenderer {
         result.addLn(indent + 2, "</div>");
     }
 
-    private void processCardContent(CollapsableCardContent collapsableCardContent, int indent, Result result) throws MDPSyntaxError {
+    private void processCardContent(CollapsableCardContent collapsableCardContent, int indent, Result result) {
         if (collapsableCardContent.hasSingleLine()) {
             String cardContentSingleLine = collapsableCardContent.getSingleLine();
             String cardContentPreprocessed = this.inlineParserMDP.parse(cardContentSingleLine);
@@ -84,18 +83,6 @@ public class AccordionRenderer extends OutlineElementRenderer {
         } else {
             MDPCompiler.renderSubdocument(collapsableCardContent.getChildElements(), result, new CompilerContext(false, indent + 3));
         }
-
-//        if (collapsableCardContent.getNrOfContentLines() <= 1) {
-//            if (collapsableCardContent.getNrOfContentLines() == 1) {
-//                String cardContentSingleLine = collapsableCardContent.getContent().get(0).asString();
-//                String cardContentPreprocessed = this.inlineParserMDP.parse(cardContentSingleLine);
-//                result.addLn(indent + 5, cardContentPreprocessed);
-//            }
-//            return;
-//        }
-//
-//        Document cardContentDocument = collapsableCardContent.getContentAsDocument();
-//        MDPCompiler.compileSubdocument(cardContentDocument, result, new CompilerContext(false, indent + 3));
     }
 
     private String getCardHeaderId(String id, int cardIndex) {

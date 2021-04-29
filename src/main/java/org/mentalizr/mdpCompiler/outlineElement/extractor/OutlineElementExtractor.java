@@ -3,7 +3,6 @@ package org.mentalizr.mdpCompiler.outlineElement.extractor;
 import org.mentalizr.mdpCompiler.document.DocumentIterator;
 import org.mentalizr.mdpCompiler.document.Line;
 import org.mentalizr.mdpCompiler.outlineElement.Extraction;
-import org.mentalizr.mdpCompiler.outlineElement.ExtractionFactory;
 
 import java.util.List;
 
@@ -37,7 +36,7 @@ public abstract class OutlineElementExtractor {
                 if (getTerminationStrategy() == TerminationStrategy.INCLUDE) {
                     extractedOutlineElementBuffer.add(line);
                 } else if (getTerminationStrategy() == TerminationStrategy.EXCLUDE_REPROCESS) {
-                    documentIterator.getPreviousLine();
+                    documentIterator.stepBack();
                 } else if (getTerminationStrategy() == TerminationStrategy.EXCLUDE_IGNORE) {
                     // do intentionally nothing
                 }

@@ -1,21 +1,9 @@
 package org.mentalizr.mdpCompiler.outlineElement.tagged.collapsable.accordion;
 
-import de.arthurpicht.utils.io.textfile.TextFile;
 import org.junit.jupiter.api.Test;
-import org.mentalizr.mdpCompiler.CompilerContext;
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
-import org.mentalizr.mdpCompiler.document.Line;
-import org.mentalizr.mdpCompiler.mdpTag.MDPTag;
-import org.mentalizr.mdpCompiler.mdpTag.MDPTagSimple;
-import org.mentalizr.mdpCompiler.outlineElement.tagged.collapsable.CollapsableLineModel;
-import org.mentalizr.mdpCompiler.result.Result;
-import org.mentalizr.mdpCompilerTestResrc.ResultTest;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AccordionRendererTest {
 
@@ -26,7 +14,7 @@ class AccordionRendererTest {
 
         // TODO Nach vollständigen Refactoring prüfen, ob Aktualisierung von diesem Test Sinn macht
 
-//        Result result = new ResultTest();
+//        Result result = new Result();
 //
 //        CollapsableLineModel collapsableModel = new CollapsableLineModel(new Accordion());
 //        Line tagLine = new Line("@accordion[id=\"i4711\" \"showFirst\"]", 0);

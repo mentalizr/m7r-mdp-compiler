@@ -2,7 +2,6 @@ package org.mentalizr.mdpCompiler.outlineElement.tagged.imgText;
 
 import org.mentalizr.mdpCompiler.CompilerContext;
 import org.mentalizr.mdpCompiler.MDPCompiler;
-import org.mentalizr.mdpCompiler.MDPSyntaxError;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
 import org.mentalizr.mdpCompiler.result.Result;
@@ -10,7 +9,7 @@ import org.mentalizr.mdpCompiler.result.Result;
 public class ImgTextRenderer extends OutlineElementRenderer {
 
     @Override
-    public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, Result result) throws MDPSyntaxError {
+    public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, Result result) {
 
         ImgTextModel imgTextModel = (ImgTextModel) outlineElementModel;
         ImgTextAttributes imgTextAttributes = imgTextModel.getImgTextAttributes();
@@ -54,11 +53,6 @@ public class ImgTextRenderer extends OutlineElementRenderer {
                 result,
                 new CompilerContext(false, compilerContext.getIndentLevel() + 1)
         );
-
-//        MDPCompiler.compileSubdocument(
-//                imgTextModel.asDocument(),
-//                result,
-//                new CompilerContext(false, compilerContext.getIndentLevel() + 1));
 
         result.addLn(indent + 1, "</div>");
         result.addLn(indent, "</div>");

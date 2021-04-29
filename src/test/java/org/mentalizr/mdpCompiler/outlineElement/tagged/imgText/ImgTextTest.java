@@ -17,7 +17,6 @@ import org.mentalizr.mdpCompiler.outlineElement.md.paragraph.ParagraphModel;
 import org.mentalizr.mdpCompiler.result.Result;
 import org.mentalizr.mdpCompilerTestResrc.OutlineElementTestBench;
 import org.mentalizr.mdpCompilerTestResrc.OutlineElementTestBenchExecutor;
-import org.mentalizr.mdpCompilerTestResrc.ResultTest;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -103,7 +102,7 @@ class ImgTextTest {
 
         ImgTextModel imgTextModel = new ImgTextModel(mdpTag, childModels);
 
-        Result result = new ResultTest();
+        Result result = new Result();
         CompilerContext compilerContext = CompilerContext.getDefaultTestContext();
 
         imgText.render(imgTextModel, compilerContext, result);

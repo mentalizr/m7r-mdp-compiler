@@ -1,7 +1,6 @@
 package org.mentalizr.mdpCompiler.outlineElement.tagged.html;
 
 import org.mentalizr.mdpCompiler.CompilerContext;
-import org.mentalizr.mdpCompiler.MDPSyntaxError;
 import org.mentalizr.mdpCompiler.document.Line;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
@@ -13,7 +12,7 @@ import java.util.List;
 public class HtmlRenderer extends OutlineElementRenderer {
 
     @Override
-    public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, Result result) throws MDPSyntaxError {
+    public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, Result result) {
 
         TextBlockModel textBlockModel = (TextBlockModel) outlineElementModel;
         HtmlAttributes htmlAttributes = (HtmlAttributes) textBlockModel.getOutlineElementTaggedAttributes();

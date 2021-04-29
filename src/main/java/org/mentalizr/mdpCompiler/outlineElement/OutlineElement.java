@@ -31,16 +31,6 @@ public abstract class OutlineElement {
         return line.asString().startsWith(this.prefix);
     }
 
-    public void process(CompilerContext compilerContext, DocumentIterator documentIterator, Result result) throws MDPSyntaxError {
-
-        Extraction extraction = getOutlineElementLinesExtractor().extract(documentIterator);
-
-        OutlineElementModel outlineElementModel = getOutlineElementModelBuilder().getModel(extraction);
-
-        this.getOutlineElementRenderer().render(outlineElementModel, compilerContext, result);
-
-    }
-
     public Extraction getExtraction(DocumentIterator documentIterator) {
         return getOutlineElementLinesExtractor().extract(documentIterator);
     }
@@ -49,9 +39,15 @@ public abstract class OutlineElement {
         return getOutlineElementModelBuilder().getModel(extraction);
     }
 
-    public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, Result result) throws MDPSyntaxError {
+    public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, Result result) {
         getOutlineElementRenderer().render(outlineElementModel, compilerContext, result);
     }
+
+//    public void process(CompilerContext compilerContext, DocumentIterator documentIterator, Result result) throws MDPSyntaxError {
+//        Extraction extraction = getOutlineElementLinesExtractor().extract(documentIterator);
+//        OutlineElementModel outlineElementModel = getOutlineElementModelBuilder().getModel(extraction);
+//        this.getOutlineElementRenderer().render(outlineElementModel, compilerContext, result);
+//    }
 
     @Override
     public boolean equals(Object o) {
@@ -65,4 +61,5 @@ public abstract class OutlineElement {
     public int hashCode() {
         return Objects.hash(prefix);
     }
+
 }

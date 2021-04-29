@@ -2,7 +2,6 @@ package org.mentalizr.mdpCompilerTestResrc;
 
 import org.mentalizr.mdpCompiler.helper.TextFile;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElement;
-import org.mentalizr.mdpCompiler.outlineElement.OutlineElementFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,16 +21,10 @@ public class OutlineElementTestBenchExecutor {
         return this.outlineElement;
     }
 
-//    public OutlineElementTestBenchExecutor withMDPLines(String[] mdpLines) {
-//        this.mdpLines = mdpLines;
-//        return this;
-//    }
-
     public OutlineElementTestBenchExecutor withMDPLines(String... mdpLines) {
         this.mdpLines = mdpLines;
         return this;
     }
-
 
     public OutlineElementTestBenchExecutor withMDPFile(File file) {
         try {
@@ -42,7 +35,7 @@ public class OutlineElementTestBenchExecutor {
         }
     }
 
-    public OutlineElementTestBenchExecutor withExpectedLines(String[] expectedLines) {
+    public OutlineElementTestBenchExecutor withExpectedLines(String... expectedLines) {
         this.expectedLines = expectedLines;
         return this;
     }

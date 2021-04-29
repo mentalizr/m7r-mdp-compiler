@@ -11,10 +11,6 @@ public class Document implements Iterable<Line> {
 
     private List<Line> lines;
 
-//    public Document(List<String> lineStringList) {
-//        initialize(0, lineStringList);
-//    }
-
     public Document(List<Line> lines) {
         sanityCheck(lines);
         this.lines = lines;
@@ -70,19 +66,15 @@ public class Document implements Iterable<Line> {
     }
 
     private void sanityCheck(List<Line> lines) {
-
         int index = -1;
-
         for (Line line : lines) {
-
             if (index < 0) {
                 index = line.getLineIndex();
             } else {
                 if (line.getLineIndex() != index +1) throw new IllegalArgumentException("Inconsistent line index when initializing document.");
                 index = line.getLineIndex();
             }
-
         }
-
     }
+
 }

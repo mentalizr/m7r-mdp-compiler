@@ -2,7 +2,6 @@ package org.mentalizr.mdpCompiler.outlineElement.tagged.card;
 
 import org.mentalizr.mdpCompiler.CompilerContext;
 import org.mentalizr.mdpCompiler.MDPCompiler;
-import org.mentalizr.mdpCompiler.MDPSyntaxError;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
 import org.mentalizr.mdpCompiler.result.Result;
@@ -10,7 +9,7 @@ import org.mentalizr.mdpCompiler.result.Result;
 public class CardRenderer extends OutlineElementRenderer {
 
     @Override
-    public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, Result result) throws MDPSyntaxError {
+    public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, Result result) {
 
         CardModel cardModel = (CardModel) outlineElementModel;
         CardAttributes cardAttributes = cardModel.getCardAttributes();
@@ -51,7 +50,7 @@ public class CardRenderer extends OutlineElementRenderer {
         }
     }
 
-    private void renderBody(int indent, CardModel cardModel, Result result) throws MDPSyntaxError {
+    private void renderBody(int indent, CardModel cardModel, Result result) {
         if (cardModel.hasSingleLine()) {
             renderSingleLineBody(indent, cardModel, result);
         } else if (cardModel.hasChildModels()) {
@@ -66,7 +65,7 @@ public class CardRenderer extends OutlineElementRenderer {
         result.addLn(indent + 1, "</div>");
     }
 
-    private void renderMultiLineBody(int indent, CardModel cardModel, Result result) throws MDPSyntaxError {
+    private void renderMultiLineBody(int indent, CardModel cardModel, Result result) {
 
         result.addLn(indent + 1, "<div class=\"card-body\">");
 
