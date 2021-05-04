@@ -8,6 +8,8 @@ import org.mentalizr.mdpCompiler.outlineElement.Extraction;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElement;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRegistry;
+import org.mentalizr.mdpCompiler.outlineElement.special.directive.Directive;
+import org.mentalizr.mdpCompiler.outlineElement.special.directive.DirectiveModel;
 import org.mentalizr.mdpCompiler.result.Result;
 
 import java.io.File;
@@ -53,7 +55,28 @@ public class MDPCompiler {
             dom.addOutlineElementModel(outlineElementModel);
         }
 
+        validateDom(dom);
+
         return dom;
+    }
+
+    private static void validateDom(Dom dom) throws MDPSyntaxError {
+        if (dom.getOutlineElementModels().isEmpty())
+            throw new MDPSyntaxError(new Line("", 0), "MDP document is undefined.");
+
+        OutlineElementModel outlineElementModel = dom.getOutlineElementModels().get(0);
+        String errorMessage = "@@name directive missing.";
+
+        if (!(outlineElementModel instanceof DirectiveModel)) {
+            Line line = new Line("", 0);
+            throw new MDPSyntaxError(line, errorMessage);
+        }
+
+        DirectiveModel directiveModel = (DirectiveModel) outlineElementModel;
+        for (String directive : directiveModel.getDirectives()) {
+            if (directive.startsWith("@@name=")) return;
+        }
+        throw new MDPSyntaxError(new Line("", 0), errorMessage);
     }
 
     public static Result render(Dom dom) {

@@ -1,7 +1,6 @@
 package org.mentalizr.mdpCompiler.outlineElement;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public abstract class OutlineElementModel {
 
@@ -15,23 +14,8 @@ public abstract class OutlineElementModel {
         return this.outlineElement;
     }
 
-
-//    protected List<OutlineElementModel> childModels;
-//
-//    public OutlineElementModel() {
-//        this.childModels = new ArrayList<>();
-//    }
-//
-//    public OutlineElementModel(List<OutlineElementModel> childModels) {
-//        this.childModels = childModels;
-//    }
-//
-//    protected boolean hasChildModels() {
-//        return !this.childModels.isEmpty();
-//    }
-//
-//    protected List<OutlineElementModel> getChildModels() {
-//        return this.childModels;
-//    }
+    public Set<String> getMediaResources() {
+        return Collections.emptySet();
+    }
 
 }

@@ -1,5 +1,6 @@
 package org.mentalizr.mdpCompiler.outlineElement.tagged.imgText;
 
+import de.arthurpicht.utils.core.collection.Sets;
 import org.junit.jupiter.api.Test;
 import org.mentalizr.mdpCompiler.CompilerContext;
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
@@ -21,6 +22,7 @@ import org.mentalizr.mdpCompilerTestResrc.OutlineElementTestBenchExecutor;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -79,6 +81,10 @@ class ImgTextTest {
         List<OutlineElementModel> childModels = imgTextModel.getChildModels();
         assertEquals(1, childModels.size());
 
+        Set<String> mediaRessources = imgTextModel.getMediaResources();
+        assertEquals(1, mediaRessources.size());
+        assertEquals("picture.mp3", Sets.getSomeElement(mediaRessources));
+
         OutlineElementModel childModel = childModels.get(0);
         assertTrue(childModel instanceof ParagraphModel);
 
@@ -124,13 +130,13 @@ class ImgTextTest {
     @Test
     void plausibilityTest() throws MDPSyntaxError {
 
-        OutlineElementTestBench.execute(
-                new ImgText(),
-                new String[] {
+        OutlineElementTestBenchExecutor outlineElementTestBenchExecutor
+                = new OutlineElementTestBenchExecutor(new ImgText())
+                .withMDPLines(
                         "@img-text[alt=\"Bild\"](picture.mp3)",
                         "    Some text."
-                },
-                new String[] {
+                )
+                .withExpectedLines(
                         "<div class=\"row\" style=\"margin-bottom: 1.0em; margin-top: 1.0em\">",
                         "    <div class=\"col-xs-12 col-sm-5 col-md-5 col-lg-5\">",
                         "        <img src=\"service/v1/mediaImg/picture.mp3\" class=\"img-fluid\" style=\"width: 100%\" alt=\"Bild\">",
@@ -139,9 +145,11 @@ class ImgTextTest {
                         "        <p>Some text.</p>",
                         "    </div>",
                         "</div>"
-                },
-                1
-        );
+                )
+                .withExpectedDocumentIteratorIndex(1)
+                .withMediaResources("picture.mp3");
+
+        OutlineElementTestBench.execute(outlineElementTestBenchExecutor);
     }
 
     @Test

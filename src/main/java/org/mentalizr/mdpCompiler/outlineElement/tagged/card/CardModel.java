@@ -6,7 +6,10 @@ import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTaggedModel;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.OutlineElementTaggedAttributes;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.SubModelsWithSingleLine;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class CardModel extends SubModelsWithSingleLine {
 

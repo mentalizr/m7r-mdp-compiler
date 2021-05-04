@@ -2,7 +2,10 @@ package org.mentalizr.mdpCompiler.outlineElement.tagged.collapsable;
 
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class CollapsableCardContent {
 
@@ -25,10 +28,6 @@ public class CollapsableCardContent {
         this.singleLine = singleLine;
     }
 
-//    public int getIndex() {
-//        return this.index;
-//    }
-
     public String getHeader() {
         return this.header;
     }
@@ -48,4 +47,18 @@ public class CollapsableCardContent {
     public boolean hasChildElements() {
         return this.childElements != null;
     }
+
+    public Set<String> getMediaResources() {
+        if (hasChildElements()) {
+            Set<String> mediaResources = new HashSet<>();
+            //noinspection ConstantConditions
+            for (OutlineElementModel outlineElementModel : this.childElements) {
+                mediaResources.addAll(outlineElementModel.getMediaResources());
+            }
+            return mediaResources;
+        } else {
+            return Collections.emptySet();
+        }
+    }
+
 }

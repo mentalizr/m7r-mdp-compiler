@@ -29,7 +29,6 @@ class CollapseTest {
                         .withExpectedFile(new File(RESRC_DIR, "collapse-plausibility.expected"))
                         .withExpectedDocumentIteratorIndex(7)
         );
-
     }
 
     @Test
@@ -57,8 +56,8 @@ class CollapseTest {
                                 "Und hier noch was")
                         .withExpectedFile(new File(RESRC_DIR, "collapse-netstedImgText.expected"))
                         .withExpectedDocumentIteratorIndex(14)
+                        .withMediaResources("picture_one.png")
         );
-
     }
 
 }

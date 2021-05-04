@@ -5,7 +5,9 @@ import org.mentalizr.mdpCompiler.outlineElement.OutlineElement;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTaggedModel;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class CollapsableModel extends OutlineElementTaggedModel {
 
@@ -33,6 +35,15 @@ public class CollapsableModel extends OutlineElementTaggedModel {
 
     public CollapsableAttributes getCollapsableAttributes() {
         return (CollapsableAttributes) this.mdpTag.getAttributes();
+    }
+
+    @Override
+    public Set<String> getMediaResources() {
+        Set<String> mediaResources = new HashSet<>();
+        for (CollapsableCardContent collapsableCardContent : this.collapsableCardContentList) {
+            mediaResources.addAll(collapsableCardContent.getMediaResources());
+        }
+        return mediaResources;
     }
 
 }

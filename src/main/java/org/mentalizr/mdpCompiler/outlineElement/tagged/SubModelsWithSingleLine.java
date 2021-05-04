@@ -4,10 +4,11 @@ import org.mentalizr.mdpCompiler.mdpTag.MDPTag;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElement;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTaggedModel;
-import org.mentalizr.mdpCompiler.outlineElement.tagged.card.Card;
-import org.mentalizr.mdpCompiler.outlineElement.tagged.card.CardAttributes;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class SubModelsWithSingleLine extends OutlineElementTaggedModel {
 
@@ -46,6 +47,19 @@ public class SubModelsWithSingleLine extends OutlineElementTaggedModel {
         if (this.singleLine == null)
             throw new IllegalStateException("No line existing. Check before calling.");
         return this.singleLine;
+    }
+
+    @Override
+    public Set<String> getMediaResources() {
+        if (this.hasChildModels()) {
+            Set<String> mediaResources = new HashSet<>();
+            for (OutlineElementModel outlineElementModel : this.getChildModels()) {
+                mediaResources.addAll(outlineElementModel.getMediaResources());
+            }
+            return mediaResources;
+        } else {
+            return Collections.emptySet();
+        }
     }
 
 }

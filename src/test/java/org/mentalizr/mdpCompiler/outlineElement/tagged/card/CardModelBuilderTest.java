@@ -8,6 +8,8 @@ import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
 import org.mentalizr.mdpCompiler.outlineElement.md.paragraph.ParagraphModel;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.alert.AlertExtraction;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.alert.AlertModel;
+import org.mentalizr.mdpCompilerTestResrc.OutlineElementTestBench;
+import org.mentalizr.mdpCompilerTestResrc.OutlineElementTestBenchExecutor;
 
 import java.util.List;
 

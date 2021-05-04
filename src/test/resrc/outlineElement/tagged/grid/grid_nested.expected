@@ -1,0 +1,21 @@
+<div class="row mt-0 mb-0" id="i4711">
+    <div class="col-4">
+<audio class="mt-0 mb-0" preload="none" style="width: 100%;" controls="controls">
+    <source type="audio/mpeg" src="service/v1/mediaAV/myAudio.mp3"/>
+    <a href="service/v1/mediaAV/myAudio.mp3">service/v1/mediaAV/myAudio.mp3</a>
+</audio>
+    </div>
+    <div class="col-4">
+        <p class="h1 mt-4 mb-4">Content Card 2</p>
+        <ul class="mb-2">
+            <li>erster Punkt</li>
+            <li>zweiter Punkt</li>
+        </ul>
+    </div>
+    <div class="col-4">
+<audio class="mt-0 mb-0" preload="none" style="width: 100%;" controls="controls">
+    <source type="audio/mpeg" src="service/v1/mediaAV/myOtherAudio.mp3"/>
+    <a href="service/v1/mediaAV/myOtherAudio.mp3">service/v1/mediaAV/myOtherAudio.mp3</a>
+</audio>
+    </div>
+</div>

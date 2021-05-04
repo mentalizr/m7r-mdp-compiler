@@ -4,7 +4,9 @@ import org.mentalizr.mdpCompiler.mdpTag.MDPTag;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.SubModels;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ImgTextModel extends SubModels {
 
@@ -16,4 +18,10 @@ public class ImgTextModel extends SubModels {
         return (ImgTextAttributes) this.mdpTag.getAttributes();
     }
 
+    @Override
+    public Set<String> getMediaResources() {
+        Set<String> mediaResources = new HashSet<>(super.getMediaResources());
+        mediaResources.add(this.getMdpTag().getLinkString());
+        return mediaResources;
+    }
 }

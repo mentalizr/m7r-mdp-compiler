@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -27,13 +28,41 @@ public class OutlineElementTestBench {
         if (stackTraceElements.length < 2) throw new RuntimeException("Call from external method expected.");
         String testName = "[TEST: " + stackTraceElements[1].getMethodName() + "] [CLASS: " + stackTraceElements[1].getClassName() + "]";
 
-        execute(
-                testName,
-                outlineElementTestBenchExecutor.getOutlineElement(),
-                outlineElementTestBenchExecutor.getMdpLines(),
-                outlineElementTestBenchExecutor.getExpectedLines(),
-                outlineElementTestBenchExecutor.getExpectedDocumentIteratorIndex()
-        );
+        String[] mdpLines = outlineElementTestBenchExecutor.getMdpLines();
+        DocumentIterator documentIterator = DocumentIterator.getInstanceWithIndexOnFirstLine(mdpLines);
+        Result result = new Result();
+
+        OutlineElement outlineElement = outlineElementTestBenchExecutor.getOutlineElement();
+        Extraction extraction = outlineElement.getExtraction(documentIterator);
+        OutlineElementModel outlineElementModel = outlineElement.getModel(extraction);
+        outlineElement.render(outlineElementModel, CompilerContext.getDefaultTestContext(), result);
+
+        if (SOUT_RESULT) {
+            System.out.println(">>>[OutlineElementTestBench: " + testName + "] generated HTML:");
+            for (String htmlLine : result.getResultLines()) {
+                System.out.println(htmlLine);
+            }
+            System.out.println("<<<[OutlineElementTestBench] End of generated HTML");
+        }
+
+        String[] expectedHtmlLines = outlineElementTestBenchExecutor.getExpectedLines();
+        List<String> expectedLines = Arrays.asList(expectedHtmlLines);
+
+//        System.out.println("Diff:");
+//        String[] resultArray = result.getResultLines().toArray(new String[0]);
+//        DiffHelper.showDiff(expectedHtmlLines, resultArray);
+
+        assertEquals(expectedLines, result.getResultLines());
+
+        if (outlineElementTestBenchExecutor.hasExpectedDocumentIteratorIndex()) {
+            int expectedDocumentIteratorIndex = outlineElementTestBenchExecutor.getExpectedDocumentIteratorIndex();
+            assertEquals(expectedDocumentIteratorIndex, documentIterator.getIndex());
+        }
+
+        if (outlineElementTestBenchExecutor.hasExpectedMediaResources()) {
+            Set<String> expectedMediaResources = outlineElementTestBenchExecutor.getExpectedMediaResources();
+            assertEquals(expectedMediaResources, outlineElementModel.getMediaResources());
+        }
     }
 
     public static void execute(OutlineElement outlineElement, String[] mdpLines, String[] expectedHtmlLines, int expectedDocumentIteratorIndex) throws MDPSyntaxError {

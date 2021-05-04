@@ -3,9 +3,9 @@ package org.mentalizr.mdpCompiler.outlineElement.tagged.collapsable.accordion;
 import org.junit.jupiter.api.Test;
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
 import org.mentalizr.mdpCompilerTestResrc.OutlineElementTestBench;
+import org.mentalizr.mdpCompilerTestResrc.OutlineElementTestBenchExecutor;
 
 import java.io.File;
-import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -14,11 +14,11 @@ class AccordionTest {
     private static final String RESRC_DIR = "src/test/resrc/outlineElement/tagged/collapsable/accordion/";
 
     @Test
-    void plausibility_pos_1() throws MDPSyntaxError, IOException {
+    void plausibility_pos_1() throws MDPSyntaxError {
 
-        OutlineElementTestBench.execute(
-                new Accordion(),
-                new String[]{
+        OutlineElementTestBenchExecutor outlineElementTestBenchExecutor
+                = new OutlineElementTestBenchExecutor(new Accordion())
+                .withMDPLines(
                         "@accordion[id=\"i4711\"]",
                         "--- Header 1",
                         "    Content Card 1",
@@ -32,18 +32,20 @@ class AccordionTest {
                         "",
                         "Hier folgt was",
                         "Und hier noch was"
-                },
-                new File(RESRC_DIR, "accordion-plausi-1.expected"),
-                10
-        );
+                )
+                .withExpectedFile(new File(RESRC_DIR, "accordion-plausi-1.expected"))
+                .withExpectedDocumentIteratorIndex(10)
+                .withMediaResources();
+
+        OutlineElementTestBench.execute(outlineElementTestBenchExecutor);
     }
 
     @Test
-    void inline() throws MDPSyntaxError, IOException {
+    void inline() throws MDPSyntaxError {
 
-        OutlineElementTestBench.execute(
-                new Accordion(),
-                new String[]{
+        OutlineElementTestBenchExecutor outlineElementTestBenchExecutor
+                = new OutlineElementTestBenchExecutor(new Accordion())
+                .withMDPLines(
                         "@accordion[id=\"i4711\"]",
                         "--- Header 1",
                         "    Content *Card 1*",
@@ -58,18 +60,20 @@ class AccordionTest {
                         "",
                         "Hier folgt was",
                         "Und hier noch was"
-                },
-                new File(RESRC_DIR, "accordion-inline.expected"),
-                11
-        );
+                )
+                .withExpectedFile(new File(RESRC_DIR, "accordion-inline.expected"))
+                .withExpectedDocumentIteratorIndex(11)
+                .withMediaResources();
+
+        OutlineElementTestBench.execute(outlineElementTestBenchExecutor);
     }
 
     @Test
-    void nestedImgText() throws MDPSyntaxError, IOException {
+    void nestedImgText() throws MDPSyntaxError {
 
-        OutlineElementTestBench.execute(
-                new Accordion(),
-                new String[]{
+        OutlineElementTestBenchExecutor outlineElementTestBenchExecutor
+                = new OutlineElementTestBenchExecutor(new Accordion())
+                .withMDPLines(
                         "@accordion[id=\"id4711\" \"showFirst\"]",
                         "--- Header 1",
                         "    @img-text[alt=\"picture one\"](picture_one.png)",
@@ -87,18 +91,20 @@ class AccordionTest {
                         "",
                         "Hier folgt was",
                         "Und hier noch was"
-                },
-                new File(RESRC_DIR, "accordion-nestedImgText.expected"),
-                14
-        );
+                )
+                .withExpectedFile(new File(RESRC_DIR, "accordion-nestedImgText.expected"))
+                .withExpectedDocumentIteratorIndex(14)
+                .withMediaResources("picture_one.png");
+
+        OutlineElementTestBench.execute(outlineElementTestBenchExecutor);
     }
 
     @Test
-    void nestedTwoTimes() throws IOException, MDPSyntaxError {
+    void nestedTwoTimes() throws MDPSyntaxError {
 
-        OutlineElementTestBench.execute(
-                new Accordion(),
-                new String[]{
+        OutlineElementTestBenchExecutor outlineElementTestBenchExecutor
+                = new OutlineElementTestBenchExecutor(new Accordion())
+                .withMDPLines(
                         "@accordion[id=\"id4711\" \"showFirst\"]",
                         "--- Header 1",
                         "    @accordion[id=\"id4712\"]",
@@ -118,69 +124,77 @@ class AccordionTest {
                         "",
                         "Hier folgt was",
                         "Und hier noch was"
-                },
-                new File(RESRC_DIR, "accordion-nested2times.expected"),
-                16
-        );
+                )
+                .withExpectedFile(new File(RESRC_DIR, "accordion-nested2times.expected"))
+                .withExpectedDocumentIteratorIndex(16)
+                .withMediaResources("picture_one.png");
+
+        OutlineElementTestBench.execute(outlineElementTestBenchExecutor);
     }
 
     @Test
-    void provocation_noCardContent() throws IOException, MDPSyntaxError {
+    void provocation_noCardContent() throws MDPSyntaxError {
 
-        OutlineElementTestBench.execute(
-                new Accordion(),
-                new String[]{
+        OutlineElementTestBenchExecutor outlineElementTestBenchExecutor
+                = new OutlineElementTestBenchExecutor(new Accordion())
+                .withMDPLines(
                         "@accordion[id=\"id4711\" \"showFirst\"]",
                         "--- Header 1",
                         "",
                         "Hier folgt was",
                         "Und hier noch was"
-                },
-                new File(RESRC_DIR, "accordion-provocation-noCardContent.expected"),
-                2
-        );
+                )
+                .withExpectedFile(new File(RESRC_DIR, "accordion-provocation-noCardContent.expected"))
+                .withExpectedDocumentIteratorIndex(2)
+                .withMediaResources();
+
+        OutlineElementTestBench.execute(outlineElementTestBenchExecutor);
     }
 
     @Test
     void provocation_noContent() throws MDPSyntaxError {
 
-        OutlineElementTestBench.execute(
-                new Accordion(),
-                new String[]{
+        OutlineElementTestBenchExecutor outlineElementTestBenchExecutor
+                = new OutlineElementTestBenchExecutor(new Accordion())
+                .withMDPLines(
                         "@accordion[id=\"id4711\" \"showFirst\"]",
                         "",
                         "Hier folgt was",
                         "Und hier noch was"
-                },
-                new String[]{
+                )
+                .withExpectedLines(
                         "<div class=\"accordion mt-3 mb-3\" id=\"id4711\">",
                         "</div>"
-                },
-                1
-        );
+                )
+                .withExpectedDocumentIteratorIndex(1)
+                .withMediaResources();
+
+        OutlineElementTestBench.execute(outlineElementTestBenchExecutor);
     }
 
     @Test
     void provocation_malformedContent() {
 
+        OutlineElementTestBenchExecutor outlineElementTestBenchExecutor
+                = new OutlineElementTestBenchExecutor(new Accordion())
+                .withMDPLines(
+                        "@accordion[id=\"id4711\" \"showFirst\"]",
+                        "",
+                        "--- header",
+                        "    some header content",
+                        "",
+                        "Hier folgt was",
+                        "Und hier noch was"
+                )
+                .withExpectedLines(
+                        "<div class=\"accordion mt-3 mb-3\" id=\"id4711\">",
+                        "</div>"
+                )
+                .withExpectedDocumentIteratorIndex(1)
+                .withMediaResources();
+
         try {
-            OutlineElementTestBench.execute(
-                    new Accordion(),
-                    new String[]{
-                            "@accordion[id=\"id4711\" \"showFirst\"]",
-                            "",
-                            "--- header",
-                            "    some header content",
-                            "",
-                            "Hier folgt was",
-                            "Und hier noch was"
-                    },
-                    new String[]{
-                            "<div class=\"accordion mt-3 mb-3\" id=\"id4711\">",
-                            "</div>"
-                    },
-                    1
-            );
+            OutlineElementTestBench.execute(outlineElementTestBenchExecutor);
             fail("exception expected");
         } catch (MDPSyntaxError mdpSyntaxError) {
             // do intentionally nothing
