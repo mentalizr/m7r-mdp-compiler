@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class MDPCompiler {
 
@@ -33,6 +34,11 @@ public class MDPCompiler {
     public static Result compile(Document document) throws MDPSyntaxError {
         Dom dom = createDom(document);
         return render(dom);
+    }
+
+    public static Set<String> getReferencedMediaResources(File mdpFile) throws IOException, MDPSyntaxError {
+        Dom dom = createDom(new Document(mdpFile));
+        return dom.getReferencedMediaResources();
     }
 
     public static Dom createDom(Document document) throws MDPSyntaxError {
