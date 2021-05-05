@@ -12,6 +12,7 @@ public class TableModel extends OutlineElementModel {
     private final TableModelColMetaData tableModelColMetaData;
 
     public TableModel(TableModelRow header, List<TableModelRow> rows, TableModelColMetaData tableModelColMetaData) {
+        super(new Table());
 
         AssertMethodPrecondition.parameterNotNull("header", header);
         AssertMethodPrecondition.parameterNotNull("rows", rows);

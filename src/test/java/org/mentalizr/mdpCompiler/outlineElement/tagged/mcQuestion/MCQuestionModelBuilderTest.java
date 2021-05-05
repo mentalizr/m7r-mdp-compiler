@@ -6,6 +6,7 @@ import org.mentalizr.mdpCompiler.attributeProfile.AttributeProfileException;
 import org.mentalizr.mdpCompiler.document.Document;
 import org.mentalizr.mdpCompiler.document.Line;
 import org.junit.jupiter.api.Test;
+import org.mentalizr.mdpCompiler.outlineElement.Extraction;
 
 import java.util.List;
 
@@ -30,10 +31,11 @@ class MCQuestionModelBuilderTest {
                 "    - Vermeidungsfokussiert und Problemfokussiert"
 
                 );
-        List<Line> lines = document.getLines();
+//        List<Line> lines = document.getLines();
+        Extraction extraction = new McQuestionExtraction(document);
 
-        MCQuestionModelBuilder mcQuestionModelBuilder = new MCQuestionModelBuilder(mcQuestionAttributes, lines);
-        MCQuestionModel mcQuestionModel = mcQuestionModelBuilder.getModel();
+        MCQuestionModelBuilder mcQuestionModelBuilder = new MCQuestionModelBuilder();
+        MCQuestionModel mcQuestionModel = mcQuestionModelBuilder.getModel(extraction);
 
         assertEquals(MCQuestionModel.MCQuestionType.ONE, mcQuestionModel.getMcQuestionType());
 

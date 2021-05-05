@@ -6,6 +6,7 @@ import org.mentalizr.mdpCompiler.attributeProfile.attributesBuilder.AttributesBu
 import org.mentalizr.mdpCompiler.document.Document;
 import org.mentalizr.mdpCompiler.document.Line;
 import org.junit.jupiter.api.Test;
+import org.mentalizr.mdpCompiler.outlineElement.Extraction;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,26 +16,25 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class AlertModelBuilderTest {
 
-    private static final String EXPECTED_DIR = "src/test/resrc/outlineElement/tagged/alert/";
 
     @Test
-    void getModel() throws IOException, MDPSyntaxError, AttributeProfileException {
+    void getModel() throws MDPSyntaxError {
 
-        AttributesBuilder attributesBuilder = new AttributesBuilder()
-                .addAttribute(AlertAttributes.ATTRIBUTE_NAME_TYPE, "info")
-                .addAttribute(AlertAttributes.ATTRIBUTE_NAME_HEADERSIZE, "3");
+        Document document = new Document(
+                "@alert[type=\"info\" headersize=\"3\"]",
+                "    Hier der Info-Text!"
+        );
+        Extraction extraction = new AlertExtraction(document);
 
-        AlertAttributes alertAttributes = new AlertAttributes(attributesBuilder.build());
-//        AlertAttributesParser alertAttributes = new AlertAttributesParser(AlertAttributes.ATTRIBUTE_NAME_TYPE + "=\"info\" " + AlertAttributes.ATTRIBUTE_NAME_HEADERSIZE + "=\"3\"");
-
-        Document document = new Document(new File(EXPECTED_DIR, "extractor-plausi-1.expected"));
-        List<Line> lines = document.getLines();
-
-        AlertModelBuilder alertModelBuilder = new AlertModelBuilder(alertAttributes, lines);
-        AlertModel alertModel = alertModelBuilder.getModel();
+        AlertModelBuilder alertModelBuilder = new AlertModelBuilder();
+        AlertModel alertModel = alertModelBuilder.getModel(extraction);
 
         assertNotNull(alertModel);
         assertEquals("Hier der Info-Text!", alertModel.getText());
+
+        AlertAttributes alertAttributes = alertModel.getAlertAttributes();
+        assertEquals("info", alertAttributes.getType());
+        assertEquals("3", alertAttributes.getHeadersize());
     }
 
 }

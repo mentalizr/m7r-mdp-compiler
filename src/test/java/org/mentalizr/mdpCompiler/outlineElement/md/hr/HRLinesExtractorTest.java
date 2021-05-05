@@ -4,6 +4,7 @@ import org.mentalizr.mdpCompiler.document.Document;
 import org.mentalizr.mdpCompiler.document.DocumentIterator;
 import org.mentalizr.mdpCompiler.document.Line;
 import org.junit.jupiter.api.Test;
+import org.mentalizr.mdpCompiler.outlineElement.Extraction;
 
 import java.util.List;
 
@@ -22,12 +23,12 @@ class HRLinesExtractorTest {
         DocumentIterator documentIterator = document.getDocumentIterator();
 
         Line line = documentIterator.getNextLine();
-        HRLinesExtractor hrLinesExtractor = new HRLinesExtractor();
-        List<Line> extractedLines = hrLinesExtractor.extract(documentIterator);
+        HRExtractor hrLinesExtractor = new HRExtractor();
+        Extraction extraction = hrLinesExtractor.extract(documentIterator);
 
-        assertNotNull(extractedLines);
-        assertEquals(1, extractedLines.size());
-        assertEquals("---", extractedLines.get(0).asString());
+        assertNotNull(extraction);
+        assertEquals(1, extraction.getNrOfLines());
+        assertEquals("---", extraction.getTagLine().asString());
     }
 
 }

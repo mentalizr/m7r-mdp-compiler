@@ -1,9 +1,9 @@
 package org.mentalizr.mdpCompiler.outlineElement.tagged.formGroup.textareaGroup;
 
+import org.junit.jupiter.api.Test;
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
 import org.mentalizr.mdpCompilerTestResrc.OutlineElementTestBench;
 import org.mentalizr.mdpCompilerTestResrc.OutlineElementTestBenchExecutor;
-import org.junit.jupiter.api.Test;
 
 import java.io.File;
 
@@ -16,7 +16,7 @@ class TextareaGroupTest {
     void plausibility1() throws MDPSyntaxError {
 
         OutlineElementTestBenchExecutor outlineElementTestBenchExecutor
-                = new OutlineElementTestBenchExecutor(new TextareaGroupFactory())
+                = new OutlineElementTestBenchExecutor(new TextareaGroup())
                 .withMDPLines(
                         "@textarea-group[id=\"input_myId\" rows=\"2\"]",
                         "    Eine Überschrift.",
@@ -33,7 +33,7 @@ class TextareaGroupTest {
     void scopeId() throws MDPSyntaxError {
 
         OutlineElementTestBench.execute(
-                new TextareaGroupFactory(),
+                new TextareaGroup(),
                 new String[]{
                         "@textarea-group[id=\"input_myId\" scope=\"program\" scope-id=\"input_myScopeId\"]",
                         "    Eine Überschrift in *kursiv*.",
@@ -54,7 +54,7 @@ class TextareaGroupTest {
     void scopeIdInPageScope() throws MDPSyntaxError {
 
         OutlineElementTestBench.execute(
-                new TextareaGroupFactory(),
+                new TextareaGroup(),
                 new String[]{
                         "@textarea-group[id=\"input_myId\" scope-id=\"input_myScopeId\"]",
                         "    Eine Überschrift in *kursiv*.",
@@ -75,7 +75,7 @@ class TextareaGroupTest {
     void readonly() throws MDPSyntaxError {
 
         OutlineElementTestBench.execute(
-                new TextareaGroupFactory(),
+                new TextareaGroup(),
                 new String[]{
                         "@textarea-group[id=\"input_myId\" readonly=\"true\"]",
                         "    Eine Überschrift in *kursiv*.",
@@ -97,7 +97,7 @@ class TextareaGroupTest {
     void refId() throws MDPSyntaxError {
 
         OutlineElementTestBench.execute(
-                new TextareaGroupFactory(),
+                new TextareaGroup(),
                 new String[]{
                         "@textarea-group[id=\"input_myId\" ref-id=\"myRefId\"]",
                         "    Eine Überschrift in *kursiv*.",

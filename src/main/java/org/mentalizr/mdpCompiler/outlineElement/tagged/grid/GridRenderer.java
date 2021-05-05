@@ -2,7 +2,7 @@ package org.mentalizr.mdpCompiler.outlineElement.tagged.grid;
 
 import org.mentalizr.mdpCompiler.CompilerContext;
 import org.mentalizr.mdpCompiler.MDPCompiler;
-import org.mentalizr.mdpCompiler.MDPSyntaxError;
+import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
 import org.mentalizr.mdpCompiler.result.Result;
 
@@ -10,51 +10,46 @@ import java.util.UUID;
 
 public class GridRenderer extends OutlineElementRenderer {
 
-    private final GridAttributes gridAttributes;
-    private final GridModel gridModel;
-
-    public GridRenderer(GridAttributes gridAttributes, GridModel gridModel) {
+    public GridRenderer() {
         super();
-        this.gridAttributes = gridAttributes;
-        this.gridModel = gridModel;
     }
 
     @Override
-    public void render(CompilerContext compilerContext, Result result) throws MDPSyntaxError {
+    public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, Result result) {
 
-        String id = obtainId();
+        GridModel gridModel = (GridModel) outlineElementModel;
+        GridAttributes gridAttributes = gridModel.getGridAttributes();
 
-        String marginTop = this.gridAttributes.getMarginTop();
-        String marginBottom = this.gridAttributes.getMarginBottom();
+        String id = obtainId(gridAttributes);
+
+        String marginTop = gridAttributes.getMarginTop();
+        String marginBottom = gridAttributes.getMarginBottom();
         String classValue = "row mt-" + marginTop + " mb-" + marginBottom;
 
         result.addLn("<div class=\"" + classValue + "\" id=\"" + id + "\">");
 
-        for (int i = 0; i<this.gridModel.getColumnContentList().size(); i++) {
-
-            createRow(i, compilerContext, result);
-
+        for (int i = 0; i < gridModel.getColumnContentList().size(); i++) {
+            createRow(gridModel, i, compilerContext, result);
         }
 
         result.addLn("</div>");
-
     }
 
-    private String obtainId() {
-        if (this.gridAttributes.hasId()) return this.gridAttributes.getId();
-        return "genId-" + UUID.randomUUID().toString();
+    private String obtainId(GridAttributes gridAttributes) {
+        if (gridAttributes.hasId()) return gridAttributes.getId();
+        return "genId-" + UUID.randomUUID();
     }
 
-    private void createRow(int rowIndex, CompilerContext compilerContext, Result result) throws MDPSyntaxError {
+    private void createRow(GridModel gridModel, int rowIndex, CompilerContext compilerContext, Result result) {
 
-        ColumnContent columnContent = this.gridModel.getColumnContentList().get(rowIndex);
-
+        ColumnContent columnContent = gridModel.getColumnContentList().get(rowIndex);
         result.addLn(compilerContext.getIndentLevel() + 1, "<div class=\"" + columnContent.getClassValue() + "\">");
 
-        MDPCompiler.compileSubdocument(
-                columnContent.asDocument(),
+        MDPCompiler.renderSubdocument(
+                columnContent.getChildElements(),
                 result,
-                new CompilerContext(false, compilerContext.getIndentLevel() + 1));
+                new CompilerContext(false, compilerContext.getIndentLevel() + 1)
+        );
 
         result.addLn(compilerContext.getIndentLevel() + 1,"</div>");
     }

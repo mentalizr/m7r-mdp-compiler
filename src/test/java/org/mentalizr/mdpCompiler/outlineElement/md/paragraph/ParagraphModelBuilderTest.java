@@ -19,8 +19,8 @@ class ParagraphModelBuilderTest {
 
         List<Line> mdpLines = Arrays.asList(new Line("Ein Absatz", 0));
 
-        ParagraphModelBuilder paragraphModelBuilder = new ParagraphModelBuilder(mdpLines);
-        ParagraphModel paragraphModel = paragraphModelBuilder.getModel();
+        ParagraphModelBuilder paragraphModelBuilder = new ParagraphModelBuilder();
+        ParagraphModel paragraphModel = paragraphModelBuilder.getModel(new ParagraphExtraction(mdpLines));
         List<String> contentLines = paragraphModel.getTextLines();
 
         assertNotNull(contentLines);

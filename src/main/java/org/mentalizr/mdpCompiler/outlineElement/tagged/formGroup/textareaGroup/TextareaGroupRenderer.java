@@ -1,49 +1,42 @@
 package org.mentalizr.mdpCompiler.outlineElement.tagged.formGroup.textareaGroup;
 
 import org.mentalizr.mdpCompiler.CompilerContext;
-import org.mentalizr.mdpCompiler.MDPSyntaxError;
+import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
-import org.mentalizr.mdpCompiler.outlineElement.tagged.TextBlockModel;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.formGroup.FormGroupRendererHelper;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.formGroup.inputGroup.InputGroupAttributes;
 import org.mentalizr.mdpCompiler.result.Result;
 
 public class TextareaGroupRenderer extends OutlineElementRenderer {
 
-    private final TextareaGroupAttributes textareaGroupAttributes;
-    private final TextBlockModel textBlockModel;
-
-    public TextareaGroupRenderer(TextareaGroupAttributes textareaGroupAttributes, TextBlockModel textBlockModel) {
-        super();
-        this.textareaGroupAttributes = textareaGroupAttributes;
-        this.textBlockModel = textBlockModel;
-    }
-
     @Override
-    public void render(CompilerContext compilerContext, Result result) throws MDPSyntaxError {
+    public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, Result result) {
+
+        TextareaGroupModel textareaGroupModel = (TextareaGroupModel) outlineElementModel;
+        TextareaGroupAttributes textareaGroupAttributes = textareaGroupModel.getTextareaGroupAttributes();
 
         String cssPseudoClass = "ns_input";
         int indent = compilerContext.getIndentLevel();
 
         result.addLn(indent, "<div class=\"form-group\">");
 
-        FormGroupRendererHelper.renderHeaderLines(this.textBlockModel, this.textareaGroupAttributes.getId(), result, compilerContext);
+        FormGroupRendererHelper.renderHeaderLines(textareaGroupModel, textareaGroupAttributes.getId(), result, compilerContext);
 
         StringBuilder stringBuilder = new StringBuilder("<textarea ");
         stringBuilder.append("class=\"form-control ").append(cssPseudoClass).append("\" ");
-        stringBuilder.append("id=\"").append(this.textareaGroupAttributes.getId()).append("\" ");
+        stringBuilder.append("id=\"").append(textareaGroupAttributes.getId()).append("\" ");
 
-        if (this.textareaGroupAttributes.hasRefId()) {
-            stringBuilder.append("data-m7r-ref-id=\"").append(this.textareaGroupAttributes.getRefId()).append("\" ");
+        if (textareaGroupAttributes.hasRefId()) {
+            stringBuilder.append("data-m7r-ref-id=\"").append(textareaGroupAttributes.getRefId()).append("\" ");
         }
 
-        if (this.textareaGroupAttributes.getScope().equals(InputGroupAttributes.VALUE_PROGRAM)) {
-            stringBuilder.append("data-m7r-program-scope-id=\"").append(this.textareaGroupAttributes.getScopeId()).append("\" ");
+        if (textareaGroupAttributes.getScope().equals(InputGroupAttributes.VALUE_PROGRAM)) {
+            stringBuilder.append("data-m7r-program-scope-id=\"").append(textareaGroupAttributes.getScopeId()).append("\" ");
         }
 
-        stringBuilder.append("rows=\"").append(this.textareaGroupAttributes.getRows()).append("\"");
+        stringBuilder.append("rows=\"").append(textareaGroupAttributes.getRows()).append("\"");
 
-        if (this.textareaGroupAttributes.isReadonly()) {
+        if (textareaGroupAttributes.isReadonly()) {
             stringBuilder.append(" disabled");
         }
 

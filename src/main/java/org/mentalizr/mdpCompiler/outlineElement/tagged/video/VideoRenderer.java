@@ -1,52 +1,36 @@
 package org.mentalizr.mdpCompiler.outlineElement.tagged.video;
 
 import org.mentalizr.mdpCompiler.CompilerContext;
-import org.mentalizr.mdpCompiler.MDPSyntaxError;
+import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
 import org.mentalizr.mdpCompiler.result.Result;
 
 public class VideoRenderer extends OutlineElementRenderer {
 
-//    private static final String CONTEXT_URL_VIDEO = "mediaVideo/";
     private static final String CONTEXT_URL_VIDEO = "mediaAV/";
     private static final String CONTEXT_URL_IMG = "mediaImg/";
 
-    private final VideoAttributes videoAttributes;
-    private final VideoModel videoModel;
-    private final String mdpTagLink;
-
-    public VideoRenderer(VideoAttributes videoAttributes, VideoModel videoModel, String mdpTagLink) {
-        super();
-        this.videoAttributes = videoAttributes;
-        this.videoModel = videoModel;
-        this.mdpTagLink = mdpTagLink;
-    }
-
     @Override
-    public void render(CompilerContext compilerContext, Result result) throws MDPSyntaxError {
+    public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, Result result) {
 
-//        String style = " style=\"";
-//
-//        style += "margin-top: " + this.videoAttributes.getMarginTop() + "em; ";
-//        style += "margin-bottom: " + this.videoAttributes.getMarginBottom() + "em";
-//        style += "\"";
-//
-//        result.addLn("<div class=\"embed-responsive embed-responsive-16by9\"" + style + ">");
+        VideoModel videoModel = (VideoModel) outlineElementModel;
+        VideoAttributes videoAttributes = videoModel.getVideoAttributes();
+        String mdpTagLink = videoModel.getMdpTag().getLinkString();
 
-        String marginTop = this.videoAttributes.getMarginTop();
-        String marginBottom = this.videoAttributes.getMarginBottom();
+        String marginTop = videoAttributes.getMarginTop();
+        String marginBottom = videoAttributes.getMarginBottom();
 
         result.addLn("<div class=\"embed-responsive embed-responsive-16by9 mt-" + marginTop + " mb-" + marginBottom + "\">");
 
         String poster = "";
-        if (this.videoAttributes.hasPoster()) {
-            poster = " poster=\"" + compilerContext.getServiceContextURL() + CONTEXT_URL_IMG + this.videoAttributes.getPoster() + "\"";
+        if (videoAttributes.hasPoster()) {
+            poster = " poster=\"" + compilerContext.getServiceContextURL() + CONTEXT_URL_IMG + videoAttributes.getPoster() + "\"";
         }
 
-        String srcValue = compilerContext.getServiceContextURL() + CONTEXT_URL_VIDEO + this.mdpTagLink;
+        String srcValue = compilerContext.getServiceContextURL() + CONTEXT_URL_VIDEO + mdpTagLink;
 
         result.addLn("    <video class=\"\" preload=\"metadata\" controls=\"true\"" + poster + " src=\"" + srcValue + "\" onclick=\"this.paused?this.play():this.pause();\" allowfullscreen=\"\"></video>");
         result.addLn("</div>");
-
     }
+
 }

@@ -21,8 +21,8 @@ class DirectiveModelBuilderTest {
                 "@@persistent"),
                 1);
 
-        DirectiveModelBuilder directiveModelBuilder = new DirectiveModelBuilder(lineList);
-        DirectiveModel directiveModel = (DirectiveModel) directiveModelBuilder.getModel();
+        DirectiveModelBuilder directiveModelBuilder = new DirectiveModelBuilder();
+        DirectiveModel directiveModel = (DirectiveModel) directiveModelBuilder.getModel(new DirectiveExtraction(lineList));
 
         List<String> directiveList = directiveModel.getDirectives();
 
@@ -38,9 +38,9 @@ class DirectiveModelBuilderTest {
                 "@@unknownDirective"),
                 1);
 
-        DirectiveModelBuilder directiveModelBuilder = new DirectiveModelBuilder(lineList);
+        DirectiveModelBuilder directiveModelBuilder = new DirectiveModelBuilder();
         try {
-            directiveModelBuilder.getModel();
+            directiveModelBuilder.getModel(new DirectiveExtraction(lineList));
             fail("Exception expected.");
         } catch (MDPSyntaxError mdpSyntaxError) {
             assertTrue(mdpSyntaxError instanceof UnrecognizedDirectiveException);
@@ -58,9 +58,9 @@ class DirectiveModelBuilderTest {
                 "@@exercise"),
                 1);
 
-        DirectiveModelBuilder directiveModelBuilder = new DirectiveModelBuilder(lineList);
+        DirectiveModelBuilder directiveModelBuilder = new DirectiveModelBuilder();
         try {
-            directiveModelBuilder.getModel();
+            directiveModelBuilder.getModel(new DirectiveExtraction(lineList));
             fail("Exception expected.");
         } catch (MDPSyntaxError mdpSyntaxError) {
             assertTrue(mdpSyntaxError instanceof IllegalCombinationOfDirectivesException);
@@ -79,9 +79,9 @@ class DirectiveModelBuilderTest {
                 "@@persistent"),
                 1);
 
-        DirectiveModelBuilder directiveModelBuilder = new DirectiveModelBuilder(lineList);
+        DirectiveModelBuilder directiveModelBuilder = new DirectiveModelBuilder();
         try {
-            directiveModelBuilder.getModel();
+            directiveModelBuilder.getModel(new DirectiveExtraction(lineList));
             fail("Exception expected.");
         } catch (MDPSyntaxError mdpSyntaxError) {
             assertTrue(mdpSyntaxError instanceof IllegalCombinationOfDirectivesException);

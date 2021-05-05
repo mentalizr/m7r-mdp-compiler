@@ -1,27 +1,26 @@
 package org.mentalizr.mdpCompiler.outlineElement.md.heading;
 
-import org.mentalizr.mdpCompiler.CompilerContext;
-import org.mentalizr.mdpCompiler.MDPSyntaxError;
-import org.mentalizr.mdpCompiler.result.Result;
-import org.mentalizr.mdpCompilerTestResrc.ResultTest;
 import org.junit.jupiter.api.Test;
+import org.mentalizr.mdpCompiler.CompilerContext;
+import org.mentalizr.mdpCompiler.result.Result;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class HeadingRendererTest {
 
     @Test
-    void plausi_pos_h1() throws MDPSyntaxError {
+    void plausi_pos_h1() {
 
-        HeadingModel headingModel = new HeadingModel();
+        HeadingModel headingModel = new HeadingModel(new H1());
         headingModel.addHeading("Eine Überschrift");
 
-        Result testResult = new ResultTest();
+        Result testResult = new Result();
 
-        HeadingRenderer headingRenderer = new HeadingRenderer(headingModel, 1);
-        headingRenderer.render(CompilerContext.getDefaultTestContext(), testResult);
+        HeadingRenderer headingRenderer = new HeadingRenderer();
+        headingRenderer.render(headingModel, CompilerContext.getDefaultTestContext(), testResult);
 
         List<String> htmlLines = testResult.getResultLines();
 
@@ -31,15 +30,15 @@ class HeadingRendererTest {
     }
 
     @Test
-    void plausi_pos_h2() throws MDPSyntaxError {
+    void plausi_pos_h2() {
 
-        HeadingModel headingModel = new HeadingModel();
+        HeadingModel headingModel = new HeadingModel(new H2());
         headingModel.addHeading("Eine Überschrift");
 
-        Result testResult = new ResultTest();
+        Result testResult = new Result();
 
-        HeadingRenderer headingRenderer = new HeadingRenderer(headingModel, 2);
-        headingRenderer.render(CompilerContext.getDefaultTestContext(), testResult);
+        HeadingRenderer headingRenderer = new HeadingRenderer();
+        headingRenderer.render(headingModel, CompilerContext.getDefaultTestContext(), testResult);
 
         List<String> htmlLines = testResult.getResultLines();
 
@@ -49,15 +48,15 @@ class HeadingRendererTest {
     }
 
     @Test
-    void plausi_pos_h5() throws MDPSyntaxError {
+    void plausi_pos_h5() {
 
-        HeadingModel headingModel = new HeadingModel();
+        HeadingModel headingModel = new HeadingModel(new H5());
         headingModel.addHeading("Eine Überschrift");
 
-        Result testResult = new ResultTest();
+        Result testResult = new Result();
 
-        HeadingRenderer headingRenderer = new HeadingRenderer(headingModel, 5);
-        headingRenderer.render(CompilerContext.getDefaultTestContext(), testResult);
+        HeadingRenderer headingRenderer = new HeadingRenderer();
+        headingRenderer.render(headingModel, CompilerContext.getDefaultTestContext(), testResult);
 
         List<String> htmlLines = testResult.getResultLines();
 

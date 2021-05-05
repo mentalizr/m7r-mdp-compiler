@@ -1,21 +1,16 @@
 package org.mentalizr.mdpCompiler.outlineElement.md.table;
 
 import org.mentalizr.mdpCompiler.CompilerContext;
-import org.mentalizr.mdpCompiler.MDPSyntaxError;
+import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
 import org.mentalizr.mdpCompiler.result.Result;
 
 public class TableRenderer extends OutlineElementRenderer {
 
-    private final TableModel tableModel;
-
-    public TableRenderer(TableModel tableModel) {
-        super();
-        this.tableModel = tableModel;
-    }
-
     @Override
-    public void render(CompilerContext compilerContext, Result result) throws MDPSyntaxError {
+    public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, Result result) {
+
+        TableModel tableModel = (TableModel) outlineElementModel;
 
         int indentLevel = compilerContext.getIndentLevel();
 
@@ -53,7 +48,7 @@ public class TableRenderer extends OutlineElementRenderer {
                     tdTag += " class=\"text-right\"";
                 }
 //                tdTag += ">" + tableModel.getData(colIndex, rowIndex) + "</td>";
-                tdTag += ">" + getInlineProcessedTableData(colIndex, rowIndex) + "</td>";
+                tdTag += ">" + getInlineProcessedTableData(tableModel, colIndex, rowIndex) + "</td>";
                 result.addLn(indentLevel, tdTag);
             }
             result.addLn(indentLevel, "        </tr>");
@@ -63,8 +58,8 @@ public class TableRenderer extends OutlineElementRenderer {
         result.addLn(indentLevel, "</table>");
     }
 
-    private String getInlineProcessedTableData(int colIndex, int rowIndex) {
-        String data = this.tableModel.getData(colIndex, rowIndex);
+    private String getInlineProcessedTableData(TableModel tableModel, int colIndex, int rowIndex) {
+        String data = tableModel.getData(colIndex, rowIndex);
         return this.inlineParserMDP.parse(data);
     }
 

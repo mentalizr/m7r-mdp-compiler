@@ -1,50 +1,42 @@
 package org.mentalizr.mdpCompiler.outlineElement.tagged.video;
 
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
-import org.mentalizr.mdpCompiler.document.DocumentIterator;
-import org.mentalizr.mdpCompiler.document.Line;
-import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModelBuilder;
+import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTaggedModelBuilder;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTagged;
-import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementLinesExtractor;
-import org.mentalizr.mdpCompiler.outlineElement.tagged.MDPTagOnlyLinesExtractor;
+import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementExtractor;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.OutlineElementTaggedAttributesFactory;
-import org.mentalizr.mdpCompiler.result.Result;
 
 public class Video extends OutlineElementTagged {
 
     public static final String TAG = "@video";
 
-    public Video(Line tagLine) throws MDPSyntaxError {
-        super(TAG, tagLine);
+    public Video() {
+        super(TAG);
     }
 
     @Override
-    protected boolean withLink() {
+    public boolean withLink() {
         return true;
     }
 
     @Override
-    protected OutlineElementTaggedAttributesFactory getOutlineElementTaggedAttributesFactory() {
+    public OutlineElementTaggedAttributesFactory getOutlineElementTaggedAttributesFactory() {
         return new VideoAttributesFactory();
     }
 
     @Override
-    protected OutlineElementLinesExtractor getOutlineElementLinesExtractor() {
-        return new MDPTagOnlyLinesExtractor();
+    protected OutlineElementExtractor getOutlineElementLinesExtractor() {
+        return new VideoExtractor();
     }
 
     @Override
-    protected OutlineElementModelBuilder getOutlineElementModelBuilder() {
-        VideoAttributes videoAttributes = (VideoAttributes) this.outlineElementTaggedAttributes;
-        return new VideoModelBuilder(videoAttributes, this.outlineElementLines);
+    protected OutlineElementTaggedModelBuilder getOutlineElementModelBuilder() throws MDPSyntaxError {
+        return new VideoModelBuilder();
     }
 
     @Override
     protected OutlineElementRenderer getOutlineElementRenderer() {
-        VideoAttributes videoAttributes = (VideoAttributes) this.outlineElementTaggedAttributes;
-        VideoModel videoModel = (VideoModel) this.outlineElementModel;
-        String mdpLinkString = this.mdpTag.getLinkString();
-        return new VideoRenderer(videoAttributes, videoModel, mdpLinkString);
+        return new VideoRenderer();
     }
 }

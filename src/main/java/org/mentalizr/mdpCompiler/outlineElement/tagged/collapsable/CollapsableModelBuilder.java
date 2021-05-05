@@ -1,79 +1,112 @@
 package org.mentalizr.mdpCompiler.outlineElement.tagged.collapsable;
 
+import org.mentalizr.mdpCompiler.MDPCompiler;
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
+import org.mentalizr.mdpCompiler.document.Document;
 import org.mentalizr.mdpCompiler.document.Line;
-import org.mentalizr.mdpCompiler.document.Lines;
-import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModelBuilder;
+import org.mentalizr.mdpCompiler.mdpTag.MDPTag;
+import org.mentalizr.mdpCompiler.outlineElement.Extraction;
+import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
+import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTagged;
+import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTaggedModelBuilder;
+import org.mentalizr.mdpCompiler.outlineElement.tagged.collapsable.accordion.Accordion;
+import org.mentalizr.mdpCompiler.outlineElement.tagged.collapsable.accordion.AccordionModel;
+import org.mentalizr.mdpCompiler.outlineElement.tagged.collapsable.collapse.Collapse;
+import org.mentalizr.mdpCompiler.outlineElement.tagged.collapsable.collapse.CollapseModel;
 
 import java.util.List;
 
-public class CollapsableModelBuilder implements OutlineElementModelBuilder {
+public class CollapsableModelBuilder extends OutlineElementTaggedModelBuilder {
 
-    private final CollapsableAttributes collapsableAttributes;
-    private final List<Line> lines;
-
-    private CollapsableModel collapsableModel = null;
-
-    public CollapsableModelBuilder(CollapsableAttributes collapsableAttributes, List<Line> lines) {
-        this.collapsableAttributes = collapsableAttributes;
-        this.lines = Lines.shallowCopy(lines);
+    public CollapsableModelBuilder(OutlineElementTagged outlineElementTagged) {
+        super(outlineElementTagged);
     }
 
-    public CollapsableModel getModel() throws MDPSyntaxError {
-        if (this.collapsableModel == null) {
-            buildModel();
+    @Override
+    public CollapsableModel getModel(Extraction extraction) throws MDPSyntaxError {
+
+        if (!(extraction instanceof CollapsableExtraction))
+            throw new RuntimeException(CollapsableExtraction.class.getSimpleName() + " expected.");
+
+        if (extraction.isEmpty())
+            throw new IllegalStateException("Insufficient number of lines.");
+
+        CollapsableModel collapsableModel = createCollapsableModelInstance(extraction);
+
+        CollapsableLineModel collapsableLineModel = getCollapsableLineModel(extraction);
+        List<CollapsableCardLineContent> collapsableCardLineContentList = collapsableLineModel.getCollapsableCardContentList();
+        for (CollapsableCardLineContent collapsableCardLineContent : collapsableCardLineContentList) {
+            CollapsableCardContent collapsableCardContent;
+            if (collapsableCardLineContent.hasSingleLine()) {
+                String singleLine = collapsableCardLineContent.getSingleLine();
+                collapsableCardContent = new CollapsableCardContent(-1, collapsableCardLineContent.getHeader(), singleLine);
+            } else {
+                Document cardDocument = collapsableCardLineContent.getContentAsDocument();
+                List<OutlineElementModel> outlineElementModelList = MDPCompiler.getModelsForSubdocument(cardDocument);
+                collapsableCardContent = new CollapsableCardContent(-1, collapsableCardLineContent.getHeader(), outlineElementModelList);
+            }
+            collapsableModel.addCardContent(collapsableCardContent);
         }
-        return this.collapsableModel;
+
+        return collapsableModel;
     }
 
-    public void buildModel() throws MDPSyntaxError {
+    private CollapsableModel createCollapsableModelInstance(Extraction extraction) throws MDPSyntaxError {
+        MDPTag mdpTag = parseMdpTagLine(extraction.getTagLine());
 
-        this.collapsableModel = new CollapsableModel();
+        if (this.outlineElement instanceof Accordion) {
+            return new AccordionModel(mdpTag);
+        } else if (this.outlineElement instanceof Collapse) {
+            return new CollapseModel(mdpTag);
+        } else {
+            throw new RuntimeException("Illegal subtype of OutlineElement: " +
+                    this.outlineElement.getClass().getSimpleName());
+        }
+    }
 
-        int tagLineIndex = this.removeTagLine();
+    private CollapsableLineModel getCollapsableLineModel(Extraction extraction) throws MDPSyntaxError {
 
-        for (Line line : this.lines) {
+        CollapsableLineModel collapsableLineModel = new CollapsableLineModel();
+
+        int tagLineIndex = extraction.getTagLineIndex();
+        List<Line> lines = extraction.getLinesWithoutTagLine();
+
+        for (Line line : lines) {
             String lineString = line.asString();
 
             if (lineString.startsWith("    ")) {
-                processIndentedContent(line);
+                processIndentedContent(line, collapsableLineModel);
 
             } else if (line.asString().startsWith("--- ")) {
-                processHeaderDefinition(line);
+                processHeaderDefinition(line, collapsableLineModel);
 
             } else if (line.asString().isBlank()) {
                 if (line.getLineIndex() == tagLineIndex + 1) {
                     throw new MDPSyntaxError(line, "Malformed accordion content definition. First line of content must not be blank.");
                 }
-                this.collapsableModel.addContentLine(line);
+                collapsableLineModel.addContentLine(line);
 
             } else {
-                throw new IllegalStateException("Unrecognized content found. Should have lead to termination in extraction stage. " + line.asString());
+                throw new IllegalStateException("Unrecognized content found. Should have led to termination in extraction stage. " + line.asString());
             }
         }
 
+        return collapsableLineModel;
     }
 
-    private int removeTagLine() {
-        int tagLineIndex = this.lines.get(0).getLineIndex();
-        this.lines.remove(0);
-        return tagLineIndex;
-    }
+    private void processIndentedContent(Line line, CollapsableLineModel collapsableModel) throws MDPSyntaxError {
 
-    private void processIndentedContent(Line line) throws MDPSyntaxError {
-
-        if (!this.collapsableModel.hasCurCard())
+        if (!collapsableModel.hasCurCard())
             throw new MDPSyntaxError(line, "Missing header definition for collapsable content element.");
 
 //        String contentLine = line.asString().substring(4).trim();
         String contentLine = line.asString().substring(4);
-
-        this.collapsableModel.addContentLine(new Line(contentLine, line.getLineIndex()));
-
+        collapsableModel.addContentLine(new Line(contentLine, line.getLineIndex()));
     }
 
-    private void processHeaderDefinition(Line line) {
+    private void processHeaderDefinition(Line line, CollapsableLineModel collapsableModel) {
         String header = line.asString().substring(4);
-        this.collapsableModel.createNextCard(header);
+        collapsableModel.createNextCard(header);
     }
+
 }

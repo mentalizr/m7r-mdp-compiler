@@ -1,12 +1,17 @@
 package org.mentalizr.mdpCompiler._integration;
 
+import org.mentalizr.mdpCompiler.Dom;
+import org.mentalizr.mdpCompiler.MDPCompiler;
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
+import org.mentalizr.mdpCompiler.document.Document;
 import org.mentalizr.mdpCompilerTestResrc.IntegrationTestBench;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Set;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 class PlausibilityPositiveTest {
@@ -29,4 +34,14 @@ class PlausibilityPositiveTest {
         }
 
     }
+
+    @Test
+    void md1_mediaResources() throws IOException, MDPSyntaxError {
+        Document document = new Document(new File(EXPECTED_DIR, "test1.mdp"));
+        Dom dom = MDPCompiler.createDom(document);
+        Set<String> mediaResources = dom.getReferencedMediaResources();
+
+        assertEquals(Set.of("joe_400x250.jpg"), mediaResources);
+    }
+
 }

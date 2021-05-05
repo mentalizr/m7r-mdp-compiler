@@ -2,6 +2,7 @@ package org.mentalizr.mdpCompiler.outlineElement.md.table;
 
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
 import org.mentalizr.mdpCompiler.document.Line;
+import org.mentalizr.mdpCompiler.outlineElement.Extraction;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModelBuilder;
 import org.mentalizr.mdpCompiler.remnants.TempHelper;
 
@@ -10,42 +11,28 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class TableModelBuilder implements OutlineElementModelBuilder {
+public class TableModelBuilder extends OutlineElementModelBuilder {
 
-    private final List<Line> lines;
+    private final Pattern headerMarkPattern = Pattern.compile("^:?-+:?$");
 
-    private TableModelRow header;
-    private final List<TableModelRow> rows;
-    private TableModelColMetaData tableModelColMetaData;
-
-    private final Pattern headerMarkPattern;
-
-    private TableModel tableModel;
-
-    public TableModelBuilder(List<Line> lines) {
-        this.lines = lines;
-
-        this.header = null;
-        this.rows = new ArrayList<>();
-        this.tableModelColMetaData = null;
-        this.headerMarkPattern = Pattern.compile("^:?-+:?$");
-
-        this.tableModel = null;
+    public TableModelBuilder() {
+        super(new Table());
     }
 
     @Override
-    public TableModel getModel() throws MDPSyntaxError {
-        if (this.tableModel == null) {
-            buildModel();
-        }
-        return this.tableModel;
-    }
+    public TableModel getModel(Extraction extraction) throws MDPSyntaxError {
 
-    private void buildModel() throws MDPSyntaxError {
+        if (!(extraction instanceof TableExtraction))
+            throw new RuntimeException(TableExtraction.class.getSimpleName() + " expected.");
+
+        List<Line> lines = extraction.getLines();
+        TableModelRow header = null;
+        TableModelColMetaData tableModelColMetaData = null;
+        List<TableModelRow> rows = new ArrayList<>();
 
         int nrProcessedLines = 0;
 
-        for (Line line : this.lines) {
+        for (Line line : lines) {
             String lineString = line.asString().trim();
 
             if (!lineString.startsWith("|")) throw new IllegalStateException("All lines of table must begin with '|'.");
@@ -55,13 +42,13 @@ public class TableModelBuilder implements OutlineElementModelBuilder {
             try {
 
                 if (nrProcessedLines == 0) {
-                    addHeader(rawColDataList);
+                    header = addHeader(rawColDataList, header);
 
                 } else if (nrProcessedLines == 1) {
-                    addColumnDefinition(rawColDataList);
+                    tableModelColMetaData = addColumnDefinition(rawColDataList, header, rows);
 
                 } else {
-                    addRow(rawColDataList);
+                    addRow(rawColDataList, rows, tableModelColMetaData);
                 }
 
             } catch (TableModelException e) {
@@ -71,62 +58,64 @@ public class TableModelBuilder implements OutlineElementModelBuilder {
             nrProcessedLines++;
         }
 
-        this.tableModel = new TableModel(this.header, this.rows, this.tableModelColMetaData);
+        return new TableModel(header, rows, tableModelColMetaData);
     }
 
 
-    public void addHeader(List<String> headerData) {
-        if (isHeaderDefined()) throw new IllegalStateException("Header of TableModelBuilder is already defined.");
-        this.header = new TableModelRow(headerData);
+    private TableModelRow addHeader(List<String> headerData, TableModelRow header) {
+        if (isHeaderDefined(header)) throw new IllegalStateException("Header of TableModelBuilder is already defined.");
+        return new TableModelRow(headerData);
     }
 
-    public void addColumnDefinition(List<String> columnDefinitionList) throws TableModelException {
+    private TableModelColMetaData addColumnDefinition(List<String> columnDefinitionList, TableModelRow header, List<TableModelRow> rows) throws TableModelException {
 
-        if (!isHeaderDefined()) throw new IllegalStateException("Header definition missing.");
-        if (areTableRowsDefined()) throw new IllegalStateException("Table columns are already defined.");
+        if (!isHeaderDefined(header)) throw new IllegalStateException("Header definition missing.");
+        if (areTableRowsDefined(rows)) throw new IllegalStateException("Table columns are already defined.");
 
         if (columnDefinitionList.size() == 0) throw new TableModelException("No column definition found for table.");
 
-        this.tableModelColMetaData = new TableModelColMetaData();
+        TableModelColMetaData tableModelColMetaData = new TableModelColMetaData();
 
         for (String columnDefinition : columnDefinitionList) {
 
             if (!isValidHeaderMark(columnDefinition)) throw new TableModelException("No valid column definition for table. Unrecognized token: '" + columnDefinition + "'.");
 
             if (isAlignLeft(columnDefinition)) {
-                this.tableModelColMetaData.addColAlignLeft();
+                tableModelColMetaData.addColAlignLeft();
             } else if (isAlignCenter(columnDefinition)) {
-                this.tableModelColMetaData.addColAlignCenter();
+                tableModelColMetaData.addColAlignCenter();
             } else if (isAlignRight(columnDefinition)) {
-                this.tableModelColMetaData.addColAlignRight();
+                tableModelColMetaData.addColAlignRight();
             }
         }
 
-        if (!isHeaderEmpty() && (this.header.getNrOfRows() != this.tableModelColMetaData.getNrCols())) {
+        if (!isHeaderEmpty(header) && (header.getNrOfRows() != tableModelColMetaData.getNrCols())) {
             throw new TableModelException("Inconsistent number of columns in header and header definition.");
         }
+
+        return tableModelColMetaData;
     }
 
-    public void addRow(List<String> rowDataList) throws TableModelException {
+    private void addRow(List<String> rowDataList, List<TableModelRow> rows, TableModelColMetaData tableModelColMetaData) throws TableModelException {
         TableModelRow tableModelRow = new TableModelRow(rowDataList);
 
-        if (tableModelRow.getNrOfRows() != this.tableModelColMetaData.getNrCols()) {
-            throw new TableModelException("Inconsistent number of columns in row definition. Expected=" + this.tableModelColMetaData.getNrCols() + " Actual=" + tableModelRow.getNrOfRows());
+        if (tableModelRow.getNrOfRows() != tableModelColMetaData.getNrCols()) {
+            throw new TableModelException("Inconsistent number of columns in row definition. Expected=" + tableModelColMetaData.getNrCols() + " Actual=" + tableModelRow.getNrOfRows());
         }
 
-        this.rows.add(tableModelRow);
+        rows.add(tableModelRow);
     }
 
-    private boolean isHeaderDefined() {
-        return (this.header != null);
+    private boolean isHeaderDefined(TableModelRow header) {
+        return (header != null);
     }
 
-    private boolean isHeaderEmpty() {
-        return (this.header != null && this.header.isRowEmpty());
+    private boolean isHeaderEmpty(TableModelRow header) {
+        return (header != null && header.isRowEmpty());
     }
 
-    private boolean areTableRowsDefined() {
-        return (this.rows.size() > 0);
+    private boolean areTableRowsDefined(List<TableModelRow> rows) {
+        return (rows.size() > 0);
     }
 
     private boolean isValidHeaderMark(String headerMark) {

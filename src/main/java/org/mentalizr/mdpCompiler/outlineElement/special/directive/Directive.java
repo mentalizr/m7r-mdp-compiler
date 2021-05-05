@@ -1,11 +1,10 @@
 package org.mentalizr.mdpCompiler.outlineElement.special.directive;
 
-import org.mentalizr.mdpCompiler.document.DocumentIterator;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElement;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModelBuilder;
+import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTaggedModelBuilder;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
-import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementLinesExtractor;
-import org.mentalizr.mdpCompiler.result.Result;
+import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementExtractor;
 
 public class Directive extends OutlineElement {
 
@@ -16,18 +15,18 @@ public class Directive extends OutlineElement {
     }
 
     @Override
-    protected OutlineElementLinesExtractor getOutlineElementLinesExtractor() {
-        return new DirectiveLinesExtractor();
+    protected OutlineElementExtractor getOutlineElementLinesExtractor() {
+        return new DirectiveExtractor();
     }
 
     @Override
     protected OutlineElementModelBuilder getOutlineElementModelBuilder() {
-        return new DirectiveModelBuilder(this.outlineElementLines);
+        return new DirectiveModelBuilder();
     }
 
     @Override
     protected OutlineElementRenderer getOutlineElementRenderer() {
-        DirectiveModel directiveModel = (DirectiveModel) this.outlineElementModel;
-        return new DirectiveRenderer(directiveModel);
+//        DirectiveModel directiveModel = (DirectiveModel) this.outlineElementModel;
+        return new DirectiveRenderer();
     }
 }

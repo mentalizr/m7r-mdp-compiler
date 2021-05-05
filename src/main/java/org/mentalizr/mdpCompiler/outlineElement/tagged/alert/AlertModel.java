@@ -1,12 +1,13 @@
 package org.mentalizr.mdpCompiler.outlineElement.tagged.alert;
 
-import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
+import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTaggedModel;
 
-public class AlertModel extends OutlineElementModel {
+public class AlertModel extends OutlineElementTaggedModel {
 
     private String text;
 
     public AlertModel() {
+        super(new Alert());
         this.text = "";
     }
 
@@ -17,4 +18,9 @@ public class AlertModel extends OutlineElementModel {
     public String getText() {
         return this.text;
     }
+
+    public AlertAttributes getAlertAttributes() {
+        return (AlertAttributes) this.mdpTag.getAttributes();
+    }
+
 }

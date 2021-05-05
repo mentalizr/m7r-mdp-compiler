@@ -2,85 +2,74 @@ package org.mentalizr.mdpCompiler.outlineElement.tagged.card;
 
 import org.mentalizr.mdpCompiler.CompilerContext;
 import org.mentalizr.mdpCompiler.MDPCompiler;
-import org.mentalizr.mdpCompiler.MDPSyntaxError;
+import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
-import org.mentalizr.mdpCompiler.outlineElement.tagged.TextBlockModel;
 import org.mentalizr.mdpCompiler.result.Result;
 
 public class CardRenderer extends OutlineElementRenderer {
 
-    private final CardAttributes cardAttributes;
-    private final TextBlockModel cardModel;
-
-    public CardRenderer(CardAttributes cardAttributes, TextBlockModel cardModel) {
-        super();
-        this.cardAttributes = cardAttributes;
-        this.cardModel = cardModel;
-    }
-
     @Override
-    public void render(CompilerContext compilerContext, Result result) throws MDPSyntaxError {
+    public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, Result result) {
+
+        CardModel cardModel = (CardModel) outlineElementModel;
+        CardAttributes cardAttributes = cardModel.getCardAttributes();
 
         int indent = compilerContext.getIndentLevel();
 
-        result.addLn(indent, "<div class=\"" + getCardClassValue() + "\">");
+        result.addLn(indent, "<div class=\"" + getCardClassValue(cardAttributes) + "\">");
 
-        renderHeader(indent, result);
+        renderHeader(indent, cardAttributes, result);
 
-        renderBody(indent, result);
+        renderBody(indent, cardModel, result);
 
         result.addLn(indent, "</div>");
-
     }
 
-    private String getCardClassValue() {
+    private String getCardClassValue(CardAttributes cardAttributes) {
 
         StringBuilder classValueBuilder = new StringBuilder();
         classValueBuilder.append("card");
 
-        if (this.cardAttributes.hasTextColor()) {
-            classValueBuilder.append(" text-").append(this.cardAttributes.getTextColor());
+        if (cardAttributes.hasTextColor()) {
+            classValueBuilder.append(" text-").append(cardAttributes.getTextColor());
         }
 
-        if (this.cardAttributes.hasBgColor()) {
-            classValueBuilder.append(" bg-").append(this.cardAttributes.getBgColor());
+        if (cardAttributes.hasBgColor()) {
+            classValueBuilder.append(" bg-").append(cardAttributes.getBgColor());
         }
 
-        classValueBuilder.append(" mt-").append(this.cardAttributes.getMarginTop());
-        classValueBuilder.append(" mb-").append(this.cardAttributes.getMarginBottom());
+        classValueBuilder.append(" mt-").append(cardAttributes.getMarginTop());
+        classValueBuilder.append(" mb-").append(cardAttributes.getMarginBottom());
 
         return classValueBuilder.toString();
     }
 
-    private void renderHeader(int indent, Result result) {
-        if (this.cardAttributes.hasHeader()) {
-            result.addLn(indent + 1, "<div class=\"card-header\">" + this.cardAttributes.getHeader() + "</div>");
+    private void renderHeader(int indent, CardAttributes cardAttributes, Result result) {
+        if (cardAttributes.hasHeader()) {
+            result.addLn(indent + 1, "<div class=\"card-header\">" + cardAttributes.getHeader() + "</div>");
         }
     }
 
-    private void renderBody(int indent, Result result) throws MDPSyntaxError {
-        if (this.cardModel.getNrOfTextBlockLines() == 1) {
-            renderSingleLineBody(indent, result);
-        } else if (this.cardModel.getNrOfTextBlockLines() > 1) {
-            renderMultiLineBody(indent, result);
+    private void renderBody(int indent, CardModel cardModel, Result result) {
+        if (cardModel.hasSingleLine()) {
+            renderSingleLineBody(indent, cardModel, result);
+        } else if (cardModel.hasChildModels()) {
+            renderMultiLineBody(indent, cardModel, result);
         }
     }
 
-    private void renderSingleLineBody(int indent, Result result) {
-        String cardText = this.cardModel.getSingleLineAsString();
+    private void renderSingleLineBody(int indent, CardModel cardModel, Result result) {
+        String cardText = cardModel.getSingleLine();
         result.addLn(indent + 1, "<div class=\"card-body\">");
         result.addLn(indent + 2, "<div class=\"card-text\">" + cardText + "</div>");
         result.addLn(indent + 1, "</div>");
     }
 
-    private void renderMultiLineBody(int indent, Result result) throws MDPSyntaxError {
+    private void renderMultiLineBody(int indent, CardModel cardModel, Result result) {
 
         result.addLn(indent + 1, "<div class=\"card-body\">");
 
-        MDPCompiler.compileSubdocument(
-                cardModel.asDocument(),
-                result,
-                new CompilerContext(false, indent + 1));
+        MDPCompiler.renderSubdocument(cardModel.getChildModels(), result, new CompilerContext(false, indent + 1));
 
         result.addLn(indent + 1, "</div>");
     }

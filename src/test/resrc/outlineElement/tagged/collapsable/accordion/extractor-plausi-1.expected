@@ -1,0 +1,10 @@
+@accordion[id="i4711"]
+--- Header 1
+    Content Card 1
+--- Header 2
+    # Content Card 2
+
+    * erster Punkt
+    * zweiter Punkt
+--- Header 3
+    Content Card 3

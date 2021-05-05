@@ -1,13 +1,16 @@
 package org.mentalizr.mdpCompiler.outlineElement.tagged.formGroup.radioGroup;
 
-import org.mentalizr.mdpCompiler.MDPSyntaxError;
-import org.mentalizr.mdpCompilerTestResrc.OutlineElementTestBench;
-import org.mentalizr.mdpCompilerTestResrc.OutlineElementTestBenchExecutor;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mentalizr.mdpCompiler.MDPSyntaxError;
+import org.mentalizr.mdpCompiler.document.Line;
+import org.mentalizr.mdpCompilerTestResrc.OutlineElementTestBench;
+import org.mentalizr.mdpCompilerTestResrc.OutlineElementTestBenchExecutor;
 
 import java.io.File;
 import java.io.IOException;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SuppressWarnings("SpellCheckingInspection")
 class RadioGroupTest {
@@ -15,10 +18,17 @@ class RadioGroupTest {
     private static final String TEST_RESRC_DIR = "src/test/resrc/outlineElement/tagged/formGroup/radioGroup";
 
     @Test
+    void isResponsible() {
+        RadioGroup radioGroup = new RadioGroup();
+        Line line = Line.createLine0("@radio-group[name=\"myRadioGroup\" id=\"myRadioButton\" \"Situation\" \"Gedanken\" \"Gefühl\"]");
+        assertTrue(radioGroup.isResponsible(line));
+    }
+
+    @Test
     void plausibility1() throws MDPSyntaxError, IOException {
 
         OutlineElementTestBench.execute(
-                new RadioGroupFactory(),
+                new RadioGroup(),
                 new String[]{
                         "@radio-group[id=\"input_myId\" name=\"myName\" \"Label1\" \"Label2\" \"Label3\"]",
                         "    This is a headline",
@@ -31,10 +41,10 @@ class RadioGroupTest {
     }
 
     @Test
-    void plausibilityMD() throws MDPSyntaxError, IOException {
+    void plausibilityMD() throws MDPSyntaxError {
 
         OutlineElementTestBenchExecutor outlineElementTestBenchExecutor
-                = new OutlineElementTestBenchExecutor(new RadioGroupFactory())
+                = new OutlineElementTestBenchExecutor(new RadioGroup())
                 .withMDPFile(new File(TEST_RESRC_DIR, "radiogroup_md_ul.mdp"))
                 .withExpectedFile(new File(TEST_RESRC_DIR, "radiogroup_md_ul.expected"))
                 .withExpectedDocumentIteratorIndex(4);
@@ -48,7 +58,7 @@ class RadioGroupTest {
     void escapedAttributeValue() throws MDPSyntaxError, IOException {
 
         OutlineElementTestBench.execute(
-                new RadioGroupFactory(),
+                new RadioGroup(),
                 new String[]{
                         "@radio-group[id=\"4457\" name=\"worte\" \"\\\"Danke\\\" sagen\" \"einen Dankbrief oder eine Dankmail schreiben\"]",
                         "    This is a headline",
@@ -64,7 +74,7 @@ class RadioGroupTest {
     void scopeId() throws MDPSyntaxError, IOException {
 
         OutlineElementTestBench.execute(
-                new RadioGroupFactory(),
+                new RadioGroup(),
                 new String[]{
                         "@radio-group[id=\"input_myId\" name=\"myName\" scope=\"program\" scope-id=\"myScopeId\" \"Label1\" \"Label2\" \"Label3\"]",
                         "    This is a headline",
@@ -81,7 +91,7 @@ class RadioGroupTest {
     void scopeIdInScopePage() throws MDPSyntaxError, IOException {
 
         OutlineElementTestBench.execute(
-                new RadioGroupFactory(),
+                new RadioGroup(),
                 new String[]{
                         "@radio-group[id=\"input_myId\" name=\"myName\" scope-id=\"myScopeId\" \"Label1\" \"Label2\" \"Label3\"]",
                         "    This is a headline",
@@ -97,7 +107,7 @@ class RadioGroupTest {
     void readonly() throws IOException, MDPSyntaxError {
 
         OutlineElementTestBench.execute(
-                new RadioGroupFactory(),
+                new RadioGroup(),
                 new String[]{
                         "@radio-group[id=\"input_myId\" name=\"myName\" readonly=\"true\" scope-id=\"myScopeId\" \"Label1\" \"Label2\" \"Label3\"]",
                         "    This is a headline",
@@ -113,7 +123,7 @@ class RadioGroupTest {
     void refId() throws IOException, MDPSyntaxError {
 
         OutlineElementTestBench.execute(
-                new RadioGroupFactory(),
+                new RadioGroup(),
                 new String[]{
                         "@radio-group[id=\"input_myId\" name=\"myName\" ref-id=\"myRefId\" scope-id=\"myScopeId\" \"Label1\" \"Label2\" \"Label3\"]",
                         "    This is a headline",

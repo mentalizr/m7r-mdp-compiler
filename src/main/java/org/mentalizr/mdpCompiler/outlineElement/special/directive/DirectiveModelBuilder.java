@@ -2,53 +2,50 @@ package org.mentalizr.mdpCompiler.outlineElement.special.directive;
 
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
 import org.mentalizr.mdpCompiler.document.Line;
-import org.mentalizr.mdpCompiler.document.Lines;
+import org.mentalizr.mdpCompiler.outlineElement.Extraction;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModelBuilder;
+import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTaggedModelBuilder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class DirectiveModelBuilder implements OutlineElementModelBuilder {
+public class DirectiveModelBuilder extends OutlineElementModelBuilder {
 
     public static final String DIRECTIVE_NAME = "@@name";
     public static final String DIRECTIVE_PERSISTENT = "@@persistent";
     public static final String DIRECTIVE_EXERCISE = "@@exercise";
     public static final String DIRECTIVE_FEEDBACK = "@@feedback";
 
-    private final List<Line> lines;
+//    private final List<Line> lines;
+//
+//    private DirectiveModel directiveModel;
 
-    private DirectiveModel directiveModel;
-
-    public DirectiveModelBuilder(List<Line> lines) {
-        this.lines = Lines.shallowCopy(lines);
-        this.directiveModel = null;
+    public DirectiveModelBuilder() {
+        super(new Directive());
+//        this.lines = Lines.shallowCopy(lines);
+//        this.directiveModel = null;
     }
 
     @Override
-    public OutlineElementModel getModel() throws MDPSyntaxError {
+    public OutlineElementModel getModel(Extraction extraction) throws MDPSyntaxError {
 
-        if (this.directiveModel == null) {
-            buildModel();
-        }
-        return this.directiveModel;
-    }
+        if (!(extraction instanceof DirectiveExtraction))
+            throw new RuntimeException(DirectiveExtraction.class.getSimpleName() + " expected.");
 
-    private void buildModel() throws MDPSyntaxError {
-
-        validate();
+        validate(extraction);
 
         List<String> directiveLines = new ArrayList<>();
 
-        for (Line line : this.lines) {
+        for (Line line : extraction.getLines()) {
             directiveLines.add(line.asString());
         }
 
-        this.directiveModel = new DirectiveModel(directiveLines);
+        return new DirectiveModel(directiveLines);
     }
 
-    private void validate() throws MDPSyntaxError {
+    private void validate(Extraction extraction) throws MDPSyntaxError {
 
         List<String> possibleDirectiveList = Arrays.asList(DIRECTIVE_PERSISTENT, DIRECTIVE_EXERCISE, DIRECTIVE_FEEDBACK);
 
@@ -56,7 +53,7 @@ public class DirectiveModelBuilder implements OutlineElementModelBuilder {
         boolean hasDirectiveExercise = false;
         boolean hasDirectiveFeedback = false;
 
-        for (Line line : this.lines) {
+        for (Line line : extraction.getLines()) {
 
             String lineAsString = line.asString();
 
@@ -76,7 +73,6 @@ public class DirectiveModelBuilder implements OutlineElementModelBuilder {
             if (hasDirectivePersistent && hasDirectiveFeedback) {
                 throw new IllegalCombinationOfDirectivesException(line, DIRECTIVE_PERSISTENT, DIRECTIVE_FEEDBACK);
             }
-
         }
 
     }

@@ -6,7 +6,8 @@ public class HeadingModel extends OutlineElementModel {
 
     private String heading;
 
-    public HeadingModel() {
+    public HeadingModel(Heading heading) {
+        super(heading);
         this.heading = "";
     }
 
@@ -16,5 +17,10 @@ public class HeadingModel extends OutlineElementModel {
 
     public String getHeading() {
         return this.heading;
+    }
+
+    public int getHeadingLevel() {
+        Heading heading = (Heading) this.outlineElement;
+        return heading.getHeadingLevel();
     }
 }

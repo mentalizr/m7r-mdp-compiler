@@ -20,8 +20,8 @@ class ULModelBuilderTest {
         Document document = new Document(new File(EXPECTED_DIR, "ul-1.mdp"));
         List<Line> lines = document.getLines();
 
-        ULModelBuilder ulModelBuilder = new ULModelBuilder(lines);
-        ULModel ulModel = ulModelBuilder.getModel();
+        ULModelBuilder ulModelBuilder = new ULModelBuilder();
+        ULModel ulModel = ulModelBuilder.getModel(new ULExtraction(lines));
 
         assertNotNull(ulModel);
 

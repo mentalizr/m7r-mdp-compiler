@@ -1,10 +1,10 @@
 package org.mentalizr.mdpCompiler.outlineElement.tagged.formGroup.inputGroup;
 
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
 import org.mentalizr.mdpCompilerTestResrc.OutlineElementTestBench;
 import org.mentalizr.mdpCompilerTestResrc.OutlineElementTestBenchExecutor;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 
 import java.io.File;
 
@@ -17,7 +17,7 @@ class InputGroupTest {
     void plausibility1() throws MDPSyntaxError {
 
         OutlineElementTestBench.execute(
-                new InputGroupFactory(),
+                new InputGroup(),
                 new String[]{
                         "@input-group[id=\"input_myId\"]",
                         "    Eine Überschrift in *kursiv*.",
@@ -38,7 +38,7 @@ class InputGroupTest {
     void plausibilityMD() throws MDPSyntaxError {
 
         OutlineElementTestBenchExecutor outlineElementTestBenchExecutor =
-                new OutlineElementTestBenchExecutor(new InputGroupFactory())
+                new OutlineElementTestBenchExecutor(new InputGroup())
                         .withMDPFile(new File(RESRC_DIR, "input-group_md_ul.mdp"))
                         .withExpectedFile(new File(RESRC_DIR, "input-group_md_ul.expected"))
                         .withExpectedDocumentIteratorIndex(8);
@@ -50,7 +50,7 @@ class InputGroupTest {
     void scopeId() throws MDPSyntaxError {
 
         OutlineElementTestBench.execute(
-                new InputGroupFactory(),
+                new InputGroup(),
                 new String[]{
                         "@input-group[id=\"input_myId\" scope=\"program\" scope-id=\"input_myScopeId\"]",
                         "    Eine Überschrift in *kursiv*.",
@@ -72,7 +72,7 @@ class InputGroupTest {
     void scopeIdInPageScope() throws MDPSyntaxError {
 
         OutlineElementTestBench.execute(
-                new InputGroupFactory(),
+                new InputGroup(),
                 new String[]{
                         "@input-group[id=\"input_myId\" scope-id=\"input_myScopeId\"]",
                         "    Eine Überschrift in *kursiv*.",

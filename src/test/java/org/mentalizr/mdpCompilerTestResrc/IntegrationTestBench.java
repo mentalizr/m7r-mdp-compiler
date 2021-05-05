@@ -4,6 +4,7 @@ import org.mentalizr.mdpCompiler.MDPCompiler;
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
 import org.mentalizr.mdpCompiler.document.Document;
 import org.mentalizr.mdpCompiler.helper.TextFile;
+import org.mentalizr.mdpCompiler.result.Result;
 
 import java.io.File;
 import java.io.IOException;
@@ -23,8 +24,7 @@ public class IntegrationTestBench {
         String testName = "[TEST: " + stackTraceElements[1].getMethodName() + "] [CLASS: " + stackTraceElements[1].getClassName() + "]";
 
         Document document = new Document(mdpFile);
-        ResultTest result = new ResultTest();
-        MDPCompiler.compileMdpDocument(document, result);
+        Result result = MDPCompiler.compile(document);
 
         if (SOUT_RESULT) {
             System.out.println("### BEGIN ### [IntegrationTestBench] " + testName);

@@ -1,9 +1,9 @@
 package org.mentalizr.mdpCompiler.outlineElement.tagged.mcQuestion;
 
+import org.junit.jupiter.api.Test;
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
 import org.mentalizr.mdpCompilerTestResrc.OutlineElementTestBench;
 import org.mentalizr.mdpCompilerTestResrc.OutlineElementTestBenchExecutor;
-import org.junit.jupiter.api.Test;
 
 import java.io.File;
 
@@ -16,7 +16,7 @@ public class MCQuestionTest {
     void test() throws MDPSyntaxError {
 
         OutlineElementTestBench.execute(
-                new OutlineElementTestBenchExecutor(new MCQuestionFactory())
+                new OutlineElementTestBenchExecutor(new MCQuestion())
                         .withMDPLines("@mc-question[id=\"q1\"]",
                                 "    Frage 1 von 5",
                                 "    Welche zwei Arten von Stressbewältigung unterscheidet der Stressforscher Richard Lazarus in seinem berühmten transaktionalen Stressmodell?",

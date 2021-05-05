@@ -1,36 +1,33 @@
 package org.mentalizr.mdpCompiler.outlineElement.md.ul;
 
 import org.mentalizr.mdpCompiler.document.Line;
-import org.mentalizr.mdpCompiler.document.Lines;
+import org.mentalizr.mdpCompiler.outlineElement.Extraction;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModelBuilder;
 
 import java.util.List;
 
-public class ULModelBuilder implements OutlineElementModelBuilder {
+public class ULModelBuilder extends OutlineElementModelBuilder {
 
-    private final List<Line> lines;
-    private ULModel ulModel;
-
-    public ULModelBuilder(List<Line> lines) {
-        this.lines = Lines.shallowCopy(lines);
-        this.ulModel = null;
+    public ULModelBuilder() {
+        super(new UL());
     }
 
     @Override
-    public ULModel getModel() {
-        if (this.ulModel == null) {
-            buildModel();
-        }
-        return this.ulModel;
-    }
+    public ULModel getModel(Extraction extraction) {
 
-    private void buildModel() {
-        this.ulModel = new ULModel();
-        for (Line line : this.lines) {
+        if (!(extraction instanceof ULExtraction))
+            throw new RuntimeException(ULExtraction.class.getSimpleName() + " expected.");
+
+        List<Line> lines = extraction.getLines();
+
+        ULModel ulModel = new ULModel();
+        for (Line line : lines) {
             if (line.asString().startsWith("* ")) {
-                this.ulModel.addItem(line.asString().substring(2).trim());
+                ulModel.addItem(line.asString().substring(2).trim());
             }
         }
+
+        return ulModel;
     }
 
 }

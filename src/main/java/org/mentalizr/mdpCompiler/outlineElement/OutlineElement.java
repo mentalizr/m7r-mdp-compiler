@@ -4,25 +4,22 @@ import org.mentalizr.mdpCompiler.CompilerContext;
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
 import org.mentalizr.mdpCompiler.document.DocumentIterator;
 import org.mentalizr.mdpCompiler.document.Line;
-import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementLinesExtractor;
+import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementExtractor;
 import org.mentalizr.mdpCompiler.result.Result;
 
-import java.util.List;
+import java.util.Objects;
 
 public abstract class OutlineElement {
 
     protected String prefix;
 
-    protected List<Line> outlineElementLines;
-    protected OutlineElementModel outlineElementModel;
-
     public OutlineElement(String prefix) {
         this.prefix = prefix;
     }
 
-    protected abstract OutlineElementLinesExtractor getOutlineElementLinesExtractor();
+    protected abstract OutlineElementExtractor getOutlineElementLinesExtractor();
 
-    protected abstract OutlineElementModelBuilder getOutlineElementModelBuilder();
+    protected abstract OutlineElementModelBuilder getOutlineElementModelBuilder() throws MDPSyntaxError;
 
     protected abstract OutlineElementRenderer getOutlineElementRenderer();
 
@@ -30,20 +27,39 @@ public abstract class OutlineElement {
         return this.prefix;
     }
 
-    public void process(CompilerContext compilerContext, DocumentIterator documentIterator, Result result) throws MDPSyntaxError {
+    public boolean isResponsible(Line line) {
+        return line.asString().startsWith(this.prefix);
+    }
 
-        this.outlineElementLines = getOutlineElementLinesExtractor().extract(documentIterator);
+    public Extraction getExtraction(DocumentIterator documentIterator) {
+        return getOutlineElementLinesExtractor().extract(documentIterator);
+    }
 
-//        System.out.println("extr. Lines:");
-//        for (Line line : this.outlineElementLines) {
-//            System.out.println(line.asString());
-//        }
-//        System.out.println("---");
+    public OutlineElementModel getModel(Extraction extraction) throws MDPSyntaxError {
+        return getOutlineElementModelBuilder().getModel(extraction);
+    }
 
-        this.outlineElementModel = getOutlineElementModelBuilder().getModel();
+    public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, Result result) {
+        getOutlineElementRenderer().render(outlineElementModel, compilerContext, result);
+    }
 
-        this.getOutlineElementRenderer().render(compilerContext, result);
+//    public void process(CompilerContext compilerContext, DocumentIterator documentIterator, Result result) throws MDPSyntaxError {
+//        Extraction extraction = getOutlineElementLinesExtractor().extract(documentIterator);
+//        OutlineElementModel outlineElementModel = getOutlineElementModelBuilder().getModel(extraction);
+//        this.getOutlineElementRenderer().render(outlineElementModel, compilerContext, result);
+//    }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OutlineElement that = (OutlineElement) o;
+        return prefix.equals(that.prefix);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(prefix);
     }
 
 }

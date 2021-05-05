@@ -1,44 +1,64 @@
 package org.mentalizr.mdpCompiler.outlineElement.tagged.collapsable;
 
-import org.mentalizr.mdpCompiler.document.Document;
-import org.mentalizr.mdpCompiler.document.Line;
+import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
 
-import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class CollapsableCardContent {
 
     private final int index;
     private final String header;
-    private final List<Line> content;
+    private final List<OutlineElementModel> childElements;
+    private final String singleLine;
 
-    public CollapsableCardContent(int index, String header) {
+    public CollapsableCardContent(int index, String header, List<OutlineElementModel> childElements) {
         this.index = index;
         this.header = header;
-        this.content = new ArrayList<>();
+        this.childElements = childElements;
+        this.singleLine = null;
     }
 
-    public void add(Line lineOfCardContent) {
-        this.content.add(lineOfCardContent);
-    }
-
-    public int getIndex() {
-        return this.index;
+    public CollapsableCardContent(int index, String header, String singleLine) {
+        this.index = index;
+        this.header = header;
+        this.childElements = null;
+        this.singleLine = singleLine;
     }
 
     public String getHeader() {
         return this.header;
     }
 
-    public List<Line> getContent() {
-        return this.content;
+    public List<OutlineElementModel> getChildElements() {
+        return this.childElements;
     }
 
-    public int getNrOfContentLines() {
-        return this.content.size();
+    public String getSingleLine() {
+        return this.singleLine;
     }
 
-    public Document getContentAsDocument() {
-        return new Document(this.content);
+    public boolean hasSingleLine() {
+        return this.singleLine != null;
     }
+
+    public boolean hasChildElements() {
+        return this.childElements != null;
+    }
+
+    public Set<String> getMediaResources() {
+        if (hasChildElements()) {
+            Set<String> mediaResources = new HashSet<>();
+            //noinspection ConstantConditions
+            for (OutlineElementModel outlineElementModel : this.childElements) {
+                mediaResources.addAll(outlineElementModel.getMediaResources());
+            }
+            return mediaResources;
+        } else {
+            return Collections.emptySet();
+        }
+    }
+
 }

@@ -1,11 +1,10 @@
 package org.mentalizr.mdpCompiler.outlineElement.md.ul;
 
-import org.mentalizr.mdpCompiler.document.DocumentIterator;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElement;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModelBuilder;
+import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTaggedModelBuilder;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
-import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementLinesExtractor;
-import org.mentalizr.mdpCompiler.result.Result;
+import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementExtractor;
 
 public class UL extends OutlineElement {
 
@@ -16,18 +15,17 @@ public class UL extends OutlineElement {
     }
 
     @Override
-    protected OutlineElementLinesExtractor getOutlineElementLinesExtractor() {
-        return new ULLinesExtractor();
+    protected OutlineElementExtractor getOutlineElementLinesExtractor() {
+        return new ULExtractor();
     }
 
     @Override
     protected OutlineElementModelBuilder getOutlineElementModelBuilder() {
-        return new ULModelBuilder(this.outlineElementLines);
+        return new ULModelBuilder();
     }
 
     @Override
     protected OutlineElementRenderer getOutlineElementRenderer() {
-        ULModel ulModel = (ULModel) this.outlineElementModel;
-        return new ULRenderer(ulModel);
+        return new ULRenderer();
     }
 }

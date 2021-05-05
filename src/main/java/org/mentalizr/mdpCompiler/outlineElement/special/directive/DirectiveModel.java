@@ -10,6 +10,7 @@ public class DirectiveModel extends OutlineElementModel {
     private final List<String> directiveLines;
 
     public DirectiveModel(List<String> directiveLines) {
+        super(new Directive());
         this.directiveLines = new ArrayList<>(directiveLines);
     }
 

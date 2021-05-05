@@ -1,8 +1,8 @@
 package org.mentalizr.mdpCompiler.outlineElement.tagged.alert;
 
+import org.junit.jupiter.api.Test;
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
 import org.mentalizr.mdpCompilerTestResrc.OutlineElementTestBench;
-import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,7 +15,7 @@ class AlertTest {
     void plausi1() throws MDPSyntaxError, IOException {
 
         OutlineElementTestBench.execute(
-                new AlertFactory(),
+                new Alert(),
                 new String[]{
                         "@alert[type=\"info\" headersize=\"3\"]",
                         "    Hier der Info-Text!",
@@ -31,7 +31,7 @@ class AlertTest {
     void inline() throws MDPSyntaxError, IOException {
 
         OutlineElementTestBench.execute(
-                new AlertFactory(),
+                new Alert(),
                 new String[]{
                         "@alert[type=\"info\" headersize=\"3\"]",
                         "    Hier der **Info-Text**!",

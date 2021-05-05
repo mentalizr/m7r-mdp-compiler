@@ -1,36 +1,31 @@
 package org.mentalizr.mdpCompiler.outlineElement.md.paragraph;
 
 import org.mentalizr.mdpCompiler.document.Line;
+import org.mentalizr.mdpCompiler.outlineElement.Extraction;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModelBuilder;
 
 import java.util.List;
 
-public class ParagraphModelBuilder implements OutlineElementModelBuilder {
+public class ParagraphModelBuilder extends OutlineElementModelBuilder {
 
-    private final List<Line> lines;
-    private ParagraphModel paragraphModel;
-
-    public ParagraphModelBuilder(List<Line> lines) {
-        this.lines = lines;
-        this.paragraphModel = null;
+    public ParagraphModelBuilder() {
+        super(new Paragraph());
     }
 
     @Override
-    public ParagraphModel getModel() {
-        if (this.paragraphModel == null) {
-            buildModel();
-        }
-        return this.paragraphModel;
-    }
+    public ParagraphModel getModel(Extraction extraction) {
 
-    private void buildModel() {
+        if (!(extraction instanceof ParagraphExtraction))
+            throw new RuntimeException(ParagraphExtraction.class.getSimpleName() + " expected.");
 
-        this.paragraphModel = new ParagraphModel();
+        List<Line> lines = extraction.getLines();
+        ParagraphModel paragraphModel = new ParagraphModel();
 
-        for (Line line : this.lines) {
+        for (Line line : lines) {
             if (!line.asString().isBlank())
-                this.paragraphModel.addLine(line.asString());
+                paragraphModel.addLine(line.asString());
         }
 
+        return paragraphModel;
     }
 }

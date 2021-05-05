@@ -1,35 +1,49 @@
 package org.mentalizr.mdpCompiler.outlineElement.tagged.collapsable;
 
-import org.mentalizr.mdpCompiler.document.Line;
-import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
+import org.mentalizr.mdpCompiler.mdpTag.MDPTag;
+import org.mentalizr.mdpCompiler.outlineElement.OutlineElement;
+import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTaggedModel;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-public class CollapsableModel extends OutlineElementModel {
+public class CollapsableModel extends OutlineElementTaggedModel {
 
     private final List<CollapsableCardContent> collapsableCardContentList;
-    private CollapsableCardContent curCollapsableCardContent;
 
-    public CollapsableModel() {
+    public CollapsableModel(OutlineElement outlineElement, MDPTag mdpTag) {
+        super(outlineElement);
+        setMdpTag(mdpTag);
         this.collapsableCardContentList = new ArrayList<>();
-        this.curCollapsableCardContent = null;
     }
 
-    public void createNextCard(String header) {
-        this.curCollapsableCardContent = new CollapsableCardContent(this.collapsableCardContentList.size(), header);
-        this.collapsableCardContentList.add(this.curCollapsableCardContent);
-    }
-
-    public void addContentLine(Line lineOfCardContent) {
-        this.curCollapsableCardContent.add(lineOfCardContent);
+    public void addCardContent(CollapsableCardContent collapsableCardContent) {
+        this.collapsableCardContentList.add(collapsableCardContent);
     }
 
     public List<CollapsableCardContent> getCollapsableCardContentList() {
-        return collapsableCardContentList;
+        return this.collapsableCardContentList;
     }
 
-    public boolean hasCurCard() {
-        return this.curCollapsableCardContent != null;
+    public int getIndex(CollapsableCardContent collapsableCardContent) {
+        int index = this.collapsableCardContentList.indexOf(collapsableCardContent);
+        if (index < 0) throw new IllegalStateException("Could not find element in list.");
+        return index;
     }
+
+    public CollapsableAttributes getCollapsableAttributes() {
+        return (CollapsableAttributes) this.mdpTag.getAttributes();
+    }
+
+    @Override
+    public Set<String> getMediaResources() {
+        Set<String> mediaResources = new HashSet<>();
+        for (CollapsableCardContent collapsableCardContent : this.collapsableCardContentList) {
+            mediaResources.addAll(collapsableCardContent.getMediaResources());
+        }
+        return mediaResources;
+    }
+
 }

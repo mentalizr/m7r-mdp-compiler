@@ -1,34 +1,26 @@
 package org.mentalizr.mdpCompiler.outlineElement.md.hr;
 
-import org.mentalizr.mdpCompiler.CompilerContext;
-import org.mentalizr.mdpCompiler.MDPSyntaxError;
-import org.mentalizr.mdpCompiler.document.DocumentIterator;
-import org.mentalizr.mdpCompiler.document.Line;
-import org.mentalizr.mdpCompiler.result.Result;
-import org.mentalizr.mdpCompilerTestResrc.ResultTest;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.mentalizr.mdpCompiler.MDPSyntaxError;
+import org.mentalizr.mdpCompilerTestResrc.OutlineElementTestBench;
+import org.mentalizr.mdpCompilerTestResrc.OutlineElementTestBenchExecutor;
 
 class HRTest {
 
     @Test
     void test() throws MDPSyntaxError {
-
-        DocumentIterator documentIterator = DocumentIterator.getInstance("---", "", "Eine Zeile");
-        Line firstLine = documentIterator.getNextLine();
-        Result result = new ResultTest();
-
-        HR hr = new HR();
-        hr.process(CompilerContext.getDefaultTestContext(), documentIterator, result);
-
-        List<String> htmlLines = result.getResultLines();
-
-        assertNotNull(htmlLines);
-        assertEquals(1, htmlLines.size());
-        assertEquals("<hr/>", htmlLines.get(0));
+        OutlineElementTestBenchExecutor outlineElementTestBenchExecutor
+                = new OutlineElementTestBenchExecutor(new HR())
+                .withMDPLines(
+                        "---",
+                        "",
+                        "Some text"
+                )
+                .withExpectedLines(
+                        "<hr/>"
+                )
+                .withExpectedDocumentIteratorIndex(0);
+        OutlineElementTestBench.execute(outlineElementTestBenchExecutor);
     }
 
 }
