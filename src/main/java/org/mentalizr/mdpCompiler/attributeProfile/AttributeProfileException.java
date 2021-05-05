@@ -13,7 +13,4 @@ public class AttributeProfileException extends Exception {
         return this.attributeName;
     }
 
-//    public AttributeProfileException(String message, Throwable cause) {
-//        super(message, cause);
-//    }
 }

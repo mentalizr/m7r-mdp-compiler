@@ -9,6 +9,8 @@ public class TempHelper {
 
     public static List<String> splitAtDelimiters(String string, String delimiter) {
 
+        // TODO move to utilsCore?
+
         if (!string.contains(delimiter)) {
             throw new IllegalArgumentException("Delimiter not contained in specified string.");
         }

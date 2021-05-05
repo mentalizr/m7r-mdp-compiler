@@ -1,6 +1,6 @@
 package org.mentalizr.mdpCompiler.valueExtractor;
 
-public class ValueExtractorPostState extends ValueExctractorAbstractState {
+public class ValueExtractorPostState extends ValueExtractorAbstractState {
 
     public ValueExtractorPostState(String educt, char startStopChar, char escapePrefix, int startIndex, int stopIndex, String value) {
         super(educt, startStopChar, escapePrefix);
@@ -10,7 +10,8 @@ public class ValueExtractorPostState extends ValueExctractorAbstractState {
     }
 
     @Override
-    public ValueExctractorAbstractState processChar(int index) {
+    public ValueExtractorAbstractState processChar(int index) {
         throw new IllegalArgumentException();
     }
+
 }

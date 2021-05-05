@@ -25,7 +25,6 @@ public class CompilerContext {
     }
 
     public int getIndentLevel() {
-//        return isOuterElement() ? 0 : 1;
         return this.indentLevel;
     }
 

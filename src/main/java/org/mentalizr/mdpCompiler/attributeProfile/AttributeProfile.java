@@ -17,10 +17,6 @@ public class AttributeProfile {
     /**
      * Validates given attributes against attribute specifications. Returns a new object
      * of type Attributes.
-     *
-     * @param attributes
-     * @return
-     * @throws AttributeProfileException
      */
     public Attributes validate(Attributes attributes) throws AttributeProfileException {
 
@@ -38,9 +34,6 @@ public class AttributeProfile {
     /**
      * Extracts those attributes that are simple and not specified (simpleOpen). Specified
      * attributes should be validated to avoid unexpected behaviour.
-     *
-     * @param validatedAttributes
-     * @return
      */
     public Attributes extractOpenSimple(Attributes validatedAttributes) throws AttributeProfileException {
 
@@ -120,6 +113,7 @@ public class AttributeProfile {
         if (attributeSpec.isSimple()) {
             if (!attribute.isSimpleAttribute())
                 throw new AttributeValidationException(attribute, "Attribute has assignment while specified as simple.");
+            //noinspection UnnecessaryReturnStatement
             return;
         }
     }

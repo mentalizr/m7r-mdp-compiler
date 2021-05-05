@@ -9,6 +9,9 @@ import java.util.List;
 public class TextFile {
 
     public static List<String> getLinesAsStrings(File file) throws IOException {
+        // TODO modernize that, use Path instead of File
+        // Files.lines(htmlFile).collect(Collectors.toList());
+
         List<String> lines = new ArrayList<>();
 
         try (BufferedReader bufferedReader = new BufferedReader(new java.io.FileReader(file))) {
@@ -19,6 +22,5 @@ public class TextFile {
         }
         return lines;
     }
-
 
 }

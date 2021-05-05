@@ -1,18 +1,16 @@
 package org.mentalizr.mdpCompiler.valueExtractor;
 
-public class ValueExtractorPreState extends ValueExctractorAbstractState {
+public class ValueExtractorPreState extends ValueExtractorAbstractState {
 
     public ValueExtractorPreState(String educt, char startStopChar, char escapePrefix) {
         super(educt, startStopChar, escapePrefix);
     }
 
     @Override
-    public ValueExctractorAbstractState processChar(int index) {
-
+    public ValueExtractorAbstractState processChar(int index) {
         if (isStartChar(index)) {
             return new ValueExtractorInsideStringState(this.educt, this.startStopChar, this.escapePrefix, index);
         }
-
         return this;
     }
 

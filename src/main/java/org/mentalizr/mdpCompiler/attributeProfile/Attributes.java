@@ -29,8 +29,6 @@ public final class Attributes implements Iterable<Attribute> {
     /**
      * Returns the value of the specified attribute name, null if attribute has no assignment (is simple).
      *
-     * @param name
-     * @return
      * @throws IllegalArgumentException if attribute with specified name is not existing
      */
     public String getValue(String name) {

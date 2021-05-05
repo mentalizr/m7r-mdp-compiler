@@ -7,7 +7,7 @@ import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTagged;
 
 public class MDPTagSimple extends MDPTag {
 
-    // z.B.: @TAG[hier der attribute String]
+    // z.B.: @TAG[this is the attribute string]
 
     private static final String END_DELIMITER = "]";
 

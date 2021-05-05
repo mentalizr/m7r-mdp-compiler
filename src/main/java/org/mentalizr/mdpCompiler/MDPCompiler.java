@@ -8,7 +8,6 @@ import org.mentalizr.mdpCompiler.outlineElement.Extraction;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElement;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRegistry;
-import org.mentalizr.mdpCompiler.outlineElement.special.directive.Directive;
 import org.mentalizr.mdpCompiler.outlineElement.special.directive.DirectiveModel;
 import org.mentalizr.mdpCompiler.result.Result;
 
@@ -19,7 +18,7 @@ import java.util.List;
 
 public class MDPCompiler {
 
-    public enum Mode {MD, MDP_COMPLETE, MD_AND_MDP_NESTABLE}
+    public enum Mode {MDP_COMPLETE, MD_AND_MDP_NESTABLE}
 
     public static void compile(File input, File output) throws IOException, MDPSyntaxError {
         Result result = MDPCompiler.compile(new Document(input));

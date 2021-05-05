@@ -1,6 +1,6 @@
 package org.mentalizr.mdpCompiler.valueExtractor;
 
-public abstract class ValueExctractorAbstractState {
+public abstract class ValueExtractorAbstractState {
 
     protected String educt;
     protected char startStopChar;
@@ -10,7 +10,7 @@ public abstract class ValueExctractorAbstractState {
     protected int stopIndex;
     protected String value;
 
-    public ValueExctractorAbstractState(String educt, char startStopChar, char escapePrefix) {
+    public ValueExtractorAbstractState(String educt, char startStopChar, char escapePrefix) {
         this.educt = educt;
         this.startStopChar = startStopChar;
         this.escapePrefix = escapePrefix;
@@ -20,7 +20,7 @@ public abstract class ValueExctractorAbstractState {
         this.value = null;
     }
 
-    public abstract ValueExctractorAbstractState processChar(int index);
+    public abstract ValueExtractorAbstractState processChar(int index);
 
     public boolean hasValue() {
         return this.value != null;

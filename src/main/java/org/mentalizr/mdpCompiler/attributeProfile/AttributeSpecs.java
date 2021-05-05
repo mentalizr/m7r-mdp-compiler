@@ -29,8 +29,6 @@ public class AttributeSpecs {
 
     /**
      * Returns the names of all attributes specified as required.
-     *
-     * @return
      */
     public Set<String> getNamesOfRequired() {
         Set<String> requiredAttributes = new HashSet<>();
@@ -44,9 +42,6 @@ public class AttributeSpecs {
     /**
      * Returns the names of attributes, for which requirement specifications are done,
      * but not contained in given attributes.
-     *
-     * @param attributes
-     * @return
      */
     public Set<String> getNamesOfNotSetAttributes(Attributes attributes) {
         Set<String> notSpecifiedAttributes = new HashSet<>();
