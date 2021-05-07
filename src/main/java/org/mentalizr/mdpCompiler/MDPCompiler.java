@@ -36,6 +36,10 @@ public class MDPCompiler {
         return render(dom);
     }
 
+    public static Dom createDom(File mdpFile) throws IOException, MDPSyntaxError {
+        return createDom(new Document(mdpFile));
+    }
+
     public static Set<String> getReferencedMediaResources(File mdpFile) throws IOException, MDPSyntaxError {
         Dom dom = createDom(new Document(mdpFile));
         return dom.getReferencedMediaResources();
