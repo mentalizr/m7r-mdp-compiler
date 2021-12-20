@@ -5,12 +5,12 @@ import org.mentalizr.mdpCompiler.MDPCompiler;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.formGroup.inputGroup.InputGroupAttributes;
-import org.mentalizr.mdpCompiler.result.Result;
+import org.mentalizr.mdpCompiler.result.HtmlBuilder;
 
 public class RadioGroupRenderer extends OutlineElementRenderer {
 
     @Override
-    public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, Result result) {
+    public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, HtmlBuilder htmlBuilder) {
 
         RadioGroupModel radioGroupModel = (RadioGroupModel) outlineElementModel;
         RadioGroupAttributes radioGroupAttributes = radioGroupModel.getRadioGroupAttributes();
@@ -28,16 +28,16 @@ public class RadioGroupRenderer extends OutlineElementRenderer {
             stringBuilder.append(" data-m7r-program-scope-id=\"").append(radioGroupAttributes.getScopeId()).append("\"");
         }
         stringBuilder.append(">");
-        result.addLn(indent, stringBuilder.toString());
+        htmlBuilder.addLn(indent, stringBuilder.toString());
 
         if (radioGroupModel.hasSingleLine()) {
             String label = radioGroupModel.getSingleLine();
             String labelPreprocessed = this.inlineParserMDP.parse(label);
-            result.addLn(indent + 1, "<div>" + labelPreprocessed + "</div>");
+            htmlBuilder.addLn(indent + 1, "<div>" + labelPreprocessed + "</div>");
         } else {
             MDPCompiler.renderSubdocument(
                     radioGroupModel.getChildModels(),
-                    result,
+                    htmlBuilder,
                     compilerContext
             );
 
@@ -53,7 +53,7 @@ public class RadioGroupRenderer extends OutlineElementRenderer {
         int itemCounter = 1;
         for (String buttonText : radioGroupAttributes.getOpenSimpleAttributes()) {
             String buttonTextPreprocessed = this.inlineParserMDP.parse(buttonText);
-            result.addLn(indent + 1, "<div class=\"form-check form-check-inline\">");
+            htmlBuilder.addLn(indent + 1, "<div class=\"form-check form-check-inline\">");
 
             stringBuilder = new StringBuilder()
                     .append("<input class=\"form-check-input\" type=\"radio\"")
@@ -72,14 +72,14 @@ public class RadioGroupRenderer extends OutlineElementRenderer {
 
             stringBuilder.append(">");
 
-            result.addLn(indent + 2, stringBuilder.toString());
+            htmlBuilder.addLn(indent + 2, stringBuilder.toString());
 
-            result.addLn(indent + 2, "<label class=\"form-check-label\" for=\"" + radioGroupAttributes.getId() + "_" + itemCounter + "\">" + buttonTextPreprocessed + "</label>");
-            result.addLn(indent + 1, "</div>");
+            htmlBuilder.addLn(indent + 2, "<label class=\"form-check-label\" for=\"" + radioGroupAttributes.getId() + "_" + itemCounter + "\">" + buttonTextPreprocessed + "</label>");
+            htmlBuilder.addLn(indent + 1, "</div>");
             itemCounter++;
         }
 
-        result.addLn(indent, "</div>");
+        htmlBuilder.addLn(indent, "</div>");
     }
 
 }

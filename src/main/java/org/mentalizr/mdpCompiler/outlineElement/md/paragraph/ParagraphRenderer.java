@@ -3,12 +3,12 @@ package org.mentalizr.mdpCompiler.outlineElement.md.paragraph;
 import org.mentalizr.mdpCompiler.CompilerContext;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
-import org.mentalizr.mdpCompiler.result.Result;
+import org.mentalizr.mdpCompiler.result.HtmlBuilder;
 
 public class ParagraphRenderer extends OutlineElementRenderer {
 
     @Override
-    public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, Result result) {
+    public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, HtmlBuilder htmlBuilder) {
 
         ParagraphModel paragraphModel = (ParagraphModel) outlineElementModel;
 
@@ -32,7 +32,7 @@ public class ParagraphRenderer extends OutlineElementRenderer {
                 lineWork += "</p>";
             }
 
-            result.addLn(indentLevel, lineWork);
+            htmlBuilder.addLn(indentLevel, lineWork);
         }
     }
 

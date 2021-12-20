@@ -15,7 +15,7 @@ import org.mentalizr.mdpCompiler.outlineElement.OutlineElement;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTagged;
 import org.mentalizr.mdpCompiler.outlineElement.md.paragraph.ParagraphModel;
-import org.mentalizr.mdpCompiler.result.Result;
+import org.mentalizr.mdpCompiler.result.HtmlBuilder;
 import org.mentalizr.mdpCompilerTestResrc.OutlineElementTestBench;
 import org.mentalizr.mdpCompilerTestResrc.OutlineElementTestBenchExecutor;
 
@@ -108,11 +108,11 @@ class ImgTextTest {
 
         ImgTextModel imgTextModel = new ImgTextModel(mdpTag, childModels);
 
-        Result result = new Result();
+        HtmlBuilder htmlBuilder = new HtmlBuilder();
         CompilerContext compilerContext = CompilerContext.getDefaultTestContext();
 
-        imgText.render(imgTextModel, compilerContext, result);
-        List<String> htmlStrings = result.getResultLines();
+        imgText.render(imgTextModel, compilerContext, htmlBuilder);
+        List<String> htmlStrings = htmlBuilder.getHtmlLines();
         List<String> expectedHtmlStrings = List.of(
                 "<div class=\"row\" style=\"margin-bottom: 1.0em; margin-top: 1.0em\">",
                 "    <div class=\"col-xs-12 col-sm-5 col-md-5 col-lg-5\">",

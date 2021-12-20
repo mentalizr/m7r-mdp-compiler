@@ -4,7 +4,7 @@ import org.mentalizr.mdpCompiler.CompilerContext;
 import org.mentalizr.mdpCompiler.MDPCompiler;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
-import org.mentalizr.mdpCompiler.result.Result;
+import org.mentalizr.mdpCompiler.result.HtmlBuilder;
 
 import java.util.UUID;
 
@@ -15,7 +15,7 @@ public class GridRenderer extends OutlineElementRenderer {
     }
 
     @Override
-    public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, Result result) {
+    public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, HtmlBuilder htmlBuilder) {
 
         GridModel gridModel = (GridModel) outlineElementModel;
         GridAttributes gridAttributes = gridModel.getGridAttributes();
@@ -26,13 +26,13 @@ public class GridRenderer extends OutlineElementRenderer {
         String marginBottom = gridAttributes.getMarginBottom();
         String classValue = "row mt-" + marginTop + " mb-" + marginBottom;
 
-        result.addLn("<div class=\"" + classValue + "\" id=\"" + id + "\">");
+        htmlBuilder.addLn("<div class=\"" + classValue + "\" id=\"" + id + "\">");
 
         for (int i = 0; i < gridModel.getColumnContentList().size(); i++) {
-            createRow(gridModel, i, compilerContext, result);
+            createRow(gridModel, i, compilerContext, htmlBuilder);
         }
 
-        result.addLn("</div>");
+        htmlBuilder.addLn("</div>");
     }
 
     private String obtainId(GridAttributes gridAttributes) {
@@ -40,18 +40,18 @@ public class GridRenderer extends OutlineElementRenderer {
         return "genId-" + UUID.randomUUID();
     }
 
-    private void createRow(GridModel gridModel, int rowIndex, CompilerContext compilerContext, Result result) {
+    private void createRow(GridModel gridModel, int rowIndex, CompilerContext compilerContext, HtmlBuilder htmlBuilder) {
 
         ColumnContent columnContent = gridModel.getColumnContentList().get(rowIndex);
-        result.addLn(compilerContext.getIndentLevel() + 1, "<div class=\"" + columnContent.getClassValue() + "\">");
+        htmlBuilder.addLn(compilerContext.getIndentLevel() + 1, "<div class=\"" + columnContent.getClassValue() + "\">");
 
         MDPCompiler.renderSubdocument(
                 columnContent.getChildElements(),
-                result,
+                htmlBuilder,
                 new CompilerContext(false, compilerContext.getIndentLevel() + 1)
         );
 
-        result.addLn(compilerContext.getIndentLevel() + 1,"</div>");
+        htmlBuilder.addLn(compilerContext.getIndentLevel() + 1,"</div>");
     }
 
 }

@@ -2,7 +2,7 @@ package org.mentalizr.mdpCompiler.outlineElement.md.heading;
 
 import org.junit.jupiter.api.Test;
 import org.mentalizr.mdpCompiler.CompilerContext;
-import org.mentalizr.mdpCompiler.result.Result;
+import org.mentalizr.mdpCompiler.result.HtmlBuilder;
 
 import java.util.List;
 
@@ -17,12 +17,12 @@ class HeadingRendererTest {
         HeadingModel headingModel = new HeadingModel(new H1());
         headingModel.addHeading("Eine Überschrift");
 
-        Result testResult = new Result();
+        HtmlBuilder testHtmlBuilder = new HtmlBuilder();
 
         HeadingRenderer headingRenderer = new HeadingRenderer();
-        headingRenderer.render(headingModel, CompilerContext.getDefaultTestContext(), testResult);
+        headingRenderer.render(headingModel, CompilerContext.getDefaultTestContext(), testHtmlBuilder);
 
-        List<String> htmlLines = testResult.getResultLines();
+        List<String> htmlLines = testHtmlBuilder.getHtmlLines();
 
         assertNotNull(htmlLines);
         assertEquals(1, htmlLines.size());
@@ -35,12 +35,12 @@ class HeadingRendererTest {
         HeadingModel headingModel = new HeadingModel(new H2());
         headingModel.addHeading("Eine Überschrift");
 
-        Result testResult = new Result();
+        HtmlBuilder testHtmlBuilder = new HtmlBuilder();
 
         HeadingRenderer headingRenderer = new HeadingRenderer();
-        headingRenderer.render(headingModel, CompilerContext.getDefaultTestContext(), testResult);
+        headingRenderer.render(headingModel, CompilerContext.getDefaultTestContext(), testHtmlBuilder);
 
-        List<String> htmlLines = testResult.getResultLines();
+        List<String> htmlLines = testHtmlBuilder.getHtmlLines();
 
         assertNotNull(htmlLines);
         assertEquals(1, htmlLines.size());
@@ -53,12 +53,12 @@ class HeadingRendererTest {
         HeadingModel headingModel = new HeadingModel(new H5());
         headingModel.addHeading("Eine Überschrift");
 
-        Result testResult = new Result();
+        HtmlBuilder testHtmlBuilder = new HtmlBuilder();
 
         HeadingRenderer headingRenderer = new HeadingRenderer();
-        headingRenderer.render(headingModel, CompilerContext.getDefaultTestContext(), testResult);
+        headingRenderer.render(headingModel, CompilerContext.getDefaultTestContext(), testHtmlBuilder);
 
-        List<String> htmlLines = testResult.getResultLines();
+        List<String> htmlLines = testHtmlBuilder.getHtmlLines();
 
         assertNotNull(htmlLines);
         assertEquals(1, htmlLines.size());

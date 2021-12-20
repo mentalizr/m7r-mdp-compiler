@@ -9,7 +9,8 @@ import org.mentalizr.mdpCompiler.outlineElement.OutlineElement;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRegistry;
 import org.mentalizr.mdpCompiler.outlineElement.special.directive.DirectiveModel;
-import org.mentalizr.mdpCompiler.result.Result;
+import org.mentalizr.mdpCompiler.result.Html;
+import org.mentalizr.mdpCompiler.result.HtmlBuilder;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,16 +23,16 @@ public class MDPCompiler {
     public enum Mode {MDP_COMPLETE, MD_AND_MDP_NESTABLE}
 
     public static void compile(File input, File output) throws IOException, MDPSyntaxError {
-        Result result = MDPCompiler.compile(new Document(input));
-        result.write(output);
+        Html html = MDPCompiler.compile(new Document(input));
+        html.write(output);
     }
 
     public static List<String> compile(File input) throws IOException, MDPSyntaxError {
-        Result result = MDPCompiler.compile(new Document(input));
-        return result.getResultLines();
+        Html html = MDPCompiler.compile(new Document(input));
+        return html.getLines();
     }
 
-    public static Result compile(Document document) throws MDPSyntaxError {
+    public static Html compile(Document document) throws MDPSyntaxError {
         Dom dom = createDom(document);
         return render(dom);
     }
@@ -51,7 +52,7 @@ public class MDPCompiler {
 
         DocumentIterator documentIterator = document.getDocumentIterator();
         OutlineElementRegistry outlineElementRegistry = new OutlineElementRegistry();
-        Dom dom = new Dom();
+        Dom dom = new DomImpl();
 
         while (documentIterator.hasNextLine()) {
 
@@ -88,16 +89,17 @@ public class MDPCompiler {
         throw new MDPSyntaxError(new Line("", 0), errorMessage);
     }
 
-    public static Result render(Dom dom) {
-        Result result = new Result();
+    public static Html render(Dom dom) {
+        HtmlBuilder htmlBuilder = new HtmlBuilder();
         CompilerContext compilerContext = new CompilerContext(true, 0);
         List<OutlineElementModel> models = dom.getOutlineElementModels();
 
         for (OutlineElementModel model : models) {
             OutlineElement outlineElement = model.getOutlineElement();
-            outlineElement.render(model, compilerContext, result);
+            outlineElement.render(model, compilerContext, htmlBuilder);
         }
-        return result;
+
+        return htmlBuilder.getHtml();
     }
 
     public static List<OutlineElementModel> getModelsForSubdocument(Document document) throws MDPSyntaxError {
@@ -123,12 +125,12 @@ public class MDPCompiler {
         return modelList;
     }
 
-    public static void renderSubdocument(List<OutlineElementModel> outlineElementModelList, Result result, CompilerContext compilerContext) {
+    public static void renderSubdocument(List<OutlineElementModel> outlineElementModelList, HtmlBuilder htmlBuilder, CompilerContext compilerContext) {
         for (OutlineElementModel outlineElementModel : outlineElementModelList) {
             outlineElementModel.getOutlineElement().render(
                     outlineElementModel,
                     new CompilerContext(false, compilerContext.getIndentLevel() + 1),
-                    result
+                    htmlBuilder
             );
         }
     }

@@ -13,22 +13,16 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Result {
+public class Html {
 
-    private List<String> stringList = new ArrayList<>();
+    private List<String> lines;
 
-    public void addLn(String line) {
-        stringList.add(line);
+    public Html(List<String> lines) {
+        this.lines = lines;
     }
 
-    public void addLn(int indentLevel, String line) {
-        stringList.add(
-                "    ".repeat(Math.max(0, indentLevel)) + line
-        );
-    }
-
-    public List<String> getResultLines() {
-        return this.stringList;
+    public List<String> getLines() {
+        return this.lines;
     }
 
     public void write(File file) throws FileNotFoundException {
@@ -40,7 +34,7 @@ public class Result {
 
         try (PrintWriter printWriter = new PrintWriter(new FileOutputStream(file))) {
 
-            for (String string : stringList) {
+            for (String string : lines) {
                 printWriter.println(string);
             }
 
@@ -54,13 +48,7 @@ public class Result {
             printWriter.println(footer);
         }
 
-        this.stringList = new ArrayList<>();
-    }
-
-    public void out() {
-        for (String string : stringList) {
-            System.out.println(string);
-        }
+        this.lines = new ArrayList<>();
     }
 
     private String getCurrentTimeStampFormatted() {

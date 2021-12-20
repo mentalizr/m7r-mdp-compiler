@@ -6,7 +6,7 @@ import org.mentalizr.mdpCompiler.helper.TextFile;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
 import org.mentalizr.mdpCompiler.outlineElement.md.heading.HeadingModel;
 import org.mentalizr.mdpCompiler.outlineElement.md.ul.ULModel;
-import org.mentalizr.mdpCompiler.result.Result;
+import org.mentalizr.mdpCompiler.result.HtmlBuilder;
 
 import java.io.File;
 import java.io.IOException;
@@ -64,13 +64,13 @@ class MDPCompilerTest {
         );
 
         List<OutlineElementModel> models = MDPCompiler.getModelsForSubdocument(document);
-        Result result = new Result();
+        HtmlBuilder htmlBuilder = new HtmlBuilder();
         CompilerContext compilerContext = new CompilerContext(true, 0);
-        MDPCompiler.renderSubdocument(models, result, compilerContext);
+        MDPCompiler.renderSubdocument(models, htmlBuilder, compilerContext);
 
         List<String> expectedResult = TextFile.getLinesAsStrings(new File(RESRC_DIR, "MDPCompilerTest_compileSubdocument.expected"));
 
-        assertEquals(expectedResult, result.getResultLines());
+        assertEquals(expectedResult, htmlBuilder.getHtmlLines());
     }
 
 }

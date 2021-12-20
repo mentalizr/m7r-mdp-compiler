@@ -3,12 +3,12 @@ package org.mentalizr.mdpCompiler.outlineElement.tagged.alert;
 import org.mentalizr.mdpCompiler.CompilerContext;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
-import org.mentalizr.mdpCompiler.result.Result;
+import org.mentalizr.mdpCompiler.result.HtmlBuilder;
 
 public class AlertRenderer extends OutlineElementRenderer {
 
     @Override
-    public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, Result result) {
+    public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, HtmlBuilder htmlBuilder) {
 
         AlertModel alertModel = (AlertModel) outlineElementModel;
 
@@ -17,13 +17,13 @@ public class AlertRenderer extends OutlineElementRenderer {
         String headerClassAttribute = getHeaderClassAttribute(alertAttributes);
         String preprocessedText = getPreprocessedText(alertModel);
 
-        result.addLn("<div class=\"alert alert-" + alertAttributes.getBootstrapAlertType() + " mb-4\">");
-        result.addLn("    <div style=\"display: table; width: 100%\">");
-        result.addLn("        <div style=\"display: table-cell; width: 24px; background-image: url(service/v1/mediaImg/" + iconFileName + "); background-repeat: no-repeat; background-position: center center; background-size: contain; width: 24px; height: 24px;\"></div>");
-        result.addLn("        <div style=\"display: table-cell; width: 18px;\"></div>");
-        result.addLn("        <div style=\"display: table-cell;\"" + headerClassAttribute + ">" + preprocessedText + "</div>");
-        result.addLn("    </div>");
-        result.addLn("</div>");
+        htmlBuilder.addLn("<div class=\"alert alert-" + alertAttributes.getBootstrapAlertType() + " mb-4\">");
+        htmlBuilder.addLn("    <div style=\"display: table; width: 100%\">");
+        htmlBuilder.addLn("        <div style=\"display: table-cell; width: 24px; background-image: url(service/v1/mediaImg/" + iconFileName + "); background-repeat: no-repeat; background-position: center center; background-size: contain; width: 24px; height: 24px;\"></div>");
+        htmlBuilder.addLn("        <div style=\"display: table-cell; width: 18px;\"></div>");
+        htmlBuilder.addLn("        <div style=\"display: table-cell;\"" + headerClassAttribute + ">" + preprocessedText + "</div>");
+        htmlBuilder.addLn("    </div>");
+        htmlBuilder.addLn("</div>");
     }
 
     private String getIconFileName(AlertAttributes alertAttributes) {

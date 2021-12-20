@@ -3,7 +3,7 @@ package org.mentalizr.mdpCompiler.outlineElement.tagged.audio;
 import org.mentalizr.mdpCompiler.CompilerContext;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
-import org.mentalizr.mdpCompiler.result.Result;
+import org.mentalizr.mdpCompiler.result.HtmlBuilder;
 
 public class AudioRenderer extends OutlineElementRenderer {
 
@@ -14,7 +14,7 @@ public class AudioRenderer extends OutlineElementRenderer {
     }
 
     @Override
-    public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, Result result) {
+    public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, HtmlBuilder htmlBuilder) {
 
         AudioModel audioModel = (AudioModel) outlineElementModel;
         AudioAttributes audioAttributes = audioModel.getAudioAttributes();
@@ -24,10 +24,10 @@ public class AudioRenderer extends OutlineElementRenderer {
         String marginBottom = audioAttributes.getMarginBottom();
         String source = compilerContext.getServiceContextURL() + CONTEXT_UR_AUDIO + mdpTagLink;
 
-        result.addLn("<audio class=\"mt-" + marginTop + " mb-" + marginBottom + "\" preload=\"none\" style=\"width: 100%;\" controls=\"controls\">");
-        result.addLn(1, "<source type=\"audio/mpeg\" src=\"" + source + "\"/>");
-        result.addLn(1, "<a href=\"" + source + "\">" + source + "</a>");
-        result.addLn("</audio>");
+        htmlBuilder.addLn("<audio class=\"mt-" + marginTop + " mb-" + marginBottom + "\" preload=\"none\" style=\"width: 100%;\" controls=\"controls\">");
+        htmlBuilder.addLn(1, "<source type=\"audio/mpeg\" src=\"" + source + "\"/>");
+        htmlBuilder.addLn(1, "<a href=\"" + source + "\">" + source + "</a>");
+        htmlBuilder.addLn("</audio>");
     }
 
 }

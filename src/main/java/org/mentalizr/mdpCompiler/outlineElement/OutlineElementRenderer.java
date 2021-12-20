@@ -2,7 +2,7 @@ package org.mentalizr.mdpCompiler.outlineElement;
 
 import org.mentalizr.mdpCompiler.CompilerContext;
 import org.mentalizr.mdpCompiler.inlineElement.inlineParser.InlineParserMDP;
-import org.mentalizr.mdpCompiler.result.Result;
+import org.mentalizr.mdpCompiler.result.HtmlBuilder;
 
 public abstract class OutlineElementRenderer {
 
@@ -12,5 +12,5 @@ public abstract class OutlineElementRenderer {
         this.inlineParserMDP = new InlineParserMDP();
     }
 
-    abstract public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, Result result);
+    abstract public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, HtmlBuilder htmlBuilder);
 }

@@ -5,12 +5,12 @@ import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.formGroup.FormGroupRendererHelper;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.formGroup.inputGroup.InputGroupAttributes;
-import org.mentalizr.mdpCompiler.result.Result;
+import org.mentalizr.mdpCompiler.result.HtmlBuilder;
 
 public class TextareaGroupRenderer extends OutlineElementRenderer {
 
     @Override
-    public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, Result result) {
+    public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, HtmlBuilder htmlBuilder) {
 
         TextareaGroupModel textareaGroupModel = (TextareaGroupModel) outlineElementModel;
         TextareaGroupAttributes textareaGroupAttributes = textareaGroupModel.getTextareaGroupAttributes();
@@ -18,9 +18,9 @@ public class TextareaGroupRenderer extends OutlineElementRenderer {
         String cssPseudoClass = "ns_input";
         int indent = compilerContext.getIndentLevel();
 
-        result.addLn(indent, "<div class=\"form-group\">");
+        htmlBuilder.addLn(indent, "<div class=\"form-group\">");
 
-        FormGroupRendererHelper.renderHeaderLines(textareaGroupModel, textareaGroupAttributes.getId(), result, compilerContext);
+        FormGroupRendererHelper.renderHeaderLines(textareaGroupModel, textareaGroupAttributes.getId(), htmlBuilder, compilerContext);
 
         StringBuilder stringBuilder = new StringBuilder("<textarea ");
         stringBuilder.append("class=\"form-control ").append(cssPseudoClass).append("\" ");
@@ -42,9 +42,9 @@ public class TextareaGroupRenderer extends OutlineElementRenderer {
 
         stringBuilder.append("></textarea>");
 
-        result.addLn(indent + 1, stringBuilder.toString());
+        htmlBuilder.addLn(indent + 1, stringBuilder.toString());
 
-        result.addLn("</div>");
+        htmlBuilder.addLn("</div>");
     }
 
 }

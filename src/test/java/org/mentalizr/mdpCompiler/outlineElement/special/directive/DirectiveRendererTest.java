@@ -2,7 +2,7 @@ package org.mentalizr.mdpCompiler.outlineElement.special.directive;
 
 import org.junit.jupiter.api.Test;
 import org.mentalizr.mdpCompiler.CompilerContext;
-import org.mentalizr.mdpCompiler.result.Result;
+import org.mentalizr.mdpCompiler.result.HtmlBuilder;
 
 import java.util.Arrays;
 import java.util.List;
@@ -16,11 +16,11 @@ class DirectiveRendererTest {
     void render() {
         List<String> directiveLines = Arrays.asList("@@name=myName", "@@persistent");
         DirectiveModel directiveModel = new DirectiveModel(directiveLines);
-        Result result = new Result();
+        HtmlBuilder htmlBuilder = new HtmlBuilder();
         DirectiveRenderer directiveRenderer = new DirectiveRenderer();
-        directiveRenderer.render(directiveModel, CompilerContext.getDefaultTestContext(), result);
+        directiveRenderer.render(directiveModel, CompilerContext.getDefaultTestContext(), htmlBuilder);
 
-        List<String> htmlLines = result.getResultLines();
+        List<String> htmlLines = htmlBuilder.getHtmlLines();
 
         assertNotNull(htmlLines);
         assertEquals(5, htmlLines.size());

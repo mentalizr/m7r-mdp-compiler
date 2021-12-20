@@ -3,23 +3,23 @@ package org.mentalizr.mdpCompiler.outlineElement.md.table;
 import org.mentalizr.mdpCompiler.CompilerContext;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
-import org.mentalizr.mdpCompiler.result.Result;
+import org.mentalizr.mdpCompiler.result.HtmlBuilder;
 
 public class TableRenderer extends OutlineElementRenderer {
 
     @Override
-    public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, Result result) {
+    public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, HtmlBuilder htmlBuilder) {
 
         TableModel tableModel = (TableModel) outlineElementModel;
 
         int indentLevel = compilerContext.getIndentLevel();
 
-        result.addLn(indentLevel, "<table class=\"table\">");
+        htmlBuilder.addLn(indentLevel, "<table class=\"table\">");
 
         if (tableModel.hasHeader()) {
 
-            result.addLn(indentLevel,"    <thead>");
-            result.addLn(indentLevel, "        <tr>");
+            htmlBuilder.addLn(indentLevel,"    <thead>");
+            htmlBuilder.addLn(indentLevel, "        <tr>");
 
             for (int i = 0; i < tableModel.getNrOfCols(); i++) {
                 String thTag = "            <th scope=\"col\"";
@@ -29,17 +29,17 @@ public class TableRenderer extends OutlineElementRenderer {
                     thTag += " class=\"text-right\"";
                 }
                 thTag += ">" + tableModel.getHeaderData(i) + "</th>";
-                result.addLn(indentLevel, thTag);
+                htmlBuilder.addLn(indentLevel, thTag);
             }
 
-            result.addLn(indentLevel, "        </tr>");
-            result.addLn(indentLevel, "    </thead>");
+            htmlBuilder.addLn(indentLevel, "        </tr>");
+            htmlBuilder.addLn(indentLevel, "    </thead>");
         }
 
-        result.addLn(indentLevel, "    <tbody>");
+        htmlBuilder.addLn(indentLevel, "    <tbody>");
 
         for (int rowIndex = 0; rowIndex < tableModel.getNrOfRows(); rowIndex++) {
-            result.addLn(indentLevel, "        <tr>");
+            htmlBuilder.addLn(indentLevel, "        <tr>");
             for (int colIndex = 0; colIndex < tableModel.getNrOfCols(); colIndex++) {
                 String tdTag = "            <td";
                 if (tableModel.getAlignment(colIndex).equals(TableModelColMetaData.Alignment.CENTER)) {
@@ -49,13 +49,13 @@ public class TableRenderer extends OutlineElementRenderer {
                 }
 //                tdTag += ">" + tableModel.getData(colIndex, rowIndex) + "</td>";
                 tdTag += ">" + getInlineProcessedTableData(tableModel, colIndex, rowIndex) + "</td>";
-                result.addLn(indentLevel, tdTag);
+                htmlBuilder.addLn(indentLevel, tdTag);
             }
-            result.addLn(indentLevel, "        </tr>");
+            htmlBuilder.addLn(indentLevel, "        </tr>");
         }
 
-        result.addLn(indentLevel, "    </tbody>");
-        result.addLn(indentLevel, "</table>");
+        htmlBuilder.addLn(indentLevel, "    </tbody>");
+        htmlBuilder.addLn(indentLevel, "</table>");
     }
 
     private String getInlineProcessedTableData(TableModel tableModel, int colIndex, int rowIndex) {

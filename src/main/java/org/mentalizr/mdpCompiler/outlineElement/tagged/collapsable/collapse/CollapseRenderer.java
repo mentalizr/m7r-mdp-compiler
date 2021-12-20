@@ -7,7 +7,7 @@ import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.collapsable.CollapsableAttributes;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.collapsable.CollapsableCardContent;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.collapsable.CollapsableModel;
-import org.mentalizr.mdpCompiler.result.Result;
+import org.mentalizr.mdpCompiler.result.HtmlBuilder;
 
 import java.util.List;
 import java.util.UUID;
@@ -15,7 +15,7 @@ import java.util.UUID;
 public class CollapseRenderer extends OutlineElementRenderer {
 
     @Override
-    public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, Result result) {
+    public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, HtmlBuilder htmlBuilder) {
 
         CollapseModel collapseModel = (CollapseModel) outlineElementModel;
         CollapsableAttributes collapsableAttributes = collapseModel.getCollapsableAttributes();
@@ -26,13 +26,13 @@ public class CollapseRenderer extends OutlineElementRenderer {
 
         int indent = compilerContext.getIndentLevel();
 
-        result.addLn(indent, "<div class=\"mt-" + marginTop + " mb-" + marginBottom + "\" id=\"" + id + "\">");
+        htmlBuilder.addLn(indent, "<div class=\"mt-" + marginTop + " mb-" + marginBottom + "\" id=\"" + id + "\">");
 
-        this.renderButtons(collapseModel, indent, id, result);
+        this.renderButtons(collapseModel, indent, id, htmlBuilder);
 
-        this.renderCollapseList(collapseModel, indent, id, result);
+        this.renderCollapseList(collapseModel, indent, id, htmlBuilder);
 
-        result.addLn(indent, "</div>");
+        htmlBuilder.addLn(indent, "</div>");
     }
 
     private String obtainId(CollapsableAttributes collapsableAttributes) {
@@ -40,52 +40,52 @@ public class CollapseRenderer extends OutlineElementRenderer {
         return "genId-" + UUID.randomUUID();
     }
 
-    private void renderButtons(CollapseModel collapsableModel, int indent, String id, Result result) {
+    private void renderButtons(CollapseModel collapsableModel, int indent, String id, HtmlBuilder htmlBuilder) {
 
-        result.addLn(indent + 1, "<p>");
+        htmlBuilder.addLn(indent + 1, "<p>");
 
         List<CollapsableCardContent> collapsableCardContentList = collapsableModel.getCollapsableCardContentList();
         for (CollapsableCardContent collapsableCardContent : collapsableCardContentList) {
             int index = collapsableModel.getIndex(collapsableCardContent);
             String targetId = id + "_collapse_" + index;
-            result.addLn(indent + 2, "<button class=\"btn btn-primary\" type=\"button\" data-toggle=\"collapse\" data-target=\"#" + targetId + "\" aria-expanded=\"false\" aria-controls=\"" + targetId + "\">");
-            result.addLn(indent + 3, collapsableCardContent.getHeader());
-            result.addLn(indent + 2, "</button>");
+            htmlBuilder.addLn(indent + 2, "<button class=\"btn btn-primary\" type=\"button\" data-toggle=\"collapse\" data-target=\"#" + targetId + "\" aria-expanded=\"false\" aria-controls=\"" + targetId + "\">");
+            htmlBuilder.addLn(indent + 3, collapsableCardContent.getHeader());
+            htmlBuilder.addLn(indent + 2, "</button>");
         }
 
-        result.addLn(indent + 1, "</p>");
+        htmlBuilder.addLn(indent + 1, "</p>");
     }
 
-    private void renderCollapseList(CollapsableModel collapsableModel, int indent, String id, Result result) {
+    private void renderCollapseList(CollapsableModel collapsableModel, int indent, String id, HtmlBuilder htmlBuilder) {
 
         CollapsableAttributes collapsableAttributes = collapsableModel.getCollapsableAttributes();
         for (CollapsableCardContent collapsableCardContent : collapsableModel.getCollapsableCardContentList()) {
             int index = collapsableModel.getIndex(collapsableCardContent);
-            renderCollapse(index, collapsableAttributes, indent, id, collapsableCardContent, result);
+            renderCollapse(index, collapsableAttributes, indent, id, collapsableCardContent, htmlBuilder);
         }
 
     }
 
-    private void renderCollapse(int collapsableIndex, CollapsableAttributes collapsableAttributes, int indent, String id, CollapsableCardContent collapsableCardContent, Result result) {
+    private void renderCollapse(int collapsableIndex, CollapsableAttributes collapsableAttributes, int indent, String id, CollapsableCardContent collapsableCardContent, HtmlBuilder htmlBuilder) {
         String elementId = id + "_collapse_" + collapsableIndex;
 
-        result.addLn(indent + 1, "<div class=\"collapse" + this.getShowFirst(collapsableAttributes, collapsableIndex) + "\" id=\"" + elementId + "\" data-parent=\"#" + id + "\">");
-        result.addLn(indent + 2, "<div class=\"card card-body\">");
+        htmlBuilder.addLn(indent + 1, "<div class=\"collapse" + this.getShowFirst(collapsableAttributes, collapsableIndex) + "\" id=\"" + elementId + "\" data-parent=\"#" + id + "\">");
+        htmlBuilder.addLn(indent + 2, "<div class=\"card card-body\">");
 
-        this.processCardContent(collapsableCardContent, indent, result);
+        this.processCardContent(collapsableCardContent, indent, htmlBuilder);
 
-        result.addLn(indent + 2, "</div>");
-        result.addLn(indent + 1, "</div>");
+        htmlBuilder.addLn(indent + 2, "</div>");
+        htmlBuilder.addLn(indent + 1, "</div>");
     }
 
-    private void processCardContent(CollapsableCardContent collapsableCardContent, int indent, Result result) {
+    private void processCardContent(CollapsableCardContent collapsableCardContent, int indent, HtmlBuilder htmlBuilder) {
 
         if (collapsableCardContent.hasSingleLine()) {
             String cardContentSingleLine = collapsableCardContent.getSingleLine();
             String cardContentPreprocessed = this.inlineParserMDP.parse(cardContentSingleLine);
-            result.addLn(indent + 3, cardContentPreprocessed);
+            htmlBuilder.addLn(indent + 3, cardContentPreprocessed);
         } else {
-            MDPCompiler.renderSubdocument(collapsableCardContent.getChildElements(), result, new CompilerContext(false, indent + 2));
+            MDPCompiler.renderSubdocument(collapsableCardContent.getChildElements(), htmlBuilder, new CompilerContext(false, indent + 2));
         }
     }
 

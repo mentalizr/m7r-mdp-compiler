@@ -4,11 +4,11 @@ import org.mentalizr.mdpCompiler.CompilerContext;
 import org.mentalizr.mdpCompiler.MDPCompiler;
 import org.mentalizr.mdpCompiler.inlineElement.inlineParser.InlineParserMDP;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.SubModelsWithSingleLine;
-import org.mentalizr.mdpCompiler.result.Result;
+import org.mentalizr.mdpCompiler.result.HtmlBuilder;
 
 public class FormGroupRendererHelper {
 
-    public static void renderHeaderLines(SubModelsWithSingleLine subModelsWithSingleLine, String id, Result result, CompilerContext compilerContext) {
+    public static void renderHeaderLines(SubModelsWithSingleLine subModelsWithSingleLine, String id, HtmlBuilder htmlBuilder, CompilerContext compilerContext) {
 
         int indent = compilerContext.getIndentLevel();
 
@@ -16,11 +16,11 @@ public class FormGroupRendererHelper {
             String label = subModelsWithSingleLine.getSingleLine();
             InlineParserMDP inlineParserMDP = new InlineParserMDP();
             String labelPreprocessed = inlineParserMDP.parse(label);
-            result.addLn(indent + 1, "<label for=\"" + id + "\">" + labelPreprocessed + "</label>");
+            htmlBuilder.addLn(indent + 1, "<label for=\"" + id + "\">" + labelPreprocessed + "</label>");
         } else {
             MDPCompiler.renderSubdocument(
                     subModelsWithSingleLine.getChildModels(),
-                    result,
+                    htmlBuilder,
                     compilerContext
             );
         }

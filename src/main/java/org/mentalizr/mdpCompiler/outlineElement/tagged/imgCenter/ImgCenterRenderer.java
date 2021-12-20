@@ -3,12 +3,12 @@ package org.mentalizr.mdpCompiler.outlineElement.tagged.imgCenter;
 import org.mentalizr.mdpCompiler.CompilerContext;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
-import org.mentalizr.mdpCompiler.result.Result;
+import org.mentalizr.mdpCompiler.result.HtmlBuilder;
 
 public class ImgCenterRenderer extends OutlineElementRenderer {
 
     @Override
-    public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, Result result) {
+    public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, HtmlBuilder htmlBuilder) {
 
         ImgCenterModel imgCenterModel = (ImgCenterModel) outlineElementModel;
         ImgCenterAttributes imgCenterAttributes = imgCenterModel.getImgCenterAttributes();
@@ -21,7 +21,7 @@ public class ImgCenterRenderer extends OutlineElementRenderer {
         String resultString = "<img src=\"" + contextUrl + mdpTagLink + "\" class=\"" + classString + "\""
             + " alt=\"" + imgCenterAttributes.getAlt() + "\">";
 
-        result.addLn(compilerContext.getIndentLevel(), resultString);
+        htmlBuilder.addLn(compilerContext.getIndentLevel(), resultString);
     }
 
 }

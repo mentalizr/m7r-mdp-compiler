@@ -4,25 +4,25 @@ import org.mentalizr.mdpCompiler.CompilerContext;
 import org.mentalizr.mdpCompiler.MDPCompiler;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
-import org.mentalizr.mdpCompiler.result.Result;
+import org.mentalizr.mdpCompiler.result.HtmlBuilder;
 
 public class CardRenderer extends OutlineElementRenderer {
 
     @Override
-    public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, Result result) {
+    public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, HtmlBuilder htmlBuilder) {
 
         CardModel cardModel = (CardModel) outlineElementModel;
         CardAttributes cardAttributes = cardModel.getCardAttributes();
 
         int indent = compilerContext.getIndentLevel();
 
-        result.addLn(indent, "<div class=\"" + getCardClassValue(cardAttributes) + "\">");
+        htmlBuilder.addLn(indent, "<div class=\"" + getCardClassValue(cardAttributes) + "\">");
 
-        renderHeader(indent, cardAttributes, result);
+        renderHeader(indent, cardAttributes, htmlBuilder);
 
-        renderBody(indent, cardModel, result);
+        renderBody(indent, cardModel, htmlBuilder);
 
-        result.addLn(indent, "</div>");
+        htmlBuilder.addLn(indent, "</div>");
     }
 
     private String getCardClassValue(CardAttributes cardAttributes) {
@@ -44,33 +44,33 @@ public class CardRenderer extends OutlineElementRenderer {
         return classValueBuilder.toString();
     }
 
-    private void renderHeader(int indent, CardAttributes cardAttributes, Result result) {
+    private void renderHeader(int indent, CardAttributes cardAttributes, HtmlBuilder htmlBuilder) {
         if (cardAttributes.hasHeader()) {
-            result.addLn(indent + 1, "<div class=\"card-header\">" + cardAttributes.getHeader() + "</div>");
+            htmlBuilder.addLn(indent + 1, "<div class=\"card-header\">" + cardAttributes.getHeader() + "</div>");
         }
     }
 
-    private void renderBody(int indent, CardModel cardModel, Result result) {
+    private void renderBody(int indent, CardModel cardModel, HtmlBuilder htmlBuilder) {
         if (cardModel.hasSingleLine()) {
-            renderSingleLineBody(indent, cardModel, result);
+            renderSingleLineBody(indent, cardModel, htmlBuilder);
         } else if (cardModel.hasChildModels()) {
-            renderMultiLineBody(indent, cardModel, result);
+            renderMultiLineBody(indent, cardModel, htmlBuilder);
         }
     }
 
-    private void renderSingleLineBody(int indent, CardModel cardModel, Result result) {
+    private void renderSingleLineBody(int indent, CardModel cardModel, HtmlBuilder htmlBuilder) {
         String cardText = cardModel.getSingleLine();
-        result.addLn(indent + 1, "<div class=\"card-body\">");
-        result.addLn(indent + 2, "<div class=\"card-text\">" + cardText + "</div>");
-        result.addLn(indent + 1, "</div>");
+        htmlBuilder.addLn(indent + 1, "<div class=\"card-body\">");
+        htmlBuilder.addLn(indent + 2, "<div class=\"card-text\">" + cardText + "</div>");
+        htmlBuilder.addLn(indent + 1, "</div>");
     }
 
-    private void renderMultiLineBody(int indent, CardModel cardModel, Result result) {
+    private void renderMultiLineBody(int indent, CardModel cardModel, HtmlBuilder htmlBuilder) {
 
-        result.addLn(indent + 1, "<div class=\"card-body\">");
+        htmlBuilder.addLn(indent + 1, "<div class=\"card-body\">");
 
-        MDPCompiler.renderSubdocument(cardModel.getChildModels(), result, new CompilerContext(false, indent + 1));
+        MDPCompiler.renderSubdocument(cardModel.getChildModels(), htmlBuilder, new CompilerContext(false, indent + 1));
 
-        result.addLn(indent + 1, "</div>");
+        htmlBuilder.addLn(indent + 1, "</div>");
     }
 }

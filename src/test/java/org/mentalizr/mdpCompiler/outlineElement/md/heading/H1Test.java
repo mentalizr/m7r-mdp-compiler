@@ -4,7 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mentalizr.mdpCompiler.CompilerContext;
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
-import org.mentalizr.mdpCompiler.result.Result;
+import org.mentalizr.mdpCompiler.result.HtmlBuilder;
 import org.mentalizr.mdpCompilerTestResrc.OutlineElementTestBench;
 import org.mentalizr.mdpCompilerTestResrc.OutlineElementTestBenchExecutor;
 
@@ -55,10 +55,10 @@ class H1Test {
         headingModel.addHeading("Eine Überschrift");
 
         CompilerContext compilerContext = new CompilerContext(false, 1);
-        Result result = new Result();
-        h1.render(headingModel, compilerContext, result);
+        HtmlBuilder htmlBuilder = new HtmlBuilder();
+        h1.render(headingModel, compilerContext, htmlBuilder);
 
-        List<String> htmlLines = result.getResultLines();
+        List<String> htmlLines = htmlBuilder.getHtmlLines();
 
         assertNotNull(htmlLines);
         assertEquals(1, htmlLines.size());
@@ -72,10 +72,10 @@ class H1Test {
         headingModel.addHeading("Eine Überschrift");
 
         CompilerContext compilerContext = new CompilerContext(false, 2);
-        Result result = new Result();
-        h1.render(headingModel, compilerContext, result);
+        HtmlBuilder htmlBuilder = new HtmlBuilder();
+        h1.render(headingModel, compilerContext, htmlBuilder);
 
-        List<String> htmlLines = result.getResultLines();
+        List<String> htmlLines = htmlBuilder.getHtmlLines();
 
         assertNotNull(htmlLines);
         assertEquals(1, htmlLines.size());

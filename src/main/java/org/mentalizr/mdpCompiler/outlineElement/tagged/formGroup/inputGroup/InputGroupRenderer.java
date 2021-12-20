@@ -4,12 +4,12 @@ import org.mentalizr.mdpCompiler.CompilerContext;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.formGroup.FormGroupRendererHelper;
-import org.mentalizr.mdpCompiler.result.Result;
+import org.mentalizr.mdpCompiler.result.HtmlBuilder;
 
 public class InputGroupRenderer extends OutlineElementRenderer {
 
     @Override
-    public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, Result result) {
+    public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, HtmlBuilder htmlBuilder) {
 
         InputGroupModel inputGroupModel = (InputGroupModel) outlineElementModel;
         InputGroupAttributes inputGroupAttributes = inputGroupModel.getInputGroupAttributes();
@@ -18,9 +18,9 @@ public class InputGroupRenderer extends OutlineElementRenderer {
 
         int indent = compilerContext.getIndentLevel();
 
-        result.addLn("<div class=\"form-group\">");
+        htmlBuilder.addLn("<div class=\"form-group\">");
 
-        FormGroupRendererHelper.renderHeaderLines(inputGroupModel, inputGroupAttributes.getId(), result, compilerContext);
+        FormGroupRendererHelper.renderHeaderLines(inputGroupModel, inputGroupAttributes.getId(), htmlBuilder, compilerContext);
 
         StringBuilder stringBuilder = new StringBuilder("<input ");
         stringBuilder.append("type=\"").append(inputGroupAttributes.getInputtype()).append("\" ");
@@ -33,9 +33,9 @@ public class InputGroupRenderer extends OutlineElementRenderer {
 
         stringBuilder.append("placeholder=\"").append(inputGroupAttributes.getPlaceholder()).append("\">");
 
-        result.addLn(indent + 1, stringBuilder.toString());
+        htmlBuilder.addLn(indent + 1, stringBuilder.toString());
 
-        result.addLn("</div>");
+        htmlBuilder.addLn("</div>");
     }
 
 }

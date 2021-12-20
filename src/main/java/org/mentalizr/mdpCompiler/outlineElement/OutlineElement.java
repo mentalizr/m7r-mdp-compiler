@@ -5,7 +5,7 @@ import org.mentalizr.mdpCompiler.MDPSyntaxError;
 import org.mentalizr.mdpCompiler.document.DocumentIterator;
 import org.mentalizr.mdpCompiler.document.Line;
 import org.mentalizr.mdpCompiler.outlineElement.extractor.OutlineElementExtractor;
-import org.mentalizr.mdpCompiler.result.Result;
+import org.mentalizr.mdpCompiler.result.HtmlBuilder;
 
 import java.util.Objects;
 
@@ -39,8 +39,8 @@ public abstract class OutlineElement {
         return getOutlineElementModelBuilder().getModel(extraction);
     }
 
-    public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, Result result) {
-        getOutlineElementRenderer().render(outlineElementModel, compilerContext, result);
+    public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, HtmlBuilder htmlBuilder) {
+        getOutlineElementRenderer().render(outlineElementModel, compilerContext, htmlBuilder);
     }
 
 //    public void process(CompilerContext compilerContext, DocumentIterator documentIterator, Result result) throws MDPSyntaxError {

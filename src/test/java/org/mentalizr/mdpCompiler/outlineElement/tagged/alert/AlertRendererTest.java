@@ -7,7 +7,7 @@ import org.mentalizr.mdpCompiler.MDPSyntaxError;
 import org.mentalizr.mdpCompiler.document.Line;
 import org.mentalizr.mdpCompiler.mdpTag.MDPTag;
 import org.mentalizr.mdpCompiler.mdpTag.MDPTagSimple;
-import org.mentalizr.mdpCompiler.result.Result;
+import org.mentalizr.mdpCompiler.result.HtmlBuilder;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,7 +22,7 @@ class AlertRendererTest {
     @Test
     void render() throws MDPSyntaxError, IOException {
 
-        Result result = new Result();
+        HtmlBuilder htmlBuilder = new HtmlBuilder();
 
         AlertModel alertModel = new AlertModel();
         MDPTag mdpTag = new MDPTagSimple(new Alert(), new Line("@alert[type=\"info\" headersize=\"3\"]", 0));
@@ -30,11 +30,11 @@ class AlertRendererTest {
         alertModel.setText("Hier der Info-Text!");
 
         AlertRenderer alertRenderer = new AlertRenderer();
-        alertRenderer.render(alertModel, CompilerContext.getDefaultTestContext(), result);
+        alertRenderer.render(alertModel, CompilerContext.getDefaultTestContext(), htmlBuilder);
 
         List<String> expectedLines = TextFile.getLinesAsStrings(new File(EXPECTED_DIR, "plausi_pos_1.expected"));
 
-        assertEquals(expectedLines, result.getResultLines());
+        assertEquals(expectedLines, htmlBuilder.getHtmlLines());
     }
 
     // TODO Test ohne optionales Attribut headersize

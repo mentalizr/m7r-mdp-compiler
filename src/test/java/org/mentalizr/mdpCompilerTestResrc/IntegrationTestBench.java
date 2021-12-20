@@ -4,7 +4,7 @@ import org.mentalizr.mdpCompiler.MDPCompiler;
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
 import org.mentalizr.mdpCompiler.document.Document;
 import org.mentalizr.mdpCompiler.helper.TextFile;
-import org.mentalizr.mdpCompiler.result.Result;
+import org.mentalizr.mdpCompiler.result.Html;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,18 +24,18 @@ public class IntegrationTestBench {
         String testName = "[TEST: " + stackTraceElements[1].getMethodName() + "] [CLASS: " + stackTraceElements[1].getClassName() + "]";
 
         Document document = new Document(mdpFile);
-        Result result = MDPCompiler.compile(document);
+        Html html = MDPCompiler.compile(document);
 
         if (SOUT_RESULT) {
             System.out.println("### BEGIN ### [IntegrationTestBench] " + testName);
-            for (String line : result.getResultLines()) {
+            for (String line : html.getLines()) {
                 System.out.println(line);
             }
             System.out.println("### END ### [IntegrationTestBench] " + testName);
         }
 
         List<String> expectedResult = TextFile.getLinesAsStrings(expectedFile);
-        assertEquals(expectedResult, result.getResultLines());
+        assertEquals(expectedResult, html.getLines());
     }
 
 }
