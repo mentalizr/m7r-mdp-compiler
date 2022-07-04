@@ -3,6 +3,7 @@ package org.mentalizr.mdpCompiler;
 public class CompilerContext {
 
     private static final String SERVICE_CONTEXT_URL = "service/v1/";
+    private static final String MEDIA_CONTEXT_URL = "media/";
 
     private final boolean outerElement;
     private final int indentLevel;
@@ -30,6 +31,10 @@ public class CompilerContext {
 
     public String getServiceContextURL() {
         return SERVICE_CONTEXT_URL;
+    }
+
+    public String getMediaContextUrl() {
+        return MEDIA_CONTEXT_URL;
     }
 
 }

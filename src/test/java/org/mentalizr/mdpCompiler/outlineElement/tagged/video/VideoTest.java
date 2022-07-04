@@ -20,7 +20,9 @@ class VideoTest {
 
                 .withExpectedLines(
                         "<div class=\"embed-responsive embed-responsive-16by9 mt-3 mb-3\">",
-                        "    <video class=\"\" preload=\"metadata\" controls=\"true\" src=\"service/v1/mediaAV/myVideo.mp4\" onclick=\"this.paused?this.play():this.pause();\" allowfullscreen=\"\"></video>",
+                        "    <video class=\"\" preload=\"metadata\" controls=\"true\" onclick=\"this.paused?this.play():this.pause();\" allowfullscreen=\"\" playsinline=\"\">",
+                        "        <source src=\"media/myVideo.mp4\" type=\"video/mp4\"/>",
+                        "    </video>",
                         "</div>"
                 )
                 .withExpectedDocumentIteratorIndex(1)
@@ -41,7 +43,9 @@ class VideoTest {
 
                 .withExpectedLines(
                         "<div class=\"embed-responsive embed-responsive-16by9 mt-3 mb-3\">",
-                        "    <video class=\"\" preload=\"metadata\" controls=\"true\" poster=\"service/v1/mediaImg/background.png\" src=\"service/v1/mediaAV/myVideo.mp4\" onclick=\"this.paused?this.play():this.pause();\" allowfullscreen=\"\"></video>",
+                        "    <video class=\"\" preload=\"metadata\" controls=\"true\" poster=\"media/background.png\" onclick=\"this.paused?this.play():this.pause();\" allowfullscreen=\"\" playsinline=\"\">",
+                        "        <source src=\"media/myVideo.mp4\" type=\"video/mp4\"/>",
+                        "    </video>",
                         "</div>"
                 )
                 .withExpectedDocumentIteratorIndex(1)
@@ -62,7 +66,9 @@ class VideoTest {
 
                 .withExpectedLines(
                         "<div class=\"embed-responsive embed-responsive-16by9 mt-1 mb-2\">",
-                        "    <video class=\"\" preload=\"metadata\" controls=\"true\" poster=\"service/v1/mediaImg/background.png\" src=\"service/v1/mediaAV/myVideo.mp4\" onclick=\"this.paused?this.play():this.pause();\" allowfullscreen=\"\"></video>",
+                        "    <video class=\"\" preload=\"metadata\" controls=\"true\" poster=\"media/background.png\" onclick=\"this.paused?this.play():this.pause();\" allowfullscreen=\"\" playsinline=\"\">",
+                        "        <source src=\"media/myVideo.mp4\" type=\"video/mp4\"/>",
+                        "    </video>",
                         "</div>"
                 )
                 .withExpectedDocumentIteratorIndex(1)

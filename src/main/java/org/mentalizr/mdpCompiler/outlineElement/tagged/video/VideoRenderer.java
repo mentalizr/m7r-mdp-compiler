@@ -7,9 +7,6 @@ import org.mentalizr.mdpCompiler.result.HtmlBuilder;
 
 public class VideoRenderer extends OutlineElementRenderer {
 
-    private static final String CONTEXT_URL_VIDEO = "mediaAV/";
-    private static final String CONTEXT_URL_IMG = "mediaImg/";
-
     @Override
     public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, HtmlBuilder htmlBuilder) {
 
@@ -19,17 +16,20 @@ public class VideoRenderer extends OutlineElementRenderer {
 
         String marginTop = videoAttributes.getMarginTop();
         String marginBottom = videoAttributes.getMarginBottom();
+        int indentLevel = compilerContext.getIndentLevel();
 
-        htmlBuilder.addLn("<div class=\"embed-responsive embed-responsive-16by9 mt-" + marginTop + " mb-" + marginBottom + "\">");
+        htmlBuilder.addLn(indentLevel, "<div class=\"embed-responsive embed-responsive-16by9 mt-" + marginTop + " mb-" + marginBottom + "\">");
 
         String poster = "";
         if (videoAttributes.hasPoster()) {
-            poster = " poster=\"" + compilerContext.getServiceContextURL() + CONTEXT_URL_IMG + videoAttributes.getPoster() + "\"";
+            poster = " poster=\"" + compilerContext.getMediaContextUrl() + videoAttributes.getPoster() + "\"";
         }
 
-        String srcValue = compilerContext.getServiceContextURL() + CONTEXT_URL_VIDEO + mdpTagLink;
+        String srcValue = compilerContext.getMediaContextUrl() + mdpTagLink;
 
-        htmlBuilder.addLn("    <video class=\"\" preload=\"metadata\" controls=\"true\"" + poster + " src=\"" + srcValue + "\" onclick=\"this.paused?this.play():this.pause();\" allowfullscreen=\"\"></video>");
+        htmlBuilder.addLn("    <video class=\"\" preload=\"metadata\" controls=\"true\"" + poster + " onclick=\"this.paused?this.play():this.pause();\" allowfullscreen=\"\" playsinline=\"\">");
+        htmlBuilder.addLn("        <source src=\"" + srcValue + "\" type=\"video/mp4\"/>");
+        htmlBuilder.addLn("    </video>");
         htmlBuilder.addLn("</div>");
     }
 
