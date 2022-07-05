@@ -14,7 +14,7 @@ public class ImgCenterRenderer extends OutlineElementRenderer {
         ImgCenterAttributes imgCenterAttributes = imgCenterModel.getImgCenterAttributes();
         String mdpTagLink = imgCenterModel.getMdpTag().getLinkString();
 
-        String contextUrl = compilerContext.getServiceContextURL() + "mediaImg/";
+        String contextUrl = compilerContext.getMediaContextUrl();
 
         String classString = "mx-auto d-block mb-" + imgCenterAttributes.getNameMarginBottom() + " mt-" + imgCenterAttributes.getMarginTop();
 

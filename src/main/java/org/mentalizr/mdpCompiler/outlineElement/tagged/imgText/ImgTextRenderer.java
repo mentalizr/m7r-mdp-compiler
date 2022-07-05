@@ -15,7 +15,7 @@ public class ImgTextRenderer extends OutlineElementRenderer {
         ImgTextAttributes imgTextAttributes = imgTextModel.getImgTextAttributes();
         String mdpTagLink = imgTextModel.getMdpTag().getLinkString();
 
-        String contextUrl = compilerContext.getServiceContextURL() + "mediaImg/";
+        String contextUrl = compilerContext.getMediaContextUrl();
         int indent = compilerContext.getIndentLevel();
 
         // TODO margion-top und margin-bottom müssen angepasst werden: Abschneiden von anhängenden Nullen? 3.00 zu 3? Prüfen! S. alter Code

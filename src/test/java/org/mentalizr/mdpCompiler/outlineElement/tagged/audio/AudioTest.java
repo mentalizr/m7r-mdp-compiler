@@ -19,8 +19,8 @@ class AudioTest {
                 )
                 .withExpectedLines(
                         "<audio class=\"mt-0 mb-0\" preload=\"none\" style=\"width: 100%;\" controls=\"controls\">",
-                        "    <source type=\"audio/mpeg\" src=\"service/v1/mediaAV/myAudio.mp3\"/>",
-                        "    <a href=\"service/v1/mediaAV/myAudio.mp3\">service/v1/mediaAV/myAudio.mp3</a>",
+                        "    <source type=\"audio/mpeg\" src=\"media/myAudio.mp3\"/>",
+                        "    <a href=\"media/myAudio.mp3\">media/myAudio.mp3</a>",
                         "</audio>"
                 )
                 .withExpectedDocumentIteratorIndex(1)

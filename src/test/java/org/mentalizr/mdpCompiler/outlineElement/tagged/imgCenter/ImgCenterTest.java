@@ -25,7 +25,7 @@ class ImgCenterTest {
                         "Something completely different ..."
                 )
                 .withExpectedLines(
-                        "<img src=\"service/v1/mediaImg/picture.jpg\" class=\"mx-auto d-block mb-0 mt-0\" alt=\"Ein alternativer Text\">"
+                        "<img src=\"media/picture.jpg\" class=\"mx-auto d-block mb-0 mt-0\" alt=\"Ein alternativer Text\">"
                 )
                 .withExpectedDocumentIteratorIndex(1)
                 .withMediaResources("picture.jpg");

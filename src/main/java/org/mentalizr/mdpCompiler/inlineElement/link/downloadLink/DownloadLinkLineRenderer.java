@@ -9,7 +9,7 @@ public class DownloadLinkLineRenderer implements LinkLineRendererInterface {
     public String process(LinkParserResultForLine linkParserResultForLine) {
         return linkParserResultForLine.getPre()
                 + "<a "
-                + "href=\"service/v1/mediaAV/" + linkParserResultForLine.getId() + "\" "
+                + "href=\"media/" + linkParserResultForLine.getId() + "\" "
                 + "class=\"download-link\" "
                 + "download=\"" + linkParserResultForLine.getId() + "\""
                 + ">"

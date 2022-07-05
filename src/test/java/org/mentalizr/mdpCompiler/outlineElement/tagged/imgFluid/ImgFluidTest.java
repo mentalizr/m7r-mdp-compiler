@@ -18,7 +18,7 @@ class ImgFluidTest {
                         "Something completely different ..."
                 )
                 .withExpectedLines(
-                        "<img src=\"service/v1/mediaImg/link\" class=\"img-fluid mb-0 mt-0\" style=\"width: 100%\" alt=\"Ein alternativer Text\">"
+                        "<img src=\"media/link\" class=\"img-fluid mb-0 mt-0\" style=\"width: 100%\" alt=\"Ein alternativer Text\">"
                 )
                 .withExpectedDocumentIteratorIndex(1)
                 .withMediaResources("link");
@@ -36,7 +36,7 @@ class ImgFluidTest {
                         "Something completely different ..."
                 )
                 .withExpectedLines(
-                        "<img src=\"service/v1/mediaImg/link\" class=\"img-fluid mb-0 mt-2\" style=\"width: 100%\" alt=\"Ein alternativer Text\">"
+                        "<img src=\"media/link\" class=\"img-fluid mb-0 mt-2\" style=\"width: 100%\" alt=\"Ein alternativer Text\">"
                 )
                 .withExpectedDocumentIteratorIndex(1)
                 .withMediaResources("link");
@@ -54,7 +54,7 @@ class ImgFluidTest {
                         "Something completely different ..."
                 )
                 .withExpectedLines(
-                        "<img src=\"service/v1/mediaImg/link\" class=\"img-fluid mb-1 mt-0\" style=\"width: 100%\" alt=\"Ein alternativer Text\">"
+                        "<img src=\"media/link\" class=\"img-fluid mb-1 mt-0\" style=\"width: 100%\" alt=\"Ein alternativer Text\">"
                 )
                 .withExpectedDocumentIteratorIndex(1)
                 .withMediaResources("link");

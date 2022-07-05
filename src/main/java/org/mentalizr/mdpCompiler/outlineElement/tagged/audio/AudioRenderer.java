@@ -7,8 +7,6 @@ import org.mentalizr.mdpCompiler.result.HtmlBuilder;
 
 public class AudioRenderer extends OutlineElementRenderer {
 
-    private static final String CONTEXT_UR_AUDIO = "mediaAV/";
-
     public AudioRenderer() {
         super();
     }
@@ -22,7 +20,7 @@ public class AudioRenderer extends OutlineElementRenderer {
 
         String marginTop = audioAttributes.getMarginTop();
         String marginBottom = audioAttributes.getMarginBottom();
-        String source = compilerContext.getServiceContextURL() + CONTEXT_UR_AUDIO + mdpTagLink;
+        String source = compilerContext.getMediaContextUrl() + mdpTagLink;
 
         htmlBuilder.addLn("<audio class=\"mt-" + marginTop + " mb-" + marginBottom + "\" preload=\"none\" style=\"width: 100%;\" controls=\"controls\">");
         htmlBuilder.addLn(1, "<source type=\"audio/mpeg\" src=\"" + source + "\"/>");

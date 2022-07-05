@@ -72,8 +72,8 @@ class CardTest {
                         "    <div class=\"card-body\">",
                         "        <p>Test</p>",
                         "<audio class=\"mt-0 mb-0\" preload=\"none\" style=\"width: 100%;\" controls=\"controls\">",
-                        "    <source type=\"audio/mpeg\" src=\"service/v1/mediaAV/myAudio1.mp4\"/>",
-                        "    <a href=\"service/v1/mediaAV/myAudio1.mp4\">service/v1/mediaAV/myAudio1.mp4</a>",
+                        "    <source type=\"audio/mpeg\" src=\"media/myAudio1.mp4\"/>",
+                        "    <a href=\"media/myAudio1.mp4\">media/myAudio1.mp4</a>",
                         "</audio>",
                         "    </div>",
                         "</div>"

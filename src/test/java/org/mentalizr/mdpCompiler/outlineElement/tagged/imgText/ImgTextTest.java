@@ -116,7 +116,7 @@ class ImgTextTest {
         List<String> expectedHtmlStrings = List.of(
                 "<div class=\"row\" style=\"margin-bottom: 1.0em; margin-top: 1.0em\">",
                 "    <div class=\"col-xs-12 col-sm-5 col-md-5 col-lg-5\">",
-                "        <img src=\"service/v1/mediaImg/picture.mp3\" class=\"img-fluid\" style=\"width: 100%\" alt=\"Bild\">",
+                "        <img src=\"media/picture.mp3\" class=\"img-fluid\" style=\"width: 100%\" alt=\"Bild\">",
                 "    </div>",
                 "    <div class=\"col-xs-12 col-sm-7 col-md-7 col-lg-7\">",
                 "        <p>Some text.</p>",
@@ -139,7 +139,7 @@ class ImgTextTest {
                 .withExpectedLines(
                         "<div class=\"row\" style=\"margin-bottom: 1.0em; margin-top: 1.0em\">",
                         "    <div class=\"col-xs-12 col-sm-5 col-md-5 col-lg-5\">",
-                        "        <img src=\"service/v1/mediaImg/picture.mp3\" class=\"img-fluid\" style=\"width: 100%\" alt=\"Bild\">",
+                        "        <img src=\"media/picture.mp3\" class=\"img-fluid\" style=\"width: 100%\" alt=\"Bild\">",
                         "    </div>",
                         "    <div class=\"col-xs-12 col-sm-7 col-md-7 col-lg-7\">",
                         "        <p>Some text.</p>",

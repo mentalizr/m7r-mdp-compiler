@@ -1,6 +1,6 @@
 <div class="row" style="margin-bottom: 1.0em; margin-top: 1.0em">
     <div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
-        <img src="service/v1/mediaImg/sun_400x250-1.jpg" class="img-fluid" style="width: 100%" alt="relaxing picture">
+        <img src="media/sun_400x250-1.jpg" class="img-fluid" style="width: 100%" alt="relaxing picture">
     </div>
     <div class="col-xs-12 col-sm-7 col-md-7 col-lg-7">
         <p>This is a simple paragraph</p>

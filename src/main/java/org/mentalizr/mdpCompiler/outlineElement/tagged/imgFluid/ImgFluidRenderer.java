@@ -14,7 +14,7 @@ public class ImgFluidRenderer extends OutlineElementRenderer {
         ImgFluidAttributes imgFluidAttributes = imgFluidModel.getImgFluidAttributes();
         String mdpTagLink = imgFluidModel.getMdpTag().getLinkString();
 
-        String contextUrl = compilerContext.getServiceContextURL() + "mediaImg/";
+        String contextUrl = compilerContext.getMediaContextUrl();
 
         String classString = "img-fluid mb-" + imgFluidAttributes.getNameMarginBottom()
                 + " mt-" + imgFluidAttributes.getMarginTop();

@@ -12,7 +12,7 @@
 <p>Nemo <a href="www.example.com" class="external-link" target="_blank" rel="noreferrer noopener">externer Link</a>enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.</p>
 <div class="row" style="margin-bottom: 1.0em; margin-top: 1.0em">
     <div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
-        <img src="service/v1/mediaImg/joe_400x250.jpg" class="img-fluid" style="width: 100%" alt="picture joe">
+        <img src="media/joe_400x250.jpg" class="img-fluid" style="width: 100%" alt="picture joe">
     </div>
     <div class="col-xs-12 col-sm-7 col-md-7 col-lg-7">
         <p><strong>Joe (35)</strong> ist Krankenpfleger in einem Kreiskrankenhaus in Mecklenburg-Vorpommern. Er ist verheiratet

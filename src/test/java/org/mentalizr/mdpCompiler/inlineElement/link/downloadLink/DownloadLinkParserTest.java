@@ -13,7 +13,7 @@ class DownloadLinkParserTest {
         String line = "Here some text with @download[a special download link](file.pdf) within.";
         String result = downloadLinkParser.parse(line);
 
-        assertEquals("Here some text with <a href=\"service/v1/mediaAV/file.pdf\" class=\"download-link\" download=\"file.pdf\">a special download link</a> within.", result);
+        assertEquals("Here some text with <a href=\"media/file.pdf\" class=\"download-link\" download=\"file.pdf\">a special download link</a> within.", result);
     }
 
 }

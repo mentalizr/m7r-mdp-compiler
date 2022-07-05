@@ -15,7 +15,7 @@ class DownloadLinkLineRendererTest {
         DownloadLinkLineRenderer downloadLinkLineRenderer = new DownloadLinkLineRenderer();
         String result = downloadLinkLineRenderer.process(linkParserResultForLine);
 
-        assertEquals("pre<a href=\"service/v1/mediaAV/id\" class=\"download-link\" download=\"id\">text</a>post", result);
+        assertEquals("pre<a href=\"media/id\" class=\"download-link\" download=\"id\">text</a>post", result);
     }
 
 }
