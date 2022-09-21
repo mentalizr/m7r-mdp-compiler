@@ -89,4 +89,26 @@ class InputGroupTest {
         );
     }
 
+    @Test
+    @DisplayName("readonly")
+    void readOnly() throws MDPSyntaxError {
+
+        OutlineElementTestBench.execute(
+                new InputGroup(),
+                new String[]{
+                        "@input-group[id=\"input_myId\" readonly=\"true\"]",
+                        "    Eine Überschrift in *kursiv*.",
+                        "",
+                        "Hier noch was anderes"
+                },
+                new String[]{
+                        "<div class=\"form-group\">",
+                        "    <label for=\"input_myId\">Eine Überschrift in <em>kursiv</em>.</label>",
+                        "    <input type=\"text\" class=\"form-control ns_input\" id=\"input_myId\" placeholder=\"\" disabled>",
+                        "</div>"
+                },
+                2
+        );
+    }
+
 }

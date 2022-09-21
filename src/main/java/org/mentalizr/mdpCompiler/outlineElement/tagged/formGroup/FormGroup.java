@@ -1,8 +1,6 @@
 package org.mentalizr.mdpCompiler.outlineElement.tagged.formGroup;
 
-import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTaggedModelBuilder;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementTagged;
-import org.mentalizr.mdpCompiler.outlineElement.tagged.TextBlockModelBuilder;
 
 public abstract class FormGroup extends OutlineElementTagged {
 
