@@ -4,6 +4,7 @@ import org.mentalizr.mdpCompiler.attributeParser.AttributeParserException;
 import org.mentalizr.mdpCompiler.attributeProfile.AttributeProfileException;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -21,12 +22,12 @@ class RadioGroupAttributesParserTest {
         assertEquals("myRadioButtonId", radioGroupAttributes.getId());
         assertEquals("myRadioGroup", radioGroupAttributes.getName());
 
-        Set<String> openSimpleAttributes = radioGroupAttributes.getOpenSimpleAttributes();
+        List<String> openSimpleAttributes = radioGroupAttributes.getOpenSimpleAttributes();
 
         assertEquals(3, openSimpleAttributes.size());
-        assertTrue(openSimpleAttributes.contains("itemOne"));
-        assertTrue(openSimpleAttributes.contains("itemTwo"));
-        assertTrue(openSimpleAttributes.contains("itemThree"));
+        assertEquals("itemOne", openSimpleAttributes.get(0));
+        assertEquals("itemTwo", openSimpleAttributes.get(1));
+        assertEquals("itemThree", openSimpleAttributes.get(2));
     }
 
 }

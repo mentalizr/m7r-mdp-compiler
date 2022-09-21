@@ -6,10 +6,10 @@
     </div>
     <div class="form-check form-check-inline">
         <input class="form-check-input" type="radio" name="myName" id="input_myId_2" value="2">
-        <label class="form-check-label" for="input_myId_2">Label3</label>
+        <label class="form-check-label" for="input_myId_2">Label2</label>
     </div>
     <div class="form-check form-check-inline">
         <input class="form-check-input" type="radio" name="myName" id="input_myId_3" value="3">
-        <label class="form-check-label" for="input_myId_3">Label2</label>
+        <label class="form-check-label" for="input_myId_3">Label3</label>
     </div>
 </div>

@@ -26,7 +26,7 @@
     <div>Drei Uhr am Nachmittag</div>
     <div class="form-check form-check-inline">
         <input class="form-check-input" type="radio" name="myRadioGroup" id="myRadioButton_1" value="1">
-        <label class="form-check-label" for="myRadioButton_1">Gefühl</label>
+        <label class="form-check-label" for="myRadioButton_1">Situation</label>
     </div>
     <div class="form-check form-check-inline">
         <input class="form-check-input" type="radio" name="myRadioGroup" id="myRadioButton_2" value="2">
@@ -34,7 +34,7 @@
     </div>
     <div class="form-check form-check-inline">
         <input class="form-check-input" type="radio" name="myRadioGroup" id="myRadioButton_3" value="3">
-        <label class="form-check-label" for="myRadioButton_3">Situation</label>
+        <label class="form-check-label" for="myRadioButton_3">Gefühl</label>
     </div>
 </div>
 <p>Hier steht noch was dazwischen</p>
@@ -46,7 +46,7 @@
     </ul>
     <div class="form-check form-check-inline">
         <input class="form-check-input" type="radio" name="myRadioGroup" id="b_1" value="1">
-        <label class="form-check-label" for="b_1">Gefühl</label>
+        <label class="form-check-label" for="b_1">Situation</label>
     </div>
     <div class="form-check form-check-inline">
         <input class="form-check-input" type="radio" name="myRadioGroup" id="b_2" value="2">
@@ -54,7 +54,7 @@
     </div>
     <div class="form-check form-check-inline">
         <input class="form-check-input" type="radio" name="myRadioGroup" id="b_3" value="3">
-        <label class="form-check-label" for="b_3">Situation</label>
+        <label class="form-check-label" for="b_3">Gefühl</label>
     </div>
 </div>
 <div class="form-group">

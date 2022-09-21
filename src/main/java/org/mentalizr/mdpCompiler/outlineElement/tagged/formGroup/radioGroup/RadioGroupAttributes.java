@@ -4,7 +4,9 @@ import org.mentalizr.mdpCompiler.attributeProfile.Attribute;
 import org.mentalizr.mdpCompiler.attributeProfile.Attributes;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.formGroup.FormGroupAttributes;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class RadioGroupAttributes extends FormGroupAttributes {
@@ -22,8 +24,8 @@ public class RadioGroupAttributes extends FormGroupAttributes {
         return this.attributes.getValue(ATTRIBUTE_NAME_NAME);
     }
 
-    public Set<String> getOpenSimpleAttributes() {
-        Set<String> openSimpleAttributesSet = new HashSet<>();
+    public List<String> getOpenSimpleAttributes() {
+        List<String> openSimpleAttributesSet = new ArrayList<>();
 
         for (Attribute attribute : this.openSimpleAttributes) {
             openSimpleAttributesSet.add(attribute.getName());

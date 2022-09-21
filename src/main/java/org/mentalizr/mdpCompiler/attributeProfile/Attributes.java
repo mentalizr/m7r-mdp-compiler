@@ -1,16 +1,16 @@
 package org.mentalizr.mdpCompiler.attributeProfile;
 
-import de.arthurpicht.utils.core.assertion.AssertMethodPrecondition;
-
 import java.util.*;
+
+import static de.arthurpicht.utils.core.assertion.MethodPreconditions.assertArgumentNotNull;
 
 public final class Attributes implements Iterable<Attribute> {
 
     private final Map<String, Attribute> attributes;
 
     public Attributes(Map<String, Attribute> attributes) {
-        AssertMethodPrecondition.parameterNotNull("attributes", attributes);
-        this.attributes = new HashMap<>(attributes);
+        assertArgumentNotNull("attributes", attributes);
+        this.attributes = new LinkedHashMap<>(attributes);
     }
 
     public Set<String> getAttributeNameSet() {

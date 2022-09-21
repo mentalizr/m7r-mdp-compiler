@@ -5,7 +5,7 @@ import org.mentalizr.mdpCompiler.attributeProfile.Attribute;
 import org.mentalizr.mdpCompiler.attributeProfile.AttributeProfileException;
 import org.mentalizr.mdpCompiler.attributeProfile.Attributes;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class AttributesBuilder {
@@ -13,7 +13,7 @@ public class AttributesBuilder {
     private final Map<String, Attribute> attributes;
 
     public AttributesBuilder() {
-        this.attributes = new HashMap<>();
+        this.attributes = new LinkedHashMap<>();
     }
 
     public AttributesBuilder addAttribute(String name, String value) throws AttributeProfileException {
