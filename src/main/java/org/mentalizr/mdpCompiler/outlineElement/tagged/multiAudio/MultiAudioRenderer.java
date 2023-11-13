@@ -24,7 +24,7 @@ public class MultiAudioRenderer extends OutlineElementRenderer {
 
         htmlBuilder.addLn("<div class=\"m7r-ma defined-space container-lg d-flex flex-column\">");
         htmlBuilder.addLn(1,"<div class=\"audio-player-toolbar p-1 d-flex flex-column align-items-center\">");
-        htmlBuilder.addLn(2, "<i id=\"play-and-pause-button\" class=\"bi-play-circle\"></i>");
+        htmlBuilder.addLn(2, "<i id=\"m7r-ma-play-pause-button\" class=\"bi-play-circle\"></i>");
         htmlBuilder.addLn(1, "</div>");
         htmlBuilder.addLn(1, "<div class=\"slider-container p-2 d-flex flex-column align-self-center w-100\">");
         htmlBuilder.addLn(2, "<div class=\"slider-toolbar d-flex flex-row justify-content-between\">");
@@ -46,9 +46,9 @@ public class MultiAudioRenderer extends OutlineElementRenderer {
         htmlBuilder.addLn(2, "</div>");
         htmlBuilder.addLn(1, "</div>");
         htmlBuilder.addLn(1, "<div role=\"group\" class=\"audio-player-playlist btn-group-vertical p-3 align-items-center\">");
-        htmlBuilder.addLn(2, "<button class=\"btn btn-secondary w-25 active\" style=\"min-width: 130px;\">WoW Weltenbeben: Prolog - am Lagerfeuer</button>");
-        htmlBuilder.addLn(2, "<button class=\"btn btn-secondary w-25\" style=\"min-width: 130px;\">WoW Weltenbeben: Prolog - im Regen</button>");
-        htmlBuilder.addLn(2, "<button class=\"btn btn-secondary w-25\" style=\"min-width: 130px;\">WoW Weltenbeben: Prolog - im Wald</button>");
+        htmlBuilder.addLn(2, "<button class=\"btn btn-secondary w-25 active\" style=\"min-width: 130px;\">Klavier</button>");
+        htmlBuilder.addLn(2, "<button class=\"btn btn-secondary w-25\" style=\"min-width: 130px;\">Monochord</button>");
+        htmlBuilder.addLn(2, "<button class=\"btn btn-secondary w-25\" style=\"min-width: 130px;\">Dritte V.</button>");
         htmlBuilder.addLn(1, "</div>");
         htmlBuilder.addLn("</div>");
 
