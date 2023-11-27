@@ -3,7 +3,11 @@ package org.mentalizr.mdpCompiler.outlineElement.tagged.multiAudio;
 import org.mentalizr.mdpCompiler.CompilerContext;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementModel;
 import org.mentalizr.mdpCompiler.outlineElement.OutlineElementRenderer;
+import org.mentalizr.mdpCompiler.outlineElement.tagged.multiAudio.MultiAudioModel.MultiAudioResource;
 import org.mentalizr.mdpCompiler.result.HtmlBuilder;
+
+import java.util.List;
+import java.util.UUID;
 
 public class MultiAudioRenderer extends OutlineElementRenderer {
 
@@ -15,48 +19,65 @@ public class MultiAudioRenderer extends OutlineElementRenderer {
     public void render(OutlineElementModel outlineElementModel, CompilerContext compilerContext, HtmlBuilder htmlBuilder) {
 
         MultiAudioModel multiAudioModel = (MultiAudioModel) outlineElementModel;
-        MultiAudioAttributes audioAttributes = multiAudioModel.getAudioAttributes();
-//        String mdpTagLink = multiAudioModel.getMdpTag().getLinkString();
+        MultiAudioAttributes multiAudioAttributes = multiAudioModel.getMultiAudioAttributes();
 
-        String marginTop = audioAttributes.getMarginTop();
-        String marginBottom = audioAttributes.getMarginBottom();
-//        String source = compilerContext.getMediaContextUrl() + mdpTagLink;
+        String id = obtainId(multiAudioAttributes);
+        String marginTop = multiAudioAttributes.getMarginTop();
+        String marginBottom = multiAudioAttributes.getMarginBottom();
 
-        htmlBuilder.addLn("<div class=\"m7r-ma defined-space container-lg d-flex flex-column\">");
-        htmlBuilder.addLn(1,"<div class=\"audio-player-toolbar p-1 d-flex flex-column align-items-center\">");
-        htmlBuilder.addLn(2, "<i id=\"m7r-ma-play-pause-button\" class=\"bi-play-circle\"></i>");
-        htmlBuilder.addLn(1, "</div>");
-        htmlBuilder.addLn(1, "<div class=\"slider-container p-2 d-flex flex-column align-self-center w-100\">");
-        htmlBuilder.addLn(2, "<div class=\"slider-toolbar d-flex flex-row justify-content-between\">");
-        htmlBuilder.addLn(3, "<div class=\"d-flex flex-row align-items-center\">");
-        htmlBuilder.addLn(4, "<i id=\"rewind-button\" class=\"bi bi-rewind\"></i>");
-        htmlBuilder.addLn(4, "<i id=\"loop-button\" class=\"bi bi-repeat\"></i>");
-        htmlBuilder.addLn(3, "</div>");
-        htmlBuilder.addLn(3, "<div class=\"d-flex flex-row align-items-center justify-content-end\">");
-        htmlBuilder.addLn(4, "<input id=\"volume-slider\" type=\"range\" min=\"0\" max=\"100\" value=\"100\" class=\"p-1 w-50\">");
-        htmlBuilder.addLn(4, "<i id=\"volume-button\" class=\"p-2 bi-volume-down\"></i>");
-        htmlBuilder.addLn(3, "</div>");
-        htmlBuilder.addLn(2, "</div>");
-        htmlBuilder.addLn(2, "<div class=\"d-flex flex-column\">");
-        htmlBuilder.addLn(3, "<input type=\"range\" id=\"progressBar\" min=\"0\" value=\"0\" class=\"p-1\" max=\"660\">");
-        htmlBuilder.addLn(3, "<div class=\"slider-timestamp p-2 d-flex flex-row justify-content-between\">");
-        htmlBuilder.addLn(4, "<label id=\"current-time-label\">0:28</label>");
-        htmlBuilder.addLn(4, "<label id=\"remaining-time-label\">10:32</label>");
-        htmlBuilder.addLn(3, "</div>");
-        htmlBuilder.addLn(2, "</div>");
-        htmlBuilder.addLn(1, "</div>");
-        htmlBuilder.addLn(1, "<div role=\"group\" class=\"audio-player-playlist btn-group-vertical p-3 align-items-center\">");
-        htmlBuilder.addLn(2, "<button class=\"btn btn-secondary w-25 active\" style=\"min-width: 130px;\">Klavier</button>");
-        htmlBuilder.addLn(2, "<button class=\"btn btn-secondary w-25\" style=\"min-width: 130px;\">Monochord</button>");
-        htmlBuilder.addLn(2, "<button class=\"btn btn-secondary w-25\" style=\"min-width: 130px;\">Dritte V.</button>");
-        htmlBuilder.addLn(1, "</div>");
-        htmlBuilder.addLn("</div>");
+        int indent = compilerContext.getIndentLevel();
 
+        htmlBuilder.addLn(indent, "<div id=\"" + id + "\" class=\"m7r-ma defined-space container-lg mt-" + marginTop
+                + " mb-" + marginBottom + " d-flex flex-column\">");
+        htmlBuilder.addLn(indent + 1, "<div class=\"m7r-ma-toolbar p-1 d-flex flex-column align-items-center\">");
+        htmlBuilder.addLn(indent + 2, "<i class=\"m7r-ma-play-pause-button bi-play-circle\"></i>");
+        htmlBuilder.addLn(indent + 1, "</div>");
+        htmlBuilder.addLn(indent + 1, "<div class=\"slider-container p-2 d-flex flex-column align-self-center w-100\">");
+        htmlBuilder.addLn(indent + 2, "<div class=\"slider-toolbar d-flex flex-row justify-content-between\">");
+        htmlBuilder.addLn(indent + 3, "<div class=\"d-flex flex-row align-items-center\">");
+        htmlBuilder.addLn(indent + 4, "<i class=\"m7r-ma-skip-back-button bi bi-rewind\"></i>");
+        htmlBuilder.addLn(indent + 4, "<i class=\"m7r-ma-loop-button bi bi-repeat\"></i>");
+        htmlBuilder.addLn(indent + 3, "</div>");
+        htmlBuilder.addLn(indent + 3, "<div class=\"d-flex flex-row align-items-center justify-content-end\">");
+        htmlBuilder.addLn(indent + 4, "<input class=\"m7r-ma-volume-slider p-1 w-50\" type=\"range\" min=\"0\" max=\"100\" value=\"100\">");
+        htmlBuilder.addLn(indent + 4, "<i class=\"m7r-ma-mute-button p-2 bi-volume-down\"></i>");
+        htmlBuilder.addLn(indent + 3, "</div>");
+        htmlBuilder.addLn(indent + 2, "</div>");
+        htmlBuilder.addLn(indent + 2, "<div class=\"d-flex flex-column\">");
+        htmlBuilder.addLn(indent + 3, "<input type=\"range\" class=\"m7r-ma-progressBar p-1\" min=\"0\" value=\"0\" max=\"1000\">");
+        htmlBuilder.addLn(indent + 3, "<div class=\"slider-timestamp p-2 d-flex flex-row justify-content-between\">");
+        htmlBuilder.addLn(indent + 4, "<label class=\"m7r-ma-current-time-label\">0:00</label>");
+        htmlBuilder.addLn(indent + 4, "<label class=\"m7r-ma-remaining-time-label\">0:00</label>");
+        htmlBuilder.addLn(indent + 3, "</div>");
+        htmlBuilder.addLn(indent + 2, "</div>");
+        htmlBuilder.addLn(indent + 1, "</div>");
+        htmlBuilder.addLn(indent + 1, "<div role=\"group\" class=\"m7r-ma-playlist btn-group-vertical p-3 align-items-center\">");
+        generateTrackButtons(multiAudioModel.getAudioResources(), indent, htmlBuilder);
+        htmlBuilder.addLn(indent + 1, "</div>");
+        htmlBuilder.addLn(indent, "</div>");
+    }
 
-//        htmlBuilder.addLn("<audio class=\"mt-" + marginTop + " mb-" + marginBottom + "\" preload=\"none\" style=\"width: 100%;\" controls=\"controls\">");
-//        htmlBuilder.addLn(1, "<source type=\"audio/mpeg\" src=\"" + source + "\"/>");
-//        htmlBuilder.addLn(1, "<a href=\"" + source + "\">" + source + "</a>");
-//        htmlBuilder.addLn("</audio>");
+    private static void generateTrackButtons(
+            List<MultiAudioResource> multiAudioResourceList,
+            int indent,
+            HtmlBuilder htmlBuilder) {
+
+        boolean first = true;
+        for (MultiAudioResource multiAudioResource : multiAudioResourceList) {
+            String html = "<button class=\"m7r-ma-track-button btn btn-secondary w-25";
+            if (first) {
+                html += " active";
+                first = false;
+            }
+            html += "\" data-source=\"media/" + multiAudioResource.source() + "\" style=\"min-width: 130px;\">"
+                    + multiAudioResource.label() + "</button>";
+            htmlBuilder.addLn(indent + 2, html);
+        }
+    }
+
+    private static String obtainId(MultiAudioAttributes multiAudioAttributes) {
+        if (multiAudioAttributes.hasId()) return multiAudioAttributes.getId();
+        return "genId-" + UUID.randomUUID();
     }
 
 }

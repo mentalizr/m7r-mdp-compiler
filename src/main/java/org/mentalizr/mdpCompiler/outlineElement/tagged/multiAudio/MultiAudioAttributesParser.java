@@ -2,8 +2,10 @@ package org.mentalizr.mdpCompiler.outlineElement.tagged.multiAudio;
 
 import org.mentalizr.mdpCompiler.attributeParser.AttributeParserException;
 import org.mentalizr.mdpCompiler.attributeProfile.*;
+import org.mentalizr.mdpCompiler.attributeProfile.validator.HtmlIdValidator;
 import org.mentalizr.mdpCompiler.attributeProfile.validator.IntegerRange;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.OutlineElementTaggedAttributesParser;
+import org.mentalizr.mdpCompiler.outlineElement.tagged.mcQuestion.MCQuestionAttributes;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -24,6 +26,10 @@ public class MultiAudioAttributesParser extends OutlineElementTaggedAttributesPa
 
         Set<AttributeSpec> attributeSpecSet = new HashSet<>();
 
+        attributeSpecSet.add(new AttributeSpecBuilder(MCQuestionAttributes.ID)
+                .withNoEmptyValue()
+                .withValidator(new HtmlIdValidator())
+                .build());
         attributeSpecSet.add(new AttributeSpecBuilder(MultiAudioAttributes.NAME_MARGIN_TOP)
                 .withValidator(new IntegerRange(0, 5))
                 .withDefaultValue("0")

@@ -15,11 +15,6 @@ public class MultiAudio extends OutlineElementTagged {
     }
 
     @Override
-    public boolean withLink() {
-        return true;
-    }
-
-    @Override
     public OutlineElementTaggedAttributesFactory getOutlineElementTaggedAttributesFactory() {
         return new MultiAudioAttributesFactory();
     }

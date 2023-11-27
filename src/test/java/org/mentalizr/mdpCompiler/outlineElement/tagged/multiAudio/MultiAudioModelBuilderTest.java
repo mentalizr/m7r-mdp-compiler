@@ -2,32 +2,47 @@ package org.mentalizr.mdpCompiler.outlineElement.tagged.multiAudio;
 
 import org.junit.jupiter.api.Test;
 import org.mentalizr.mdpCompiler.MDPSyntaxError;
-import org.mentalizr.mdpCompiler.document.Lines;
+import org.mentalizr.mdpCompiler.document.Document;
 import org.mentalizr.mdpCompiler.outlineElement.Extraction;
+import org.mentalizr.mdpCompiler.outlineElement.tagged.mcQuestion.MCQuestionAttributes;
+import org.mentalizr.mdpCompiler.outlineElement.tagged.multiAudio.MultiAudioModel.MultiAudioResource;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MultiAudioModelBuilderTest {
 
     @Test
     void buildTest() throws MDPSyntaxError {
 
-        String mdpLine = "@multi-audio[](track1.mp3;track2.mp3;track3.mp3)";
-        Extraction extraction = new MultiAudioExtraction(Lines.create(mdpLine));
+        Document document = new Document(
+                "@multi-audio[]",
+                "    [label1](source1.mp3)",
+                "    [label2](source2.mp3)",
+                "    [label3](source3.mp3)"
+        );
+        Extraction extraction = new MultiAudioExtraction(document);
 
         MultiAudioModel multiAudioModel = new MultiAudioModelBuilder().getModel(extraction);
 
-        Set<String> mediaResources = multiAudioModel.getMediaResources();
-        List<String> mediaResourcesList = new ArrayList<>(mediaResources);
+        List<MultiAudioResource> multiAudioResources = multiAudioModel.getAudioResources();
+        assertEquals(3, multiAudioResources.size());
+        assertEquals("label1", multiAudioResources.get(0).label());
+        assertEquals("source1.mp3", multiAudioResources.get(0).source());
+        assertEquals("label2", multiAudioResources.get(1).label());
+        assertEquals("source2.mp3", multiAudioResources.get(1).source());
+        assertEquals("label3", multiAudioResources.get(2).label());
+        assertEquals("source3.mp3", multiAudioResources.get(2).source());
 
-        assertEquals(3, mediaResourcesList.size());
-        assertEquals("track1.mp3", mediaResourcesList.get(0));
-        assertEquals("track2.mp3", mediaResourcesList.get(1));
-        assertEquals("track3.mp3", mediaResourcesList.get(2));
+        Set<String> mediaResources = multiAudioModel.getMediaResources();
+        assertEquals(3, mediaResources.size());
+        assertTrue(mediaResources.contains("source1.mp3"));
+        assertTrue(mediaResources.contains("source2.mp3"));
+        assertTrue(mediaResources.contains("source3.mp3"));
     }
 
 }
