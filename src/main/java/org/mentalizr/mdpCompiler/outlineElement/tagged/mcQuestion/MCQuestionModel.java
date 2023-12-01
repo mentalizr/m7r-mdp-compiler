@@ -15,7 +15,12 @@ public class MCQuestionModel extends OutlineElementTaggedModel {
 
     private final List<MCQuestionAnsweringOption> mcQuestionAnsweringOptions;
 
-    public MCQuestionModel(String title, String question, List<MCQuestionAnsweringOption> mcQuestionAnsweringOptions, MCQuestionType mcQuestionType, MCQuestionAttributes mcQuestionAttributes) {
+    public MCQuestionModel(
+            String title,
+            String question,
+            List<MCQuestionAnsweringOption> mcQuestionAnsweringOptions,
+            MCQuestionType mcQuestionType,
+            MCQuestionAttributes mcQuestionAttributes) {
         super(new MCQuestion());
         this.title = title;
         this.question = question;

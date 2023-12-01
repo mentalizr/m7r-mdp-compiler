@@ -23,6 +23,7 @@ import org.mentalizr.mdpCompiler.outlineElement.tagged.imgCenter.ImgCenter;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.imgFluid.ImgFluid;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.imgText.ImgText;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.mcQuestion.MCQuestion;
+import org.mentalizr.mdpCompiler.outlineElement.tagged.multiAudio.MultiAudio;
 import org.mentalizr.mdpCompiler.outlineElement.tagged.video.Video;
 
 import java.util.ArrayList;
@@ -31,11 +32,8 @@ import java.util.List;
 public class OutlineElementRegistry {
 
     private final List<OutlineElement> outlineElementMDFactoryList;
-//    private final Map<String, OutlineElementFactory> outlineElementMDFactoryMap;
     private final List<OutlineElement> outlineElementTaggedFactoryList;
-//    private final Map<String, OutlineElementFactory> outlineElementTaggedFactoryMap;
     private final List<OutlineElement> outlineElementTaggedNestableFactoryList;
-//    private final Map<String, OutlineElementFactory> outlineElementTaggedNestableFactoryMap;
     private final OutlineElement defaultElement;
 
     public OutlineElementRegistry() {
@@ -46,17 +44,6 @@ public class OutlineElementRegistry {
 
         this.defaultElement = new Paragraph();
 
-//        this.outlineElementMDFactoryMap = new HashMap<>();
-//        this.outlineElementMDFactoryMap.put(Comment.PREFIX, new CommentFactory());
-//        this.outlineElementMDFactoryMap.put(H1.PREFIX, new H1Factory());
-//        this.outlineElementMDFactoryMap.put(H2.PREFIX, new H2Factory());
-//        this.outlineElementMDFactoryMap.put(H3.PREFIX, new H3Factory());
-//        this.outlineElementMDFactoryMap.put(H4.PREFIX, new H4Factory());
-//        this.outlineElementMDFactoryMap.put(H5.PREFIX, new H5Factory());
-//        this.outlineElementMDFactoryMap.put(UL.PREFIX, new ULFactory());
-//        this.outlineElementMDFactoryMap.put(HR.PREFIX, new HRFactory());
-//        this.outlineElementMDFactoryMap.put(Table.PREFIX, new TableFactory());
-
         this.outlineElementMDFactoryList.add(new Comment());
         this.outlineElementMDFactoryList.add(new H1());
         this.outlineElementMDFactoryList.add(new H2());
@@ -66,23 +53,6 @@ public class OutlineElementRegistry {
         this.outlineElementMDFactoryList.add(new UL());
         this.outlineElementMDFactoryList.add(new HR());
         this.outlineElementMDFactoryList.add(new Table());
-
-//        this.outlineElementTaggedNestableFactoryMap = new HashMap<>();
-//        this.outlineElementTaggedNestableFactoryMap.put(Accordion.TAG, new AccordionFactory());
-//        this.outlineElementTaggedNestableFactoryMap.put(Collapse.TAG, new CollapseFactory());
-//        this.outlineElementTaggedNestableFactoryMap.put(ImgFluid.TAG, new ImgFluidFactory());
-//        this.outlineElementTaggedNestableFactoryMap.put(ImgCenter.TAG, new ImgCenterFactory());
-//        this.outlineElementTaggedNestableFactoryMap.put(ImgText.TAG, new ImgTextFactory());
-//        this.outlineElementTaggedNestableFactoryMap.put(TextareaGroup.TAG, new TextareaGroupFactory());
-//        this.outlineElementTaggedNestableFactoryMap.put(Card.TAG, new CardFactory());
-//        this.outlineElementTaggedNestableFactoryMap.put(InputGroup.TAG, new InputGroupFactory());
-//        this.outlineElementTaggedNestableFactoryMap.put(RadioGroup.TAG, new RadioGroupFactory());
-//        this.outlineElementTaggedNestableFactoryMap.put(Alert.TAG, new AlertFactory());
-//        this.outlineElementTaggedNestableFactoryMap.put(Grid.TAG, new GridFactory());
-//        this.outlineElementTaggedNestableFactoryMap.put(Video.TAG, new VideoFactory());
-//        this.outlineElementTaggedNestableFactoryMap.put(Audio.TAG, new AudioFactory());
-//        this.outlineElementTaggedNestableFactoryMap.put(Html.TAG, new HtmlFactory());
-//        this.outlineElementTaggedNestableFactoryMap.put(MCQuestion.TAG, new MCQuestionFactory());
 
         this.outlineElementTaggedNestableFactoryList.add(new Accordion());
         this.outlineElementTaggedNestableFactoryList.add(new Collapse());
@@ -97,11 +67,9 @@ public class OutlineElementRegistry {
         this.outlineElementTaggedNestableFactoryList.add(new Grid());
         this.outlineElementTaggedNestableFactoryList.add(new Video());
         this.outlineElementTaggedNestableFactoryList.add(new Audio());
+        this.outlineElementTaggedNestableFactoryList.add(new MultiAudio());
         this.outlineElementTaggedNestableFactoryList.add(new Html());
         this.outlineElementTaggedNestableFactoryList.add(new MCQuestion());
-
-//        this.outlineElementTaggedFactoryMap = new HashMap<>();
-//        this.outlineElementTaggedFactoryMap.put(Directive.PREFIX, new DirectiveFactory());
 
         this.outlineElementTaggedFactoryList.add(new Directive());
     }
