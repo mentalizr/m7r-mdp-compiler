@@ -27,7 +27,7 @@ public class MultiAudioRenderer extends OutlineElementRenderer {
 
         int indent = compilerContext.getIndentLevel();
 
-        htmlBuilder.addLn(indent, "<div id=\"" + id + "\" class=\"m7r-ma defined-space container-lg mt-" + marginTop
+        htmlBuilder.addLn(indent, "<div id=\"" + id + "\" class=\"m7r-ma container-fluid col-lg-8 col-md-10 col-sm-12 col-xs-12 mt-" + marginTop
                 + " mb-" + marginBottom + " d-flex flex-column\">");
         htmlBuilder.addLn(indent + 1, "<div class=\"m7r-ma-toolbar p-1 d-flex flex-column align-items-center\">");
         htmlBuilder.addLn(indent + 2, "<i class=\"m7r-ma-play-pause-button bi-play-circle\"></i>");
@@ -69,8 +69,8 @@ public class MultiAudioRenderer extends OutlineElementRenderer {
                 html += " active";
                 first = false;
             }
-            html += "\" data-source=\"media/" + multiAudioResource.source() + "\" style=\"min-width: 130px;\">"
-                    + multiAudioResource.label() + "</button>";
+            html += "\" data-source=\"media/" + multiAudioResource.source() + "\">" + multiAudioResource.label()
+                    + "</button>";
             htmlBuilder.addLn(indent + 2, html);
         }
     }
