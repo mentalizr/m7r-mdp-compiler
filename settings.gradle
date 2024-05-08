@@ -1,3 +1,3 @@
 rootProject.name = 'mdp-compiler'
 
-
+apply from: "../../infra/m7r-common-config/libs.gradle"
